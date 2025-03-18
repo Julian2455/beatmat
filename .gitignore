@@ -6,3 +6,4 @@ env/
 .env/
 *.sqlite
 .vscode/
+*.db
