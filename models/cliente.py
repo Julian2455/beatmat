@@ -6,7 +6,7 @@ class Cliente(Base):
     __tablename__ = 'cliente'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String, nullable=False)
-    direccion = Column(String, nullable=False)
+    nombre = Column(String(70), nullable=False)
+    direccion = Column(String(70), nullable=False)
 
     caja=relationship('caja',back_populates='cliente')

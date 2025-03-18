@@ -10,8 +10,9 @@ class Caja(Base):
     gastos=Column(Float,nullable=False)
     cobros=Column(Float,nullable=False)
     adeudado=Column(Float,nullable=False)
-    descripcion=Column(String,nullable=False)
+    descripcion=Column(String(255),nullable=False)
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
     cliente=relationship('cliente',back_populates='caja')
+    detcaja=relationship('detcaja',back_populates='caja')
