@@ -235,22 +235,30 @@ border-color: rgb(89, 89, 89);</string>
                </property>
               </widget>
              </item>
-             <item>
+             <item alignment="Qt::AlignHCenter">
               <widget class="QPushButton" name="tittleclients">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
-                 <family>Poppins</family>
-                 <pointsize>-1</pointsize>
+                 <pointsize>11</pointsize>
                  <italic>true</italic>
                  <bold>true</bold>
-                 <underline>false</underline>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-font-family: &quot;Poppins&quot;, sans-serif;
-font-size: 18px;
-font-weight: bold;</string>
+</string>
                </property>
                <property name="text">
                 <string>Clientes</string>
@@ -274,7 +282,7 @@ font-weight: bold;</string>
                <property name="maximumSize">
                 <size>
                  <width>300</width>
-                 <height>300</height>
+                 <height>200</height>
                 </size>
                </property>
                <property name="styleSheet">
@@ -299,21 +307,30 @@ border-color: rgb(89, 89, 89);
                </property>
               </widget>
              </item>
-             <item>
+             <item alignment="Qt::AlignHCenter">
               <widget class="QPushButton" name="tittlemtfgs">
+               <property name="minimumSize">
+                <size>
+                 <width>1</width>
+                 <height>1</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>120</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
-                 <family>Poppins</family>
-                 <pointsize>-1</pointsize>
+                 <pointsize>11</pointsize>
                  <italic>true</italic>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-font-family: &quot;Poppins&quot;, sans-serif;
-font-size: 18px;
-font-weight: bold;</string>
+</string>
                </property>
                <property name="text">
                 <string>Matafuegos</string>
@@ -370,21 +387,30 @@ border-color: rgb(89, 89, 89);
                </property>
               </widget>
              </item>
-             <item>
+             <item alignment="Qt::AlignHCenter">
               <widget class="QPushButton" name="tittlecaja">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
-                 <family>Poppins</family>
-                 <pointsize>-1</pointsize>
+                 <pointsize>11</pointsize>
                  <italic>true</italic>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-font-family: &quot;Poppins&quot;, sans-serif;
-font-size: 18px;
-font-weight: bold;</string>
+</string>
                </property>
                <property name="text">
                 <string>Caja</string>
@@ -453,21 +479,30 @@ border-color: rgb(89, 89, 89);
                </property>
               </widget>
              </item>
-             <item>
+             <item alignment="Qt::AlignHCenter">
               <widget class="QPushButton" name="tittlevencts">
+               <property name="minimumSize">
+                <size>
+                 <width>1</width>
+                 <height>1</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>120</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
-                 <family>Poppins</family>
-                 <pointsize>-1</pointsize>
+                 <pointsize>11</pointsize>
                  <italic>true</italic>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-font-family: &quot;Poppins&quot;, sans-serif;
-font-size: 18px;
-font-weight: bold;</string>
+</string>
                </property>
                <property name="text">
                 <string>Vencimientos</string>
@@ -518,19 +553,28 @@ border-color: rgb(89, 89, 89);
              </item>
              <item alignment="Qt::AlignHCenter">
               <widget class="QPushButton" name="tittlerepts">
+               <property name="minimumSize">
+                <size>
+                 <width>20</width>
+                 <height>20</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>120</width>
+                 <height>20</height>
+                </size>
+               </property>
                <property name="font">
                 <font>
-                 <family>Poppins</family>
-                 <pointsize>-1</pointsize>
+                 <pointsize>11</pointsize>
                  <italic>true</italic>
                  <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-font-family: &quot;Poppins&quot;, sans-serif;
-font-size: 18px;
-font-weight: bold;</string>
+</string>
                </property>
                <property name="text">
                 <string>Reportes</string>

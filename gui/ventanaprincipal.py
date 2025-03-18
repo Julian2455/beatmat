@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ventana.ui'
+# Form implementation generated from reading ui file 'ventanaprincipal.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -105,19 +105,17 @@ class Ui_MainWindow(object):
         self.botonclients.setObjectName("botonclients")
         self.verticalLayout_3.addWidget(self.botonclients)
         self.tittleclients = QtWidgets.QPushButton(parent=self.clientes)
+        self.tittleclients.setMinimumSize(QtCore.QSize(20, 20))
+        self.tittleclients.setMaximumSize(QtCore.QSize(120, 20))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         font.setBold(True)
         font.setItalic(True)
-        font.setUnderline(False)
         self.tittleclients.setFont(font)
         self.tittleclients.setStyleSheet("border: none;\n"
-"font-family: \"Poppins\", sans-serif;\n"
-"font-size: 18px;\n"
-"font-weight: bold;")
+"")
         self.tittleclients.setObjectName("tittleclients")
-        self.verticalLayout_3.addWidget(self.tittleclients)
+        self.verticalLayout_3.addWidget(self.tittleclients, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addWidget(self.clientes, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignRight)
         self.matafuegos = QtWidgets.QWidget(parent=self.widget_3)
         self.matafuegos.setObjectName("matafuegos")
@@ -125,7 +123,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.botonmtfgs = QtWidgets.QPushButton(parent=self.matafuegos)
         self.botonmtfgs.setMinimumSize(QtCore.QSize(150, 150))
-        self.botonmtfgs.setMaximumSize(QtCore.QSize(300, 300))
+        self.botonmtfgs.setMaximumSize(QtCore.QSize(300, 200))
         self.botonmtfgs.setStyleSheet("background-color: #E5E5E5;\n"
 "border-radius: 30px;\n"
 "border: 2px solid;\n"
@@ -139,18 +137,17 @@ class Ui_MainWindow(object):
         self.botonmtfgs.setObjectName("botonmtfgs")
         self.verticalLayout_4.addWidget(self.botonmtfgs, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.tittlemtfgs = QtWidgets.QPushButton(parent=self.matafuegos)
+        self.tittlemtfgs.setMinimumSize(QtCore.QSize(1, 1))
+        self.tittlemtfgs.setMaximumSize(QtCore.QSize(120, 120))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         font.setBold(True)
         font.setItalic(True)
         self.tittlemtfgs.setFont(font)
         self.tittlemtfgs.setStyleSheet("border: none;\n"
-"font-family: \"Poppins\", sans-serif;\n"
-"font-size: 18px;\n"
-"font-weight: bold;")
+"")
         self.tittlemtfgs.setObjectName("tittlemtfgs")
-        self.verticalLayout_4.addWidget(self.tittlemtfgs)
+        self.verticalLayout_4.addWidget(self.tittlemtfgs, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addWidget(self.matafuegos, 0, 1, 1, 1)
         self.caja = QtWidgets.QWidget(parent=self.widget_3)
         font = QtGui.QFont()
@@ -178,18 +175,17 @@ class Ui_MainWindow(object):
         self.botoncaja.setObjectName("botoncaja")
         self.verticalLayout_5.addWidget(self.botoncaja)
         self.tittlecaja = QtWidgets.QPushButton(parent=self.caja)
+        self.tittlecaja.setMinimumSize(QtCore.QSize(20, 20))
+        self.tittlecaja.setMaximumSize(QtCore.QSize(120, 20))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         font.setBold(True)
         font.setItalic(True)
         self.tittlecaja.setFont(font)
         self.tittlecaja.setStyleSheet("border: none;\n"
-"font-family: \"Poppins\", sans-serif;\n"
-"font-size: 18px;\n"
-"font-weight: bold;")
+"")
         self.tittlecaja.setObjectName("tittlecaja")
-        self.verticalLayout_5.addWidget(self.tittlecaja)
+        self.verticalLayout_5.addWidget(self.tittlecaja, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addWidget(self.caja, 0, 2, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.verticalLayout_2.addWidget(self.widget_3)
         spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
@@ -219,18 +215,17 @@ class Ui_MainWindow(object):
         self.botonvencts.setObjectName("botonvencts")
         self.verticalLayout_7.addWidget(self.botonvencts)
         self.tittlevencts = QtWidgets.QPushButton(parent=self.vencimientos)
+        self.tittlevencts.setMinimumSize(QtCore.QSize(1, 1))
+        self.tittlevencts.setMaximumSize(QtCore.QSize(120, 120))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         font.setBold(True)
         font.setItalic(True)
         self.tittlevencts.setFont(font)
         self.tittlevencts.setStyleSheet("border: none;\n"
-"font-family: \"Poppins\", sans-serif;\n"
-"font-size: 18px;\n"
-"font-weight: bold;")
+"")
         self.tittlevencts.setObjectName("tittlevencts")
-        self.verticalLayout_7.addWidget(self.tittlevencts)
+        self.verticalLayout_7.addWidget(self.tittlevencts, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout_2.addWidget(self.vencimientos, 0, 2, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.reportes = QtWidgets.QWidget(parent=self.widget_8)
         self.reportes.setObjectName("reportes")
@@ -252,16 +247,15 @@ class Ui_MainWindow(object):
         self.botonrepts.setObjectName("botonrepts")
         self.verticalLayout_6.addWidget(self.botonrepts, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.tittlerepts = QtWidgets.QPushButton(parent=self.reportes)
+        self.tittlerepts.setMinimumSize(QtCore.QSize(20, 20))
+        self.tittlerepts.setMaximumSize(QtCore.QSize(120, 20))
         font = QtGui.QFont()
-        font.setFamily("Poppins")
-        font.setPointSize(-1)
+        font.setPointSize(11)
         font.setBold(True)
         font.setItalic(True)
         self.tittlerepts.setFont(font)
         self.tittlerepts.setStyleSheet("border: none;\n"
-"font-family: \"Poppins\", sans-serif;\n"
-"font-size: 18px;\n"
-"font-weight: bold;")
+"")
         self.tittlerepts.setObjectName("tittlerepts")
         self.verticalLayout_6.addWidget(self.tittlerepts, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout_2.addWidget(self.reportes, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignRight)
