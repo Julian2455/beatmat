@@ -7,10 +7,10 @@ class Caja(Base):
 
     id=Column(Integer,primary_key=True,autoincrement=True)
     fecha=Column(Date,nullable=False)
-    gastos=Column(Float,nullable=False)
-    cobros=Column(Float,nullable=False)
-    adeudado=Column(Float,nullable=False)
-    descripcion=Column(String(255),nullable=False)
+    gastos=Column(Float)
+    cobros=Column(Float)
+    adeudado=Column(Float)
+    descripcion=Column(String(255))
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
