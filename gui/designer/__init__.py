@@ -1,0 +1,1 @@
+from .ventanaprincipal import Ui_MainWindow

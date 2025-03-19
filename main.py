@@ -1,8 +1,8 @@
 from models import *
+from gui.designer import *
 
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow
-from gui.ventanaprincipal import Ui_MainWindow  # Importa la clase de la interfaz generada
 
 class Ventana(QMainWindow):
     def __init__(self):
