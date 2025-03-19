@@ -113,6 +113,7 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.tittleclients.setFont(font)
         self.tittleclients.setStyleSheet("border: none;\n"
+"color: rgb(43, 117, 255);\n"
 "")
         self.tittleclients.setObjectName("tittleclients")
         self.verticalLayout_3.addWidget(self.tittleclients, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
@@ -145,7 +146,7 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.tittlemtfgs.setFont(font)
         self.tittlemtfgs.setStyleSheet("border: none;\n"
-"")
+"color: rgb(43, 117, 255);")
         self.tittlemtfgs.setObjectName("tittlemtfgs")
         self.verticalLayout_4.addWidget(self.tittlemtfgs, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addWidget(self.matafuegos, 0, 1, 1, 1)
@@ -183,7 +184,7 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.tittlecaja.setFont(font)
         self.tittlecaja.setStyleSheet("border: none;\n"
-"")
+"color: rgb(43, 117, 255);")
         self.tittlecaja.setObjectName("tittlecaja")
         self.verticalLayout_5.addWidget(self.tittlecaja, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout.addWidget(self.caja, 0, 2, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -223,7 +224,7 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.tittlevencts.setFont(font)
         self.tittlevencts.setStyleSheet("border: none;\n"
-"")
+"color: rgb(43, 117, 255);")
         self.tittlevencts.setObjectName("tittlevencts")
         self.verticalLayout_7.addWidget(self.tittlevencts, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout_2.addWidget(self.vencimientos, 0, 2, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
@@ -255,7 +256,7 @@ class Ui_MainWindow(object):
         font.setItalic(True)
         self.tittlerepts.setFont(font)
         self.tittlerepts.setStyleSheet("border: none;\n"
-"")
+"color: rgb(43, 117, 255);")
         self.tittlerepts.setObjectName("tittlerepts")
         self.verticalLayout_6.addWidget(self.tittlerepts, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayout_2.addWidget(self.reportes, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignRight)

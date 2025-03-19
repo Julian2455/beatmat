@@ -258,6 +258,7 @@ border-color: rgb(89, 89, 89);</string>
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
+color: rgb(43, 117, 255);
 </string>
                </property>
                <property name="text">
@@ -330,7 +331,7 @@ border-color: rgb(89, 89, 89);
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-</string>
+color: rgb(43, 117, 255);</string>
                </property>
                <property name="text">
                 <string>Matafuegos</string>
@@ -410,7 +411,7 @@ border-color: rgb(89, 89, 89);
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-</string>
+color: rgb(43, 117, 255);</string>
                </property>
                <property name="text">
                 <string>Caja</string>
@@ -502,7 +503,7 @@ border-color: rgb(89, 89, 89);
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-</string>
+color: rgb(43, 117, 255);</string>
                </property>
                <property name="text">
                 <string>Vencimientos</string>
@@ -574,7 +575,7 @@ border-color: rgb(89, 89, 89);
                </property>
                <property name="styleSheet">
                 <string notr="true">border: none;
-</string>
+color: rgb(43, 117, 255);</string>
                </property>
                <property name="text">
                 <string>Reportes</string>
