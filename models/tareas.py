@@ -9,6 +9,7 @@ class Tareas(Base):
     tamizacion=Column(Integer,nullable=False)
     peso=Column(Integer,nullable=False)
     control_tacho=Column(Integer,nullable=False)
+    relleno_polvo=Column(Integer,nullable=False)
     cambio_manometro=Column(Integer,nullable=False)
     oring=Column(Integer,nullable=False)
     gatillo=Column(Integer,nullable=False)
