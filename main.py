@@ -12,7 +12,7 @@ class Ventana(QMainWindow):
         self.inicializarUI()  # Método para configuraciones adicionales
 
     def inicializarUI(self):
-        self.setWindowTitle("Beatriz Casado")  # Personaliza el título de la ventana
+        self.setWindowTitle("LE * LO Matafuegos")  # Personaliza el título de la ventana
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
