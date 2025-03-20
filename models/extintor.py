@@ -12,6 +12,6 @@ class Extintor(Base):
     tipo=Column(String(20),nullable=False)
     capacidad=Column(String(30),nullable=False)
 
-    recarga=relationship('recarga',back_populates='extintor')
-    detcaja=relationship('detcaja',back_populates='extintor')
-    tareas=relationship('tareas',back_populates='extintor')
+    recarga=relationship('Recarga',back_populates='extintor')
+    detcaja=relationship('DetCaja',back_populates='extintor')
+    tareas=relationship('Tareas',back_populates='extintor')

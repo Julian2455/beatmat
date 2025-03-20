@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
+from .extintor import Extintor
 
 class Recarga(Base):
     __tablename__='recarga'
@@ -13,4 +14,4 @@ class Recarga(Base):
 
     extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
-    extintor=relationship('extintor',back_populates='recarga')
+    extintor=relationship('Extintor',back_populates='recarga')

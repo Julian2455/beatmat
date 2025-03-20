@@ -9,4 +9,4 @@ class Cliente(Base):
     nombre = Column(String(70), nullable=False)
     direccion = Column(String(70), nullable=False)
 
-    caja=relationship('caja',back_populates='cliente')
+    caja=relationship('Caja',back_populates='cliente')

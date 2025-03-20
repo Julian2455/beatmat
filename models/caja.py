@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
+from .cliente import Cliente
 
 class Caja(Base):
     __tablename__='caja'
@@ -14,5 +15,5 @@ class Caja(Base):
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
-    cliente=relationship('cliente',back_populates='caja')
-    detcaja=relationship('detcaja',back_populates='caja')
+    cliente=relationship('Cliente',back_populates='caja')
+    detcaja=relationship('DetCaja',back_populates='caja')

@@ -1,6 +1,8 @@
 from sqlalchemy import Column, Integer, ForeignKey, Float
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
+from .caja import Caja
+from .extintor import Extintor
 
 class DetCaja(Base):
     __tablename__='detcaja'
@@ -11,5 +13,5 @@ class DetCaja(Base):
     cantidad_sale=Column(Integer)
     precio=Column(Float,nullable=False)
 
-    caja=relationship('caja',back_populates='detcaja')
-    extintor=relationship('extintor',back_populates='detcaja')
+    caja=relationship('Caja',back_populates='detcaja')
+    extintor=relationship('Extintor',back_populates='detcaja')
