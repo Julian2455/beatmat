@@ -6,15 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>728</width>
-    <height>533</height>
+    <width>774</width>
+    <height>555</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_2">
     <property name="spacing">
      <number>0</number>
     </property>
@@ -94,20 +94,95 @@ QTabBar::tab:selected {
           </attribute>
           <layout class="QVBoxLayout" name="verticalLayout_7">
            <item>
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
+            <widget class="QFrame" name="frame_2">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
              </property>
-             <property name="sizeType">
-              <enum>QSizePolicy::Fixed</enum>
+             <property name="frameShadow">
+              <enum>QFrame::Raised</enum>
              </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>50</height>
-              </size>
-             </property>
-            </spacer>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="label">
+                <property name="minimumSize">
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>23</width>
+                  <height>23</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="pixmap">
+                 <pixmap>../images/buscar.png</pixmap>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit">
+                <property name="styleSheet">
+                 <string notr="true">border: 2px solid;
+border-radius: 10px;</string>
+                </property>
+                <property name="placeholderText">
+                 <string>  Buscar clientes...</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_2" native="true">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QPushButton" name="pushButton_5">
+                   <property name="styleSheet">
+                    <string notr="true">border:2px solid rgb(0, 4, 255);
+border-radius: 10px;</string>
+                   </property>
+                   <property name="text">
+                    <string>Nuevo cliente</string>
+                   </property>
+                   <property name="icon">
+                    <iconset>
+                     <normaloff>../images/nueva-cuenta.png</normaloff>../images/nueva-cuenta.png</iconset>
+                   </property>
+                   <property name="iconSize">
+                    <size>
+                     <width>23</width>
+                     <height>23</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Maximum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>400</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </item>
            <item>
             <widget class="QTableWidget" name="tableWidget">
@@ -160,17 +235,7 @@ border:none;</string>
              </column>
              <column>
               <property name="text">
-               <string>Apellido</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
                <string>Domicilio</string>
-              </property>
-             </column>
-             <column>
-              <property name="text">
-               <string>DNI</string>
               </property>
              </column>
             </widget>
@@ -284,7 +349,7 @@ border: none;
                 </property>
                 <property name="sizeHint" stdset="0">
                  <size>
-                  <width>209</width>
+                  <width>400</width>
                   <height>20</height>
                  </size>
                 </property>
