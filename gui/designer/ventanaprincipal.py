@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ventanaprincipal.ui'
+# Form implementation generated from reading ui file 'ventanatablaclientes.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
