@@ -24,6 +24,7 @@ class ClientController:
         for index, cliente in enumerate(clientes):
             self.ui.tableWidget.setItem(index, 0, QTableWidgetItem(cliente.nombre))
             self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(cliente.direccion))
+            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem("✏️"))
 
         self.actualizar_estado_paginado()
     
