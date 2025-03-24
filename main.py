@@ -1,17 +1,26 @@
 from models import *
 from gui.controller import *
+from gui.designer import *
 
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow
-from gui.designer import Ui_MainWindow 
+from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget
+from PyQt6 import QtWidgets
+
+class ClientUi(QWidget, Ui_Form):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
 
 class Ventana(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        self.client_logic = ClientController(self.ui)
-        #self.product_logic = ProductLogic(self.ui)
+        self.cliente_tab = ClientUi()
+        self.ui.Clientes.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Clientes.layout().addWidget(self.cliente_tab)
+        self.client_controller = ClientController(self.cliente_tab)
+        self.setWindowTitle("LE * LO Matafuegos")
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
