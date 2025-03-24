@@ -15,6 +15,7 @@ class RegistroClient(QDialog, Ui_Dialog):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
+        
 
     def mostrar_form(self):
         self.exec()
@@ -32,6 +33,8 @@ class Ventana(QMainWindow):
 
         self.alta_client = RegistroClient()
         self.cliente_tab.pushButton_5.clicked.connect(self.alta_client.mostrar_form)
+        
+        self.form_controller = ClientFormController(self.alta_client, self.client_controller)
        
         self.setWindowTitle("LE * LO Matafuegos")
 

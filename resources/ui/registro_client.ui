@@ -248,7 +248,7 @@ border-radius: 5px;
           <widget class="QWidget" name="widget_4" native="true">
            <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QPushButton" name="pushButton">
+             <widget class="QPushButton" name="cancelar_form">
               <property name="font">
                <font>
                 <bold>true</bold>
@@ -276,7 +276,7 @@ border-radius: 5px;
              </spacer>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButton_2">
+             <widget class="QPushButton" name="guardar_client">
               <property name="font">
                <font>
                 <bold>true</bold>

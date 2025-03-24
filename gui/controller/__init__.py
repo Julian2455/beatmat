@@ -1,1 +1,2 @@
 from .client_controller import ClientController
+from .client_registro import ClientFormController

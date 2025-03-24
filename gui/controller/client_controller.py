@@ -1,5 +1,6 @@
 from PyQt6.QtWidgets import QTableWidgetItem
 from models import *  
+from db import SessionLocal
 
 class ClientController:
     def __init__(self, ui):
@@ -14,6 +15,8 @@ class ClientController:
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
+
+    
 
     def mostrar_clientes(self):
         clientes = Cliente.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
