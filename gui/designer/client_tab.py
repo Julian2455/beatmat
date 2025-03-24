@@ -9,13 +9,13 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Form(object):
-    def setupUi(self, Form):
-        Form.setObjectName("Form")
-        Form.resize(700, 500)
-        self.verticalLayout_7 = QtWidgets.QVBoxLayout(Form)
+class Ui_Client(object):
+    def setupUi(self, Client):
+        Client.setObjectName("Client")
+        Client.resize(700, 500)
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(Client)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
-        self.frame_2 = QtWidgets.QFrame(parent=Form)
+        self.frame_2 = QtWidgets.QFrame(parent=Client)
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
@@ -53,7 +53,7 @@ class Ui_Form(object):
         self.horizontalLayout_4.addItem(spacerItem)
         self.horizontalLayout_3.addWidget(self.widget_2)
         self.verticalLayout_7.addWidget(self.frame_2)
-        self.tableWidget = QtWidgets.QTableWidget(parent=Form)
+        self.tableWidget = QtWidgets.QTableWidget(parent=Client)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -87,7 +87,7 @@ class Ui_Form(object):
         self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_7.addWidget(self.tableWidget)
-        self.widget = QtWidgets.QWidget(parent=Form)
+        self.widget = QtWidgets.QWidget(parent=Client)
         self.widget.setMaximumSize(QtCore.QSize(16777215, 50))
         self.widget.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "border: none;")
@@ -141,25 +141,25 @@ class Ui_Form(object):
         self.horizontalLayout.addItem(spacerItem2)
         self.verticalLayout_7.addWidget(self.widget)
 
-        self.retranslateUi(Form)
-        QtCore.QMetaObject.connectSlotsByName(Form)
+        self.retranslateUi(Client)
+        QtCore.QMetaObject.connectSlotsByName(Client)
 
-    def retranslateUi(self, Form):
+    def retranslateUi(self, Client):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
-        self.lineEdit.setPlaceholderText(_translate("Form", "  Buscar clientes..."))
-        self.pushButton_5.setText(_translate("Form", "Nuevo cliente"))
+        Client.setWindowTitle(_translate("Client", "Form"))
+        self.lineEdit.setPlaceholderText(_translate("Client", "  Buscar clientes..."))
+        self.pushButton_5.setText(_translate("Client", "Nuevo cliente"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Form", "Nombre"))
+        item.setText(_translate("Client", "Nombre"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Domicilio"))
+        item.setText(_translate("Client", "Domicilio"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Form = QtWidgets.QWidget()
-    ui = Ui_Form()
-    ui.setupUi(Form)
-    Form.show()
+    Client = QtWidgets.QWidget()
+    ui = Ui_Client()
+    ui.setupUi(Client)
+    Client.show()
     sys.exit(app.exec())

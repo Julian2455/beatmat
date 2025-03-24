@@ -1,3 +1,3 @@
 from .ventanaprincipal import Ui_MainWindow
-from .client_tab import Ui_Form
-from .registro_client import Ui_Dialog
+from .client_tab import Ui_Client
+from .client_form import Ui_ClientForm

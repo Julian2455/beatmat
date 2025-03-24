@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'registro_client.ui'
+# Form implementation generated from reading ui file 'resources/ui/client_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -9,16 +9,16 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
-        Dialog.resize(368, 402)
-        Dialog.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.verticalLayout = QtWidgets.QVBoxLayout(Dialog)
+class Ui_ClientForm(object):
+    def setupUi(self, ClientForm):
+        ClientForm.setObjectName("ClientForm")
+        ClientForm.resize(368, 402)
+        ClientForm.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.verticalLayout = QtWidgets.QVBoxLayout(ClientForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.widget = QtWidgets.QWidget(parent=Dialog)
+        self.widget = QtWidgets.QWidget(parent=ClientForm)
         self.widget.setStyleSheet("border: none ;\n"
 "border-radius: 5px;\n"
 "background-color: rgb(221, 221, 221);\n"
@@ -33,7 +33,7 @@ class Ui_Dialog(object):
         self.label.setMaximumSize(QtCore.QSize(30, 30))
         self.label.setStyleSheet("border:none;")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../images/avatar.png"))
+        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/avatar.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -44,14 +44,16 @@ class Ui_Dialog(object):
         font.setPointSize(12)
         font.setBold(True)
         font.setItalic(False)
+        font.setWeight(75)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("border:none;")
+        self.label_2.setStyleSheet("border:none;\n"
+"color:black;")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem1)
         self.verticalLayout.addWidget(self.widget)
-        self.widget_2 = QtWidgets.QWidget(parent=Dialog)
+        self.widget_2 = QtWidgets.QWidget(parent=ClientForm)
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
@@ -67,12 +69,15 @@ class Ui_Dialog(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
+        font.setWeight(75)
         self.label_3.setFont(font)
+        self.label_3.setStyleSheet("color:black;")
         self.label_3.setObjectName("label_3")
         self.verticalLayout_2.addWidget(self.label_3, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_3)
         self.lineEdit.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
 "border-radius: 5px;\n"
+"color:black;\n"
 "")
         self.lineEdit.setObjectName("lineEdit")
         self.verticalLayout_2.addWidget(self.lineEdit)
@@ -82,13 +87,15 @@ class Ui_Dialog(object):
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
+        font.setWeight(75)
         self.label_4.setFont(font)
+        self.label_4.setStyleSheet("color:black;")
         self.label_4.setObjectName("label_4")
         self.verticalLayout_2.addWidget(self.label_4, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.widget_3)
         self.lineEdit_2.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
 "border-radius: 5px;\n"
-"")
+"color:black;")
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.verticalLayout_2.addWidget(self.lineEdit_2)
         spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
@@ -100,8 +107,9 @@ class Ui_Dialog(object):
         self.cancelar_form = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.cancelar_form.setFont(font)
-        self.cancelar_form.setStyleSheet("")
+        self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
         spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -109,6 +117,7 @@ class Ui_Dialog(object):
         self.guardar_client = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
+        font.setWeight(75)
         self.guardar_client.setFont(font)
         self.guardar_client.setStyleSheet("color: rgb(17, 0, 255)")
         self.guardar_client.setObjectName("guardar_client")
@@ -121,26 +130,26 @@ class Ui_Dialog(object):
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
 
-        self.retranslateUi(Dialog)
-        QtCore.QMetaObject.connectSlotsByName(Dialog)
+        self.retranslateUi(ClientForm)
+        QtCore.QMetaObject.connectSlotsByName(ClientForm)
 
-    def retranslateUi(self, Dialog):
+    def retranslateUi(self, ClientForm):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
-        self.label_2.setText(_translate("Dialog", "NUEVO CLIENTE"))
-        self.label_3.setText(_translate("Dialog", "Nombre"))
-        self.lineEdit.setPlaceholderText(_translate("Dialog", "Ingrese el nombre del cliente"))
-        self.label_4.setText(_translate("Dialog", "Dirección"))
-        self.lineEdit_2.setPlaceholderText(_translate("Dialog", "Ingrese la dirección"))
-        self.cancelar_form.setText(_translate("Dialog", "Cancelar"))
-        self.guardar_client.setText(_translate("Dialog", "Guardar"))
+        ClientForm.setWindowTitle(_translate("ClientForm", "Dialog"))
+        self.label_2.setText(_translate("ClientForm", "NUEVO CLIENTE"))
+        self.label_3.setText(_translate("ClientForm", "Nombre"))
+        self.lineEdit.setPlaceholderText(_translate("ClientForm", "Ingrese el nombre del cliente"))
+        self.label_4.setText(_translate("ClientForm", "Dirección"))
+        self.lineEdit_2.setPlaceholderText(_translate("ClientForm", "Ingrese la dirección"))
+        self.cancelar_form.setText(_translate("ClientForm", "Cancelar"))
+        self.guardar_client.setText(_translate("ClientForm", "Guardar"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    Dialog = QtWidgets.QDialog()
-    ui = Ui_Dialog()
-    ui.setupUi(Dialog)
-    Dialog.show()
+    ClientForm = QtWidgets.QDialog()
+    ui = Ui_ClientForm()
+    ui.setupUi(ClientForm)
+    ClientForm.show()
     sys.exit(app.exec())

@@ -31,3 +31,18 @@ class Cliente(Base):
         total = db.query(cls).count()
         db.close()
         return total
+
+    @classmethod
+    def registrar(cls,nombre,direccion):
+        datos=cls(nombre=nombre,direccion=direccion)
+        try:
+            db = SessionLocal()
+            db.add(datos)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
