@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>ClientForm</class>
+ <widget class="QDialog" name="ClientForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -99,12 +99,14 @@ background-color: rgb(221, 221, 221);
         <property name="font">
          <font>
           <pointsize>12</pointsize>
+          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">border:none;</string>
+         <string notr="true">border:none;
+color:black;</string>
         </property>
         <property name="text">
          <string>NUEVO CLIENTE</string>
@@ -170,8 +172,12 @@ background-color: rgb(221, 221, 221);
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:black;</string>
            </property>
            <property name="text">
             <string>Nombre</string>
@@ -183,6 +189,7 @@ background-color: rgb(221, 221, 221);
            <property name="styleSheet">
             <string notr="true">border: 2px solid rgb(38, 38, 38);
 border-radius: 5px;
+color:black;
 </string>
            </property>
            <property name="placeholderText">
@@ -211,8 +218,12 @@ border-radius: 5px;
            <property name="font">
             <font>
              <pointsize>11</pointsize>
+             <weight>75</weight>
              <bold>true</bold>
             </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:black;</string>
            </property>
            <property name="text">
             <string>Dirección</string>
@@ -224,7 +235,7 @@ border-radius: 5px;
            <property name="styleSheet">
             <string notr="true">border: 2px solid rgb(38, 38, 38);
 border-radius: 5px;
-</string>
+color:black;</string>
            </property>
            <property name="placeholderText">
             <string>Ingrese la dirección</string>
@@ -251,11 +262,12 @@ border-radius: 5px;
              <widget class="QPushButton" name="cancelar_form">
               <property name="font">
                <font>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true"/>
+               <string notr="true">color:black;</string>
               </property>
               <property name="text">
                <string>Cancelar</string>
@@ -279,6 +291,7 @@ border-radius: 5px;
              <widget class="QPushButton" name="guardar_client">
               <property name="font">
                <font>
+                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
