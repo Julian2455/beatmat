@@ -18,6 +18,11 @@ class RegisterClientUi(QDialog, Ui_ClientForm):
     def mostrar_form(self):
         self.exec()
 
+class ExtintorUi(QWidget, Ui_Extintor):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+
 class Ventana(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -31,6 +36,10 @@ class Ventana(QMainWindow):
         self.cliente_tab.pushButton_5.clicked.connect(self.alta_client.mostrar_form)
         self.form_controller = ClientFormController(self.alta_client, self.client_controller)
         self.setWindowTitle("LE * LO Matafuegos")
+        self.extintor_tab = ExtintorUi()
+        self.ui.Matafuegos.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Matafuegos.layout().addWidget(self.extintor_tab)
+        self.extintor_controller = ExtintorController(self.extintor_tab)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
