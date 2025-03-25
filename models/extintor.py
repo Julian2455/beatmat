@@ -36,3 +36,18 @@ class Extintor(Base):
         total = db.query(cls).count()
         db.close()
         return total
+    
+    @classmethod
+    def registrar(cls,numeracion,marca,ubicacion,tipo,capacidad):
+        datos=cls(numeracion=numeracion,marca=marca,ubicacion=ubicacion,tipo=tipo,capacidad=capacidad)
+        try:
+            db = SessionLocal()
+            db.add(datos)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
