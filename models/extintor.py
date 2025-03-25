@@ -15,3 +15,24 @@ class Extintor(Base):
     recarga=relationship('Recarga',back_populates='extintor')
     detcaja=relationship('DetCaja',back_populates='extintor')
     tareas=relationship('Tareas',back_populates='extintor')
+
+    @classmethod
+    def show_all(cls, page=1, per_page=10):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(cls)
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
+    
+    @classmethod
+    def contar_extintores(cls):
+        db = SessionLocal()
+        total = db.query(cls).count()
+        db.close()
+        return total

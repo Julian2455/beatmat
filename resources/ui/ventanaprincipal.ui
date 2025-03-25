@@ -93,7 +93,6 @@ QTabBar::tab:selected {
           <attribute name="title">
            <string>Clientes</string>
           </attribute>
-          <!-- Aquí es donde se insertará el contenido de client_tab.ui -->
          </widget>
          <widget class="QWidget" name="Matafuegos">
           <attribute name="icon">
@@ -103,15 +102,6 @@ QTabBar::tab:selected {
           <attribute name="title">
            <string>Matafuegos</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <item>
-            <widget class="QLabel" name="label_2">
-             <property name="text">
-              <string>TODO LO REFERIDO A MATAFUEFOS</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
          <widget class="QWidget" name="Caja">
           <attribute name="icon">
@@ -121,15 +111,6 @@ QTabBar::tab:selected {
           <attribute name="title">
            <string>Caja</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_4">
-           <item>
-            <widget class="QLabel" name="label_3">
-             <property name="text">
-              <string>TODO LO REFERIDO A CAJA</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
          <widget class="QWidget" name="Reportes">
           <attribute name="icon">
@@ -139,15 +120,6 @@ QTabBar::tab:selected {
           <attribute name="title">
            <string>Reportes</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
-           <item>
-            <widget class="QLabel" name="label_4">
-             <property name="text">
-              <string>TODO LO REFERIDO A REPORTES</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
          <widget class="QWidget" name="Vencimientos">
           <attribute name="icon">
@@ -157,15 +129,6 @@ QTabBar::tab:selected {
           <attribute name="title">
            <string>Vencimientos</string>
           </attribute>
-          <layout class="QVBoxLayout" name="verticalLayout_6">
-           <item>
-            <widget class="QLabel" name="label_5">
-             <property name="text">
-              <string>TODO LO REFERIDO A VENCIMIENTOS</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
          </widget>
         </widget>
        </item>
