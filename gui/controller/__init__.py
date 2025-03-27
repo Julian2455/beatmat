@@ -1,3 +1,4 @@
 from .client_controller import ClientController
 from .cli_form_controller import ClientFormController
 from .extintor_controller import ExtintorController
+from .ext_form_controller import ExtFormController
