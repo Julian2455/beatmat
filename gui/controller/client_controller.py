@@ -1,10 +1,12 @@
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QPushButton
+from PyQt6.QtGui import QIcon
 from models import *  
 from db import SessionLocal
 
 class ClientController:
-    def __init__(self, ui):
+    def __init__(self, ui, main_window):
         self.ui = ui
+        self.main_window = main_window
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_clientes = Cliente.contar_clientes()
@@ -16,18 +18,36 @@ class ClientController:
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
 
-    
 
     def mostrar_clientes(self):
         clientes = Cliente.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(clientes))
         for index, cliente in enumerate(clientes):
-            self.ui.tableWidget.setItem(index, 0, QTableWidgetItem(cliente.nombre))
-            self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(cliente.direccion))
-            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem("✏️"))
+            cliente_id = cliente.id
+            nombrec = cliente.nombre
+            direccionc = cliente.direccion
+            btn_edit = QPushButton("")
+            btn_edit.setIcon(QIcon("resources/images/boligrafo"))
+            btn_delete = QPushButton("")
+            btn_delete.setIcon(QIcon("resources/images/basura"))
+            btn_edit.clicked.connect(lambda _, cid=cliente_id, nom=nombrec, dire=direccionc : self.obtener_datos_cliente(cid,nom,dire))
+            btn_delete.clicked.connect(lambda _, cid=cliente_id: self.borrar_cliente(cid))
+            self.ui.tableWidget.setCellWidget(index, 0, btn_delete)
+            self.ui.tableWidget.setCellWidget(index, 1, btn_edit)
+            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(cliente.nombre))  
+            self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(cliente.direccion))
+
+            self.ui.tableWidget.resizeColumnToContents(0)
+            self.ui.tableWidget.resizeColumnToContents(1)
 
         self.actualizar_estado_paginado()
     
+    def obtener_datos_cliente(self,cliente_id,nombrec,direccionc):
+        cliente = [cliente_id, nombrec, direccionc]
+        if cliente:
+            self.main_window.client_form_controller.abrir_form_edit(cliente)
+
+
     def actualizar_estado_paginado(self):
         self.total_clientes = Cliente.contar_clientes()
         self.total_paginas = (self.total_clientes // self.filas_por_pagina) + (1 if self.total_clientes % self.filas_por_pagina else 0)

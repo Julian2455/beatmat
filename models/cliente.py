@@ -46,3 +46,21 @@ class Cliente(Base):
             return False
         finally:
             db.close()
+
+    @classmethod
+    def actualizar(cls,client_id,nombrec,direccionc):
+        try:
+            db = SessionLocal()
+            cliente = db.query(cls).filter_by(id=client_id).first()
+            if cliente:
+                cliente.nombre = nombrec
+                cliente.direccion = direccionc
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()

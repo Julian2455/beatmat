@@ -167,7 +167,7 @@ border:none;</string>
      </attribute>
      <column>
       <property name="text">
-       <string>Nombre</string>
+       <string/>
       </property>
       <property name="foreground">
        <brush brushstyle="SolidPattern">
@@ -181,12 +181,17 @@ border:none;</string>
      </column>
      <column>
       <property name="text">
-       <string>Domicilio</string>
+       <string/>
       </property>
      </column>
      <column>
       <property name="text">
-       <string>Acciones</string>
+       <string>Nombre</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Domicilio</string>
       </property>
      </column>
     </widget>

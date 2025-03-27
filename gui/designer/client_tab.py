@@ -72,7 +72,7 @@ class Ui_Client(object):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tableWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(3)
+        self.tableWidget.setColumnCount(4)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
@@ -83,6 +83,8 @@ class Ui_Client(object):
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidget.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidget.setHorizontalHeaderItem(3, item)
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
@@ -151,10 +153,10 @@ class Ui_Client(object):
         Client.setWindowTitle(_translate("Client", "Form"))
         self.lineEdit.setPlaceholderText(_translate("Client", "  Buscar clientes..."))
         self.pushButton_5.setText(_translate("Client", "Nuevo cliente"))
-        item = self.tableWidget.horizontalHeaderItem(0)
+        item = self.tableWidget.horizontalHeaderItem(2)
         item.setText(_translate("Client", "Nombre"))
-        item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Form", "Domicilio"))
+        item = self.tableWidget.horizontalHeaderItem(3)
+        item.setText(_translate("Client", "Domicilio"))
 
 
 if __name__ == "__main__":
