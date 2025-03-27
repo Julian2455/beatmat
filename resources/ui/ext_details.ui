@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ExtintorDetails</class>
+ <widget class="QWidget" name="ExtintorDetails">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>887</width>
+    <height>631</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_7">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="btnAtras">
+       <property name="styleSheet">
+        <string notr="true">
+color: black; 
+background-color: #f0f0f0; 
+border: 1px solid #a0a0a0; 
+border-radius: 5px; 
+padding: 5px 10px;
+</string>
+       </property>
+       <property name="text">
+        <string>Atrás</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelExtintores">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #333333; text-decoration: underline;</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelDetallesExtintores">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #555555;</string>
+     </property>
+     <property name="text">
+      <string>Historial de recargas</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidgetExtintores">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QTableWidget {
+    color: rgb(0, 0, 0);
+    border: 2px solid #a0a0a0;
+    gridline-color: #d0d0d0;
+    background-color: #f9f9f9;
+}
+QTableWidget::item {
+    border: 1px solid #d0d0d0;
+    padding: 5px;
+}
+QHeaderView::section {
+    background-color: #e0e0e0;
+    color: #333333;
+    padding: 5px;
+    border: 1px solid #a0a0a0;
+    font-weight: bold;
+}
+</string>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="autoScrollMargin">
+      <number>16</number>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="horizontalScrollMode">
+      <enum>QAbstractItemView::ScrollPerItem</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Fecha vencida de control</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Nueva fecha de control</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Vencimiento de PH</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Fecha de fabricacion</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelMantenimiento">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #333333; text-decoration: underline;</string>
+     </property>
+     <property name="text">
+      <string>Historial de Mantenimiento</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelDetallesMantenimiento">
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+       <weight>50</weight>
+       <bold>false</bold>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: #555555;</string>
+     </property>
+     <property name="text">
+      <string>Registro de Servicios y Revisiones</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QTableWidget" name="tableWidgetTareas">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+QTableWidget {
+    color: rgb(0, 0, 0);
+    border: 2px solid #a0a0a0;
+    gridline-color: #d0d0d0;
+    background-color: #f9f9f9;
+}
+QTableWidget::item {
+    border: 1px solid #d0d0d0;
+    padding: 5px;
+}
+QHeaderView::section {
+    background-color: #e0e0e0;
+    color: #333333;
+    padding: 5px;
+    border: 1px solid #a0a0a0;
+    font-weight: bold;
+}
+</string>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
+     <property name="autoScroll">
+      <bool>true</bool>
+     </property>
+     <property name="autoScrollMargin">
+      <number>16</number>
+     </property>
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+     <property name="horizontalScrollMode">
+      <enum>QAbstractItemView::ScrollPerItem</enum>
+     </property>
+     <attribute name="horizontalHeaderVisible">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderDefaultSectionSize">
+      <number>200</number>
+     </attribute>
+     <attribute name="horizontalHeaderHighlightSections">
+      <bool>true</bool>
+     </attribute>
+     <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="horizontalHeaderStretchLastSection">
+      <bool>true</bool>
+     </attribute>
+     <column>
+      <property name="text">
+       <string>Tamización</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Peso</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Control de tacho</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Relleno de polvo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Cambio de manómetro</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Oring</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Gatillo</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Pintura</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Interior</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Válvula</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Bastago de bronce</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Otro</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Observaciones</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

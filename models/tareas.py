@@ -24,3 +24,21 @@ class Tareas(Base):
     extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
     extintor=relationship('Extintor',back_populates='tareas')
+
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            tareas = db.query(cls).all()
+            return tareas
+        finally:
+            db.close()
+
+    @classmethod
+    def show_filter(cls, extintor_id):  
+        db = SessionLocal()
+        try:
+            tareas = db.query(cls).filter(cls.extintor_id == extintor_id).order_by(cls.id.desc()).all() 
+            return tareas
+        finally:
+            db.close()

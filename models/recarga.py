@@ -15,3 +15,21 @@ class Recarga(Base):
     extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
     extintor=relationship('Extintor',back_populates='recarga')
+
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            recargas = db.query(cls).all()
+            return recargas
+        finally:
+            db.close()
+
+    @classmethod
+    def show_filter(cls, extintor_id):  
+        db = SessionLocal()
+        try:
+            recargas = db.query(cls).filter(cls.extintor_id == extintor_id).order_by(cls.id.desc()).all() 
+            return recargas
+        finally:
+            db.close()
