@@ -78,3 +78,14 @@ class ClientFormController(QDialog):
         self.main_window.close()
         self.main_window.lineEdit.clear()
         self.main_window.lineEdit_2.clear()
+
+    def confirmar_eliminacion(self,respuesta,cliente_id):
+        if respuesta == QMessageBox.StandardButton.Yes:
+            if Cliente.eliminar_cliente(cliente_id) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Eliminación")
+                msg.setText("Cliente eliminado correctamente.")
+                msg.exec()
+                self.client_controller.mostrar_clientes()
+       

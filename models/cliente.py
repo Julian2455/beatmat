@@ -64,3 +64,20 @@ class Cliente(Base):
             return False
         finally:
             db.close()
+
+    @classmethod
+    def eliminar_cliente(cls,cliente_id):
+        try:
+            db=SessionLocal()
+            cliente = db.query(cls).filter_by(id=cliente_id).first()
+            if cliente:
+                db.delete(cliente)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
