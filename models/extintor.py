@@ -51,3 +51,34 @@ class Extintor(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def actualizar(cls, id_extintor, numeracion, marca, ubicacion, tipo, capacidad):
+        try:
+            db = SessionLocal()
+            extintor = db.query(cls).filter_by(id=id_extintor).first()
+            if extintor:
+                extintor.numeracion = numeracion
+                extintor.marca = marca
+                extintor.ubicacion = ubicacion
+                extintor.tipo = tipo
+                extintor.capacidad = capacidad
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al actualizar extintor: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def get_by_id(cls, id_extintor):
+        try:
+            db = SessionLocal()
+            extintor = db.query(cls).filter(cls.id == id_extintor).first()
+            return extintor
+        except Exception as e:
+            print(f"Error al obtener id: {e}")
+            return None
