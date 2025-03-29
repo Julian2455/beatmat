@@ -1,4 +1,5 @@
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog
+from PyQt6.QtGui import QAction
 from PyQt6.QtCore import Qt
 from models import *  
 
@@ -16,6 +17,9 @@ class ExtintorController:
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.doubleClicked.connect(self.mostrar_detalles_extintor)
+        self.ui.tableWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
+        self.edit_form_ext = None
 
     def mostrar_extintores(self):
         extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
@@ -106,3 +110,59 @@ class ExtintorController:
                 self.details_ui.tableWidgetTareas.setItem(index, 10, QTableWidgetItem(str(tarea.bastago_bronce)))
                 self.details_ui.tableWidgetTareas.setItem(index, 11, QTableWidgetItem(str(tarea.otro)))
                 self.details_ui.tableWidgetTareas.setItem(index, 12, QTableWidgetItem(str(tarea.observacion)))
+
+    def mostrar_menu_contextual(self, pos):
+        index = self.ui.tableWidget.indexAt(pos)
+        if not index.isValid():
+            return
+        menu = QMenu(self.ui.tableWidget)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        editar_action = QAction("Editar", self.ui.tableWidget)
+        eliminar_action = QAction("Eliminar", self.ui.tableWidget)
+        editar_action.triggered.connect(self.editar_extintor)
+        eliminar_action.triggered.connect(self.eliminar_extintor)
+        menu.addAction(editar_action)
+        menu.addAction(eliminar_action)
+        menu.exec(self.ui.tableWidget.viewport().mapToGlobal(pos))
+    
+    def set_edit_form_ext(self, edit_form_ext):
+        self.edit_form_ext = edit_form_ext
+
+    def editar_extintor(self):
+        id_extintor = self.obtener_id_extintor()
+        if id_extintor and self.edit_form_ext:
+            self.edit_form_ext.setWindowTitle("Editar Extintor")
+            extintor = Extintor.get_by_id(id_extintor)
+            if extintor:
+                self.edit_form_ext.label_2.setText("EDITAR EXTINTOR")
+                self.edit_form_ext.lineEdit_numeracion.setText(str(extintor.numeracion))
+                self.edit_form_ext.comboBox_marca.clear()
+                self.edit_form_ext.comboBox_marca.addItems(["Marca 1", "Marca 2", "Marca 3"])  
+                self.edit_form_ext.comboBox_tipo.clear()
+                self.edit_form_ext.comboBox_tipo.addItems(["Tipo1", "Tipo2", "Tipo3"]) 
+                self.edit_form_ext.comboBox_capacidad.clear()
+                self.edit_form_ext.comboBox_capacidad.addItems(["5kg", "10kg", "20kg"])  
+                self.edit_form_ext.comboBox_marca.setCurrentText(extintor.marca)
+                self.edit_form_ext.lineEdit_ubicacion.setText(str(extintor.ubicacion))
+                self.edit_form_ext.comboBox_tipo.setCurrentText(extintor.tipo)
+                self.edit_form_ext.comboBox_capacidad.setCurrentText(extintor.capacidad)
+                self.edit_extintor_controller.extintor_id = id_extintor
+                self.edit_form_ext.mostrar_form()
+
+    def eliminar_extintor(self):
+        id_extintor = self.obtener_id_extintor()
+        if id_extintor:
+            print(f"Eliminar : {id_extintor}")

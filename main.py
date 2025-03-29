@@ -68,6 +68,10 @@ class Ventana(QMainWindow):
         self.extintor_tab.pushButton_5.clicked.connect(self.alta_extintor.mostrar_form)
         self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller)
         self.extintor_details_tab.btnAtras.clicked.connect(self.show_extintor_tab)
+        self.edit_extintor = RegisterExtUi()
+        self.extintor_controller.set_edit_form_ext(self.edit_extintor)
+        self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller)
+        self.extintor_controller.edit_extintor_controller = self.edit_extintor_controller
     
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   

@@ -19,7 +19,7 @@ class Ui_ExtintorForm(object):
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtWidgets.QWidget(parent=ExtintorForm)
-        self.widget.setStyleSheet("border: none ;\n"
+        self.widget.setStyleSheet("border: none;\n"
 "border-radius: 5px;\n"
 "background-color: rgb(221, 221, 221);\n"
 "")
@@ -57,7 +57,7 @@ class Ui_ExtintorForm(object):
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem2)
         self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
         self.widget_3.setObjectName("widget_3")
@@ -79,7 +79,6 @@ class Ui_ExtintorForm(object):
 "border-radius: 5px;\n"
 "color:black;\n"
 "")
-        self.lineEdit_numeracion.setMaxLength(30)
         self.lineEdit_numeracion.setObjectName("lineEdit_numeracion")
         self.verticalLayout_2.addWidget(self.lineEdit_numeracion)
         self.label_marca = QtWidgets.QLabel(parent=self.widget_3)
@@ -189,7 +188,6 @@ class Ui_ExtintorForm(object):
         ExtintorForm.setWindowTitle(_translate("ExtintorForm", "Nuevo Extintor"))
         self.label_2.setText(_translate("ExtintorForm", "NUEVO EXTINTOR"))
         self.label_numeracion.setText(_translate("ExtintorForm", "Numeración"))
-        self.lineEdit_numeracion.setInputMask(_translate("ExtintorForm", "#00000000000000000000000000000"))
         self.lineEdit_numeracion.setPlaceholderText(_translate("ExtintorForm", "Ingrese la numeración"))
         self.label_marca.setText(_translate("ExtintorForm", "Marca"))
         self.comboBox_marca.setPlaceholderText(_translate("ExtintorForm", "Seleccione o ingrese la marca"))

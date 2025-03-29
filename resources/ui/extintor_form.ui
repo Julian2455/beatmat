@@ -35,7 +35,7 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">border: none ;
+      <string notr="true">border: none;
 border-radius: 5px;
 background-color: rgb(221, 221, 221);
 </string>
@@ -137,9 +137,6 @@ color:black;</string>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
         <property name="sizeHint" stdset="0">
          <size>
           <width>40</width>
@@ -191,12 +188,6 @@ color:black;</string>
 border-radius: 5px;
 color:black;
 </string>
-           </property>
-           <property name="inputMask">
-            <string>#00000000000000000000000000000</string>
-           </property>
-           <property name="maxLength">
-            <number>30</number>
            </property>
            <property name="placeholderText">
             <string>Ingrese la numeración</string>
