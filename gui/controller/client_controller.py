@@ -1,12 +1,11 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox
-from PyQt6.QtGui import QIcon
+from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox, QMenu
+from PyQt6.QtGui import QAction
+from PyQt6.QtCore import Qt
 from models import *  
-from db import SessionLocal
 
 class ClientController:
-    def __init__(self, ui, main_window):
+    def __init__(self, ui):
         self.ui = ui
-        self.main_window = main_window
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_clientes = Cliente.contar_clientes()
@@ -17,44 +16,76 @@ class ClientController:
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
-
+        self.ui.tableWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
+        self.edit_form_cli = None
 
     def mostrar_clientes(self):
         clientes = Cliente.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(clientes))
         for index, cliente in enumerate(clientes):
-            cliente_id = cliente.id
-            nombrec = cliente.nombre
-            direccionc = cliente.direccion
-            btn_edit = QPushButton("")
-            btn_edit.setIcon(QIcon("resources/images/boligrafo"))
-            btn_delete = QPushButton("")
-            btn_delete.setIcon(QIcon("resources/images/basura"))
-            btn_edit.clicked.connect(lambda _, cid=cliente_id, nom=nombrec, dire=direccionc : self.obtener_datos_cliente("editar", cid,nom,dire))
-            btn_delete.clicked.connect(lambda _, cid=cliente_id, nom=nombrec, dire=direccionc : self.obtener_datos_cliente("eliminar", cid,nom,dire))
-            self.ui.tableWidget.setCellWidget(index, 0, btn_delete)
-            self.ui.tableWidget.setCellWidget(index, 1, btn_edit)
-            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(cliente.nombre))  
-            self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(cliente.direccion))
-
-            self.ui.tableWidget.resizeColumnToContents(0)
-            self.ui.tableWidget.resizeColumnToContents(1)
+            id_cliente = QTableWidgetItem(cliente.nombre)
+            id_cliente.setData(Qt.ItemDataRole.UserRole, cliente.id)
+            self.ui.tableWidget.setItem(index, 0, id_cliente)
+            self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(cliente.direccion))
 
         self.actualizar_estado_paginado()
+
+    def mostrar_menu_contextual(self, pos):
+        index = self.ui.tableWidget.indexAt(pos)
+        if not index.isValid():
+            return
+        menu = QMenu(self.ui.tableWidget)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        editar_action = QAction("Editar", self.ui.tableWidget)
+        eliminar_action = QAction("Eliminar", self.ui.tableWidget)
+        editar_action.triggered.connect(self.editar_cliente)
+        eliminar_action.triggered.connect(self.eliminar_cliente)
+        menu.addAction(editar_action)
+        menu.addAction(eliminar_action)
+        menu.exec(self.ui.tableWidget.viewport().mapToGlobal(pos))
     
-    def obtener_datos_cliente(self,accion, cliente_id, nombrec, direccionc):
-        cliente = [cliente_id, nombrec, direccionc]
-        if accion == "editar":
-            self.main_window.client_form_controller.abrir_form_edit(cliente)
-        elif accion == "eliminar":
-            msg=QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Warning)
-            msg.setWindowTitle("Confirmar eliminación")
-            msg.setText(f"¿Estás seguro que deseas eliminar al usuario <b>'{nombrec}'</b>?")
-            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
-            msg.setDefaultButton(QMessageBox.StandardButton.No)
-            respuesta=msg.exec()
-            self.main_window.client_form_controller.confirmar_eliminacion(respuesta,cliente_id)
+    def set_edit_form_cli(self, edit_form_cli):
+        self.edit_form_cli = edit_form_cli
+    
+    def obtener_id_cliente(self):
+        item_seleccionado = self.ui.tableWidget.currentItem()
+        if item_seleccionado:
+            fila = item_seleccionado.row()
+            item_con_id = self.ui.tableWidget.item(fila, 0) 
+            id_cliente = item_con_id.data(Qt.ItemDataRole.UserRole)
+            return id_cliente
+        return None
+
+    def editar_cliente(self):
+        id_cliente = self.obtener_id_cliente()
+        if id_cliente and self.edit_form_cli:
+            self.edit_form_cli.setWindowTitle("Editar Cliente")
+            cliente = Cliente.get_by_id(id_cliente)
+            if cliente:
+                self.edit_form_cli.label_2.setText("EDITAR CLIENTE")
+                self.edit_form_cli.lineEdit.setText(cliente.nombre)
+                self.edit_form_cli.lineEdit_2.setText(cliente.direccion)
+                self.edit_client_controller.cliente_id = id_cliente
+                self.edit_form_cli.mostrar_form()
+    
+    def eliminar_cliente(self):
+        id_cliente = self.obtener_id_cliente()
+        if id_cliente: #Aca tiene que ir la logica para eliminar y el mensaje, pero hay que hacerlo despues, por la relacion con las otras tablas
+            print(f"Eliminar : {id_cliente}")
 
     def actualizar_estado_paginado(self):
         self.total_clientes = Cliente.contar_clientes()

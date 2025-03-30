@@ -81,3 +81,13 @@ class Cliente(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def get_by_id(cls, id_cliente):
+        try:
+            db = SessionLocal()
+            cliente = db.query(cls).filter(cls.id == id_cliente).first()
+            return cliente
+        except Exception as e:
+            print(f"Error al obtener id: {e}")
+            return None

@@ -18,13 +18,6 @@ class RegisterClientUi(QDialog, Ui_ClientForm):
     def mostrar_form(self):
         self.exec()
 
-class EditClientUi(QDialog, Ui_ClientFormEdit):
-    def __init__(self):
-        super().__init__()
-        self.setupUi(self)
-    def mostrar_form_edit(self):
-        self.exec()
-
 class ExtintorUi(QWidget, Ui_Extintor):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -50,11 +43,14 @@ class Ventana(QMainWindow):
         self.cliente_tab = ClientUi()
         self.ui.Clientes.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Clientes.layout().addWidget(self.cliente_tab)
-        self.edit_client_ui = EditClientUi()
-        self.client_controller = ClientController(self.cliente_tab, self)
+        self.client_controller = ClientController(self.cliente_tab)
         self.alta_client = RegisterClientUi()
         self.cliente_tab.pushButton_5.clicked.connect(self.alta_client.mostrar_form)
-        self.client_form_controller = ClientFormController(self.alta_client, self.client_controller, self.edit_client_ui)
+        self.client_form_controller = ClientFormController(self.alta_client, self.client_controller)
+        self.edit_client = RegisterClientUi()
+        self.client_controller.set_edit_form_cli(self.edit_client)
+        self.edit_client_controller = ClientFormController(self.edit_client, self.client_controller)
+        self.client_controller.edit_client_controller = self.edit_client_controller
         self.setWindowTitle("LE * LO Matafuegos")
         self.extintor_tab = ExtintorUi()
         self.extintor_details_tab = ExtintorDetailsUi()
