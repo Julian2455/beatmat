@@ -4,7 +4,7 @@ from gui.designer import *
 
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QDialog
-from PyQt6 import QtWidgets
+from PyQt6 import QtWidgets, QtCore
 
 class ClientUi(QWidget, Ui_Client):
     def __init__(self, parent=None):
@@ -52,11 +52,19 @@ class Ventana(QMainWindow):
         self.edit_client_controller = ClientFormController(self.edit_client, self.client_controller)
         self.client_controller.edit_client_controller = self.edit_client_controller
         self.setWindowTitle("LE * LO Matafuegos")
+        self.scroll_area = QtWidgets.QScrollArea()
+        self.scroll_area.setWidgetResizable(True)
+        self.scroll_area.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.scroll_area.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.matafuegos_container = QtWidgets.QWidget()
+        self.matafuegos_layout = QtWidgets.QVBoxLayout(self.matafuegos_container)
         self.extintor_tab = ExtintorUi()
         self.extintor_details_tab = ExtintorDetailsUi()
+        self.matafuegos_layout.addWidget(self.extintor_tab)
+        self.matafuegos_layout.addWidget(self.extintor_details_tab)
+        self.scroll_area.setWidget(self.matafuegos_container)
         self.ui.Matafuegos.setLayout(QtWidgets.QVBoxLayout())
-        self.ui.Matafuegos.layout().addWidget(self.extintor_tab)
-        self.ui.Matafuegos.layout().addWidget(self.extintor_details_tab)
+        self.ui.Matafuegos.layout().addWidget(self.scroll_area)
         self.extintor_details_tab.hide()
         self.extintor_controller = ExtintorController(self.extintor_tab)
         self.extintor_controller.details_ui = self.extintor_details_tab

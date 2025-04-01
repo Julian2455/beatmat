@@ -16,6 +16,18 @@ class Recarga(Base):
 
     extintor=relationship('Extintor',back_populates='recarga')
 
+    @property
+    def vto_control_recarga_formateado(self):
+        if self.vto_control_recarga:
+            return self.vto_control_recarga.strftime("%d-%m-%Y")
+        return ""
+        
+    @property
+    def nuevo_control_recarga_formateado(self):
+        if self.nuevo_control_recarga:
+            return self.nuevo_control_recarga.strftime("%d-%m-%Y") 
+        return ""
+
     @classmethod
     def show_all(cls):
         db = SessionLocal()

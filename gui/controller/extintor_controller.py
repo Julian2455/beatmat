@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog
-from PyQt6.QtGui import QAction
+from PyQt6.QtGui import QAction, QColor, QBrush
 from PyQt6.QtCore import Qt
 from models import *  
 
@@ -81,35 +81,52 @@ class ExtintorController:
         id_extintor=self.obtener_id_extintor()
         self.ui.hide()
         self.details_ui.show()
+        self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
+        self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
         recargas=Recarga.show_filter(id_extintor)
         if recargas:
             self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
             for index, recarga in enumerate(recargas):
-                id_recarga = QTableWidgetItem(str(recarga.vto_control_recarga))
+                id_recarga = QTableWidgetItem(str(recarga.vto_control_recarga_formateado))
                 id_recarga.setData(Qt.ItemDataRole.UserRole, recarga.id)
                 self.details_ui.tableWidgetExtintores.setItem(index, 0, id_recarga)
-                self.details_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(recarga.nuevo_control_recarga)))
+                self.details_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(recarga.nuevo_control_recarga_formateado)))
                 self.details_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_ph)))
                 self.details_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.fecha_fabricacion)))
         tareas=Tareas.show_filter(id_extintor)
         if tareas:
-            self.details_ui.tableWidgetTareas.setRowCount(len(tareas))
-            for index, tarea in enumerate(tareas):
-                id_tarea = QTableWidgetItem(str(tarea.tamizacion))
-                id_tarea.setData(Qt.ItemDataRole.UserRole, tarea.id)
-                self.details_ui.tableWidgetTareas.setItem(index, 0, id_tarea)
-                self.details_ui.tableWidgetTareas.setItem(index, 1, QTableWidgetItem(str(tarea.peso)))
-                self.details_ui.tableWidgetTareas.setItem(index, 2, QTableWidgetItem(str(tarea.control_tacho)))
-                self.details_ui.tableWidgetTareas.setItem(index, 3, QTableWidgetItem(str(tarea.relleno_polvo)))
-                self.details_ui.tableWidgetTareas.setItem(index, 4, QTableWidgetItem(str(tarea.cambio_manometro)))
-                self.details_ui.tableWidgetTareas.setItem(index, 5, QTableWidgetItem(str(tarea.oring)))
-                self.details_ui.tableWidgetTareas.setItem(index, 6, QTableWidgetItem(str(tarea.gatillo)))
-                self.details_ui.tableWidgetTareas.setItem(index, 7, QTableWidgetItem(str(tarea.pintura)))
-                self.details_ui.tableWidgetTareas.setItem(index, 8, QTableWidgetItem(str(tarea.interior)))
-                self.details_ui.tableWidgetTareas.setItem(index, 9, QTableWidgetItem(str(tarea.valvula)))
-                self.details_ui.tableWidgetTareas.setItem(index, 10, QTableWidgetItem(str(tarea.bastago_bronce)))
-                self.details_ui.tableWidgetTareas.setItem(index, 11, QTableWidgetItem(str(tarea.otro)))
-                self.details_ui.tableWidgetTareas.setItem(index, 12, QTableWidgetItem(str(tarea.observacion)))
+            num_tareas = len(tareas)
+            self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
+            for col, tarea in enumerate(tareas):
+                id_item = QTableWidgetItem("")
+                id_item.setData(Qt.ItemDataRole.UserRole, tarea.id)
+                self.details_ui.tableWidgetTareas.setItem(0, col, id_item)
+                valores = [
+                    tarea.tamizacion,
+                    tarea.peso,      
+                    tarea.control_tacho,
+                    tarea.relleno_polvo,
+                    tarea.cambio_manometro,
+                    tarea.oring,
+                    tarea.gatillo,
+                    tarea.pintura,
+                    tarea.interior,
+                    tarea.valvula,
+                    tarea.bastago_bronce,
+                    tarea.otro,
+                    tarea.observacion
+                ]
+                for fila, valor in enumerate(valores):
+                    item = QTableWidgetItem("")
+                    if fila < 12:
+                        if str(valor) == "1" or valor == 1:
+                            item.setBackground(QBrush(QColor("#7FFF00")))
+                        else:
+                            item.setBackground(QBrush(QColor("#DC143C")))
+                    else:
+                        item.setText(str(valor))
+                    self.details_ui.tableWidgetTareas.setItem(fila, col, item)
+                    self.details_ui.tableWidgetTareas.setColumnWidth(col,30)
 
     def mostrar_menu_contextual(self, pos):
         index = self.ui.tableWidget.indexAt(pos)

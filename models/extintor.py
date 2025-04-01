@@ -6,12 +6,13 @@ class Extintor(Base):
     __tablename__='extintor'
 
     id=Column(Integer,primary_key=True,autoincrement=True)
-    numeracion=Column(Integer,nullable=False)
+    numeracion=Column(Integer,nullable=False,unique=True)
     marca=Column(String(50),nullable=False)
     ubicacion=Column(String(70),nullable=False)
     tipo=Column(String(20),nullable=False)
     capacidad=Column(String(30),nullable=False)
 
+    cliente=relationship('Cliente',back_populates='extintor')
     recarga=relationship('Recarga',back_populates='extintor')
     detcaja=relationship('DetCaja',back_populates='extintor')
     tareas=relationship('Tareas',back_populates='extintor')

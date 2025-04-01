@@ -12,7 +12,8 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorDetails(object):
     def setupUi(self, ExtintorDetails):
         ExtintorDetails.setObjectName("ExtintorDetails")
-        ExtintorDetails.resize(887, 631)
+        ExtintorDetails.resize(989, 770)
+        ExtintorDetails.setStyleSheet("color:black;")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(ExtintorDetails)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
@@ -58,25 +59,10 @@ class Ui_ExtintorDetails(object):
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableWidgetExtintores.sizePolicy().hasHeightForWidth())
         self.tableWidgetExtintores.setSizePolicy(sizePolicy)
-        self.tableWidgetExtintores.setStyleSheet("\n"
-"QTableWidget {\n"
-"    color: rgb(0, 0, 0);\n"
-"    border: 2px solid #a0a0a0;\n"
-"    gridline-color: #d0d0d0;\n"
-"    background-color: #f9f9f9;\n"
-"}\n"
-"QTableWidget::item {\n"
-"    border: 1px solid #d0d0d0;\n"
-"    padding: 5px;\n"
-"}\n"
-"QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 5px;\n"
-"    border: 1px solid #a0a0a0;\n"
-"    font-weight: bold;\n"
-"}\n"
-"")
+        self.tableWidgetExtintores.setMinimumSize(QtCore.QSize(0, 200))
+        self.tableWidgetExtintores.setMaximumSize(QtCore.QSize(16777215, 200))
+        self.tableWidgetExtintores.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tableWidgetExtintores.setStyleSheet("")
         self.tableWidgetExtintores.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.tableWidgetExtintores.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tableWidgetExtintores.setAutoScroll(True)
@@ -122,70 +108,55 @@ class Ui_ExtintorDetails(object):
         self.labelDetallesMantenimiento.setObjectName("labelDetallesMantenimiento")
         self.verticalLayout_7.addWidget(self.labelDetallesMantenimiento)
         self.tableWidgetTareas = QtWidgets.QTableWidget(parent=ExtintorDetails)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.tableWidgetTareas.sizePolicy().hasHeightForWidth())
         self.tableWidgetTareas.setSizePolicy(sizePolicy)
-        self.tableWidgetTareas.setStyleSheet("\n"
-"QTableWidget {\n"
-"    color: rgb(0, 0, 0);\n"
-"    border: 2px solid #a0a0a0;\n"
-"    gridline-color: #d0d0d0;\n"
-"    background-color: #f9f9f9;\n"
-"}\n"
-"QTableWidget::item {\n"
-"    border: 1px solid #d0d0d0;\n"
-"    padding: 5px;\n"
-"}\n"
-"QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 5px;\n"
-"    border: 1px solid #a0a0a0;\n"
-"    font-weight: bold;\n"
-"}\n"
-"")
+        self.tableWidgetTareas.setMinimumSize(QtCore.QSize(0, 400))
+        self.tableWidgetTareas.setMaximumSize(QtCore.QSize(16777215, 400))
+        self.tableWidgetTareas.setStyleSheet("")
         self.tableWidgetTareas.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
+        self.tableWidgetTareas.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.tableWidgetTareas.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tableWidgetTareas.setAutoScroll(True)
         self.tableWidgetTareas.setAutoScrollMargin(16)
         self.tableWidgetTareas.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tableWidgetTareas.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem)
         self.tableWidgetTareas.setObjectName("tableWidgetTareas")
-        self.tableWidgetTareas.setColumnCount(13)
-        self.tableWidgetTareas.setRowCount(0)
+        self.tableWidgetTareas.setColumnCount(0)
+        self.tableWidgetTareas.setRowCount(13)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(0, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(1, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(2, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(2, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(3, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(3, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(4, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(4, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(5, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(5, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(6, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(6, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(7, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(7, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(8, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(8, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(9, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(9, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(10, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(10, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(11, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(11, item)
         item = QtWidgets.QTableWidgetItem()
-        self.tableWidgetTareas.setHorizontalHeaderItem(12, item)
+        self.tableWidgetTareas.setVerticalHeaderItem(12, item)
         self.tableWidgetTareas.horizontalHeader().setVisible(True)
         self.tableWidgetTareas.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidgetTareas.horizontalHeader().setHighlightSections(True)
         self.tableWidgetTareas.horizontalHeader().setSortIndicatorShown(False)
-        self.tableWidgetTareas.horizontalHeader().setStretchLastSection(True)
+        self.tableWidgetTareas.horizontalHeader().setStretchLastSection(False)
         self.verticalLayout_7.addWidget(self.tableWidgetTareas)
 
         self.retranslateUi(ExtintorDetails)
@@ -206,31 +177,31 @@ class Ui_ExtintorDetails(object):
         item.setText(_translate("ExtintorDetails", "Fecha de fabricacion"))
         self.labelMantenimiento.setText(_translate("ExtintorDetails", "Historial de Mantenimiento"))
         self.labelDetallesMantenimiento.setText(_translate("ExtintorDetails", "Registro de Servicios y Revisiones"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(0)
+        item = self.tableWidgetTareas.verticalHeaderItem(0)
         item.setText(_translate("ExtintorDetails", "Tamización"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(1)
+        item = self.tableWidgetTareas.verticalHeaderItem(1)
         item.setText(_translate("ExtintorDetails", "Peso"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(2)
+        item = self.tableWidgetTareas.verticalHeaderItem(2)
         item.setText(_translate("ExtintorDetails", "Control de tacho"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(3)
+        item = self.tableWidgetTareas.verticalHeaderItem(3)
         item.setText(_translate("ExtintorDetails", "Relleno de polvo"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(4)
+        item = self.tableWidgetTareas.verticalHeaderItem(4)
         item.setText(_translate("ExtintorDetails", "Cambio de manómetro"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(5)
+        item = self.tableWidgetTareas.verticalHeaderItem(5)
         item.setText(_translate("ExtintorDetails", "Oring"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(6)
+        item = self.tableWidgetTareas.verticalHeaderItem(6)
         item.setText(_translate("ExtintorDetails", "Gatillo"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(7)
+        item = self.tableWidgetTareas.verticalHeaderItem(7)
         item.setText(_translate("ExtintorDetails", "Pintura"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(8)
+        item = self.tableWidgetTareas.verticalHeaderItem(8)
         item.setText(_translate("ExtintorDetails", "Interior"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(9)
+        item = self.tableWidgetTareas.verticalHeaderItem(9)
         item.setText(_translate("ExtintorDetails", "Válvula"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(10)
+        item = self.tableWidgetTareas.verticalHeaderItem(10)
         item.setText(_translate("ExtintorDetails", "Bastago de bronce"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(11)
+        item = self.tableWidgetTareas.verticalHeaderItem(11)
         item.setText(_translate("ExtintorDetails", "Otro"))
-        item = self.tableWidgetTareas.horizontalHeaderItem(12)
+        item = self.tableWidgetTareas.verticalHeaderItem(12)
         item.setText(_translate("ExtintorDetails", "Observaciones"))
 
 
