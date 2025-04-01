@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import sessionmaker, relationship
 from db import Base, engine, SessionLocal
-from .extintor import Extintor
 
 class Cliente(Base):
     __tablename__ = 'cliente'
@@ -9,8 +8,6 @@ class Cliente(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(70), nullable=False)
     direccion = Column(String(70), nullable=False)
-
-    extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
     extintor=relationship('Extintor',back_populates='cliente')
     caja=relationship('Caja',back_populates='cliente')

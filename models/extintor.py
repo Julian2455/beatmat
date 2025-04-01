@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
+from .cliente import Cliente
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -11,6 +12,8 @@ class Extintor(Base):
     ubicacion=Column(String(70),nullable=False)
     tipo=Column(String(20),nullable=False)
     capacidad=Column(String(30),nullable=False)
+
+    cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
     cliente=relationship('Cliente',back_populates='extintor')
     recarga=relationship('Recarga',back_populates='extintor')
