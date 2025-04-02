@@ -52,7 +52,7 @@ class Ventana(QMainWindow):
         self.ui.Clientes.layout().addWidget(self.cliente_extintor)
         self.cliente_extintor.hide()
         self.client_controller = ClientController(self.cliente_tab)
-        self.client_controller.asosiacion_ui=self.cliente_extintor
+        self.client_controller.asociacion_ui=self.cliente_extintor
         self.cliente_extintor.btnAtras.clicked.connect(self.show_clientes_tab)
         self.alta_client = RegisterClientUi()
         self.cliente_tab.pushButton_5.clicked.connect(self.alta_client.mostrar_form)

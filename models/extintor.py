@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
-from models.recarga import Recarga
+from .cliente import Cliente
+from .recarga import Recarga
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -92,7 +93,7 @@ class Extintor(Base):
         try:
             db = SessionLocal()
             resultado = (
-                db.query(Extintor.numeracion, Extintor.marca, Recarga.vto_control_recarga, Recarga.vto_ph)
+                db.query(Extintor, Recarga)
                 .join(Recarga, Recarga.extintor_id == Extintor.id)
                 .filter(Extintor.cliente_id == id_cliente)
                 .all()

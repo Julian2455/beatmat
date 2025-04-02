@@ -121,16 +121,16 @@ class ClientController:
 
     def extintores_clientes(self,index):
         nombre = self.ui.tableWidget.item(index.row(), 0).text()
-        self.asosiacion_ui.labelExtintores.setText(f'Extintores asociados a {nombre}')
+        self.asociacion_ui.labelExtintores.setText(f'Extintores asociados a {nombre}')
         id_cliente=self.obtener_id_cliente()
         self.ui.hide()
-        self.asosiacion_ui.show()
+        self.asociacion_ui.show()
         extintores=Extintor.extintor_asociado_cliente(id_cliente)
         if extintores:
-            self.asosiacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
-            for index, (numeracion, marca, vto_control_recarga, vto_ph) in enumerate(extintores):
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 0, QTableWidgetItem(str(numeracion)))
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(marca)))
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem((vto_control_recarga)))
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(vto_ph)))
+            self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
+            for index, (extintor, recarga) in enumerate(extintores):
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 0, QTableWidgetItem(str(extintor.numeracion)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(extintor.marca)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_control_recarga_formateado)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.vto_ph)))
 
