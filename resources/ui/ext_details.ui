@@ -55,7 +55,6 @@ padding: 5px 10px;
      <property name="font">
       <font>
        <pointsize>12</pointsize>
-       <weight>75</weight>
        <bold>true</bold>
        <underline>true</underline>
       </font>
@@ -76,7 +75,6 @@ padding: 5px 10px;
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -100,25 +98,25 @@ padding: 5px 10px;
       </sizepolicy>
      </property>
      <property name="minimumSize">
-  <size>
-   <width>0</width>
-   <height>200</height> <!-- Ajusta a lo que necesites -->
-  </size>
-</property>
-<property name="maximumSize">
-  <size>
-   <width>16777215</width>
-   <height>200</height> <!-- Ajusta a lo que necesites -->
-  </size>
-</property>
-<property name="verticalScrollBarPolicy">
-  <enum>Qt::ScrollBarAlwaysOff</enum>
-</property>
+      <size>
+       <width>0</width>
+       <height>200</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>200</height>
+      </size>
+     </property>
      <property name="styleSheet">
       <string notr="true"/>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
+     </property>
+     <property name="verticalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
      </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAsNeeded</enum>
@@ -154,20 +152,52 @@ padding: 5px 10px;
       <property name="text">
        <string>Fecha vencida de control</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Nueva fecha de control</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Vencimiento de PH</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Fecha de fabricacion</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
     </widget>
@@ -177,7 +207,6 @@ padding: 5px 10px;
      <property name="font">
       <font>
        <pointsize>12</pointsize>
-       <weight>75</weight>
        <bold>true</bold>
        <underline>true</underline>
       </font>
@@ -198,7 +227,6 @@ padding: 5px 10px;
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <weight>50</weight>
        <bold>false</bold>
       </font>
      </property>
@@ -276,65 +304,130 @@ padding: 5px 10px;
       <property name="text">
        <string>Tamización</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Peso</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Control de tacho</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Relleno de polvo</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Cambio de manómetro</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Oring</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Gatillo</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Pintura</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Interior</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Válvula</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>
       <property name="text">
        <string>Bastago de bronce</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Otro</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
      </row>
      <row>
       <property name="text">
        <string>Observaciones</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
     </widget>

@@ -133,6 +133,11 @@ padding: 5px 10px;
       <property name="text">
        <string>Extintor</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="textAlignment">
        <set>AlignLeading|AlignVCenter</set>
       </property>
@@ -140,6 +145,11 @@ padding: 5px 10px;
      <column>
       <property name="text">
        <string>Marca</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="textAlignment">
        <set>AlignLeading|AlignVCenter</set>
@@ -149,6 +159,11 @@ padding: 5px 10px;
       <property name="text">
        <string>Vencimiento de recarga</string>
       </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="textAlignment">
        <set>AlignLeading|AlignVCenter</set>
       </property>
@@ -156,6 +171,11 @@ padding: 5px 10px;
      <column>
       <property name="text">
        <string>Vencimiento de ph</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
       <property name="textAlignment">
        <set>AlignLeading|AlignVCenter</set>
