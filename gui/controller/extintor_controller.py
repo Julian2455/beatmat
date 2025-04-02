@@ -83,6 +83,8 @@ class ExtintorController:
         self.details_ui.show()
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
+        self.details_ui.tableWidgetExtintores.setRowCount(0)
+        self.details_ui.tableWidgetTareas.setColumnCount(0)
         recargas=Recarga.show_filter(id_extintor)
         if recargas:
             self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
