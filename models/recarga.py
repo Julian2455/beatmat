@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, Date, ForeignKey
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
-from .extintor import Extintor
 
 class Recarga(Base):
     __tablename__='recarga'

@@ -4,3 +4,4 @@ from .client_form import Ui_ClientForm
 from .extintor_tab import Ui_Extintor
 from .extintor_form import Ui_ExtintorForm
 from .ext_details import Ui_ExtintorDetails
+from .ext_client_details import Ui_ExtintorClientsDetails

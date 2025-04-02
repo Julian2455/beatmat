@@ -1,7 +1,8 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship,sessionmaker
+from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
 from .cliente import Cliente
+from .recarga import Recarga
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -86,3 +87,20 @@ class Extintor(Base):
         except Exception as e:
             print(f"Error al obtener id: {e}")
             return None
+        
+    @classmethod
+    def extintor_asociado_cliente(cls, id_cliente):
+        try:
+            db = SessionLocal()
+            resultado = (
+                db.query(Extintor, Recarga)
+                .join(Recarga, Recarga.extintor_id == Extintor.id)
+                .filter(Extintor.cliente_id == id_cliente)
+                .all()
+            )   
+            return resultado
+        except Exception as e:
+            print(f"Error en consulta: {e}")
+            return []
+        finally:
+            db.close()

@@ -16,6 +16,7 @@ class ClientController:
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
+        self.ui.tableWidget.doubleClicked.connect(self.extintores_clientes)
         self.ui.tableWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.edit_form_cli = None
@@ -117,4 +118,19 @@ class ClientController:
         if self.pagina_actual != self.total_paginas:
             self.pagina_actual = self.total_paginas
             self.mostrar_clientes()
+
+    def extintores_clientes(self,index):
+        nombre = self.ui.tableWidget.item(index.row(), 0).text()
+        self.asociacion_ui.labelExtintores.setText(f'Extintores asociados a {nombre}')
+        id_cliente=self.obtener_id_cliente()
+        self.ui.hide()
+        self.asociacion_ui.show()
+        extintores=Extintor.extintor_asociado_cliente(id_cliente)
+        if extintores:
+            self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
+            for index, (extintor, recarga) in enumerate(extintores):
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 0, QTableWidgetItem(str(extintor.numeracion)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(extintor.marca)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_control_recarga_formateado)))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.vto_ph)))
 
