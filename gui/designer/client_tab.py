@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'client_tab.ui'
+# Form implementation generated from reading ui file 'resources/ui/client_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -25,7 +25,7 @@ class Ui_Client(object):
         self.label.setMinimumSize(QtCore.QSize(23, 23))
         self.label.setMaximumSize(QtCore.QSize(23, 23))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../../../../images/buscar.png"))
+        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/buscar.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
@@ -48,7 +48,7 @@ class Ui_Client(object):
 "color: white;\n"
 "background-color:rgb(0, 4, 255)")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../../../../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_5.setIcon(icon)
         self.pushButton_5.setIconSize(QtCore.QSize(20, 20))
         self.pushButton_5.setObjectName("pushButton_5")
@@ -112,7 +112,7 @@ class Ui_Client(object):
         self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_3.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../../../../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_3.setIcon(icon1)
         self.pushButton_3.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_3.setObjectName("pushButton_3")
@@ -121,7 +121,7 @@ class Ui_Client(object):
         self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_2.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../../../../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_2.setIcon(icon2)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
@@ -135,7 +135,7 @@ class Ui_Client(object):
         self.pushButton.setStyleSheet("")
         self.pushButton.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../../../../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton.setIcon(icon3)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
@@ -144,7 +144,7 @@ class Ui_Client(object):
         self.pushButton_4.setStyleSheet("")
         self.pushButton_4.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("../../../../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_4.setIcon(icon4)
         self.pushButton_4.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_4.setObjectName("pushButton_4")

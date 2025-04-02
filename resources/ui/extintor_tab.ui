@@ -41,7 +41,7 @@
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../../../../images/buscar.png</pixmap>
+         <pixmap>../images/buscar.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -51,7 +51,7 @@
       <item>
        <widget class="QLineEdit" name="lineEdit">
         <property name="styleSheet">
-         <string notr="true">border: 2px solid;
+         <string notr="true">nborder: 2px solid;
 border-radius: 10px;</string>
         </property>
         <property name="placeholderText">
@@ -90,7 +90,7 @@ background-color: rgb(255, 0, 0);</string>
            </property>
            <property name="icon">
             <iconset>
-             <normaloff>../../../../images/extintor.png</normaloff>../../../../images/extintor.png</iconset>
+             <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
            </property>
            <property name="iconSize">
             <size>
@@ -291,7 +291,7 @@ border: none;</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../images/anterior (1).png</normaloff>../../../../images/anterior (1).png</iconset>
+          <normaloff>../images/anterior (1).png</normaloff>../images/anterior (1).png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -311,7 +311,7 @@ border: none;</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../images/anterior.png</normaloff>../../../../images/anterior.png</iconset>
+          <normaloff>../images/anterior.png</normaloff>../images/anterior.png</iconset>
         </property>
        </widget>
       </item>
@@ -338,7 +338,7 @@ border: none;</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../images/sssiguiente.png</normaloff>../../../../images/sssiguiente.png</iconset>
+          <normaloff>../images/sssiguiente.png</normaloff>../images/sssiguiente.png</iconset>
         </property>
        </widget>
       </item>
@@ -355,7 +355,7 @@ border: none;</string>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../../../../images/proximo (1).png</normaloff>../../../../images/proximo (1).png</iconset>
+          <normaloff>../images/proximo (1).png</normaloff>../images/proximo (1).png</iconset>
         </property>
         <property name="iconSize">
          <size>
