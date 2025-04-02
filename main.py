@@ -11,6 +11,11 @@ class ClientUi(QWidget, Ui_Client):
         super().__init__(parent)
         self.setupUi(self)
 
+class ExtintorClientsDetailsUi(QWidget,Ui_ExtintorClientsDetails):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+
 class RegisterClientUi(QDialog, Ui_ClientForm):
     def __init__(self):
         super().__init__()
@@ -41,9 +46,14 @@ class Ventana(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.cliente_tab = ClientUi()
+        self.cliente_extintor = ExtintorClientsDetailsUi()
         self.ui.Clientes.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Clientes.layout().addWidget(self.cliente_tab)
+        self.ui.Clientes.layout().addWidget(self.cliente_extintor)
+        self.cliente_extintor.hide()
         self.client_controller = ClientController(self.cliente_tab)
+        self.client_controller.asosiacion_ui=self.cliente_extintor
+        self.cliente_extintor.btnAtras.clicked.connect(self.show_clientes_tab)
         self.alta_client = RegisterClientUi()
         self.cliente_tab.pushButton_5.clicked.connect(self.alta_client.mostrar_form)
         self.client_form_controller = ClientFormController(self.alta_client, self.client_controller)
@@ -80,6 +90,10 @@ class Ventana(QMainWindow):
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   
         self.extintor_tab.show()
+    
+    def show_clientes_tab(self):
+        self.cliente_extintor.hide()
+        self.cliente_tab.show()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
