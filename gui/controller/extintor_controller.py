@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog
+from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
 from PyQt6.QtGui import QAction, QColor, QBrush
 from PyQt6.QtCore import Qt
 from models import *  
@@ -83,6 +83,8 @@ class ExtintorController:
         self.details_ui.show()
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
+        self.details_ui.tableWidgetExtintores.setRowCount(0)
+        self.details_ui.tableWidgetTareas.setColumnCount(0)
         recargas=Recarga.show_filter(id_extintor)
         if recargas:
             self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
@@ -97,11 +99,14 @@ class ExtintorController:
         if tareas:
             num_tareas = len(tareas)
             self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
+            self.observaciones={}
             for col, tarea in enumerate(tareas):
                 id_item = QTableWidgetItem("")
                 id_item.setData(Qt.ItemDataRole.UserRole, tarea.id)
                 self.details_ui.tableWidgetTareas.setItem(0, col, id_item)
+                self.observaciones[col] = tarea.observacion
                 valores = [
+                    tarea.fecha_formateada,
                     tarea.tamizacion,
                     tarea.peso,      
                     tarea.control_tacho,
@@ -114,11 +119,10 @@ class ExtintorController:
                     tarea.valvula,
                     tarea.bastago_bronce,
                     tarea.otro,
-                    tarea.observacion
                 ]
                 for fila, valor in enumerate(valores):
                     item = QTableWidgetItem("")
-                    if fila < 12:
+                    if fila < 13 and fila!=0:
                         if str(valor) == "1" or valor == 1:
                             item.setBackground(QBrush(QColor("#7FFF00")))
                         else:
@@ -126,7 +130,19 @@ class ExtintorController:
                     else:
                         item.setText(str(valor))
                     self.details_ui.tableWidgetTareas.setItem(fila, col, item)
-                    self.details_ui.tableWidgetTareas.setColumnWidth(col,30)
+                if tarea.observacion and tarea.observacion != "Null":
+                    btn = QPushButton("Ver")
+                    btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
+                    self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
+                self.details_ui.tableWidgetTareas.setColumnWidth(col,85)
+    
+    def mostrar_observacion(self, columna):
+        observacion = self.observaciones.get(columna, "No hay observación")  
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setWindowTitle("Observación")
+        msg.setText(observacion)
+        msg.exec()
 
     def mostrar_menu_contextual(self, pos):
         index = self.ui.tableWidget.indexAt(pos)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey, String
+from sqlalchemy import Column, Integer, ForeignKey, String, Date
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
 from .extintor import Extintor
@@ -20,10 +20,17 @@ class Tareas(Base):
     bastago_bronce=Column(Integer,nullable=False)
     otro=Column(Integer,nullable=False)
     observacion=Column(String(255))
+    fecha=Column(Date,nullable=False)
 
     extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
     extintor=relationship('Extintor',back_populates='tareas')
+
+    @property
+    def fecha_formateada(self):
+        if self.fecha:
+            return self.fecha.strftime("%d-%m-%Y")
+        return ""
 
     @classmethod
     def show_all(cls):

@@ -125,6 +125,7 @@ class ClientController:
         id_cliente=self.obtener_id_cliente()
         self.ui.hide()
         self.asociacion_ui.show()
+        self.asociacion_ui.tableWidgetExtintores.setRowCount(0)
         extintores=Extintor.extintor_asociado_cliente(id_cliente)
         if extintores:
             self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
