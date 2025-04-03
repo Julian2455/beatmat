@@ -40,6 +40,13 @@ class RegisterExtUi(QDialog, Ui_ExtintorForm):
     def mostrar_form(self):
         self.exec()
 
+class TareaRegisterUi(QDialog, Ui_TareasForm):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+    def mostrar_form(self):
+        self.exec()
+
 class Ventana(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -86,6 +93,9 @@ class Ventana(QMainWindow):
         self.extintor_controller.set_edit_form_ext(self.edit_extintor)
         self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller)
         self.extintor_controller.edit_extintor_controller = self.edit_extintor_controller
+        self.alta_tarea = TareaRegisterUi()
+        self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.alta_tarea.mostrar_form)
+        self.tarea_form_controller = TareaFormController(self.alta_tarea, self.extintor_controller)
     
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   

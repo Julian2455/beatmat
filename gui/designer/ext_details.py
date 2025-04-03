@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ext_details.ui'
+# Form implementation generated from reading ui file 'resources/ui/ext_details.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -51,6 +51,21 @@ class Ui_ExtintorDetails(object):
         self.labelDetallesExtintores.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.labelDetallesExtintores.setObjectName("labelDetallesExtintores")
         self.verticalLayout_7.addWidget(self.labelDetallesExtintores)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.btnAgregarRecarga = QtWidgets.QPushButton(parent=ExtintorDetails)
+        self.btnAgregarRecarga.setStyleSheet("\n"
+"color: black; \n"
+"background-color: #f0f0f0; \n"
+"border: 1px solid #a0a0a0; \n"
+"border-radius: 5px; \n"
+"padding: 5px 10px;\n"
+"")
+        self.btnAgregarRecarga.setObjectName("btnAgregarRecarga")
+        self.horizontalLayout_2.addWidget(self.btnAgregarRecarga)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_2)
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=ExtintorDetails)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -119,6 +134,21 @@ class Ui_ExtintorDetails(object):
         self.labelDetallesMantenimiento.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.labelDetallesMantenimiento.setObjectName("labelDetallesMantenimiento")
         self.verticalLayout_7.addWidget(self.labelDetallesMantenimiento)
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem2)
+        self.btnAgregarTareas = QtWidgets.QPushButton(parent=ExtintorDetails)
+        self.btnAgregarTareas.setStyleSheet("\n"
+"color: black; \n"
+"background-color: #f0f0f0; \n"
+"border: 1px solid #a0a0a0; \n"
+"border-radius: 5px; \n"
+"padding: 5px 10px;\n"
+"")
+        self.btnAgregarTareas.setObjectName("btnAgregarTareas")
+        self.horizontalLayout_3.addWidget(self.btnAgregarTareas)
+        self.verticalLayout_7.addLayout(self.horizontalLayout_3)
         self.tableWidgetTareas = QtWidgets.QTableWidget(parent=ExtintorDetails)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -139,9 +169,6 @@ class Ui_ExtintorDetails(object):
         self.tableWidgetTareas.setColumnCount(0)
         self.tableWidgetTareas.setRowCount(14)
         item = QtWidgets.QTableWidgetItem()
-        font = QtGui.QFont()
-        font.setBold(True)
-        item.setFont(font)
         self.tableWidgetTareas.setVerticalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         font = QtGui.QFont()
@@ -204,6 +231,9 @@ class Ui_ExtintorDetails(object):
         item.setFont(font)
         self.tableWidgetTareas.setVerticalHeaderItem(12, item)
         item = QtWidgets.QTableWidgetItem()
+        font = QtGui.QFont()
+        font.setBold(True)
+        item.setFont(font)
         self.tableWidgetTareas.setVerticalHeaderItem(13, item)
         self.tableWidgetTareas.horizontalHeader().setVisible(True)
         self.tableWidgetTareas.horizontalHeader().setDefaultSectionSize(200)
@@ -220,6 +250,7 @@ class Ui_ExtintorDetails(object):
         ExtintorDetails.setWindowTitle(_translate("ExtintorDetails", "Form"))
         self.btnAtras.setText(_translate("ExtintorDetails", "Atrás"))
         self.labelDetallesExtintores.setText(_translate("ExtintorDetails", "Historial de recargas"))
+        self.btnAgregarRecarga.setText(_translate("ExtintorDetails", "Agregar recarga"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(0)
         item.setText(_translate("ExtintorDetails", "Fecha vencida de control"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(1)
@@ -230,6 +261,7 @@ class Ui_ExtintorDetails(object):
         item.setText(_translate("ExtintorDetails", "Fecha de fabricacion"))
         self.labelMantenimiento.setText(_translate("ExtintorDetails", "Historial de Mantenimiento"))
         self.labelDetallesMantenimiento.setText(_translate("ExtintorDetails", "Registro de Servicios y Revisiones"))
+        self.btnAgregarTareas.setText(_translate("ExtintorDetails", "Agregar tareas"))
         item = self.tableWidgetTareas.verticalHeaderItem(0)
         item.setText(_translate("ExtintorDetails", "Fecha"))
         item = self.tableWidgetTareas.verticalHeaderItem(1)

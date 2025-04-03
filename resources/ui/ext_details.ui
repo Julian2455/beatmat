@@ -90,6 +90,39 @@ padding: 5px 10px;
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAgregarRecarga">
+       <property name="styleSheet">
+        <string notr="true">
+color: black; 
+background-color: #f0f0f0; 
+border: 1px solid #a0a0a0; 
+border-radius: 5px; 
+padding: 5px 10px;
+</string>
+       </property>
+       <property name="text">
+        <string>Agregar recarga</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QTableWidget" name="tableWidgetExtintores">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -240,6 +273,39 @@ padding: 5px 10px;
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btnAgregarTareas">
+       <property name="styleSheet">
+        <string notr="true">
+color: black; 
+background-color: #f0f0f0; 
+border: 1px solid #a0a0a0; 
+border-radius: 5px; 
+padding: 5px 10px;
+</string>
+       </property>
+       <property name="text">
+        <string>Agregar tareas</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidgetTareas">
