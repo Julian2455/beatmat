@@ -32,6 +32,7 @@ class ExtintorDetailsUi(QWidget, Ui_ExtintorDetails):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setupUi(self)
+        self.extintor_id_actual = None 
 
 class RegisterExtUi(QDialog, Ui_ExtintorForm):
     def __init__(self):
@@ -44,7 +45,9 @@ class TareaRegisterUi(QDialog, Ui_TareasForm):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
-    def mostrar_form(self):
+        self.extintor_id = None
+    def mostrar_form(self, extintor_id=None):
+        self.extintor_id = extintor_id
         self.exec()
 
 class Ventana(QMainWindow):
@@ -94,7 +97,8 @@ class Ventana(QMainWindow):
         self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller)
         self.extintor_controller.edit_extintor_controller = self.edit_extintor_controller
         self.alta_tarea = TareaRegisterUi()
-        self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.alta_tarea.mostrar_form)
+        #self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.alta_tarea.mostrar_form)
+        self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.mostrar_form_tarea)
         self.tarea_form_controller = TareaFormController(self.alta_tarea, self.extintor_controller)
     
     def show_extintor_tab(self):
@@ -104,6 +108,10 @@ class Ventana(QMainWindow):
     def show_clientes_tab(self):
         self.cliente_extintor.hide()
         self.cliente_tab.show()
+    
+    def mostrar_form_tarea(self):
+        extintor_id = self.extintor_details_tab.extintor_id_actual
+        self.alta_tarea.mostrar_form(extintor_id)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

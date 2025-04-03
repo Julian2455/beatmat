@@ -79,6 +79,7 @@ class ExtintorController:
         numeracion = self.ui.tableWidget.item(index.row(), 0).text()
         self.details_ui.labelExtintores.setText(f"Detalles del Extintor {numeracion}")
         id_extintor=self.obtener_id_extintor()
+        self.details_ui.extintor_id_actual = id_extintor
         self.ui.hide()
         self.details_ui.show()
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
@@ -123,7 +124,7 @@ class ExtintorController:
                 for fila, valor in enumerate(valores):
                     item = QTableWidgetItem("")
                     if fila < 13 and fila!=0:
-                        if str(valor) == "1" or valor == 1:
+                        if valor==True:
                             item.setBackground(QBrush(QColor("#7FFF00")))
                         else:
                             item.setBackground(QBrush(QColor("#DC143C")))
@@ -199,3 +200,54 @@ class ExtintorController:
         id_extintor = self.obtener_id_extintor()
         if id_extintor:
             print(f"Eliminar : {id_extintor}")
+    
+    def actualizar_tabla_tareas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
+        extintor = Extintor.get_by_id(id_extintor)
+        self.details_ui.labelExtintores.setText(f"Detalles del Extintor {extintor.numeracion}")
+        self.ui.hide()
+        self.details_ui.show()
+        self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
+        self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
+        self.details_ui.tableWidgetExtintores.setRowCount(0)
+        self.details_ui.tableWidgetTareas.setColumnCount(0)        
+        tareas = Tareas.show_filter(id_extintor)
+        if tareas:
+            ("y aca")
+            num_tareas = len(tareas)
+            self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
+            self.observaciones={}
+            for col, tarea in enumerate(tareas):
+                id_item = QTableWidgetItem("")
+                id_item.setData(Qt.ItemDataRole.UserRole, tarea.id)
+                self.details_ui.tableWidgetTareas.setItem(0, col, id_item)
+                self.observaciones[col] = tarea.observacion
+                valores = [
+                    tarea.fecha_formateada,
+                    tarea.tamizacion,
+                    tarea.peso,      
+                    tarea.control_tacho,
+                    tarea.relleno_polvo,
+                    tarea.cambio_manometro,
+                    tarea.oring,
+                    tarea.gatillo,
+                    tarea.pintura,
+                    tarea.interior,
+                    tarea.valvula,
+                    tarea.bastago_bronce,
+                    tarea.otro,
+                ]
+                for fila, valor in enumerate(valores):
+                    item = QTableWidgetItem("")
+                    if fila < 13 and fila!=0:
+                        if valor==True:
+                            item.setBackground(QBrush(QColor("#7FFF00")))
+                        else:
+                            item.setBackground(QBrush(QColor("#DC143C")))
+                    else:
+                        item.setText(str(valor))
+                    self.details_ui.tableWidgetTareas.setItem(fila, col, item)
+                if tarea.observacion and tarea.observacion != "Null":
+                    btn = QPushButton("Ver")
+                    btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
+                    self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
+                self.details_ui.tableWidgetTareas.setColumnWidth(col,85)

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, ForeignKey, String, Date
+from sqlalchemy import Column, Integer, ForeignKey, String, Date, Boolean
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
 from .extintor import Extintor
@@ -7,18 +7,18 @@ class Tareas(Base):
     __tablename__='tareas'
 
     id=Column(Integer,primary_key=True,autoincrement=True)
-    tamizacion=Column(Integer,nullable=False)
-    peso=Column(Integer,nullable=False)
-    control_tacho=Column(Integer,nullable=False)
-    relleno_polvo=Column(Integer,nullable=False)
-    cambio_manometro=Column(Integer,nullable=False)
-    oring=Column(Integer,nullable=False)
-    gatillo=Column(Integer,nullable=False)
-    pintura=Column(Integer,nullable=False)
-    interior=Column(Integer,nullable=False)
-    valvula=Column(Integer,nullable=False)
-    bastago_bronce=Column(Integer,nullable=False)
-    otro=Column(Integer,nullable=False)
+    tamizacion=Column(Boolean,nullable=False)
+    peso=Column(Boolean,nullable=False)
+    control_tacho=Column(Boolean,nullable=False)
+    relleno_polvo=Column(Boolean,nullable=False)
+    cambio_manometro=Column(Boolean,nullable=False)
+    oring=Column(Boolean,nullable=False)
+    gatillo=Column(Boolean,nullable=False)
+    pintura=Column(Boolean,nullable=False)
+    interior=Column(Boolean,nullable=False)
+    valvula=Column(Boolean,nullable=False)
+    bastago_bronce=Column(Boolean,nullable=False)
+    otro=Column(Boolean,nullable=False)
     observacion=Column(String(255))
     fecha=Column(Date,nullable=False)
 
@@ -47,5 +47,23 @@ class Tareas(Base):
         try:
             tareas = db.query(cls).filter(cls.extintor_id == extintor_id).order_by(cls.id.desc()).all() 
             return tareas
+        finally:
+            db.close()
+    
+    @classmethod
+    def registrar(cls,bastago,manometro,tacho,gatillo,interior,oring,otro,peso,pintura,relleno,tamizacion,valvula,observacion,fecha,extintor_id):
+        datos=cls(bastago_bronce=bastago,cambio_manometro=manometro,control_tacho=tacho,
+                gatillo=gatillo,interior=interior,oring=oring,otro=otro,peso=peso,pintura=pintura,
+                relleno_polvo=relleno,tamizacion=tamizacion,valvula=valvula,observacion=observacion,
+                fecha=fecha,extintor_id=extintor_id)
+        try:
+            db = SessionLocal()
+            db.add(datos)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
         finally:
             db.close()

@@ -188,6 +188,9 @@ class Ui_TareasForm(object):
 "color:black;\n"
 "padding: 5px;\n"
 "")
+        self.dateEdit_fecha.setButtonSymbols(QtWidgets.QAbstractSpinBox.ButtonSymbols.PlusMinus)
+        self.dateEdit_fecha.setMaximumDate(QtCore.QDate(2100, 12, 31))
+        self.dateEdit_fecha.setMinimumDate(QtCore.QDate(2000, 9, 14))
         self.dateEdit_fecha.setCalendarPopup(True)
         self.dateEdit_fecha.setObjectName("dateEdit_fecha")
         self.verticalLayout_2.addWidget(self.dateEdit_fecha)
@@ -246,7 +249,7 @@ class Ui_TareasForm(object):
         self.label_observacion.setText(_translate("TareasForm", "Observación"))
         self.textEdit_observacion.setPlaceholderText(_translate("TareasForm", "Ingrese las observaciones"))
         self.label_fecha.setText(_translate("TareasForm", "Fecha"))
-        self.dateEdit_fecha.setDisplayFormat(_translate("TareasForm", "dd/MM/yyyy"))
+        self.dateEdit_fecha.setDisplayFormat(_translate("TareasForm", "dd-MM-yyyy"))
         self.cancelar_form.setText(_translate("TareasForm", "Cancelar"))
         self.guardar_tareas.setText(_translate("TareasForm", "Guardar"))
 
