@@ -7,3 +7,5 @@ from .ext_details import Ui_ExtintorDetails
 from .ext_client_details import Ui_ExtintorClientsDetails
 from .tareas_form import Ui_TareasForm
 from .recarga_form import Ui_RecargaForm
+from .caja_form import Ui_CajaForm
+from .caja_tab import Ui_Caja

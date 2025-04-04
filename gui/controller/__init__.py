@@ -4,3 +4,4 @@ from .extintor_controller import ExtintorController
 from .ext_form_controller import ExtFormController
 from .tarea_form_controller import TareaFormController
 from .recarga_form_controller import RecargaFormController
+from .caja_controller import CajaController

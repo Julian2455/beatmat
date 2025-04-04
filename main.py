@@ -59,6 +59,18 @@ class RecargaRegisterUi(QDialog, Ui_RecargaForm):
         self.extintor_id = extintor_id
         self.exec()
 
+class CajaUi(QWidget,Ui_Caja):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+
+class RegisterCajaui(QDialog, Ui_CajaForm):
+    def __init__(self, parent = None):
+        super().__init__(parent)
+        self.setupUi(self)
+    def mostrar_form(self):
+        self.exec()
+
 class Ventana(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -111,6 +123,12 @@ class Ventana(QMainWindow):
         self.alta_recarga = RecargaRegisterUi()
         self.extintor_details_tab.btnAgregarRecarga.clicked.connect(self.mostrar_form_recarga)
         self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller)
+        self.caja_tab = CajaUi()
+        self.caja_controller = CajaController(self.caja_tab)
+        self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Caja.layout().addWidget(self.caja_tab)
+        self.alta_caja = RegisterCajaui()
+        self.caja_tab.abrir_caja.clicked.connect(self.alta_caja.mostrar_form)
     
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   
