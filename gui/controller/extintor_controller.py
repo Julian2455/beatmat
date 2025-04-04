@@ -130,7 +130,7 @@ class ExtintorController:
                             item.setBackground(QBrush(QColor("#DC143C")))
                     else:
                         item.setText(str(valor))
-                        if fila == 0:  # Si es la fila de fechas
+                        if fila == 0:
                             font = QFont()
                             font.setBold(True)
                             item.setFont(font)
