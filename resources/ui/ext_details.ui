@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>989</width>
-    <height>764</height>
+    <height>849</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -318,13 +318,13 @@ padding: 5px 10px;
      <property name="minimumSize">
       <size>
        <width>0</width>
-       <height>421</height>
+       <height>436</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
        <width>16777215</width>
-       <height>421</height>
+       <height>436</height>
       </size>
      </property>
      <property name="styleSheet">
@@ -369,6 +369,11 @@ padding: 5px 10px;
      <row>
       <property name="text">
        <string>Fecha</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
       </property>
      </row>
      <row>

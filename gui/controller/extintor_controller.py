@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
-from PyQt6.QtGui import QAction, QColor, QBrush
+from PyQt6.QtGui import QAction, QColor, QBrush, QFont
 from PyQt6.QtCore import Qt
 from models import *  
 
@@ -130,6 +130,10 @@ class ExtintorController:
                             item.setBackground(QBrush(QColor("#DC143C")))
                     else:
                         item.setText(str(valor))
+                        if fila == 0:  # Si es la fila de fechas
+                            font = QFont()
+                            font.setBold(True)
+                            item.setFont(font)
                     self.details_ui.tableWidgetTareas.setItem(fila, col, item)
                 if tarea.observacion and tarea.observacion != "Null":
                     btn = QPushButton("Ver")
@@ -201,7 +205,7 @@ class ExtintorController:
         if id_extintor:
             print(f"Eliminar : {id_extintor}")
     
-    def actualizar_tabla_tareas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
+    def actualizar_tablas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
         extintor = Extintor.get_by_id(id_extintor)
         self.details_ui.labelExtintores.setText(f"Detalles del Extintor {extintor.numeracion}")
         self.ui.hide()
@@ -209,10 +213,19 @@ class ExtintorController:
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
         self.details_ui.tableWidgetExtintores.setRowCount(0)
-        self.details_ui.tableWidgetTareas.setColumnCount(0)        
+        self.details_ui.tableWidgetTareas.setColumnCount(0) 
+        recargas=Recarga.show_filter(id_extintor)
+        if recargas:
+            self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
+            for index, recarga in enumerate(recargas):
+                id_recarga = QTableWidgetItem(str(recarga.vto_control_recarga_formateado))
+                id_recarga.setData(Qt.ItemDataRole.UserRole, recarga.id)
+                self.details_ui.tableWidgetExtintores.setItem(index, 0, id_recarga)
+                self.details_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(recarga.nuevo_control_recarga_formateado)))
+                self.details_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_ph)))
+                self.details_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.fecha_fabricacion)))       
         tareas = Tareas.show_filter(id_extintor)
         if tareas:
-            ("y aca")
             num_tareas = len(tareas)
             self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
             self.observaciones={}
@@ -245,6 +258,10 @@ class ExtintorController:
                             item.setBackground(QBrush(QColor("#DC143C")))
                     else:
                         item.setText(str(valor))
+                        if fila == 0:
+                            font = QFont()
+                            font.setBold(True)
+                            item.setFont(font)
                     self.details_ui.tableWidgetTareas.setItem(fila, col, item)
                 if tarea.observacion and tarea.observacion != "Null":
                     btn = QPushButton("Ver")

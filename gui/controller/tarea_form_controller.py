@@ -53,12 +53,11 @@ class TareaFormController(QDialog):
     def guardar_tarea(self):
         bastago,manometro,tacho,gatillo,interior,oring,otro,peso,pintura,relleno,tamizacion,valvula,observacion,fecha=self.obtener_datos()
         extintor_id = self.ui.extintor_id 
-        print(extintor_id)
         if Tareas.registrar(bastago,manometro,tacho,gatillo,interior,oring,otro,peso,pintura,relleno,tamizacion,valvula,observacion,fecha,extintor_id):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Information)
             msg.setWindowTitle("Éxito")
             msg.setText("Tarea registrada correctamente.")
             msg.exec()
-            self.tarea_controller.actualizar_tabla_tareas(self.ui.extintor_id)
+            self.tarea_controller.actualizar_tablas(self.ui.extintor_id)
             self.cerrar_form()

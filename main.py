@@ -50,6 +50,15 @@ class TareaRegisterUi(QDialog, Ui_TareasForm):
         self.extintor_id = extintor_id
         self.exec()
 
+class RecargaRegisterUi(QDialog, Ui_RecargaForm):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.extintor_id = None
+    def mostrar_form(self, extintor_id=None):
+        self.extintor_id = extintor_id
+        self.exec()
+
 class Ventana(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -97,9 +106,11 @@ class Ventana(QMainWindow):
         self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller)
         self.extintor_controller.edit_extintor_controller = self.edit_extintor_controller
         self.alta_tarea = TareaRegisterUi()
-        #self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.alta_tarea.mostrar_form)
         self.extintor_details_tab.btnAgregarTareas.clicked.connect(self.mostrar_form_tarea)
         self.tarea_form_controller = TareaFormController(self.alta_tarea, self.extintor_controller)
+        self.alta_recarga = RecargaRegisterUi()
+        self.extintor_details_tab.btnAgregarRecarga.clicked.connect(self.mostrar_form_recarga)
+        self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller)
     
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   
@@ -112,6 +123,10 @@ class Ventana(QMainWindow):
     def mostrar_form_tarea(self):
         extintor_id = self.extintor_details_tab.extintor_id_actual
         self.alta_tarea.mostrar_form(extintor_id)
+    
+    def mostrar_form_recarga(self):
+        extintor_id = self.extintor_details_tab.extintor_id_actual
+        self.alta_recarga.mostrar_form(extintor_id)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

@@ -44,3 +44,19 @@ class Recarga(Base):
             return recargas
         finally:
             db.close()
+    
+    @classmethod
+    def registrar(cls,vto_control,nuevo_control,vto_ph,fabricacion,extintor_id):
+        datos=cls(vto_control_recarga=vto_control,nuevo_control_recarga=nuevo_control,
+                vto_ph=vto_ph,fecha_fabricacion=fabricacion,extintor_id=extintor_id)
+        try:
+            db = SessionLocal()
+            db.add(datos)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
