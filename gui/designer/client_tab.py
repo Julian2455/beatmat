@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Client(object):
     def setupUi(self, Client):
         Client.setObjectName("Client")
-        Client.resize(570, 500)
+        Client.resize(1074, 500)
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(Client)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.frame_2 = QtWidgets.QFrame(parent=Client)
@@ -31,7 +31,8 @@ class Ui_Client(object):
         self.horizontalLayout_3.addWidget(self.label)
         self.lineEdit = QtWidgets.QLineEdit(parent=self.frame_2)
         self.lineEdit.setStyleSheet("border: 2px solid;\n"
-"border-radius: 10px;")
+"border-radius: 10px;\n"
+"color:black;")
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.widget_2 = QtWidgets.QWidget(parent=self.frame_2)

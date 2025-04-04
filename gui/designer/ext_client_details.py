@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'ext_client_details.ui'
+# Form implementation generated from reading ui file 'resources/ui/ext_client_details.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -22,6 +22,7 @@ class Ui_ExtintorClientsDetails(object):
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnAtras = QtWidgets.QPushButton(parent=self.widget)
+        self.btnAtras.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnAtras.setStyleSheet("color: black; \n"
 "background-color: #f0f0f0; \n"
 "border: 1px solid #a0a0a0; \n"
@@ -43,6 +44,7 @@ class Ui_ExtintorClientsDetails(object):
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.labelExtintores = QtWidgets.QLabel(parent=self.widget_2)
+        self.labelExtintores.setStyleSheet("color:black;")
         self.labelExtintores.setText("")
         self.labelExtintores.setObjectName("labelExtintores")
         self.horizontalLayout_2.addWidget(self.labelExtintores, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
@@ -52,6 +54,7 @@ class Ui_ExtintorClientsDetails(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=self.widget_3)
+        self.tableWidgetExtintores.setStyleSheet("color:black;")
         self.tableWidgetExtintores.setObjectName("tableWidgetExtintores")
         self.tableWidgetExtintores.setColumnCount(4)
         self.tableWidgetExtintores.setRowCount(0)

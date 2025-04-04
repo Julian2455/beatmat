@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Extintor(object):
     def setupUi(self, Extintor):
         Extintor.setObjectName("Extintor")
-        Extintor.resize(644, 513)
+        Extintor.resize(1075, 513)
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(Extintor)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.frame_2 = QtWidgets.QFrame(parent=Extintor)
@@ -30,8 +30,9 @@ class Ui_Extintor(object):
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
         self.lineEdit = QtWidgets.QLineEdit(parent=self.frame_2)
-        self.lineEdit.setStyleSheet("nborder: 2px solid;\n"
-"border-radius: 10px;")
+        self.lineEdit.setStyleSheet("border: 2px solid;\n"
+"border-radius: 10px;\n"
+"color:black")
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.widget_2 = QtWidgets.QWidget(parent=self.frame_2)

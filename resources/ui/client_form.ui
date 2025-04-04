@@ -99,7 +99,6 @@ background-color: rgb(221, 221, 221);
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-          <weight>75</weight>
           <italic>false</italic>
           <bold>true</bold>
          </font>
@@ -172,7 +171,6 @@ color:black;</string>
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -218,7 +216,6 @@ color:black;
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <weight>75</weight>
              <bold>true</bold>
             </font>
            </property>
@@ -262,7 +259,6 @@ color:black;</string>
              <widget class="QPushButton" name="cancelar_form">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>
@@ -291,7 +287,6 @@ color:black;</string>
              <widget class="QPushButton" name="guardar_client">
               <property name="font">
                <font>
-                <weight>75</weight>
                 <bold>true</bold>
                </font>
               </property>

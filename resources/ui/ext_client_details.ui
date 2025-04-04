@@ -34,6 +34,9 @@
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QPushButton" name="btnAtras">
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
         <property name="styleSheet">
          <string notr="true">color: black; 
 background-color: #f0f0f0; 
@@ -75,6 +78,9 @@ padding: 5px 10px;
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item alignment="Qt::AlignHCenter">
        <widget class="QLabel" name="labelExtintores">
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -88,6 +94,9 @@ padding: 5px 10px;
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
        <widget class="QTableWidget" name="tableWidgetExtintores">
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
+        </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
          <number>200</number>
         </attribute>

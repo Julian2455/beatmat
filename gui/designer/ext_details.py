@@ -12,13 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorDetails(object):
     def setupUi(self, ExtintorDetails):
         ExtintorDetails.setObjectName("ExtintorDetails")
-        ExtintorDetails.resize(989, 849)
+        ExtintorDetails.resize(989, 864)
         ExtintorDetails.setStyleSheet("color:black;")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(ExtintorDetails)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnAtras = QtWidgets.QPushButton(parent=ExtintorDetails)
+        self.btnAtras.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnAtras.setStyleSheet("\n"
 "color: black; \n"
 "background-color: #f0f0f0; \n"
@@ -46,6 +47,7 @@ class Ui_ExtintorDetails(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
+        font.setWeight(50)
         self.labelDetallesExtintores.setFont(font)
         self.labelDetallesExtintores.setStyleSheet("color: #555555;")
         self.labelDetallesExtintores.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -56,6 +58,7 @@ class Ui_ExtintorDetails(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.btnAgregarRecarga = QtWidgets.QPushButton(parent=ExtintorDetails)
+        self.btnAgregarRecarga.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnAgregarRecarga.setStyleSheet("\n"
 "color: black; \n"
 "background-color: #f0f0f0; \n"
@@ -129,6 +132,7 @@ class Ui_ExtintorDetails(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
+        font.setWeight(50)
         self.labelDetallesMantenimiento.setFont(font)
         self.labelDetallesMantenimiento.setStyleSheet("color: #555555;")
         self.labelDetallesMantenimiento.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -139,6 +143,7 @@ class Ui_ExtintorDetails(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem2)
         self.btnAgregarTareas = QtWidgets.QPushButton(parent=ExtintorDetails)
+        self.btnAgregarTareas.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnAgregarTareas.setStyleSheet("\n"
 "color: black; \n"
 "background-color: #f0f0f0; \n"

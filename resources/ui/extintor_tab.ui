@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>644</width>
+    <width>1075</width>
     <height>513</height>
    </rect>
   </property>
@@ -51,8 +51,9 @@
       <item>
        <widget class="QLineEdit" name="lineEdit">
         <property name="styleSheet">
-         <string notr="true">nborder: 2px solid;
-border-radius: 10px;</string>
+         <string notr="true">border: 2px solid;
+border-radius: 10px;
+color:black</string>
         </property>
         <property name="placeholderText">
          <string>  Buscar extintor...</string>
