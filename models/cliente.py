@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, asc
 from sqlalchemy.orm import sessionmaker, relationship
 from db import Base, engine, SessionLocal
 
@@ -92,3 +92,29 @@ class Cliente(Base):
         except Exception as e:
             print(f"Error al obtener id: {e}")
             return None
+    
+    @classmethod
+    def buscar(cls, nombre, page=1, per_page=10):
+        try:
+            db = SessionLocal()
+            clientes = (
+                db.query(cls)
+                .filter(cls.nombre.like(f"{nombre}%"))
+                .order_by(asc(cls.nombre))
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            return clientes
+        except Exception as e:
+            print(f"Error al buscar: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def contar_buscar(cls, nombre):
+        db = SessionLocal()
+        total = db.query(cls).filter(cls.nombre.like(f"{nombre}%")).count()
+        db.close()
+        return total

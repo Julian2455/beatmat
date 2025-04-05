@@ -7,6 +7,7 @@ from datetime import datetime, timedelta
 class ClientController:
     def __init__(self, ui):
         self.ui = ui
+        self.query=None
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_clientes = Cliente.contar_clientes()
@@ -21,9 +22,13 @@ class ClientController:
         self.ui.tableWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.edit_form_cli = None
+        self.ui.lineEdit.textChanged.connect(self.buscar_cliente)
 
     def mostrar_clientes(self):
-        clientes = Cliente.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
+        if self.query:
+            clientes=Cliente.buscar(self.query,page=self.pagina_actual, per_page=self.filas_por_pagina)
+        else:
+            clientes = Cliente.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(clientes))
         for index, cliente in enumerate(clientes):
             id_cliente = QTableWidgetItem(cliente.nombre)
@@ -90,7 +95,10 @@ class ClientController:
             print(f"Eliminar : {id_cliente}")
 
     def actualizar_estado_paginado(self):
-        self.total_clientes = Cliente.contar_clientes()
+        if self.query:
+            self.total_clientes=Cliente.contar_buscar(self.query)
+        else:
+            self.total_clientes = Cliente.contar_clientes()
         self.total_paginas = (self.total_clientes // self.filas_por_pagina) + (1 if self.total_clientes % self.filas_por_pagina else 0)
         self.ui.label_7.setText(f"Página {self.pagina_actual} de {self.total_paginas}")
         self.ui.label_7.repaint()
@@ -147,4 +155,10 @@ class ClientController:
                     item_control.setForeground(QColor("orange"))
                 self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, item_control)
                 self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.vto_ph)))
-
+    
+    def buscar_cliente(self):
+        previous_query = self.query
+        self.query = self.ui.lineEdit.text()
+        if previous_query != self.query:
+            self.pagina_actual = 1
+        self.mostrar_clientes()

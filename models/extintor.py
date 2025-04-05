@@ -104,3 +104,28 @@ class Extintor(Base):
             return []
         finally:
             db.close()
+
+    @classmethod
+    def buscar(cls, numeracion, page=1, per_page=10):
+        try:
+            db = SessionLocal()
+            extintores = (
+                db.query(cls)
+                .filter(cls.numeracion.like(f"{numeracion}%"))
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            return extintores
+        except Exception as e:
+            print(f"Error al buscar: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def contar_buscar(cls, numeracion):
+        db = SessionLocal()
+        total = db.query(cls).filter(cls.numeracion.like(f"{numeracion}%")).count()
+        db.close()
+        return total

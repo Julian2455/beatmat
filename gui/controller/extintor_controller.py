@@ -6,6 +6,7 @@ from models import *
 class ExtintorController:
     def __init__(self, ui):
         self.ui = ui
+        self.query=None
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_extintores = Extintor.contar_extintores()
@@ -20,9 +21,13 @@ class ExtintorController:
         self.ui.tableWidget.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.edit_form_ext = None
+        self.ui.lineEdit.textChanged.connect(self.buscar_extintor)
 
     def mostrar_extintores(self):
-        extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
+        if self.query:
+            extintores=Extintor.buscar(self.query,page=self.pagina_actual, per_page=self.filas_por_pagina)
+        else:
+            extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(extintores))
         for index, extintor in enumerate(extintores):
             id_extintor = QTableWidgetItem(str(extintor.numeracion))
@@ -45,7 +50,10 @@ class ExtintorController:
         return None
     
     def actualizar_estado_paginado(self):
-        self.total_extintores = Extintor.contar_extintores()
+        if self.query:
+            self.total_extintores=Extintor.contar_buscar(self.query)
+        else:
+            self.total_extintores = Extintor.contar_extintores()
         self.total_paginas = (self.total_extintores // self.filas_por_pagina) + (1 if self.total_extintores % self.filas_por_pagina else 0)
         self.ui.label_7.setText(f"Página {self.pagina_actual} de {self.total_paginas}")
         self.ui.label_7.repaint()
@@ -268,3 +276,10 @@ class ExtintorController:
                     btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
                     self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
                 self.details_ui.tableWidgetTareas.setColumnWidth(col,85)
+    
+    def buscar_extintor(self):
+        previous_query = self.query
+        self.query = self.ui.lineEdit.text()
+        if previous_query != self.query:
+            self.pagina_actual = 1
+        self.mostrar_extintores()
