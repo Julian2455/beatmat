@@ -1,6 +1,8 @@
 from gui.controller import *
 from models import *
+from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
+from PyQt6.QtGui import QPixmap
 
 class ExtFormController(QDialog):
     def __init__(self,ui,extintor_controller, extintor_id=None):
@@ -16,6 +18,7 @@ class ExtFormController(QDialog):
         self.ui.comboBox_marca.addItems(["Marca 1", "Marca 2", "Marca 3"])
         self.ui.comboBox_tipo.addItems(["Tipo1", "Tipo2", "Tipo3"]) 
         self.ui.comboBox_capacidad.addItems(["5kg", "10kg", "20kg"])  
+        self.ui.label.setPixmap(QPixmap(get_image("extintor")))
     
     def cerrar_form(self):
         self.ui.close()

@@ -1,7 +1,9 @@
 from gui.controller import *
 from models import *
+from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6.QtCore import QDate
+from PyQt6.QtGui import QPixmap
 
 class RecargaFormController(QDialog):
     def __init__(self,ui,extintor_controller, recarga_id=None):
@@ -17,6 +19,7 @@ class RecargaFormController(QDialog):
             self.cargar_datos_recarga()
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.guardar_recarga.clicked.connect(self.guardar_recarga)
+        self.ui.label.setPixmap(QPixmap(get_image("extintor")))
     
     def cerrar_form(self):
         self.ui.close()

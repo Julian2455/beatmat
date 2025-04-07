@@ -1,10 +1,12 @@
 from models import *
 from gui.controller import *
 from gui.designer import *
+from utils import get_image
 
 import sys
 from PyQt6.QtWidgets import QApplication, QMainWindow, QWidget, QDialog
 from PyQt6 import QtWidgets, QtCore
+from PyQt6.QtGui import QIcon
 
 class ClientUi(QWidget, Ui_Client):
     def __init__(self, parent=None):
@@ -129,6 +131,11 @@ class Ventana(QMainWindow):
         self.ui.Caja.layout().addWidget(self.caja_tab)
         self.alta_caja = RegisterCajaui()
         self.caja_tab.abrir_caja.clicked.connect(self.alta_caja.mostrar_form)
+        self.ui.tabWidget.setTabIcon(0, QIcon(get_image("avatar")))
+        self.ui.tabWidget.setTabIcon(1, QIcon(get_image("extintor")))
+        self.ui.tabWidget.setTabIcon(2, QIcon(get_image("salario")))
+        self.ui.tabWidget.setTabIcon(3, QIcon(get_image("estadisticas")))
+        self.ui.tabWidget.setTabIcon(4, QIcon(get_image("fecha_de_vencimiento")))
     
     def show_extintor_tab(self):
         self.extintor_details_tab.hide()   

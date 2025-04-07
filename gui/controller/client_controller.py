@@ -1,7 +1,8 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox, QMenu
-from PyQt6.QtGui import QAction, QColor
+from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon
 from PyQt6.QtCore import Qt
 from models import *  
+from utils import get_image
 from datetime import datetime, timedelta
 
 class ClientController:
@@ -23,6 +24,12 @@ class ClientController:
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.edit_form_cli = None
         self.ui.lineEdit.textChanged.connect(self.buscar_cliente)
+        self.ui.label.setPixmap(QPixmap(get_image("buscar")))
+        self.ui.pushButton.setIcon(QIcon(get_image("sssiguiente"))) 
+        self.ui.pushButton_2.setIcon(QIcon(get_image("anterior"))) 
+        self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
+        self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
+        self.ui.pushButton_5.setIcon(QIcon(get_image("agregar-usuario2")))
 
     def mostrar_clientes(self):
         if self.query:

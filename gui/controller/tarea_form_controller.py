@@ -1,7 +1,9 @@
 from gui.controller import *
 from models import *
+from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6.QtCore import QDate
+from PyQt6.QtGui import QPixmap
 
 class TareaFormController(QDialog):
     def __init__(self,ui,extintor_controller, tarea_id=None):
@@ -14,6 +16,7 @@ class TareaFormController(QDialog):
             self.cargar_datos_tarea()
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.guardar_tareas.clicked.connect(self.guardar_tarea)
+        self.ui.label.setPixmap(QPixmap(get_image("extintor")))
 
     def cerrar_form(self):
         self.ui.close()

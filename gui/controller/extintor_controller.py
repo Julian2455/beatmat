@@ -1,7 +1,8 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
-from PyQt6.QtGui import QAction, QColor, QBrush, QFont
+from PyQt6.QtGui import QAction, QColor, QBrush, QFont, QIcon, QPixmap
 from PyQt6.QtCore import Qt
 from models import *  
+from utils import get_image
 
 class ExtintorController:
     def __init__(self, ui):
@@ -22,6 +23,12 @@ class ExtintorController:
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.edit_form_ext = None
         self.ui.lineEdit.textChanged.connect(self.buscar_extintor)
+        self.ui.label.setPixmap(QPixmap(get_image("buscar")))
+        self.ui.pushButton.setIcon(QIcon(get_image("sssiguiente"))) 
+        self.ui.pushButton_2.setIcon(QIcon(get_image("anterior"))) 
+        self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
+        self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
+        self.ui.pushButton_5.setIcon(QIcon(get_image("extintor")))
 
     def mostrar_extintores(self):
         if self.query:

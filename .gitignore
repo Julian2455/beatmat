@@ -9,3 +9,6 @@ env/
 *.db
 *db-journal
 *sqbpro
+dist/
+build/
+*.spec

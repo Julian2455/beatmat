@@ -1,6 +1,8 @@
 from gui.controller import *
 from models import *
+from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
+from PyQt6.QtGui import QPixmap
 
 class ClientFormController(QDialog):
     def __init__(self,ui,client_controller,cliente_id=None):
@@ -13,6 +15,7 @@ class ClientFormController(QDialog):
         self.ui.guardar_client.clicked.connect(self.guardar_cliente)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.setWindowTitle("Registrar Cliente")
+        self.ui.label.setPixmap(QPixmap(get_image("avatar")))
     
     def cerrar_form(self):
         self.ui.close()
