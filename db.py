@@ -5,12 +5,7 @@ import sys
 import shutil
 
 def get_app_data_dir():
-    if os.name == 'nt':  #Windows, si no llega a funcionar puede ser el nombre
-        app_data = os.path.join(os.environ['APPDATA'], 'beatmat')
-    else:  #Linux
-        app_data = os.path.join(os.path.expanduser('~'), '.beatmat')
-    os.makedirs(app_data, exist_ok=True)
-    return app_data
+    return os.path.dirname(os.path.abspath(__file__))
 
 def setup_database():
     app_data_dir = get_app_data_dir()

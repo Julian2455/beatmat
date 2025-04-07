@@ -34,6 +34,9 @@
              <bold>true</bold>
             </font>
            </property>
+           <property name="styleSheet">
+            <string notr="true">color:black;</string>
+           </property>
            <property name="text">
             <string>DATOS PARA REALIZAR LA CAJA DE LA FECHA: </string>
            </property>
@@ -53,7 +56,8 @@
             </font>
            </property>
            <property name="styleSheet">
-            <string notr="true">background-color: rgb(197, 223, 255);</string>
+            <string notr="true">background-color: rgb(197, 223, 255);
+color:black;</string>
            </property>
            <property name="text">
             <string>Abrir Caja</string>
@@ -93,6 +97,7 @@
      </property>
      <property name="styleSheet">
       <string notr="true">color: rgb(0, 0, 0);
+color:black;
 </string>
      </property>
      <property name="frameShadow">
@@ -223,7 +228,7 @@
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color:black;</string>
      </property>
      <attribute name="horizontalHeaderDefaultSectionSize">
       <number>170</number>
@@ -284,6 +289,9 @@
          <font>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
         </property>
         <property name="text">
          <string>Cerrar Caja</string>

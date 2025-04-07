@@ -1,5 +1,7 @@
 from PyQt6.QtWidgets import QTableWidgetItem
 from models import *
+from utils import get_image
+from PyQt6.QtGui import QIcon
 
 class CajaController:
     def __init__(self,ui):
@@ -14,6 +16,10 @@ class CajaController:
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
         self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
         self.ui.tableWidget.verticalHeader().setVisible(False)
+        self.ui.pushButton.setIcon(QIcon(get_image("sssiguiente"))) 
+        self.ui.pushButton_2.setIcon(QIcon(get_image("anterior"))) 
+        self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
+        self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
     
     def mostrar_cajas(self):
         cajas = Caja.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'caja_tab.ui'
+# Form implementation generated from reading ui file 'resources/ui/caja_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -30,6 +30,7 @@ class Ui_Caja(object):
         font.setPointSize(10)
         font.setBold(True)
         self.label.setFont(font)
+        self.label.setStyleSheet("color:black;")
         self.label.setObjectName("label")
         self.horizontalLayout_4.addWidget(self.label)
         self.abrir_caja = QtWidgets.QPushButton(parent=self.widget_2)
@@ -37,7 +38,8 @@ class Ui_Caja(object):
         font = QtGui.QFont()
         font.setBold(True)
         self.abrir_caja.setFont(font)
-        self.abrir_caja.setStyleSheet("background-color: rgb(197, 223, 255);")
+        self.abrir_caja.setStyleSheet("background-color: rgb(197, 223, 255);\n"
+"color:black;")
         self.abrir_caja.setObjectName("abrir_caja")
         self.horizontalLayout_4.addWidget(self.abrir_caja, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.horizontalLayout_3.addWidget(self.widget_2)
@@ -54,6 +56,7 @@ class Ui_Caja(object):
         font.setKerning(True)
         self.tableWidget.setFont(font)
         self.tableWidget.setStyleSheet("color: rgb(0, 0, 0);\n"
+"color:black;\n"
 "")
         self.tableWidget.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
@@ -109,7 +112,7 @@ class Ui_Caja(object):
         self.tableWidget_2 = QtWidgets.QTableWidget(parent=Caja)
         self.tableWidget_2.setMinimumSize(QtCore.QSize(50, 50))
         self.tableWidget_2.setMaximumSize(QtCore.QSize(550, 80))
-        self.tableWidget_2.setStyleSheet("")
+        self.tableWidget_2.setStyleSheet("color:black;")
         self.tableWidget_2.setObjectName("tableWidget_2")
         self.tableWidget_2.setColumnCount(3)
         self.tableWidget_2.setRowCount(0)
@@ -142,6 +145,7 @@ class Ui_Caja(object):
         font = QtGui.QFont()
         font.setBold(True)
         self.pushButton_6.setFont(font)
+        self.pushButton_6.setStyleSheet("color:black;")
         self.pushButton_6.setObjectName("pushButton_6")
         self.horizontalLayout_2.addWidget(self.pushButton_6, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.verticalLayout_7.addWidget(self.widget_3)
@@ -158,7 +162,7 @@ class Ui_Caja(object):
         self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_3.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_3.setIcon(icon)
         self.pushButton_3.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_3.setObjectName("pushButton_3")
@@ -167,7 +171,7 @@ class Ui_Caja(object):
         self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_2.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_2.setIcon(icon1)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
@@ -181,7 +185,7 @@ class Ui_Caja(object):
         self.pushButton.setStyleSheet("")
         self.pushButton.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton.setIcon(icon2)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
@@ -190,7 +194,7 @@ class Ui_Caja(object):
         self.pushButton_4.setStyleSheet("")
         self.pushButton_4.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_4.setIcon(icon3)
         self.pushButton_4.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_4.setObjectName("pushButton_4")
