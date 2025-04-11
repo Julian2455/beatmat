@@ -8,6 +8,7 @@ class Cliente(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(70), nullable=False)
     direccion = Column(String(70), nullable=False)
+    telefono = Column(Integer, nullable=True)
 
     extintor=relationship('Extintor',back_populates='cliente')
     caja=relationship('Caja',back_populates='cliente')
@@ -34,8 +35,8 @@ class Cliente(Base):
         return total
 
     @classmethod
-    def registrar(cls,nombre,direccion):
-        datos=cls(nombre=nombre,direccion=direccion)
+    def registrar(cls,nombre,direccion,telefono):
+        datos=cls(nombre=nombre,direccion=direccion,telefono=telefono)
         try:
             db = SessionLocal()
             db.add(datos)
@@ -49,13 +50,14 @@ class Cliente(Base):
             db.close()
 
     @classmethod
-    def actualizar(cls,client_id,nombrec,direccionc):
+    def actualizar(cls,client_id,nombrec,direccionc,telefonoc):
         try:
             db = SessionLocal()
             cliente = db.query(cls).filter_by(id=client_id).first()
             if cliente:
                 cliente.nombre = nombrec
                 cliente.direccion = direccionc
+                cliente.telefono = telefonoc
                 db.commit()
                 return True
             return False

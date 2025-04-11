@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/client_form.ui'
+# Form implementation generated from reading ui file 'client_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ClientForm(object):
     def setupUi(self, ClientForm):
         ClientForm.setObjectName("ClientForm")
-        ClientForm.resize(368, 402)
+        ClientForm.resize(327, 476)
         ClientForm.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.verticalLayout = QtWidgets.QVBoxLayout(ClientForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -33,7 +33,7 @@ class Ui_ClientForm(object):
         self.label.setMaximumSize(QtCore.QSize(30, 30))
         self.label.setStyleSheet("border:none;")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/avatar.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/avatar.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -79,7 +79,7 @@ class Ui_ClientForm(object):
 "")
         self.lineEdit.setObjectName("lineEdit")
         self.verticalLayout_2.addWidget(self.lineEdit)
-        spacerItem4 = QtWidgets.QSpacerItem(26, 26, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
+        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem4)
         self.label_4 = QtWidgets.QLabel(parent=self.widget_3)
         font = QtGui.QFont()
@@ -97,6 +97,22 @@ class Ui_ClientForm(object):
         self.verticalLayout_2.addWidget(self.lineEdit_2)
         spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
         self.verticalLayout_2.addItem(spacerItem5)
+        self.label_5 = QtWidgets.QLabel(parent=self.widget_3)
+        font = QtGui.QFont()
+        font.setPointSize(11)
+        font.setBold(True)
+        self.label_5.setFont(font)
+        self.label_5.setObjectName("label_5")
+        self.verticalLayout_2.addWidget(self.label_5, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.lineEdit_3 = QtWidgets.QLineEdit(parent=self.widget_3)
+        self.lineEdit_3.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
+"border-radius: 5px;\n"
+"color:black;\n"
+"")
+        self.lineEdit_3.setObjectName("lineEdit_3")
+        self.verticalLayout_2.addWidget(self.lineEdit_3)
+        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem6)
         self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -108,8 +124,8 @@ class Ui_ClientForm(object):
         self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem6)
+        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem7)
         self.guardar_client = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
@@ -119,8 +135,8 @@ class Ui_ClientForm(object):
         self.horizontalLayout_3.addWidget(self.guardar_client)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem7)
+        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem8)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
@@ -136,6 +152,8 @@ class Ui_ClientForm(object):
         self.lineEdit.setPlaceholderText(_translate("ClientForm", "Ingrese el nombre del cliente"))
         self.label_4.setText(_translate("ClientForm", "Dirección"))
         self.lineEdit_2.setPlaceholderText(_translate("ClientForm", "Ingrese la dirección"))
+        self.label_5.setText(_translate("ClientForm", "Teléfono"))
+        self.lineEdit_3.setPlaceholderText(_translate("ClientForm", "Ingrese el teléfono"))
         self.cancelar_form.setText(_translate("ClientForm", "Cancelar"))
         self.guardar_client.setText(_translate("ClientForm", "Guardar"))
 

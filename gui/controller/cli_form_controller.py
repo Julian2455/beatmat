@@ -25,6 +25,7 @@ class ClientFormController(QDialog):
     def limpiar_formulario(self):
         self.ui.lineEdit.clear()
         self.ui.lineEdit_2.clear()
+        self.ui.lineEdit_3.clear()
     
     def cargar_datos_extintor(self):
         cliente = Cliente.get_by_id(self.cliente_id)
@@ -35,27 +36,28 @@ class ClientFormController(QDialog):
     def obtener_datos(self):
         nombre = self.ui.lineEdit.text().strip().title()
         direccion = self.ui.lineEdit_2.text().strip().title()
-        return(nombre, direccion)
+        telefono = self.ui.lineEdit_3.text().strip().title()
+        return(nombre, direccion, telefono)
     
     def guardar_cliente(self):
-        nombre, direccion = self.obtener_datos()
+        nombre, direccion, telefono = self.obtener_datos()
         
         if not nombre or not direccion:
             msg=QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
             msg.setWindowTitle("Error")
-            msg.setText("Por favor, completa todos los campos.")
+            msg.setText("Por favor, completa los campos obligatorios (nombre y dirección).")
             msg.exec()
             return
         if self.cliente_id:
-            if Cliente.actualizar(self.cliente_id,nombre,direccion) == True:
+            if Cliente.actualizar(self.cliente_id,nombre,direccion,telefono) == True:
                 msg=QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Information)
                 msg.setWindowTitle("Exito")
                 msg.setText("Cliente actualizado correctamente.")
                 msg.exec()
         else:
-            if Cliente.registrar(nombre,direccion) == True:
+            if Cliente.registrar(nombre,direccion,telefono) == True:
                 msg=QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Information)
                 msg.setWindowTitle("Exito")

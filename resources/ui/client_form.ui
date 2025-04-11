@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
-    <height>402</height>
+    <width>327</width>
+    <height>476</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -200,13 +200,10 @@ color:black;
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Preferred</enum>
-           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>26</width>
-             <height>26</height>
+             <width>20</width>
+             <height>40</height>
             </size>
            </property>
           </spacer>
@@ -236,6 +233,45 @@ color:black;</string>
            </property>
            <property name="placeholderText">
             <string>Ingrese la dirección</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_4">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_5">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <bold>true</bold>
+            </font>
+           </property>
+           <property name="text">
+            <string>Teléfono</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEdit_3">
+           <property name="styleSheet">
+            <string notr="true">border: 2px solid rgb(38, 38, 38);
+border-radius: 5px;
+color:black;
+</string>
+           </property>
+           <property name="placeholderText">
+            <string>Ingrese el teléfono</string>
            </property>
           </widget>
          </item>

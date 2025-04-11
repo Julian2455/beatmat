@@ -42,6 +42,7 @@ class ClientController:
             id_cliente.setData(Qt.ItemDataRole.UserRole, cliente.id)
             self.ui.tableWidget.setItem(index, 0, id_cliente)
             self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(cliente.direccion))
+            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(str(cliente.telefono)))
 
         self.actualizar_estado_paginado()
 
@@ -93,6 +94,7 @@ class ClientController:
                 self.edit_form_cli.label_2.setText("EDITAR CLIENTE")
                 self.edit_form_cli.lineEdit.setText(cliente.nombre)
                 self.edit_form_cli.lineEdit_2.setText(cliente.direccion)
+                self.edit_form_cli.lineEdit_3.setText(str(cliente.telefono))
                 self.edit_client_controller.cliente_id = id_cliente
                 self.edit_form_cli.mostrar_form()
     
@@ -137,7 +139,7 @@ class ClientController:
 
     def extintores_clientes(self,index):
         nombre = self.ui.tableWidget.item(index.row(), 0).text()
-        self.asociacion_ui.labelExtintores.setText(f'Extintores asociados a {nombre}')
+        self.asociacion_ui.labelCliente.setText(f'Extintores asociados a {nombre}')
         id_cliente=self.obtener_id_cliente()
         self.ui.hide()
         self.asociacion_ui.show()
