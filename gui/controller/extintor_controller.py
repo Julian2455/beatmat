@@ -1,6 +1,7 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
 from PyQt6.QtGui import QAction, QColor, QBrush, QFont, QIcon, QPixmap
 from PyQt6.QtCore import Qt
+from PyQt6 import QtCore
 from models import *  
 from utils import get_image
 
@@ -8,11 +9,15 @@ class ExtintorController:
     def __init__(self, ui):
         self.ui = ui
         self.query=None
+        self.marca_filter = None
+        self.tipo_filter = None
+        self.capacidad_filter = None
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_extintores = Extintor.contar_extintores()
         self.total_paginas = (self.total_extintores // self.filas_por_pagina) + (1 if self.total_extintores % self.filas_por_pagina else 0)
         self.mostrar_extintores()
+        self.llenar_combobox_filtro()
         self.ui.pushButton_2.clicked.connect(self.pagina_anterior) 
         self.ui.pushButton.clicked.connect(self.pagina_siguiente) 
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
@@ -29,10 +34,16 @@ class ExtintorController:
         self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
         self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
         self.ui.pushButton_5.setIcon(QIcon(get_image("extintor")))
+        self.ui.comboBox_marca.currentIndexChanged.connect(self.filtrar_por_marca)
+        self.ui.comboBox_tipo.currentIndexChanged.connect(self.filtrar_por_tipo)
+        self.ui.comboBox_capacidad.currentIndexChanged.connect(self.filtrar_por_capacidad)
+        self.ui.btnRestaurarFiltros.clicked.connect(self.restaurar_filtros)
 
     def mostrar_extintores(self):
-        if self.query:
-            extintores=Extintor.buscar(self.query,page=self.pagina_actual, per_page=self.filas_por_pagina)
+        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
+            extintores = Extintor.buscar(numeracion=self.query, marca_filter=self.marca_filter, 
+                tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter, 
+                page=self.pagina_actual, per_page=self.filas_por_pagina)
         else:
             extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(extintores))
@@ -43,9 +54,10 @@ class ExtintorController:
             self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(extintor.marca_nombre))
             self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(extintor.ubicacion))
             self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(extintor.tipo_nombre))
-            self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad_valor))
+            self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad_nombre))
 
         self.actualizar_estado_paginado()
+        self.mostrar_boton_restaurar()
     
     def obtener_id_extintor(self):
         item_seleccionado = self.ui.tableWidget.currentItem()
@@ -57,8 +69,10 @@ class ExtintorController:
         return None
     
     def actualizar_estado_paginado(self):
-        if self.query:
-            self.total_extintores=Extintor.contar_buscar(self.query)
+        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
+            self.total_extintores = Extintor.contar_buscar(
+                numeracion=self.query, marca_filter=self.marca_filter, tipo_filter=self.tipo_filter, 
+                capacidad_filter=self.capacidad_filter)
         else:
             self.total_extintores = Extintor.contar_extintores()
         self.total_paginas = (self.total_extintores // self.filas_por_pagina) + (1 if self.total_extintores % self.filas_por_pagina else 0)
@@ -138,11 +152,14 @@ class ExtintorController:
                 ]
                 for fila, valor in enumerate(valores):
                     item = QTableWidgetItem("")
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                     if fila < 13 and fila!=0:
                         if valor==True:
-                            item.setBackground(QBrush(QColor("#7FFF00")))
+                            item.setText("SI")
+                            item.setForeground(QBrush(QColor("green")))
                         else:
-                            item.setBackground(QBrush(QColor("#DC143C")))
+                            item.setText("NO")
+                            item.setForeground(QBrush(QColor("red")))
                     else:
                         item.setText(str(valor))
                         if fila == 0:
@@ -203,15 +220,36 @@ class ExtintorController:
                 self.edit_form_ext.label_2.setText("EDITAR EXTINTOR")
                 self.edit_form_ext.lineEdit_numeracion.setText(str(extintor.numeracion))
                 self.edit_form_ext.comboBox_marca.clear()
-                self.edit_form_ext.comboBox_marca.addItems(["Marca 1", "Marca 2", "Marca 3"])  
                 self.edit_form_ext.comboBox_tipo.clear()
-                self.edit_form_ext.comboBox_tipo.addItems(["Tipo1", "Tipo2", "Tipo3"]) 
                 self.edit_form_ext.comboBox_capacidad.clear()
-                self.edit_form_ext.comboBox_capacidad.addItems(["5kg", "10kg", "20kg"])  
-                self.edit_form_ext.comboBox_marca.setCurrentText(extintor.marca)
+                marcas = Marca.show_all()
+                marca_index_to_select = 0
+                for i, marca in enumerate(marcas):
+                    self.edit_form_ext.comboBox_marca.addItem(marca.nombre)
+                    index = self.edit_form_ext.comboBox_marca.count() - 1
+                    self.edit_form_ext.comboBox_marca.setItemData(index, marca.id, QtCore.Qt.ItemDataRole.UserRole)
+                    if marca.id == extintor.marca_id:
+                        marca_index_to_select = i
+                tipos = Tipo.show_all()
+                tipo_index_to_select = 0
+                for i, tipo in enumerate(tipos):
+                    self.edit_form_ext.comboBox_tipo.addItem(tipo.nombre)
+                    index = self.edit_form_ext.comboBox_tipo.count() - 1
+                    self.edit_form_ext.comboBox_tipo.setItemData(index, tipo.id, QtCore.Qt.ItemDataRole.UserRole)
+                    if tipo.id == extintor.tipo_id:
+                        tipo_index_to_select = i
+                capacidades = Capacidad.show_all()
+                capacidad_index_to_select = 0
+                for i, capacidad in enumerate(capacidades):
+                    self.edit_form_ext.comboBox_capacidad.addItem(capacidad.nombre)
+                    index = self.edit_form_ext.comboBox_capacidad.count() - 1
+                    self.edit_form_ext.comboBox_capacidad.setItemData(index, capacidad.id, QtCore.Qt.ItemDataRole.UserRole)
+                    if capacidad.id == extintor.capacidad_id:
+                        capacidad_index_to_select = i
+                self.edit_form_ext.comboBox_marca.setCurrentIndex(marca_index_to_select)
+                self.edit_form_ext.comboBox_tipo.setCurrentIndex(tipo_index_to_select)
+                self.edit_form_ext.comboBox_capacidad.setCurrentIndex(capacidad_index_to_select)
                 self.edit_form_ext.lineEdit_ubicacion.setText(str(extintor.ubicacion))
-                self.edit_form_ext.comboBox_tipo.setCurrentText(extintor.tipo)
-                self.edit_form_ext.comboBox_capacidad.setCurrentText(extintor.capacidad)
                 self.edit_extintor_controller.extintor_id = id_extintor
                 self.edit_form_ext.mostrar_form()
 
@@ -266,11 +304,14 @@ class ExtintorController:
                 ]
                 for fila, valor in enumerate(valores):
                     item = QTableWidgetItem("")
+                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                     if fila < 13 and fila!=0:
                         if valor==True:
-                            item.setBackground(QBrush(QColor("#7FFF00")))
+                            item.setText("SI")
+                            item.setForeground(QBrush(QColor("green")))
                         else:
-                            item.setBackground(QBrush(QColor("#DC143C")))
+                            item.setText("NO")
+                            item.setForeground(QBrush(QColor("red")))
                     else:
                         item.setText(str(valor))
                         if fila == 0:
@@ -289,4 +330,72 @@ class ExtintorController:
         self.query = self.ui.lineEdit.text()
         if previous_query != self.query:
             self.pagina_actual = 1
+        self.mostrar_extintores()
+    
+    def llenar_combobox_filtro(self):
+        self.ui.comboBox_marca.clear()
+        self.ui.comboBox_tipo.clear()
+        self.ui.comboBox_capacidad.clear()
+        self.ui.comboBox_marca.addItem("----Marca----")
+        self.ui.comboBox_tipo.addItem("----Tipo----")
+        self.ui.comboBox_capacidad.addItem("----Capacidad----")
+        marcas=Marca.show_all()
+        for marca in marcas:
+            self.ui.comboBox_marca.addItem(marca.nombre)
+            index=self.ui.comboBox_marca.count()-1
+            self.ui.comboBox_marca.setItemData(index, marca.id, QtCore.Qt.ItemDataRole.UserRole)
+        tipos=Tipo.show_all()
+        for tipo in tipos:
+            self.ui.comboBox_tipo.addItem(tipo.nombre)
+            index=self.ui.comboBox_tipo.count()-1
+            self.ui.comboBox_tipo.setItemData(index, tipo.id, QtCore.Qt.ItemDataRole.UserRole)
+        capacidades=Capacidad.show_all()
+        for capacidad in capacidades:
+            self.ui.comboBox_capacidad.addItem(capacidad.nombre)
+            index=self.ui.comboBox_capacidad.count()-1
+            self.ui.comboBox_capacidad.setItemData(index, capacidad.id, QtCore.Qt.ItemDataRole.UserRole)
+   
+    def filtrar_por_marca(self):
+        indice = self.ui.comboBox_marca.currentIndex()
+        if indice == 0:
+            self.marca_filter = None
+        else:
+            self.marca_filter = self.ui.comboBox_marca.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+        self.pagina_actual = 1 
+        self.mostrar_extintores()
+
+    def filtrar_por_tipo(self):
+        indice = self.ui.comboBox_tipo.currentIndex()
+        if indice == 0:
+            self.tipo_filter = None
+        else:
+            self.tipo_filter = self.ui.comboBox_tipo.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+        self.pagina_actual = 1
+        self.mostrar_extintores()
+
+    def filtrar_por_capacidad(self):
+        indice = self.ui.comboBox_capacidad.currentIndex()
+        if indice == 0:
+            self.capacidad_filter = None
+        else:
+            self.capacidad_filter = self.ui.comboBox_capacidad.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+        self.pagina_actual = 1
+        self.mostrar_extintores()
+
+    def mostrar_boton_restaurar(self):
+        filtros_activos = (
+            self.ui.comboBox_marca.currentIndex() != 0 or
+            self.ui.comboBox_tipo.currentIndex() != 0 or
+            self.ui.comboBox_capacidad.currentIndex() != 0
+        )
+        self.ui.btnRestaurarFiltros.setVisible(filtros_activos)
+
+    def restaurar_filtros(self):
+        self.ui.comboBox_marca.setCurrentIndex(0)
+        self.ui.comboBox_tipo.setCurrentIndex(0)
+        self.ui.comboBox_capacidad.setCurrentIndex(0)
+        self.marca_filter = None
+        self.tipo_filter = None
+        self.capacidad_filter = None
+        self.pagina_actual = 1
         self.mostrar_extintores()

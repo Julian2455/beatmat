@@ -8,14 +8,47 @@ class Marca(Base):
     nombre = Column(String(50), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='marca')
 
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            clientes = (
+                db.query(cls).all()
+            )
+            return clientes
+        finally:
+            db.close()
+
 class Tipo(Base):
     __tablename__ = 'tipo'
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(20), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='tipo')
 
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            clientes = (
+                db.query(cls).all()
+            )
+            return clientes
+        finally:
+            db.close()
+
 class Capacidad(Base):
     __tablename__ = 'capacidad'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    valor = Column(String(30), nullable=False, unique=True)
+    nombre = Column(String(30), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='capacidad')
+
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            clientes = (
+                db.query(cls).all()
+            )
+            return clientes
+        finally:
+            db.close()

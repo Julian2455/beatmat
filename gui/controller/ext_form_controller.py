@@ -3,6 +3,7 @@ from models import *
 from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6.QtGui import QPixmap
+from PyQt6 import QtCore
 
 class ExtFormController(QDialog):
     def __init__(self,ui,extintor_controller, extintor_id=None):
@@ -15,9 +16,7 @@ class ExtFormController(QDialog):
         self.ui.guardar_extintor.clicked.connect(self.guardar_extintor)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.setWindowTitle("Registrar Extintor")
-        self.ui.comboBox_marca.addItems(["Marca 1", "Marca 2", "Marca 3"])
-        self.ui.comboBox_tipo.addItems(["Tipo1", "Tipo2", "Tipo3"]) 
-        self.ui.comboBox_capacidad.addItems(["5kg", "10kg", "20kg"])  
+        self.llenar_combobox()
         self.ui.label.setPixmap(QPixmap(get_image("extintor")))
     
     def cerrar_form(self):
@@ -40,17 +39,17 @@ class ExtFormController(QDialog):
         extintor = Extintor.get_by_id(self.extintor_id)
         if extintor:
             self.ui.lineEdit_numeracion.setText(str(extintor.numeracion))
-            self.ui.comboBox_marca.setCurrentText(extintor.marca)
+            self.ui.comboBox_marca.currentData(QtCore.Qt.ItemDataRole.UserRole)
             self.ui.lineEdit_ubicacion.setText(extintor.ubicacion)
-            self.ui.comboBox_tipo.setCurrentText(extintor.tipo)
-            self.ui.comboBox_capacidad.setCurrentText(extintor.capacidad)
+            self.ui.comboBox_tipo.currentData(QtCore.Qt.ItemDataRole.UserRole)
+            self.ui.comboBox_capacidad.currentData(QtCore.Qt.ItemDataRole.UserRole)
 
     def obtener_datos(self):
         numeracion = self.ui.lineEdit_numeracion.text()
-        marca = self.ui.comboBox_marca.currentText()
+        marca = self.ui.comboBox_marca.currentData(QtCore.Qt.ItemDataRole.UserRole)
         ubicacion = self.ui.lineEdit_ubicacion.text()
-        tipo = self.ui.comboBox_tipo.currentText()
-        capacidad = self.ui.comboBox_capacidad.currentText()
+        tipo = self.ui.comboBox_tipo.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        capacidad = self.ui.comboBox_capacidad.currentData(QtCore.Qt.ItemDataRole.UserRole)
 
         return(numeracion,marca,ubicacion,tipo,capacidad)
     
@@ -80,3 +79,23 @@ class ExtFormController(QDialog):
         self.extintor_controller.mostrar_extintores()
         self.ui.close()
         self.limpiar_formulario()
+
+    def llenar_combobox(self):
+        self.ui.comboBox_marca.clear()
+        self.ui.comboBox_tipo.clear()
+        self.ui.comboBox_capacidad.clear()
+        marcas=Marca.show_all()
+        for marca in marcas:
+            self.ui.comboBox_marca.addItem(marca.nombre)
+            index=self.ui.comboBox_marca.count()-1
+            self.ui.comboBox_marca.setItemData(index, marca.id, QtCore.Qt.ItemDataRole.UserRole)
+        tipos=Tipo.show_all()
+        for tipo in tipos:
+            self.ui.comboBox_tipo.addItem(tipo.nombre)
+            index=self.ui.comboBox_tipo.count()-1
+            self.ui.comboBox_tipo.setItemData(index, tipo.id, QtCore.Qt.ItemDataRole.UserRole)
+        capacidades=Capacidad.show_all()
+        for capacidad in capacidades:
+            self.ui.comboBox_capacidad.addItem(capacidad.nombre)
+            index=self.ui.comboBox_capacidad.count()-1
+            self.ui.comboBox_capacidad.setItemData(index, capacidad.id, QtCore.Qt.ItemDataRole.UserRole)

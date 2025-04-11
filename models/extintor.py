@@ -36,7 +36,7 @@ class Extintor(Base):
                 Marca.nombre.label('marca_nombre'),
                 Extintor.ubicacion,
                 Tipo.nombre.label('tipo_nombre'),
-                Capacidad.valor.label('capacidad_valor')
+                Capacidad.nombre.label('capacidad_nombre')
                 )
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
@@ -58,7 +58,7 @@ class Extintor(Base):
     
     @classmethod
     def registrar(cls,numeracion,marca,ubicacion,tipo,capacidad):
-        datos=cls(numeracion=numeracion,marca=marca,ubicacion=ubicacion,tipo=tipo,capacidad=capacidad)
+        datos=cls(numeracion=numeracion,marca_id=marca,ubicacion=ubicacion,tipo_id=tipo,capacidad_id=capacidad)
         try:
             db = SessionLocal()
             db.add(datos)
@@ -78,10 +78,10 @@ class Extintor(Base):
             extintor = db.query(cls).filter_by(id=id_extintor).first()
             if extintor:
                 extintor.numeracion = numeracion
-                extintor.marca = marca
+                extintor.marca_id = marca
                 extintor.ubicacion = ubicacion
-                extintor.tipo = tipo
-                extintor.capacidad = capacidad
+                extintor.tipo_id = tipo
+                extintor.capacidad_id = capacidad
                 db.commit()
                 return True
             return False
@@ -96,7 +96,21 @@ class Extintor(Base):
     def get_by_id(cls, id_extintor):
         try:
             db = SessionLocal()
-            extintor = db.query(cls).filter(cls.id == id_extintor).first()
+            extintor = (db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.id.label('marca_id'),
+                Marca.nombre.label('marca_nombre'),
+                Extintor.ubicacion,
+                Tipo.id.label('tipo_id'),
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.id.label('capacidad_id'),
+                Capacidad.nombre.label('capacidad_nombre')
+            )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.id == id_extintor).first())
             return extintor
         except Exception as e:
             print(f"Error al obtener id: {e}")
@@ -120,22 +134,32 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def buscar(cls, numeracion, page=1, per_page=10):
+    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, page=1, per_page=10):
         try:
             db = SessionLocal()
-            extintores = (
+            query = (
                 db.query(
                     Extintor.id,
                     Extintor.numeracion,
                     Marca.nombre.label('marca_nombre'),
                     Extintor.ubicacion,
                     Tipo.nombre.label('tipo_nombre'),
-                    Capacidad.valor.label('capacidad_valor')
+                    Capacidad.nombre.label('capacidad_nombre')
                 )
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
-                .filter(Extintor.numeracion.like(f"{numeracion}%"))
+            )
+            if numeracion:
+                query = query.filter(Extintor.numeracion.like(f"{numeracion}%"))
+            if marca_filter:
+                query = query.filter(Extintor.marca_id == marca_filter)
+            if tipo_filter:
+                query = query.filter(Extintor.tipo_id == tipo_filter)
+            if capacidad_filter:
+                query = query.filter(Extintor.capacidad_id == capacidad_filter)
+            extintores = (
+                query
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
@@ -148,8 +172,22 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def contar_buscar(cls, numeracion):
-        db = SessionLocal()
-        total = db.query(cls).filter(cls.numeracion.like(f"{numeracion}%")).count()
-        db.close()
-        return total
+    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter):
+        try:
+            db = SessionLocal()
+            query = db.query(cls)
+            if numeracion:
+                query = query.filter(cls.numeracion.like(f"{numeracion}%"))
+            if marca_filter:
+                query = query.filter(cls.marca_id == marca_filter)
+            if tipo_filter:
+                query = query.filter(cls.tipo_id == tipo_filter)
+            if capacidad_filter:
+                query = query.filter(cls.capacidad_id == capacidad_filter)
+            total = query.count()
+            return total
+        except Exception as e:
+            print(f"Error al contar resultados: {e}")
+            return 0
+        finally:
+            db.close()
