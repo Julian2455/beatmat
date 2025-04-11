@@ -40,10 +40,10 @@ class ExtintorController:
             id_extintor = QTableWidgetItem(str(extintor.numeracion))
             id_extintor.setData(Qt.ItemDataRole.UserRole, extintor.id)
             self.ui.tableWidget.setItem(index, 0, id_extintor)
-            self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(extintor.marca))
+            self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(extintor.marca_nombre))
             self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(extintor.ubicacion))
-            self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(extintor.tipo))
-            self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad))
+            self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(extintor.tipo_nombre))
+            self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad_valor))
 
         self.actualizar_estado_paginado()
     

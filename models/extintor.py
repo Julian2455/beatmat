@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
 from .cliente import Cliente
+from .lists import *
 from .recarga import Recarga
 
 class Extintor(Base):
@@ -9,14 +10,17 @@ class Extintor(Base):
 
     id=Column(Integer,primary_key=True,autoincrement=True)
     numeracion=Column(Integer,nullable=False,unique=True)
-    marca=Column(String(50),nullable=False)
+    marca_id=Column(Integer, ForeignKey('marca.id'), nullable=False)
     ubicacion=Column(String(70),nullable=False)
-    tipo=Column(String(20),nullable=False)
-    capacidad=Column(String(30),nullable=False)
+    tipo_id=Column(Integer, ForeignKey('tipo.id'), nullable=False)
+    capacidad_id=Column(Integer, ForeignKey('capacidad.id'), nullable=False)
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
     cliente=relationship('Cliente',back_populates='extintor')
+    marca=relationship('Marca', back_populates='extintores')
+    tipo=relationship('Tipo', back_populates='extintores')
+    capacidad=relationship('Capacidad', back_populates='extintores')
     recarga=relationship('Recarga',back_populates='extintor')
     detcaja=relationship('DetCaja',back_populates='extintor')
     tareas=relationship('Tareas',back_populates='extintor')
@@ -26,7 +30,17 @@ class Extintor(Base):
         db = SessionLocal()
         try:
             extintores = (
-                db.query(cls)
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.nombre.label('marca_nombre'),
+                Extintor.ubicacion,
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.valor.label('capacidad_valor')
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
@@ -110,8 +124,18 @@ class Extintor(Base):
         try:
             db = SessionLocal()
             extintores = (
-                db.query(cls)
-                .filter(cls.numeracion.like(f"{numeracion}%"))
+                db.query(
+                    Extintor.id,
+                    Extintor.numeracion,
+                    Marca.nombre.label('marca_nombre'),
+                    Extintor.ubicacion,
+                    Tipo.nombre.label('tipo_nombre'),
+                    Capacidad.valor.label('capacidad_valor')
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(Extintor.numeracion.like(f"{numeracion}%"))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
