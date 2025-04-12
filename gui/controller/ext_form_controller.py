@@ -79,6 +79,7 @@ class ExtFormController(QDialog):
         self.extintor_controller.mostrar_extintores()
         self.ui.close()
         self.limpiar_formulario()
+        self.llenar_combobox()
 
     def llenar_combobox(self):
         self.ui.comboBox_marca.clear()
