@@ -103,7 +103,7 @@ class MainController:
         
         # Formulario para alta de caja
         self.alta_caja = RegisterCajaUi()
-        self.caja_tab.abrir_caja.clicked.connect(self.alta_caja.mostrar_form)
+        #self.caja_tab.abrir_caja.clicked.connect(self.alta_caja.mostrar_form)
     
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable

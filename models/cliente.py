@@ -28,6 +28,19 @@ class Cliente(Base):
             db.close()
     
     @classmethod
+    def all(cls):
+        db = SessionLocal()
+        try:
+            clientes = (
+                db.query(cls)
+                .order_by(asc(cls.nombre))
+                .all()
+            )
+            return clientes
+        finally:
+            db.close()
+    
+    @classmethod
     def contar_clientes(cls):
         db = SessionLocal()
         total = db.query(cls).count()

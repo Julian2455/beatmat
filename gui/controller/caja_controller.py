@@ -1,61 +1,44 @@
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView
 from models import *
 from utils import get_image
 from PyQt6.QtGui import QIcon
+from PyQt6 import QtCore
 
 class CajaController:
     def __init__(self,ui):
         self.ui = ui
-        self.pagina_actual = 1 
-        self.filas_por_pagina = 10  
-        self.total_cajas = Caja.contar_cajas()
-        self.total_paginas = (self.total_cajas // self.filas_por_pagina) + (1 if self.total_cajas % self.filas_por_pagina else 0)
-        self.mostrar_cajas()
-        self.ui.pushButton_2.clicked.connect(self.pagina_anterior) 
-        self.ui.pushButton.clicked.connect(self.pagina_siguiente) 
-        self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
-        self.ui.pushButton_4.clicked.connect(self.ultima_pagina) 
-        self.ui.tableWidget.verticalHeader().setVisible(False)
-        self.ui.pushButton.setIcon(QIcon(get_image("sssiguiente"))) 
-        self.ui.pushButton_2.setIcon(QIcon(get_image("anterior"))) 
-        self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
-        self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
+        self.cliente=None
+        self.clientes_combobox()
+        self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
+        self.ui.tableExtintoresCliente.verticalHeader().setVisible(False)
+        self.ui.tableExtintoresCliente.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.ui.comboClientes.editTextChanged.connect(self.seleccionar_cliente)
     
-    def mostrar_cajas(self):
-        cajas = Caja.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
-        self.ui.tableWidget.setRowCount(len(cajas))
-        for index, cajas in enumerate(cajas):
-            pass
+    def clientes_combobox(self):
+        self.ui.comboClientes.clear()
+        self.ui.comboClientes.addItem("--SELECCIONAR CLIENTE--")
+        clientes=Cliente.all()
+        for cliente in clientes:
+            self.ui.comboClientes.addItem(cliente.nombre)
+            index=self.ui.comboClientes.count()-1
+            self.ui.comboClientes.setItemData(index, cliente.id, QtCore.Qt.ItemDataRole.UserRole)
 
-        self.actualizar_estado_paginado()
-
-    def actualizar_estado_paginado(self):
-        self.total_cajas = Caja.contar_cajas()
-        self.total_paginas = (self.total_cajas // self.filas_por_pagina) + (1 if self.total_cajas % self.filas_por_pagina else 0)
-        self.ui.label_7.setText(f"Página {self.pagina_actual} de {self.total_paginas}")
-        self.ui.label_7.repaint()
-        self.ui.pushButton_2.setEnabled(self.pagina_actual > 1)
-        self.ui.pushButton.setEnabled(self.pagina_actual < self.total_paginas)
-
-    def pagina_anterior(self):
-        if self.pagina_actual > 1:
-            self.pagina_actual -= 1
-            self.mostrar_cajas()
-
-    def pagina_siguiente(self):
-        self.total_cajas = Caja.contar_cajas()
-        self.total_paginas = (self.total_cajas // self.filas_por_pagina) + (1 if self.total_cajas % self.filas_por_pagina else 0)
-
-        if self.pagina_actual < self.total_paginas:
-            self.pagina_actual += 1
-            self.mostrar_cajas()
-    
-    def primer_pagina(self):
-        if self.pagina_actual != 1:
-            self.pagina_actual = 1
-            self.mostrar_cajas()
-
-    def ultima_pagina(self):
-        if self.pagina_actual != self.total_paginas:
-            self.pagina_actual = self.total_paginas
-            self.mostrar_cajas()
+    def seleccionar_cliente(self):
+        indice = self.ui.comboClientes.currentIndex()
+        texto = self.ui.comboClientes.currentText()
+        self.ui.tableExtintoresCliente.setRowCount(0)
+        if indice == 0 or texto=="":
+            self.cliente = None
+        else:
+            self.cliente = self.ui.comboClientes.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+            extintores = Extintor.show_all_client(client_id=self.cliente)
+            if extintores:
+                self.ui.tableExtintoresCliente.setRowCount(len(extintores))
+                for index, extintor in enumerate(extintores):
+                    id_extintor = QTableWidgetItem(str(extintor.numeracion))
+                    id_extintor.setData(QtCore.Qt.ItemDataRole.UserRole, extintor.id)
+                    self.ui.tableExtintoresCliente.setItem(index, 0, id_extintor)
+                    self.ui.tableExtintoresCliente.setItem(index, 1, QTableWidgetItem(extintor.marca_nombre))
+                    self.ui.tableExtintoresCliente.setItem(index, 2, QTableWidgetItem(extintor.ubicacion))
+                    self.ui.tableExtintoresCliente.setItem(index, 3, QTableWidgetItem(extintor.tipo_nombre))
+                    self.ui.tableExtintoresCliente.setItem(index, 4, QTableWidgetItem(extintor.capacidad_nombre))

@@ -50,6 +50,29 @@ class Extintor(Base):
             db.close()
     
     @classmethod
+    def show_all_client(cls, client_id):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.nombre.label('marca_nombre'),
+                Extintor.ubicacion,
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.nombre.label('capacidad_nombre')
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.cliente_id == client_id)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
+    
+    @classmethod
     def contar_extintores(cls):
         db = SessionLocal()
         total = db.query(cls).count()
