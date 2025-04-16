@@ -5,10 +5,11 @@ from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6.QtGui import QPixmap
 
 class ClientFormController(QDialog):
-    def __init__(self,ui,client_controller,cliente_id=None):
+    def __init__(self,ui,client_controller,cliente_id=None,caja_controller=None):
         super().__init__()
         self.ui = ui
         self.client_controller = client_controller
+        self.caja_controller = caja_controller
         self.cliente_id = cliente_id
         if self.cliente_id: 
             self.cargar_datos_cliente()
@@ -64,6 +65,8 @@ class ClientFormController(QDialog):
                 msg.setText("Cliente registrado correctamente.")
                 msg.exec()
         self.client_controller.mostrar_clientes()
+        if self.caja_controller:
+            self.caja_controller.clientes_combobox()
         self.ui.close() 
         self.limpiar_formulario()
 

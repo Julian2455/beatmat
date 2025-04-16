@@ -3,6 +3,7 @@ from models import *
 from utils import get_image
 from PyQt6.QtGui import QIcon
 from PyQt6 import QtCore
+from PyQt6.QtCore import QDate
 
 class CajaController:
     def __init__(self,ui):
@@ -13,6 +14,8 @@ class CajaController:
         self.ui.tableExtintoresCliente.verticalHeader().setVisible(False)
         self.ui.tableExtintoresCliente.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.ui.comboClientes.editTextChanged.connect(self.seleccionar_cliente)
+        self.ui.dateEdit.setDate(QDate.currentDate())
+        self.ui.btnAgregarExtintores.setVisible(False)
     
     def clientes_combobox(self):
         self.ui.comboClientes.clear()
@@ -29,8 +32,11 @@ class CajaController:
         self.ui.tableExtintoresCliente.setRowCount(0)
         if indice == 0 or texto=="":
             self.cliente = None
+            self.ui.btnAgregarExtintores.setVisible(False)
         else:
+            self.ui.btnAgregarExtintores.setVisible(True)
             self.cliente = self.ui.comboClientes.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+            self.ui.cliente_id_actual = self.cliente
             extintores = Extintor.show_all_client(client_id=self.cliente)
             if extintores:
                 self.ui.tableExtintoresCliente.setRowCount(len(extintores))

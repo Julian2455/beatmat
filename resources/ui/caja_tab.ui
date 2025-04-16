@@ -267,7 +267,7 @@ QTableWidget::item:selected {
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>icons/add-user.png</normaloff>icons/add-user.png</iconset>
+          <normaloff>../images/agregar-usuario2.png</normaloff>../images/agregar-usuario2.png</iconset>
         </property>
        </widget>
       </item>
@@ -339,7 +339,7 @@ QTableWidget::item:selected {
         </attribute>
         <column>
          <property name="text">
-          <string>Num.</string>
+          <string>Numeración</string>
          </property>
         </column>
         <column>
@@ -349,17 +349,17 @@ QTableWidget::item:selected {
         </column>
         <column>
          <property name="text">
+          <string>Ubicación</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Tipo</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Cap.</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Ubicación</string>
+          <string>Capacidad</string>
          </property>
         </column>
        </widget>
@@ -397,29 +397,10 @@ QTableWidget::item:selected {
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>icons/fire-extinguisher.png</normaloff>icons/fire-extinguisher.png</iconset>
+            <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnServicioMantenimiento">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-           <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Mantenimiento</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>icons/tools.png</normaloff>icons/tools.png</iconset>
+          <property name="visible">
+           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -738,7 +719,7 @@ QTableWidget::item:selected {
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>icons/save.png</normaloff>icons/save.png</iconset>
+         <normaloff>../images/save.png</normaloff>../images/save.png</iconset>
        </property>
       </widget>
      </item>
@@ -763,7 +744,7 @@ QTableWidget::item:selected {
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>icons/printer.png</normaloff>icons/printer.png</iconset>
+         <normaloff>../images/print.png</normaloff>../images/print.png</iconset>
        </property>
       </widget>
      </item>
@@ -781,14 +762,14 @@ QTableWidget::item:selected {
         </font>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: #95a5a6;</string>
+        <string notr="true">background-color: rgb(237, 51, 59);</string>
        </property>
        <property name="text">
         <string>Cancelar</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>icons/cancel.png</normaloff>icons/cancel.png</iconset>
+         <normaloff>../images/cancel.png</normaloff>../images/cancel.png</iconset>
        </property>
       </widget>
      </item>

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'caja_form.ui'
+# Form implementation generated from reading ui file 'resources/ui/caja_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -9,206 +9,241 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
 
 
-class Ui_CajaForm(object):
-    def setupUi(self, CajaForm):
-        CajaForm.setObjectName("CajaForm")
-        CajaForm.resize(402, 573)
-        CajaForm.setStyleSheet("background-color: rgb(255, 255, 255);")
-        self.verticalLayout = QtWidgets.QVBoxLayout(CajaForm)
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.verticalLayout.setSpacing(0)
+class Ui_AgregarExtintores(object):
+    def setupUi(self, AgregarExtintores):
+        AgregarExtintores.setObjectName("AgregarExtintores")
+        AgregarExtintores.resize(700, 500)
+        AgregarExtintores.setStyleSheet("QDialog {\n"
+"    background-color: #f5f5f5;\n"
+"}\n"
+"QLabel {\n"
+"    color: #333333;\n"
+"}\n"
+"QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 5px 10px;\n"
+"    min-height: 30px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"}\n"
+"QTableWidget {\n"
+"    border: 1px solid #cccccc;\n"
+"    background-color: white;\n"
+"    gridline-color: #dddddd;\n"
+"}\n"
+"QHeaderView::section {\n"
+"    background-color: #e0e0e0;\n"
+"    color: #333333;\n"
+"    padding: 5px;\n"
+"    border: 1px solid #cccccc;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QTableWidget::item:selected {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"}\n"
+"QCheckBox {\n"
+"    spacing: 5px;\n"
+"}\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"}\n"
+"QCheckBox::indicator:unchecked {\n"
+"    border: 1px solid #cccccc;\n"
+"    background-color: white;\n"
+"}\n"
+"QCheckBox::indicator:checked {\n"
+"    border: 1px solid #3498db;\n"
+"    background-color: #3498db;\n"
+"}\n"
+"QComboBox {\n"
+"    border: 2px solid;\n"
+"    border-radius: 5px;\n"
+"    color: black;\n"
+"    padding: 2px;\n"
+"}")
+        self.verticalLayout = QtWidgets.QVBoxLayout(AgregarExtintores)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.widget = QtWidgets.QWidget(parent=CajaForm)
-        self.widget.setStyleSheet("border: none ;\n"
-"border-radius: 5px;\n"
-"background-color: rgb(221, 221, 221);\n"
-"")
-        self.widget.setObjectName("widget")
-        self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
-        self.horizontalLayout.setObjectName("horizontalLayout")
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout.addItem(spacerItem)
-        self.label = QtWidgets.QLabel(parent=self.widget)
-        self.label.setMinimumSize(QtCore.QSize(30, 30))
-        self.label.setMaximumSize(QtCore.QSize(30, 30))
-        self.label.setStyleSheet("border:none;")
-        self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("../images/salario.png"))
-        self.label.setScaledContents(True)
-        self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
-        self.label_2 = QtWidgets.QLabel(parent=self.widget)
-        self.label_2.setMinimumSize(QtCore.QSize(50, 50))
-        self.label_2.setMaximumSize(QtCore.QSize(200, 200))
+        self.labelTitle = QtWidgets.QLabel(parent=AgregarExtintores)
         font = QtGui.QFont()
         font.setPointSize(12)
         font.setBold(True)
-        font.setItalic(False)
-        self.label_2.setFont(font)
-        self.label_2.setStyleSheet("border:none;\n"
+        self.labelTitle.setFont(font)
+        self.labelTitle.setStyleSheet("color:black;")
+        self.labelTitle.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelTitle.setObjectName("labelTitle")
+        self.verticalLayout.addWidget(self.labelTitle)
+        self.labelCliente = QtWidgets.QLabel(parent=AgregarExtintores)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        self.labelCliente.setFont(font)
+        self.labelCliente.setStyleSheet("color:black;")
+        self.labelCliente.setObjectName("labelCliente")
+        self.verticalLayout.addWidget(self.labelCliente)
+        self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setObjectName("horizontalLayout")
+        self.labelFiltro = QtWidgets.QLabel(parent=AgregarExtintores)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.labelFiltro.setFont(font)
+        self.labelFiltro.setStyleSheet("color:black;")
+        self.labelFiltro.setObjectName("labelFiltro")
+        self.horizontalLayout.addWidget(self.labelFiltro)
+        self.lineFiltro = QtWidgets.QLineEdit(parent=AgregarExtintores)
+        self.lineFiltro.setMinimumSize(QtCore.QSize(180, 30))
+        self.lineFiltro.setStyleSheet("border: 2px solid;\n"
+"border-radius: 10px;\n"
 "color:black;")
-        self.label_2.setObjectName("label_2")
-        self.horizontalLayout.addWidget(self.label_2)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout.addItem(spacerItem1)
-        self.verticalLayout.addWidget(self.widget)
-        self.widget_2 = QtWidgets.QWidget(parent=CajaForm)
-        self.widget_2.setObjectName("widget_2")
-        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
+        self.lineFiltro.setObjectName("lineFiltro")
+        self.horizontalLayout.addWidget(self.lineFiltro)
+        self.comboBox_marca = QtWidgets.QComboBox(parent=AgregarExtintores)
+        self.comboBox_marca.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox_marca.setMaximumSize(QtCore.QSize(100, 25))
+        self.comboBox_marca.setStyleSheet("border: 2px solid;\n"
+"border-radius: 5px;\n"
+"color:black")
+        self.comboBox_marca.setObjectName("comboBox_marca")
+        self.comboBox_marca.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_marca)
+        self.comboBox_tipo = QtWidgets.QComboBox(parent=AgregarExtintores)
+        self.comboBox_tipo.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox_tipo.setMaximumSize(QtCore.QSize(100, 25))
+        self.comboBox_tipo.setStyleSheet("border: 2px solid;\n"
+"border-radius: 5px;\n"
+"color:black")
+        self.comboBox_tipo.setObjectName("comboBox_tipo")
+        self.comboBox_tipo.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_tipo)
+        self.comboBox_capacidad = QtWidgets.QComboBox(parent=AgregarExtintores)
+        self.comboBox_capacidad.setMinimumSize(QtCore.QSize(100, 25))
+        self.comboBox_capacidad.setMaximumSize(QtCore.QSize(100, 25))
+        self.comboBox_capacidad.setStyleSheet("border: 2px solid;\n"
+"border-radius: 5px;\n"
+"color:black")
+        self.comboBox_capacidad.setObjectName("comboBox_capacidad")
+        self.comboBox_capacidad.addItem("")
+        self.horizontalLayout.addWidget(self.comboBox_capacidad)
+        self.btnRestaurarFiltros = QtWidgets.QPushButton(parent=AgregarExtintores)
+        self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(120, 25))
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.btnRestaurarFiltros.setFont(font)
+        self.btnRestaurarFiltros.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnRestaurarFiltros.setStyleSheet("border:2px solid rgb(0, 0, 255);\n"
+"border-radius: 10px;\n"
+"color: white;\n"
+"background-color: rgb(0, 120, 215);")
+        self.btnRestaurarFiltros.setVisible(False)
+        self.btnRestaurarFiltros.setObjectName("btnRestaurarFiltros")
+        self.horizontalLayout.addWidget(self.btnRestaurarFiltros)
+        self.checkSeleccionarTodos = QtWidgets.QCheckBox(parent=AgregarExtintores)
+        self.checkSeleccionarTodos.setStyleSheet("color:black;")
+        self.checkSeleccionarTodos.setObjectName("checkSeleccionarTodos")
+        self.horizontalLayout.addWidget(self.checkSeleccionarTodos)
+        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.tableExtintores = QtWidgets.QTableWidget(parent=AgregarExtintores)
+        self.tableExtintores.setStyleSheet("color:black;")
+        self.tableExtintores.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.tableExtintores.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
+        self.tableExtintores.setObjectName("tableExtintores")
+        self.tableExtintores.setColumnCount(5)
+        self.tableExtintores.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableExtintores.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableExtintores.setHorizontalHeaderItem(1, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableExtintores.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableExtintores.setHorizontalHeaderItem(3, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableExtintores.setHorizontalHeaderItem(4, item)
+        self.tableExtintores.horizontalHeader().setDefaultSectionSize(120)
+        self.tableExtintores.horizontalHeader().setStretchLastSection(True)
+        self.verticalLayout.addWidget(self.tableExtintores)
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
-        self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
-        self.widget_3.setObjectName("widget_3")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.label_6 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_6.setFont(font)
-        self.label_6.setObjectName("label_6")
-        self.verticalLayout_2.addWidget(self.label_6, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.cliente = QtWidgets.QComboBox(parent=self.widget_3)
-        self.cliente.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
-        self.cliente.setObjectName("cliente")
-        self.verticalLayout_2.addWidget(self.cliente, 0, QtCore.Qt.AlignmentFlag.AlignTop)
-        self.label_5 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_5.setFont(font)
-        self.label_5.setObjectName("label_5")
-        self.verticalLayout_2.addWidget(self.label_5, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.fecha = QtWidgets.QDateEdit(parent=self.widget_3)
-        self.fecha.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
-        self.fecha.setObjectName("fecha")
-        self.verticalLayout_2.addWidget(self.fecha)
-        self.label_3 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_3.setFont(font)
-        self.label_3.setStyleSheet("color:black;")
-        self.label_3.setObjectName("label_3")
-        self.verticalLayout_2.addWidget(self.label_3, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.gastos = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.gastos.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
-        self.gastos.setObjectName("gastos")
-        self.verticalLayout_2.addWidget(self.gastos)
-        self.label_4 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color:black;")
-        self.label_4.setObjectName("label_4")
-        self.verticalLayout_2.addWidget(self.label_4, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.cobros = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.cobros.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
-        self.cobros.setObjectName("cobros")
-        self.verticalLayout_2.addWidget(self.cobros)
-        self.label_7 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_7.setFont(font)
-        self.label_7.setObjectName("label_7")
-        self.verticalLayout_2.addWidget(self.label_7, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.adeudado = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.adeudado.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
-        self.adeudado.setObjectName("adeudado")
-        self.verticalLayout_2.addWidget(self.adeudado)
-        self.label_8 = QtWidgets.QLabel(parent=self.widget_3)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        font.setBold(True)
-        self.label_8.setFont(font)
-        self.label_8.setObjectName("label_8")
-        self.verticalLayout_2.addWidget(self.label_8, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.descripcion = QtWidgets.QTextEdit(parent=self.widget_3)
-        self.descripcion.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
-        self.descripcion.setObjectName("descripcion")
-        self.verticalLayout_2.addWidget(self.descripcion)
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem3)
-        self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
-        self.widget_4.setObjectName("widget_4")
-        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
-        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
-        self.cancelar_form = QtWidgets.QPushButton(parent=self.widget_4)
+        self.btnNuevoExtintor = QtWidgets.QPushButton(parent=AgregarExtintores)
+        self.btnNuevoExtintor.setMinimumSize(QtCore.QSize(180, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        self.cancelar_form.setFont(font)
-        self.cancelar_form.setStyleSheet("color:black;")
-        self.cancelar_form.setObjectName("cancelar_form")
-        self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem4)
-        self.guardar_caja = QtWidgets.QPushButton(parent=self.widget_4)
+        self.btnNuevoExtintor.setFont(font)
+        self.btnNuevoExtintor.setStyleSheet("background-color: #27ae60;")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnNuevoExtintor.setIcon(icon)
+        self.btnNuevoExtintor.setObjectName("btnNuevoExtintor")
+        self.horizontalLayout_2.addWidget(self.btnNuevoExtintor)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem)
+        self.btnAgregar = QtWidgets.QPushButton(parent=AgregarExtintores)
+        self.btnAgregar.setMinimumSize(QtCore.QSize(150, 40))
         font = QtGui.QFont()
         font.setBold(True)
-        self.guardar_caja.setFont(font)
-        self.guardar_caja.setStyleSheet("color: rgb(17, 0, 255)")
-        self.guardar_caja.setObjectName("guardar_caja")
-        self.horizontalLayout_3.addWidget(self.guardar_caja)
-        self.verticalLayout_2.addWidget(self.widget_4)
-        self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem5)
-        self.verticalLayout.addWidget(self.widget_2)
-        self.verticalLayout.setStretch(0, 2)
-        self.verticalLayout.setStretch(1, 8)
+        self.btnAgregar.setFont(font)
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnAgregar.setIcon(icon1)
+        self.btnAgregar.setObjectName("btnAgregar")
+        self.horizontalLayout_2.addWidget(self.btnAgregar)
+        self.btnCancelar = QtWidgets.QPushButton(parent=AgregarExtintores)
+        self.btnCancelar.setMinimumSize(QtCore.QSize(150, 40))
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.btnCancelar.setFont(font)
+        self.btnCancelar.setStyleSheet("background-color: #95a5a6;")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnCancelar.setIcon(icon2)
+        self.btnCancelar.setObjectName("btnCancelar")
+        self.horizontalLayout_2.addWidget(self.btnCancelar)
+        self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        self.retranslateUi(CajaForm)
-        QtCore.QMetaObject.connectSlotsByName(CajaForm)
+        self.retranslateUi(AgregarExtintores)
+        QtCore.QMetaObject.connectSlotsByName(AgregarExtintores)
 
-    def retranslateUi(self, CajaForm):
+    def retranslateUi(self, AgregarExtintores):
         _translate = QtCore.QCoreApplication.translate
-        CajaForm.setWindowTitle(_translate("CajaForm", "Dialog"))
-        self.label_2.setText(_translate("CajaForm", "NUEVA CAJA"))
-        self.label_6.setText(_translate("CajaForm", "Cliente"))
-        self.label_5.setText(_translate("CajaForm", "Fecha"))
-        self.label_3.setText(_translate("CajaForm", "Gastos"))
-        self.gastos.setPlaceholderText(_translate("CajaForm", "Ingrese los gastos"))
-        self.label_4.setText(_translate("CajaForm", "Cobros"))
-        self.cobros.setPlaceholderText(_translate("CajaForm", "Ingrese el cobro"))
-        self.label_7.setText(_translate("CajaForm", "Adeudado"))
-        self.adeudado.setPlaceholderText(_translate("CajaForm", "Ingrese lo adeudado"))
-        self.label_8.setText(_translate("CajaForm", "Descripción"))
-        self.descripcion.setPlaceholderText(_translate("CajaForm", "Ingrese una descripción"))
-        self.cancelar_form.setText(_translate("CajaForm", "Cancelar"))
-        self.guardar_caja.setText(_translate("CajaForm", "Guardar"))
+        AgregarExtintores.setWindowTitle(_translate("AgregarExtintores", "Agregar Extintores"))
+        self.labelTitle.setText(_translate("AgregarExtintores", "Seleccionar Extintores para Agregar"))
+        self.labelCliente.setText(_translate("AgregarExtintores", "Cliente: "))
+        self.labelFiltro.setText(_translate("AgregarExtintores", "Filtrar:"))
+        self.lineFiltro.setPlaceholderText(_translate("AgregarExtintores", "  Buscar extintor..."))
+        self.comboBox_marca.setCurrentText(_translate("AgregarExtintores", "----Marca----"))
+        self.comboBox_marca.setItemText(0, _translate("AgregarExtintores", "----Marca----"))
+        self.comboBox_tipo.setItemText(0, _translate("AgregarExtintores", "----Tipo----"))
+        self.comboBox_capacidad.setItemText(0, _translate("AgregarExtintores", "----Capacidad----"))
+        self.btnRestaurarFiltros.setText(_translate("AgregarExtintores", "Restaurar filtros"))
+        self.checkSeleccionarTodos.setText(_translate("AgregarExtintores", "Seleccionar Todos"))
+        item = self.tableExtintores.horizontalHeaderItem(0)
+        item.setText(_translate("AgregarExtintores", "Seleccionar"))
+        item = self.tableExtintores.horizontalHeaderItem(1)
+        item.setText(_translate("AgregarExtintores", "Numeración"))
+        item = self.tableExtintores.horizontalHeaderItem(2)
+        item.setText(_translate("AgregarExtintores", "Marca"))
+        item = self.tableExtintores.horizontalHeaderItem(3)
+        item.setText(_translate("AgregarExtintores", "Tipo"))
+        item = self.tableExtintores.horizontalHeaderItem(4)
+        item.setText(_translate("AgregarExtintores", "Capacidad"))
+        self.btnNuevoExtintor.setText(_translate("AgregarExtintores", "Nuevo Extintor"))
+        self.btnAgregar.setText(_translate("AgregarExtintores", "Guardar"))
+        self.btnCancelar.setText(_translate("AgregarExtintores", "Cancelar"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    CajaForm = QtWidgets.QDialog()
-    ui = Ui_CajaForm()
-    ui.setupUi(CajaForm)
-    CajaForm.show()
+    AgregarExtintores = QtWidgets.QDialog()
+    ui = Ui_AgregarExtintores()
+    ui.setupUi(AgregarExtintores)
+    AgregarExtintores.show()
     sys.exit(app.exec())

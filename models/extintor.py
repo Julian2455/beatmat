@@ -214,3 +214,29 @@ class Extintor(Base):
             return 0
         finally:
             db.close()
+    
+    @classmethod
+    def disponibles(cls):
+        try:
+            db = SessionLocal()
+            extintor = (db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.id.label('marca_id'),
+                Marca.nombre.label('marca_nombre'),
+                Extintor.ubicacion,
+                Tipo.id.label('tipo_id'),
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.id.label('capacidad_id'),
+                Capacidad.nombre.label('capacidad_nombre')
+            )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(Extintor.cliente_id.is_(None))
+                .all()
+            )
+            return extintor
+        except Exception as e:
+            print(f"Error al obtener id: {e}")
+            return None

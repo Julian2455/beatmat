@@ -101,9 +101,14 @@ class MainController:
         self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Caja.layout().addWidget(self.caja_tab)
         
-        # Formulario para alta de caja
-        self.alta_caja = RegisterCajaUi()
-        #self.caja_tab.abrir_caja.clicked.connect(self.alta_caja.mostrar_form)
+        # Ventana para agregar extintores
+        self.agregar_extintor = AgregarExtintorUi()
+        self.caja_tab.btnAgregarExtintores.clicked.connect(self.mostrar_form_agregarext)
+        self.agregar_extintor_controller = None
+
+        # Conexion para cargar clientes desde la tab de caja
+        self.caja_tab.btnNuevoCliente.clicked.connect(self.alta_client.mostrar_form)
+        self.client_form_controller = ClientFormController(self.alta_client, self.client_controller, caja_controller=self.caja_controller)
     
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
@@ -130,6 +135,13 @@ class MainController:
     def mostrar_form_recarga(self):
         extintor_id = self.extintor_details_tab.extintor_id_actual
         self.alta_recarga.mostrar_form(extintor_id)
+    
+    def mostrar_form_agregarext(self):
+        cliente_id = self.caja_tab.cliente_id_actual
+        if cliente_id is None:
+            return
+        self.agregar_extintor_controller = CajaFormController(self.agregar_extintor, self.caja_controller,cliente_id)
+        self.agregar_extintor.mostrar_form()
     
     def show(self):
         self.ventana.show()

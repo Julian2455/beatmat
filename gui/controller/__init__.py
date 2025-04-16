@@ -5,4 +5,5 @@ from .ext_form_controller import ExtFormController
 from .tarea_form_controller import TareaFormController
 from .recarga_form_controller import RecargaFormController
 from .caja_controller import CajaController
+from .caja_form import CajaFormController
 from .main_controller import MainController
