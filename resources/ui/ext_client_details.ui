@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>907</width>
-    <height>480</height>
+    <width>803</width>
+    <height>451</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,6 +48,10 @@ padding: 5px 10px;
         <property name="text">
          <string>Atrás</string>
         </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../images/flecha-izquierda.png</normaloff>../images/flecha-izquierda.png</iconset>
+        </property>
        </widget>
       </item>
       <item>
@@ -78,6 +82,13 @@ padding: 5px 10px;
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <item alignment="Qt::AlignHCenter">
        <widget class="QLabel" name="label">
+        <property name="font">
+         <font>
+          <pointsize>16</pointsize>
+          <bold>true</bold>
+          <underline>true</underline>
+         </font>
+        </property>
         <property name="styleSheet">
          <string notr="true">color:black;</string>
         </property>
@@ -90,7 +101,7 @@ padding: 5px 10px;
        <widget class="QLabel" name="labelCliente">
         <property name="font">
          <font>
-          <pointsize>10</pointsize>
+          <pointsize>14</pointsize>
           <bold>true</bold>
           <underline>true</underline>
          </font>
@@ -106,6 +117,28 @@ padding: 5px 10px;
    <item>
     <widget class="QWidget" name="widget_3" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item alignment="Qt::AlignRight">
+       <widget class="QPushButton" name="pushButton">
+        <property name="minimumSize">
+         <size>
+          <width>130</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border: 1px solid;
+border-radius: 10px;
+background-color: rgb(192, 190, 255);</string>
+        </property>
+        <property name="text">
+         <string>Imprimir</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../images/imprimir.png</normaloff>../images/imprimir.png</iconset>
+        </property>
+       </widget>
+      </item>
       <item>
        <spacer name="verticalSpacer">
         <property name="orientation">
@@ -379,7 +412,7 @@ padding: 5px 10px;
         </column>
         <column>
          <property name="text">
-          <string>Zona</string>
+          <string>Lugar asignado</string>
          </property>
          <property name="font">
           <font>

@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, ForeignKey, String, Date, Boolean
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
-from .extintor import Extintor
 
 class Tareas(Base):
     __tablename__='tareas'

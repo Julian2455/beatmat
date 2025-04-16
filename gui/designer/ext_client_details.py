@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorClientsDetails(object):
     def setupUi(self, ExtintorClientsDetails):
         ExtintorClientsDetails.setObjectName("ExtintorClientsDetails")
-        ExtintorClientsDetails.resize(907, 480)
+        ExtintorClientsDetails.resize(803, 451)
         self.verticalLayout = QtWidgets.QVBoxLayout(ExtintorClientsDetails)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
@@ -29,6 +29,9 @@ class Ui_ExtintorClientsDetails(object):
 "border-radius: 5px; \n"
 "padding: 5px 10px;\n"
 "")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("../images/flecha-izquierda.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnAtras.setIcon(icon)
         self.btnAtras.setObjectName("btnAtras")
         self.horizontalLayout.addWidget(self.btnAtras)
         spacerItem = QtWidgets.QSpacerItem(546, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -44,12 +47,17 @@ class Ui_ExtintorClientsDetails(object):
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
         self.label = QtWidgets.QLabel(parent=self.widget_2)
+        font = QtGui.QFont()
+        font.setPointSize(16)
+        font.setBold(True)
+        font.setUnderline(True)
+        self.label.setFont(font)
         self.label.setStyleSheet("color:black;")
         self.label.setObjectName("label")
         self.verticalLayout_3.addWidget(self.label, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.labelCliente = QtWidgets.QLabel(parent=self.widget_2)
         font = QtGui.QFont()
-        font.setPointSize(10)
+        font.setPointSize(14)
         font.setBold(True)
         font.setUnderline(True)
         self.labelCliente.setFont(font)
@@ -60,6 +68,16 @@ class Ui_ExtintorClientsDetails(object):
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
+        self.pushButton.setMinimumSize(QtCore.QSize(130, 40))
+        self.pushButton.setStyleSheet("border: 1px solid;\n"
+"border-radius: 10px;\n"
+"background-color: rgb(192, 190, 255);")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../images/imprimir.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton.setIcon(icon1)
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout_2.addWidget(self.pushButton, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         spacerItem1 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
         self.verticalLayout_2.addItem(spacerItem1)
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=self.widget_3)
@@ -203,6 +221,7 @@ class Ui_ExtintorClientsDetails(object):
         self.btnAtras.setText(_translate("ExtintorClientsDetails", "Atrás"))
         self.label.setText(_translate("ExtintorClientsDetails", "PLANILLA DE SEGUIMIENTO DE RECARGA DE EXTINTORES"))
         self.labelCliente.setText(_translate("ExtintorClientsDetails", "Asociado a:"))
+        self.pushButton.setText(_translate("ExtintorClientsDetails", "Imprimir"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(0)
         item.setText(_translate("ExtintorClientsDetails", "N° Extintor"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(1)
@@ -242,7 +261,7 @@ class Ui_ExtintorClientsDetails(object):
         item = self.tableWidgetExtintores.horizontalHeaderItem(18)
         item.setText(_translate("ExtintorClientsDetails", "Observaciones"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(19)
-        item.setText(_translate("ExtintorClientsDetails", "Zona"))
+        item.setText(_translate("ExtintorClientsDetails", "Lugar asignado"))
 
 
 if __name__ == "__main__":

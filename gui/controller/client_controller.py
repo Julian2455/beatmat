@@ -1,9 +1,11 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox, QMenu
-from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon
+from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon, QPainter
 from PyQt6.QtCore import Qt
-from models import *  
+from PyQt6.QtPrintSupport import QPrinter
+from models import *
 from utils import get_image
 from datetime import datetime, timedelta
+import os, tempfile, platform
 
 class ClientController:
     def __init__(self, ui):
@@ -145,26 +147,51 @@ class ClientController:
         self.asociacion_ui.show()
         self.asociacion_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.asociacion_ui.tableWidgetExtintores.setRowCount(0)
+        #self.asociacion_ui.pushButton.clicked.connect(self.imprimir_extintores_cliente)
         extintores=Extintor.extintor_asociado_cliente(id_cliente)
         if extintores:
             self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
-            fecha_actual=datetime.today().date()
-            fecha_roja= fecha_actual + timedelta(days=10)
-            fecha_verde= fecha_actual + timedelta(days=30)
-            for index, (extintor, recarga) in enumerate(extintores):
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 0, QTableWidgetItem(str(extintor.numeracion)))
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(extintor.marca)))
-                vto_control_recarga=datetime.strptime(recarga.vto_control_recarga_formateado, "%d-%m-%Y").date()
-                item_control = QTableWidgetItem(recarga.vto_control_recarga_formateado)
-                if vto_control_recarga <= fecha_roja:
-                    item_control.setForeground(QColor("red"))
-                elif vto_control_recarga > fecha_verde:
-                    item_control.setForeground(QColor("green"))
-                else:
-                    item_control.setForeground(QColor("orange"))
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, item_control)
-                self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.vto_ph)))
-    
+            for index, resultado in enumerate(extintores):
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 0, QTableWidgetItem(str(resultado["numeracion"])))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(resultado["marca"])))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(resultado["tipo"])))
+                self.asociacion_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(resultado["capacidad"])))
+                recarga = resultado["ultima_recarga"]
+                if recarga:
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 4, QTableWidgetItem(str(recarga.vto_control_recarga_formateado)))
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 5, QTableWidgetItem(str(recarga.nuevo_control_recarga_formateado)))
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 6, QTableWidgetItem(str(recarga.vto_ph)))
+                tarea = resultado["ultima_tarea"]
+                if tarea:
+                    valores = [
+                        tarea.tamizacion,
+                        tarea.peso,
+                        tarea.control_tacho,
+                        tarea.relleno_polvo,
+                        tarea.cambio_manometro,
+                        tarea.oring,
+                        tarea.gatillo,
+                        tarea.pintura,
+                        tarea.interior,
+                        tarea.valvula,
+                        tarea.bastago_bronce,
+                    ]
+                    for i, valor in enumerate(valores):
+                        item = QTableWidgetItem("")
+                        if isinstance(valor, bool):
+                            item.setText("SI" if valor else "NO")
+                        else:
+                            item.setText(str(valor))
+
+                        self.asociacion_ui.tableWidgetExtintores.setItem(index, 7 + i, item)
+                    observacion = tarea.observacion
+                    if not observacion or observacion == "Null":
+                        observacion = "-"
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 18, QTableWidgetItem(observacion))
+                self.asociacion_ui.tableWidgetExtintores.resizeColumnToContents(4)
+                self.asociacion_ui.tableWidgetExtintores.resizeColumnToContents(5)
+        
+
     def buscar_cliente(self):
         previous_query = self.query
         self.query = self.ui.lineEdit.text()

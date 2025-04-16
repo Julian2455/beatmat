@@ -1,9 +1,10 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy import Column, Integer, String, ForeignKey, func, and_
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
 from .cliente import Cliente
 from .lists import *
 from .recarga import Recarga
+from .tareas import Tareas
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -141,15 +142,49 @@ class Extintor(Base):
         
     @classmethod
     def extintor_asociado_cliente(cls, id_cliente):
+        db = SessionLocal()
         try:
-            db = SessionLocal()
-            resultado = (
-                db.query(Extintor, Recarga)
-                .join(Recarga, Recarga.extintor_id == Extintor.id)
+            extintores = (
+                db.query(
+                    Extintor.id,
+                    Extintor.numeracion,
+                    Extintor.ubicacion,
+                    Marca.nombre.label("marca"),
+                    Tipo.nombre.label("tipo"),
+                    Capacidad.nombre.label("capacidad"),
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .filter(Extintor.cliente_id == id_cliente)
                 .all()
-            )   
-            return resultado
+            )
+            resultado = []
+            for ext in extintores:
+                ext_id = ext.id
+                ultima_recarga = (
+                    db.query(Recarga)
+                    .filter(Recarga.extintor_id == ext_id)
+                    .order_by(Recarga.nuevo_control_recarga.desc())
+                    .first()
+                )
+                ultima_tarea = (
+                    db.query(Tareas)
+                    .filter(Tareas.extintor_id == ext_id)
+                    .order_by(Tareas.fecha.desc())
+                    .first()
+                )
+                resultado.append({
+                    "id": ext.id,
+                    "numeracion": ext.numeracion,
+                    "ubicacion": ext.ubicacion,
+                    "marca": ext.marca,
+                    "tipo": ext.tipo,
+                    "capacidad": ext.capacidad,
+                    "ultima_recarga": ultima_recarga,
+                    "ultima_tarea": ultima_tarea
+                })
+            return resultado       
         except Exception as e:
             print(f"Error en consulta: {e}")
             return []
