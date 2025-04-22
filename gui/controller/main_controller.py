@@ -109,7 +109,11 @@ class MainController:
         # Conexion para cargar clientes desde la tab de caja
         self.caja_tab.btnNuevoCliente.clicked.connect(self.alta_client.mostrar_form)
         self.client_form_controller = ClientFormController(self.alta_client, self.client_controller, caja_controller=self.caja_controller)
-    
+
+        # Conexion para cargar extintores desde el formulario en la tab de caja
+        self.agregar_extintor.btnNuevoExtintor.clicked.connect(self.alta_extintor.mostrar_form)
+        #self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)
+        
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
         self.ui.tabWidget.setTabIcon(0, QIcon(get_image("avatar")))
@@ -140,7 +144,11 @@ class MainController:
         cliente_id = self.caja_tab.cliente_id_actual
         if cliente_id is None:
             return
-        self.agregar_extintor_controller = CajaFormController(self.agregar_extintor, self.caja_controller,cliente_id)
+        if self.agregar_extintor_controller is None:
+            self.agregar_extintor_controller = CajaFormController(self.agregar_extintor, self.caja_controller, cliente_id)
+        else:
+            self.agregar_extintor_controller.reiniciar(cliente_id)    
+        self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)        
         self.agregar_extintor.mostrar_form()
     
     def show(self):

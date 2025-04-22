@@ -6,10 +6,11 @@ from PyQt6.QtGui import QPixmap
 from PyQt6 import QtCore
 
 class ExtFormController(QDialog):
-    def __init__(self,ui,extintor_controller, extintor_id=None):
+    def __init__(self,ui,extintor_controller, extintor_id=None, agregar_extintor_controller=None):
         super().__init__()
         self.ui = ui
         self.extintor_controller = extintor_controller
+        self.agregar_extintor_controller=agregar_extintor_controller
         self.extintor_id = extintor_id
         if self.extintor_id: 
             self.cargar_datos_extintor()
@@ -77,6 +78,8 @@ class ExtFormController(QDialog):
                 msg.setText("Extintor registrado correctamente.")
                 msg.exec()
         self.extintor_controller.mostrar_extintores()
+        if self.agregar_extintor_controller:
+            self.agregar_extintor_controller.cargar_datos()
         self.ui.close()
         self.limpiar_formulario()
         self.llenar_combobox()
