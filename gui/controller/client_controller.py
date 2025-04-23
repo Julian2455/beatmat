@@ -1,11 +1,14 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox, QMenu
+from PyQt6.QtWidgets import QTableWidgetItem, QPushButton, QMessageBox, QMenu, QFileDialog
 from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon, QPainter
 from PyQt6.QtCore import Qt
 from PyQt6.QtPrintSupport import QPrinter
 from models import *
 from utils import get_image
 from datetime import datetime, timedelta
-import os, tempfile, platform
+import os, tempfile, platform, webbrowser
+from reportlab.lib.pagesizes import landscape, A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib import colors
 
 class ClientController:
     def __init__(self, ui):
@@ -145,9 +148,10 @@ class ClientController:
         id_cliente=self.obtener_id_cliente()
         self.ui.hide()
         self.asociacion_ui.show()
+        self.asociacion_ui.pushButton.setIcon(QIcon(get_image("print")))
         self.asociacion_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.asociacion_ui.tableWidgetExtintores.setRowCount(0)
-        #self.asociacion_ui.pushButton.clicked.connect(self.imprimir_extintores_cliente)
+        self.asociacion_ui.pushButton.clicked.connect(lambda: self.imprimir_extintores_cliente(nombre))
         extintores=Extintor.extintor_asociado_cliente(id_cliente)
         if extintores:
             self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
@@ -188,9 +192,8 @@ class ClientController:
                     if not observacion or observacion == "Null":
                         observacion = "-"
                     self.asociacion_ui.tableWidgetExtintores.setItem(index, 18, QTableWidgetItem(observacion))
-                self.asociacion_ui.tableWidgetExtintores.resizeColumnToContents(4)
-                self.asociacion_ui.tableWidgetExtintores.resizeColumnToContents(5)
-        
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 19, QTableWidgetItem(str(resultado["ubicacion"])))
+                self.asociacion_ui.tableWidgetExtintores.resizeColumnsToContents()
 
     def buscar_cliente(self):
         previous_query = self.query
@@ -198,3 +201,36 @@ class ClientController:
         if previous_query != self.query:
             self.pagina_actual = 1
         self.mostrar_clientes()
+
+    def imprimir_extintores_cliente(self, nombre):
+        temp_dir = tempfile.gettempdir()
+        archivo_pdf = os.path.join(temp_dir, f"reporte_extintores_{nombre}.pdf")
+        pdf = SimpleDocTemplate(archivo_pdf, pagesize=landscape(A4))
+        tabla = self.asociacion_ui.tableWidgetExtintores
+        filas = tabla.rowCount()
+        columnas = tabla.columnCount()
+        data = []
+        encabezados = []
+        for col in range(columnas):
+            item = tabla.horizontalHeaderItem(col)
+            encabezados.append(item.text() if item else f"Col {col+1}")
+        data.append(encabezados)
+        for row in range(filas):
+            fila = []
+            for col in range(columnas):
+                item = tabla.item(row, col)
+                fila.append(item.text() if item else "")
+            data.append(fila)
+        tabla_pdf = Table(data, repeatRows=1)
+        estilo = TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#e0e0e0")),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, -1), 4),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
+        ])
+        tabla_pdf.setStyle(estilo)
+        pdf.build([tabla_pdf])
+        webbrowser.open(f'file://{archivo_pdf}')

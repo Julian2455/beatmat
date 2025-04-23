@@ -26,7 +26,8 @@ IMAGE_MAP = {
     "salario": resource_path("resources/images/salario.png"),
     "sssiguiente": resource_path("resources/images/sssiguiente.png"),
     "flecha_izquierda": resource_path("resources/images/flecha-izquierda.png"),
-    "imprimir":resource_path("resources/images/imprimir.png")
+    "imprimir":resource_path("resources/images/imprimir.png"),
+    "print":resource_path("resources/images/print.png")
 }
 
 def get_image(name):

@@ -12,7 +12,60 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorClientsDetails(object):
     def setupUi(self, ExtintorClientsDetails):
         ExtintorClientsDetails.setObjectName("ExtintorClientsDetails")
-        ExtintorClientsDetails.resize(803, 451)
+        ExtintorClientsDetails.resize(803, 455)
+        ExtintorClientsDetails.setStyleSheet("QWidget {\n"
+"    background-color: #f5f5f5;\n"
+"    color: #333333;\n"
+"}\n"
+"QFrame {\n"
+"    border: 1px solid #cccccc;\n"
+"    border-radius: 4px;\n"
+"}\n"
+"QLabel {\n"
+"    color: #333333;\n"
+"}\n"
+"QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 8px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"}\n"
+"QPushButton#btnCerrarCaja {\n"
+"    background-color: #e74c3c;\n"
+"}\n"
+"QPushButton#btnCerrarCaja:hover {\n"
+"    background-color: #c0392b;\n"
+"}\n"
+"QLineEdit, QComboBox, QDateEdit {\n"
+"    border: 1px solid #cccccc;\n"
+"    border-radius: 4px;\n"
+"    padding: 3px;\n"
+"    background: white;\n"
+"}\n"
+"QTableWidget {\n"
+"    border: 1px solid #cccccc;\n"
+"    background-color: white;\n"
+"    gridline-color: #dddddd;\n"
+"}\n"
+"QHeaderView::section {\n"
+"    background-color: #e0e0e0;\n"
+"    color: #333333;\n"
+"    padding: 3px;\n"
+"    border: 1px solid #cccccc;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QTableWidget::item:selected {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"}")
         self.verticalLayout = QtWidgets.QVBoxLayout(ExtintorClientsDetails)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
@@ -68,16 +121,6 @@ class Ui_ExtintorClientsDetails(object):
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
-        self.pushButton.setMinimumSize(QtCore.QSize(130, 40))
-        self.pushButton.setStyleSheet("border: 1px solid;\n"
-"border-radius: 10px;\n"
-"background-color: rgb(192, 190, 255);")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../images/imprimir.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton.setIcon(icon1)
-        self.pushButton.setObjectName("pushButton")
-        self.verticalLayout_2.addWidget(self.pushButton, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         spacerItem1 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
         self.verticalLayout_2.addItem(spacerItem1)
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=self.widget_3)
@@ -205,8 +248,19 @@ class Ui_ExtintorClientsDetails(object):
         font.setBold(True)
         item.setFont(font)
         self.tableWidgetExtintores.setHorizontalHeaderItem(19, item)
-        self.tableWidgetExtintores.horizontalHeader().setDefaultSectionSize(200)
+        self.tableWidgetExtintores.horizontalHeader().setDefaultSectionSize(153)
         self.verticalLayout_2.addWidget(self.tableWidgetExtintores)
+        self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
+        self.pushButton.setMinimumSize(QtCore.QSize(90, 31))
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.pushButton.setFont(font)
+        self.pushButton.setStyleSheet("background-color: #27ae60;")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton.setIcon(icon1)
+        self.pushButton.setObjectName("pushButton")
+        self.verticalLayout_2.addWidget(self.pushButton, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.verticalLayout.addWidget(self.widget_3)
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(1, 1)
@@ -221,7 +275,6 @@ class Ui_ExtintorClientsDetails(object):
         self.btnAtras.setText(_translate("ExtintorClientsDetails", "Atrás"))
         self.label.setText(_translate("ExtintorClientsDetails", "PLANILLA DE SEGUIMIENTO DE RECARGA DE EXTINTORES"))
         self.labelCliente.setText(_translate("ExtintorClientsDetails", "Asociado a:"))
-        self.pushButton.setText(_translate("ExtintorClientsDetails", "Imprimir"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(0)
         item.setText(_translate("ExtintorClientsDetails", "N° Extintor"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(1)
@@ -231,9 +284,9 @@ class Ui_ExtintorClientsDetails(object):
         item = self.tableWidgetExtintores.horizontalHeaderItem(3)
         item.setText(_translate("ExtintorClientsDetails", "Capacidad"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(4)
-        item.setText(_translate("ExtintorClientsDetails", "Fecha anterior de control y recarga"))
+        item.setText(_translate("ExtintorClientsDetails", "Anterior control y recarga"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(5)
-        item.setText(_translate("ExtintorClientsDetails", "Fecha proxima de control y recarga"))
+        item.setText(_translate("ExtintorClientsDetails", "Proximo control y recarga"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(6)
         item.setText(_translate("ExtintorClientsDetails", "Vencimiento de PH"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(7)
@@ -262,6 +315,7 @@ class Ui_ExtintorClientsDetails(object):
         item.setText(_translate("ExtintorClientsDetails", "Observaciones"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(19)
         item.setText(_translate("ExtintorClientsDetails", "Lugar asignado"))
+        self.pushButton.setText(_translate("ExtintorClientsDetails", "Imprimir"))
 
 
 if __name__ == "__main__":
