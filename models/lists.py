@@ -41,6 +41,7 @@ class Capacidad(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(30), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='capacidad')
+    precios = relationship('Precios', back_populates='capacidad')
 
     @classmethod
     def show_all(cls):

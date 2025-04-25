@@ -5,6 +5,7 @@ from .cliente import Cliente
 from .lists import *
 from .recarga import Recarga
 from .tareas import Tareas
+from .precios import Precios
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -192,7 +193,7 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, page=1, per_page=10):
+    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, page=1, per_page=10, disponible=None):
         try:
             db = SessionLocal()
             query = (
@@ -216,6 +217,8 @@ class Extintor(Base):
                 query = query.filter(Extintor.tipo_id == tipo_filter)
             if capacidad_filter:
                 query = query.filter(Extintor.capacidad_id == capacidad_filter)
+            if disponible:
+                query = query.filter(Extintor.cliente_id.is_(None))
             extintores = (
                 query
                 .offset((page - 1) * per_page)
@@ -230,7 +233,7 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter):
+    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, disponible=None):
         try:
             db = SessionLocal()
             query = db.query(cls)
@@ -242,6 +245,8 @@ class Extintor(Base):
                 query = query.filter(cls.tipo_id == tipo_filter)
             if capacidad_filter:
                 query = query.filter(cls.capacidad_id == capacidad_filter)
+            if disponible:
+                query = query.filter(Extintor.cliente_id.is_(None))
             total = query.count()
             return total
         except Exception as e:
@@ -275,3 +280,73 @@ class Extintor(Base):
         except Exception as e:
             print(f"Error al obtener id: {e}")
             return None
+    
+    @classmethod
+    def asignar_cliente(cls, lista_extintores, id_cliente):
+        db = SessionLocal()
+        try:
+            for id_extintor in lista_extintores:
+                extintor = db.query(cls).filter_by(id=id_extintor).first()
+                if extintor:
+                    extintor.cliente_id = id_cliente
+            db.commit()
+            return True
+        except Exception as e:
+            db.rollback()
+            print(f"Error: {e}")
+            return None
+        finally:
+            db.close()
+    
+    @classmethod
+    def liberar_extintor(cls, id_extintor):
+        db = SessionLocal()
+        try:
+            extintor = db.query(cls).filter_by(id=id_extintor).first()
+            if extintor:
+                extintor.cliente_id = None
+            db.commit()
+            return True
+        except Exception as e:
+            db.rollback()
+            print(f"Error: {e}")
+            return None
+        finally:
+            db.close()
+    
+    @classmethod
+    def show_all_client_pay(cls, client_id):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Capacidad.nombre.label('capacidad_nombre')
+                )
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.cliente_id == client_id)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
+    
+    @classmethod
+    def recharge_prices(cls, extintor_id):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.capacidad_id,
+                Precios.valor.label("valor_num")
+                )
+                .join(Precios, Extintor.capacidad_id == Precios.capacidad_id)
+                .filter(cls.id == extintor_id)
+                .first()
+            )
+            print(extintores)
+            return extintores
+        finally:
+            db.close()

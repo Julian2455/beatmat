@@ -12,7 +12,8 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_AgregarExtintores(object):
     def setupUi(self, AgregarExtintores):
         AgregarExtintores.setObjectName("AgregarExtintores")
-        AgregarExtintores.resize(700, 500)
+        AgregarExtintores.resize(870, 520)
+        AgregarExtintores.setMinimumSize(QtCore.QSize(870, 520))
         AgregarExtintores.setStyleSheet("QDialog {\n"
 "    background-color: #f5f5f5;\n"
 "}\n"
@@ -65,9 +66,17 @@ class Ui_AgregarExtintores(object):
 "    background-color: #3498db;\n"
 "}\n"
 "QComboBox {\n"
-"    border: 2px solid;\n"
+"    border: 2px solid #cccccc;\n"
 "    border-radius: 5px;\n"
 "    color: black;\n"
+"    background-color: white;\n"
+"    padding: 2px;\n"
+"}\n"
+"QLineEdit {\n"
+"    background-color: white;\n"
+"    color: black;\n"
+"    border: 2px solid #cccccc;\n"
+"    border-radius: 10px;\n"
 "    padding: 2px;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(AgregarExtintores)
@@ -91,64 +100,68 @@ class Ui_AgregarExtintores(object):
         self.verticalLayout.addWidget(self.labelCliente)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
-        self.labelFiltro = QtWidgets.QLabel(parent=AgregarExtintores)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.labelFiltro.setFont(font)
-        self.labelFiltro.setStyleSheet("color:black;")
-        self.labelFiltro.setObjectName("labelFiltro")
-        self.horizontalLayout.addWidget(self.labelFiltro)
         self.lineFiltro = QtWidgets.QLineEdit(parent=AgregarExtintores)
         self.lineFiltro.setMinimumSize(QtCore.QSize(180, 30))
-        self.lineFiltro.setStyleSheet("border: 2px solid;\n"
+        self.lineFiltro.setMaximumSize(QtCore.QSize(300, 30))
+        self.lineFiltro.setStyleSheet("background-color: white;\n"
+"border: 2px solid #cccccc;\n"
 "border-radius: 10px;\n"
-"color:black;")
+"color: black;")
         self.lineFiltro.setObjectName("lineFiltro")
         self.horizontalLayout.addWidget(self.lineFiltro)
         self.comboBox_marca = QtWidgets.QComboBox(parent=AgregarExtintores)
         self.comboBox_marca.setMinimumSize(QtCore.QSize(100, 25))
         self.comboBox_marca.setMaximumSize(QtCore.QSize(100, 25))
-        self.comboBox_marca.setStyleSheet("border: 2px solid;\n"
+        self.comboBox_marca.setStyleSheet("background-color: white;\n"
+"border: 2px solid #cccccc;\n"
 "border-radius: 5px;\n"
-"color:black")
+"color: black;")
         self.comboBox_marca.setObjectName("comboBox_marca")
         self.comboBox_marca.addItem("")
         self.horizontalLayout.addWidget(self.comboBox_marca)
         self.comboBox_tipo = QtWidgets.QComboBox(parent=AgregarExtintores)
         self.comboBox_tipo.setMinimumSize(QtCore.QSize(100, 25))
         self.comboBox_tipo.setMaximumSize(QtCore.QSize(100, 25))
-        self.comboBox_tipo.setStyleSheet("border: 2px solid;\n"
+        self.comboBox_tipo.setStyleSheet("background-color: white;\n"
+"border: 2px solid #cccccc;\n"
 "border-radius: 5px;\n"
-"color:black")
+"color: black;")
         self.comboBox_tipo.setObjectName("comboBox_tipo")
         self.comboBox_tipo.addItem("")
         self.horizontalLayout.addWidget(self.comboBox_tipo)
         self.comboBox_capacidad = QtWidgets.QComboBox(parent=AgregarExtintores)
-        self.comboBox_capacidad.setMinimumSize(QtCore.QSize(100, 25))
-        self.comboBox_capacidad.setMaximumSize(QtCore.QSize(100, 25))
-        self.comboBox_capacidad.setStyleSheet("border: 2px solid;\n"
+        self.comboBox_capacidad.setMinimumSize(QtCore.QSize(130, 25))
+        self.comboBox_capacidad.setMaximumSize(QtCore.QSize(130, 25))
+        self.comboBox_capacidad.setStyleSheet("background-color: white;\n"
+"border: 2px solid #cccccc;\n"
 "border-radius: 5px;\n"
-"color:black")
+"color: black;")
         self.comboBox_capacidad.setObjectName("comboBox_capacidad")
         self.comboBox_capacidad.addItem("")
         self.horizontalLayout.addWidget(self.comboBox_capacidad)
         self.btnRestaurarFiltros = QtWidgets.QPushButton(parent=AgregarExtintores)
-        self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(120, 25))
+        self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(140, 25))
+        self.btnRestaurarFiltros.setMaximumSize(QtCore.QSize(140, 25))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnRestaurarFiltros.setFont(font)
         self.btnRestaurarFiltros.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btnRestaurarFiltros.setStyleSheet("border:2px solid rgb(0, 0, 255);\n"
-"border-radius: 10px;\n"
+        self.btnRestaurarFiltros.setStyleSheet("background-color: #3498db;\n"
 "color: white;\n"
-"background-color: rgb(0, 120, 215);")
-        self.btnRestaurarFiltros.setVisible(False)
+"border: none;\n"
+"border-radius: 4px;\n"
+"padding: 0px;\n"
+"min-height: 25px;\n"
+"max-height: 25px;")
+        self.btnRestaurarFiltros.setFlat(False)
         self.btnRestaurarFiltros.setObjectName("btnRestaurarFiltros")
         self.horizontalLayout.addWidget(self.btnRestaurarFiltros)
-        self.checkSeleccionarTodos = QtWidgets.QCheckBox(parent=AgregarExtintores)
-        self.checkSeleccionarTodos.setStyleSheet("color:black;")
-        self.checkSeleccionarTodos.setObjectName("checkSeleccionarTodos")
-        self.horizontalLayout.addWidget(self.checkSeleccionarTodos)
+        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.labelTotal = QtWidgets.QLabel(parent=AgregarExtintores)
+        self.labelTotal.setStyleSheet("color:black;")
+        self.labelTotal.setObjectName("labelTotal")
+        self.horizontalLayout.addWidget(self.labelTotal)
         self.verticalLayout.addLayout(self.horizontalLayout)
         self.tableExtintores = QtWidgets.QTableWidget(parent=AgregarExtintores)
         self.tableExtintores.setStyleSheet("color:black;")
@@ -170,6 +183,60 @@ class Ui_AgregarExtintores(object):
         self.tableExtintores.horizontalHeader().setDefaultSectionSize(120)
         self.tableExtintores.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout.addWidget(self.tableExtintores)
+        self.widgetPaginacion = QtWidgets.QWidget(parent=AgregarExtintores)
+        self.widgetPaginacion.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.widgetPaginacion.setStyleSheet("background-color: #f5f5f5;\n"
+"border: none;")
+        self.widgetPaginacion.setObjectName("widgetPaginacion")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widgetPaginacion)
+        self.horizontalLayout_3.setContentsMargins(0, 0, 0, 0)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem1)
+        self.btnFirstPage = QtWidgets.QPushButton(parent=self.widgetPaginacion)
+        self.btnFirstPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnFirstPage.setText("")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnFirstPage.setIcon(icon)
+        self.btnFirstPage.setIconSize(QtCore.QSize(18, 18))
+        self.btnFirstPage.setObjectName("btnFirstPage")
+        self.horizontalLayout_3.addWidget(self.btnFirstPage)
+        self.btnPreviousPage = QtWidgets.QPushButton(parent=self.widgetPaginacion)
+        self.btnPreviousPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnPreviousPage.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnPreviousPage.setIcon(icon1)
+        self.btnPreviousPage.setObjectName("btnPreviousPage")
+        self.horizontalLayout_3.addWidget(self.btnPreviousPage)
+        self.labelPageInfo = QtWidgets.QLabel(parent=self.widgetPaginacion)
+        self.labelPageInfo.setStyleSheet("color: black")
+        self.labelPageInfo.setText("")
+        self.labelPageInfo.setObjectName("labelPageInfo")
+        self.horizontalLayout_3.addWidget(self.labelPageInfo)
+        self.btnNextPage = QtWidgets.QPushButton(parent=self.widgetPaginacion)
+        self.btnNextPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnNextPage.setStyleSheet("")
+        self.btnNextPage.setText("")
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnNextPage.setIcon(icon2)
+        self.btnNextPage.setObjectName("btnNextPage")
+        self.horizontalLayout_3.addWidget(self.btnNextPage)
+        self.btnLastPage = QtWidgets.QPushButton(parent=self.widgetPaginacion)
+        self.btnLastPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnLastPage.setStyleSheet("")
+        self.btnLastPage.setText("")
+        icon3 = QtGui.QIcon()
+        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnLastPage.setIcon(icon3)
+        self.btnLastPage.setIconSize(QtCore.QSize(18, 18))
+        self.btnLastPage.setObjectName("btnLastPage")
+        self.horizontalLayout_3.addWidget(self.btnLastPage)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem2)
+        self.verticalLayout.addWidget(self.widgetPaginacion)
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.btnNuevoExtintor = QtWidgets.QPushButton(parent=AgregarExtintores)
@@ -178,21 +245,21 @@ class Ui_AgregarExtintores(object):
         font.setBold(True)
         self.btnNuevoExtintor.setFont(font)
         self.btnNuevoExtintor.setStyleSheet("background-color: #27ae60;")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btnNuevoExtintor.setIcon(icon)
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnNuevoExtintor.setIcon(icon4)
         self.btnNuevoExtintor.setObjectName("btnNuevoExtintor")
         self.horizontalLayout_2.addWidget(self.btnNuevoExtintor)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem)
+        spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem3)
         self.btnAgregar = QtWidgets.QPushButton(parent=AgregarExtintores)
         self.btnAgregar.setMinimumSize(QtCore.QSize(150, 40))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnAgregar.setFont(font)
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btnAgregar.setIcon(icon1)
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("resources/ui/../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnAgregar.setIcon(icon5)
         self.btnAgregar.setObjectName("btnAgregar")
         self.horizontalLayout_2.addWidget(self.btnAgregar)
         self.btnCancelar = QtWidgets.QPushButton(parent=AgregarExtintores)
@@ -201,9 +268,9 @@ class Ui_AgregarExtintores(object):
         font.setBold(True)
         self.btnCancelar.setFont(font)
         self.btnCancelar.setStyleSheet("background-color: #95a5a6;")
-        icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.btnCancelar.setIcon(icon2)
+        icon6 = QtGui.QIcon()
+        icon6.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.btnCancelar.setIcon(icon6)
         self.btnCancelar.setObjectName("btnCancelar")
         self.horizontalLayout_2.addWidget(self.btnCancelar)
         self.verticalLayout.addLayout(self.horizontalLayout_2)
@@ -216,16 +283,13 @@ class Ui_AgregarExtintores(object):
         AgregarExtintores.setWindowTitle(_translate("AgregarExtintores", "Agregar Extintores"))
         self.labelTitle.setText(_translate("AgregarExtintores", "Seleccionar Extintores para Agregar"))
         self.labelCliente.setText(_translate("AgregarExtintores", "Cliente: "))
-        self.labelFiltro.setText(_translate("AgregarExtintores", "Filtrar:"))
         self.lineFiltro.setPlaceholderText(_translate("AgregarExtintores", "  Buscar extintor..."))
         self.comboBox_marca.setCurrentText(_translate("AgregarExtintores", "----Marca----"))
         self.comboBox_marca.setItemText(0, _translate("AgregarExtintores", "----Marca----"))
         self.comboBox_tipo.setItemText(0, _translate("AgregarExtintores", "----Tipo----"))
         self.comboBox_capacidad.setItemText(0, _translate("AgregarExtintores", "----Capacidad----"))
         self.btnRestaurarFiltros.setText(_translate("AgregarExtintores", "Restaurar filtros"))
-        self.checkSeleccionarTodos.setText(_translate("AgregarExtintores", "Seleccionar Todos"))
-        item = self.tableExtintores.horizontalHeaderItem(0)
-        item.setText(_translate("AgregarExtintores", "Seleccionar"))
+        self.labelTotal.setText(_translate("AgregarExtintores", "TextLabel"))
         item = self.tableExtintores.horizontalHeaderItem(1)
         item.setText(_translate("AgregarExtintores", "Numeración"))
         item = self.tableExtintores.horizontalHeaderItem(2)
