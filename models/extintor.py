@@ -6,6 +6,7 @@ from .lists import *
 from .recarga import Recarga
 from .tareas import Tareas
 from .precios import Precios
+from datetime import datetime, timedelta
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -348,5 +349,73 @@ class Extintor(Base):
             )
             print(extintores)
             return extintores
+        finally:
+            db.close()
+
+    @classmethod
+    def vencimientos_proximos(cls, dias=30, offset=0, limit=10):
+        db = SessionLocal()
+        try:
+            fecha_actual = datetime.today().date()
+            fecha_limite = fecha_actual + timedelta(days=dias)
+            subconsulta = (
+                db.query(
+                    Recarga.extintor_id,
+                    func.max(Recarga.nuevo_control_recarga).label("ultima_fecha")
+                )
+                .group_by(Recarga.extintor_id)
+                .subquery()
+            )
+            resultados = (
+                db.query(
+                    Cliente.nombre.label("cliente"),
+                    Extintor.numeracion,
+                    Marca.nombre.label("marca"),
+                    Recarga.nuevo_control_recarga.label("vto_recarga"),
+                    Recarga.vto_ph.label("vto_ph")
+                )
+                .join(Recarga, Recarga.extintor_id == Extintor.id)
+                .join(subconsulta, (subconsulta.c.extintor_id == Extintor.id) & (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .join(Cliente, Cliente.id == Extintor.cliente_id)
+                .join(Marca, Marca.id == Extintor.marca_id)
+                .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .offset(offset)
+                .limit(limit)
+                .all()
+            )
+            return resultados
+        except Exception as e:
+            print(f"Error al obtener vencimientos paginados: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def contar_vencimientos_proximos(cls, dias=30):
+        db = SessionLocal()
+        try:
+            fecha_actual = datetime.today().date()
+            fecha_limite = fecha_actual + timedelta(days=dias)
+            subconsulta = (
+                db.query(
+                    Recarga.extintor_id,
+                    func.max(Recarga.nuevo_control_recarga).label("ultima_fecha")
+                )
+                .group_by(Recarga.extintor_id)
+                .subquery()
+            )
+            total = (
+                db.query(func.count())
+                .select_from(Extintor)
+                .join(Recarga, Recarga.extintor_id == Extintor.id)
+                .join(subconsulta, (subconsulta.c.extintor_id == Extintor.id) & (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .scalar()
+            )
+            return total
+
+        except Exception as e:
+            print(f"Error al contar vencimientos: {e}")
+            return 0
         finally:
             db.close()
