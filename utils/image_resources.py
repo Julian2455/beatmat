@@ -27,7 +27,11 @@ IMAGE_MAP = {
     "sssiguiente": resource_path("resources/images/sssiguiente.png"),
     "flecha_izquierda": resource_path("resources/images/flecha-izquierda.png"),
     "imprimir":resource_path("resources/images/imprimir.png"),
-    "print":resource_path("resources/images/print.png")
+    "print":resource_path("resources/images/print.png"),
+    "encabezado-impresion":resource_path("resources/images/encabezado-impresion.png"),
+    "encabezado-impresion-dos":resource_path("resources/images/encabezado-impresion-dos.png"),
+    "notificacion": resource_path("resources/images/notificacion")
+
 }
 
 def get_image(name):

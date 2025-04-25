@@ -5,7 +5,6 @@ from PyQt6.QtGui import QIcon
 from gui.designer import Ui_MainWindow
 from gui.views import *
 from gui.controller import *
-
 from utils import get_image
 
 class MainController:
@@ -18,6 +17,7 @@ class MainController:
         self.init_clientes_tab()
         self.init_extintores_tab()
         self.init_caja_tab()
+        self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
         self.setup_tab_icons()
@@ -110,6 +110,20 @@ class MainController:
         self.caja_tab.btnNuevoCliente.clicked.connect(self.alta_client.mostrar_form)
         self.client_form_controller = ClientFormController(self.alta_client, self.client_controller, caja_controller=self.caja_controller)
     
+    #PARTE DE VENCIMIENTOS 
+    def init_vencimientos_tab(self):
+        self.vencimientos_tab=VencimientosUi()
+        self.vencimientos_details = VencDetailsUi()
+        self.ui.Vencimientos.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Vencimientos.layout().addWidget(self.vencimientos_tab)
+        self.ui.Vencimientos.layout().addWidget(self.vencimientos_details)
+        self.vencimientos_details.hide()
+
+        #conectar controladores
+        self.vencimientos_controller=VencimientosController(self.vencimientos_tab)
+        self.vencimientos_controller.vencimientos_ui = self.vencimientos_details
+        self.vencimientos_details.btnAtras.clicked.connect(self.show_vencimientos_tab)
+
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
         self.ui.tabWidget.setTabIcon(0, QIcon(get_image("avatar")))
@@ -127,6 +141,11 @@ class MainController:
         # Alternar contenido/detalles
         self.cliente_extintor.hide()
         self.cliente_tab.show()
+    
+    def show_vencimientos_tab(self):
+        #Alternas contenido/detalles
+        self.vencimientos_details.hide()
+        self.vencimientos_tab.show()
     
     def mostrar_form_tarea(self):
         extintor_id = self.extintor_details_tab.extintor_id_actual

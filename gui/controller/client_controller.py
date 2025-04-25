@@ -6,9 +6,10 @@ from models import *
 from utils import get_image
 from datetime import datetime, timedelta
 import os, tempfile, platform, webbrowser
-from reportlab.lib.pagesizes import landscape, A4
-from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Image, Spacer, Indenter, Paragraph   
 from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
 class ClientController:
     def __init__(self, ui):
@@ -144,6 +145,8 @@ class ClientController:
 
     def extintores_clientes(self,index):
         nombre = self.ui.tableWidget.item(index.row(), 0).text()
+        domicilio = self.ui.tableWidget.item(index.row(), 1).text()
+        telefono = self.ui.tableWidget.item(index.row(), 2).text()
         self.asociacion_ui.labelCliente.setText(f'Extintores asociados a {nombre}')
         id_cliente=self.obtener_id_cliente()
         self.ui.hide()
@@ -151,7 +154,7 @@ class ClientController:
         self.asociacion_ui.pushButton.setIcon(QIcon(get_image("print")))
         self.asociacion_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.asociacion_ui.tableWidgetExtintores.setRowCount(0)
-        self.asociacion_ui.pushButton.clicked.connect(lambda: self.imprimir_extintores_cliente(nombre))
+        self.asociacion_ui.pushButton.clicked.connect(lambda: self.imprimir_extintores_cliente(nombre,domicilio,telefono))
         extintores=Extintor.extintor_asociado_cliente(id_cliente)
         if extintores:
             self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
@@ -202,35 +205,96 @@ class ClientController:
             self.pagina_actual = 1
         self.mostrar_clientes()
 
-    def imprimir_extintores_cliente(self, nombre):
+
+    def imprimir_extintores_cliente(self, nombre, domicilio, telefono):
         temp_dir = tempfile.gettempdir()
         archivo_pdf = os.path.join(temp_dir, f"reporte_extintores_{nombre}.pdf")
-        pdf = SimpleDocTemplate(archivo_pdf, pagesize=landscape(A4))
+        pdf = SimpleDocTemplate(
+            archivo_pdf,
+            pagesize=A4,
+            leftMargin=2,
+            rightMargin=-2,
+            topMargin=-6,
+            bottomMargin=0
+        )
+        elementos = []
+        ruta_imagen = get_image("encabezado-impresion")
+        if os.path.exists(ruta_imagen):
+            imagen_encabezado = Image(ruta_imagen, height=130)
+            imagen_encabezado.hAlign = 'CENTER'
+            elementos.append(imagen_encabezado)
+        else:
+            print("⚠️ Imagen no encontrada:", ruta_imagen)
+        estilo_titulo = ParagraphStyle(
+            name="TituloTabla",
+            fontSize=12,
+            leading=14,
+            alignment=0,  
+            spaceAfter=6,
+            fontName="Helvetica-Bold",
+            textColor=colors.red
+        )
+        titulo_cliente=Paragraph("DATOS DEL CLIENTE", estilo_titulo)
+        data_cliente = [
+            ["Nombre", "Domicilio", "Telefono"],
+            [nombre, domicilio, telefono]
+        ]
+        tabla_cliente = Table(data_cliente, colWidths=[150]*3,hAlign='LEFT' )
+        tabla_cliente.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#d0d0d0")),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('ALIGN', (0, 0), (0, 0),"LEFT"),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, -1), 8),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
+        ]))
+        elementos.append(Indenter(left=30))
+        elementos.append(Spacer(10, 30))
+        elementos.append(titulo_cliente)
+        elementos.append(tabla_cliente)
+        elementos.append(Spacer(10, 45))
         tabla = self.asociacion_ui.tableWidgetExtintores
         filas = tabla.rowCount()
         columnas = tabla.columnCount()
-        data = []
-        encabezados = []
-        for col in range(columnas):
-            item = tabla.horizontalHeaderItem(col)
-            encabezados.append(item.text() if item else f"Col {col+1}")
-        data.append(encabezados)
+        encabezados = [tabla.horizontalHeaderItem(col).text() if tabla.horizontalHeaderItem(col) else f"Col {col+1}" for col in range(columnas)]
+        data_total = []
         for row in range(filas):
             fila = []
             for col in range(columnas):
                 item = tabla.item(row, col)
                 fila.append(item.text() if item else "")
-            data.append(fila)
-        tabla_pdf = Table(data, repeatRows=1)
-        estilo = TableStyle([
+            data_total.append(fila)
+        indices_1 = list(range(0, 7))
+        data1 = [[encabezados[i] for i in indices_1]] + [[fila[i] for i in indices_1] for fila in data_total]
+        titulo_extintor=Paragraph("DATOS DEL EXTINTOR", estilo_titulo)
+        tabla1 = Table(data1, repeatRows=1, hAlign='LEFT')
+        tabla1.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#e0e0e0")),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
-            ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+            ('ALIGN', (0, 0), (-1, -1),"CENTER"),
+            ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+            ('FONTSIZE', (0, 0), (-1, -1), 6),
+            ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
+            ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
+        ]))
+        elementos.append(titulo_extintor)
+        elementos.append(tabla1)
+        elementos.append(Spacer(10, 40))
+        indices_2 = [0] + list(range(7, min(20, columnas)))
+        data2 = [[encabezados[i] for i in indices_2]] + [[fila[i] for i in indices_2] for fila in data_total]
+        titulo_servicio=Paragraph("DETALLES DEL SERVICIO", estilo_titulo)
+        tabla2 = Table(data2, repeatRows=1, hAlign='LEFT')
+        tabla2.setStyle(TableStyle([
+            ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor("#e0e0e0")),
+            ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
+            ('ALIGN', (0, 0), (-1, -1), "CENTER"),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
             ('FONTSIZE', (0, 0), (-1, -1), 4),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
             ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
-        ])
-        tabla_pdf.setStyle(estilo)
-        pdf.build([tabla_pdf])
+        ]))
+        elementos.append(titulo_servicio)
+        elementos.append(tabla2)
+        pdf.build(elementos)
         webbrowser.open(f'file://{archivo_pdf}')
