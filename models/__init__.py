@@ -6,5 +6,6 @@ from .caja import Caja
 from .detcaja import DetCaja
 from .tareas import Tareas
 from .lists import *
+from .precios import Precios
 
 Base.metadata.create_all(bind=engine)

@@ -5,6 +5,7 @@ from .cliente import Cliente
 from .lists import *
 from .recarga import Recarga
 from .tareas import Tareas
+from .precios import Precios
 
 class Extintor(Base):
     __tablename__='extintor'
@@ -310,5 +311,42 @@ class Extintor(Base):
             db.rollback()
             print(f"Error: {e}")
             return None
+        finally:
+            db.close()
+    
+    @classmethod
+    def show_all_client_pay(cls, client_id):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Capacidad.nombre.label('capacidad_nombre')
+                )
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.cliente_id == client_id)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
+    
+    @classmethod
+    def recharge_prices(cls, extintor_id):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.capacidad_id,
+                Precios.valor.label("valor_num")
+                )
+                .join(Precios, Extintor.capacidad_id == Precios.capacidad_id)
+                .filter(cls.id == extintor_id)
+                .first()
+            )
+            print(extintores)
+            return extintores
         finally:
             db.close()

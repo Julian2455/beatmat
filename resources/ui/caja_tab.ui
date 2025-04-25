@@ -125,7 +125,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -209,7 +209,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -259,7 +259,7 @@ QTableWidget::item:selected {
         </property>
         <property name="font">
          <font>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -315,7 +315,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -389,8 +389,11 @@ QTableWidget::item:selected {
           </property>
           <property name="font">
            <font>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
+          </property>
+          <property name="visible">
+           <bool>false</bool>
           </property>
           <property name="text">
            <string>Agregar Extintores</string>
@@ -398,9 +401,6 @@ QTableWidget::item:selected {
           <property name="icon">
            <iconset>
             <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
-          </property>
-          <property name="visible">
-           <bool>false</bool>
           </property>
          </widget>
         </item>
@@ -438,7 +438,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -462,32 +462,22 @@ QTableWidget::item:selected {
         </attribute>
         <column>
          <property name="text">
-          <string>Num.</string>
+          <string>Numeración</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Detalle</string>
+          <string>Recarga</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Cant.</string>
+          <string>Otros</string>
          </property>
         </column>
         <column>
          <property name="text">
-          <string>Precio Unit.</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Subtotal</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Acción</string>
+          <string>Precio</string>
          </property>
         </column>
        </widget>
@@ -512,7 +502,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -531,7 +521,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>12</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -599,7 +589,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -628,7 +618,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -662,7 +652,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -711,7 +701,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -733,7 +723,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
@@ -758,7 +748,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">
