@@ -11,3 +11,4 @@ from .caja_form import Ui_AgregarExtintores
 from .caja_tab import Ui_Caja
 from .vencimientos_tab import Ui_Vencimientos
 from .vencimientos_details import Ui_VencDetails
+from .prices_form import Ui_FormPrecios

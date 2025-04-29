@@ -419,3 +419,24 @@ class Extintor(Base):
             return 0
         finally:
             db.close()
+    
+    @classmethod
+    def tipos(cls): #buscar forma de usar esta consulta para automatizar el registro en la tabla precios
+        db = SessionLocal()
+        try:
+            precios = (
+                db.query(
+                    Marca.nombre.label('marca'),
+                    Tipo.nombre.label('tipo'),
+                    Capacidad.nombre.label('capacidad')
+                )
+                .join(Extintor, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.cliente_id.is_(None))
+                .distinct()
+                .order_by(Marca.nombre, Tipo.nombre, Capacidad.nombre) #ver si cambiar el tipo de dato en capacidad para solo poner numeros y no la unidad de medida
+            )
+            return precios
+        finally:
+            db.close()
