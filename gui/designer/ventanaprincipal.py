@@ -85,6 +85,16 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.tabWidget)
         self.horizontalLayout_2.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
+        self.menuBar = QtWidgets.QMenuBar(parent=MainWindow)
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 774, 22))
+        self.menuBar.setObjectName("menuBar")
+        self.menuConfiguraci_n = QtWidgets.QMenu(parent=self.menuBar)
+        self.menuConfiguraci_n.setObjectName("menuConfiguraci_n")
+        MainWindow.setMenuBar(self.menuBar)
+        self.actionPrecios = QtGui.QAction(parent=MainWindow)
+        self.actionPrecios.setObjectName("actionPrecios")
+        self.menuConfiguraci_n.addAction(self.actionPrecios)
+        self.menuBar.addAction(self.menuConfiguraci_n.menuAction())
 
         self.retranslateUi(MainWindow)
         self.tabWidget.setCurrentIndex(0)
@@ -98,6 +108,8 @@ class Ui_MainWindow(object):
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Caja), _translate("MainWindow", "Caja"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Reportes), _translate("MainWindow", "Reportes"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.Vencimientos), _translate("MainWindow", "Vencimientos"))
+        self.menuConfiguraci_n.setTitle(_translate("MainWindow", "Configuración"))
+        self.actionPrecios.setText(_translate("MainWindow", "Precios"))
 
 
 if __name__ == "__main__":

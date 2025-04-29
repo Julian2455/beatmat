@@ -7,6 +7,7 @@ class Marca(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(50), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='marca')
+    precios = relationship('Precios', back_populates='marca')
 
     @classmethod
     def show_all(cls):
@@ -24,6 +25,7 @@ class Tipo(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     nombre = Column(String(20), nullable=False, unique=True)
     extintores = relationship('Extintor', back_populates='tipo')
+    precios = relationship('Precios', back_populates='tipo')
 
     @classmethod
     def show_all(cls):

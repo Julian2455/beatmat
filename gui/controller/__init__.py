@@ -7,4 +7,5 @@ from .tarea_form_controller import TareaFormController
 from .recarga_form_controller import RecargaFormController
 from .caja_controller import CajaController
 from .caja_form_controller import CajaFormController
+from .prices_controller import PricesController
 from .main_controller import MainController

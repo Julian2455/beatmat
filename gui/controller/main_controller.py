@@ -18,6 +18,7 @@ class MainController:
         self.init_extintores_tab()
         self.init_caja_tab()
         self.init_vencimientos_tab() 
+        self.init_prices_bar()
         
         # Configurar iconos para las tabs
         self.setup_tab_icons()
@@ -113,6 +114,12 @@ class MainController:
         self.agregar_extintor.btnNuevoExtintor.clicked.connect(self.alta_extintor.mostrar_form)
         #self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)
     
+    def init_prices_bar(self):
+        # Instancia de PreciosUi y conexion con el formulario
+        self.precios_ui = PreciosUi()
+        self.precios_controller = PricesController(self.precios_ui)
+        self.ui.actionPrecios.triggered.connect(self.mostrar_form_precios)
+    
     #PARTE DE VENCIMIENTOS 
     def init_vencimientos_tab(self):
         self.vencimientos_tab=VencimientosUi()
@@ -168,6 +175,9 @@ class MainController:
             self.agregar_extintor_controller.reiniciar(cliente_id)    
         self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)        
         self.agregar_extintor.mostrar_form()
+    
+    def mostrar_form_precios(self):
+        self.precios_ui.mostrar_form()
     
     def show(self):
         self.ventana.show()

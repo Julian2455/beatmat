@@ -166,7 +166,7 @@ class CajaController(QObject):
                 break
         self.calcular_total()        
     
-    def calcular_total(self): #Temporal, agregar mas campos/tareas?
+    def calcular_total(self): #Temporal, reemplazar columnas cuando termine los registros
         total = 0
         for fila in range(self.ui.tableDetalleFactura.rowCount()):
             item = self.ui.tableDetalleFactura.item(fila, 3)
