@@ -110,14 +110,14 @@ QTableWidget::item:selected {
       <item>
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Fecha:</string>
+         <string>Fecha actual:</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QDateEdit" name="dateEdit">
-        <property name="readOnly">
-         <bool>true</bool>
+       <widget class="QLabel" name="dateEdit">
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -171,22 +171,6 @@ QTableWidget::item:selected {
     </widget>
    </item>
    <item>
-    <spacer name="verticalSpacer_3">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Maximum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
     <widget class="QWidget" name="widget_2" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
@@ -228,10 +212,20 @@ QTableWidget::item:selected {
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="restaurar">
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
-   <item>
+   <item alignment="Qt::AlignHCenter">
     <widget class="QLabel" name="text_dias">
      <property name="font">
       <font>
@@ -345,20 +339,40 @@ border: none;</string>
       <property name="text">
        <string>N° Extintor</string>
       </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Marca</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
      <column>
       <property name="text">
        <string>Vencimiento de recarga</string>
       </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
      </column>
      <column>
       <property name="text">
        <string>Vencimiento de prueba hidráulica</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Días restantes</string>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
     </widget>

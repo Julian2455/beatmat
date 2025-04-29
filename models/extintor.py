@@ -353,11 +353,12 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def vencimientos_proximos(cls, dias=30, offset=0, limit=10):
+    def vencimientos_proximos(cls, dias=30, page=1, per_page=10):
         db = SessionLocal()
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
+
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -366,26 +367,23 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
-            resultados = (
-                db.query(
-                    Cliente.nombre.label("cliente"),
-                    Extintor.numeracion,
-                    Marca.nombre.label("marca"),
-                    Recarga.nuevo_control_recarga.label("vto_recarga"),
-                    Recarga.vto_ph.label("vto_ph")
-                )
-                .join(Recarga, Recarga.extintor_id == Extintor.id)
-                .join(subconsulta, (subconsulta.c.extintor_id == Extintor.id) & (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
-                .join(Cliente, Cliente.id == Extintor.cliente_id)
-                .join(Marca, Marca.id == Extintor.marca_id)
+
+            # Solo obtenemos los IDs de Recarga que cumplen con el criterio, paginados
+            recargas_ids = (
+                db.query(Recarga.id)
+                .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
+                                (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
-                .offset(offset)
-                .limit(limit)
+                .order_by(Recarga.nuevo_control_recarga)
+                .offset((page - 1) * per_page)
+                .limit(per_page)
                 .all()
             )
-            return resultados
+
+            return [r.id for r in recargas_ids]
+
         except Exception as e:
-            print(f"Error al obtener vencimientos paginados: {e}")
+            print(f"Error al obtener IDs de vencimientos paginados: {e}")
             return []
         finally:
             db.close()
@@ -396,6 +394,7 @@ class Extintor(Base):
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
+
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -404,14 +403,16 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
+
             total = (
                 db.query(func.count())
-                .select_from(Extintor)
-                .join(Recarga, Recarga.extintor_id == Extintor.id)
-                .join(subconsulta, (subconsulta.c.extintor_id == Extintor.id) & (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .select_from(Recarga)
+                .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
+                                (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
                 .scalar()
             )
+
             return total
 
         except Exception as e:
@@ -419,3 +420,33 @@ class Extintor(Base):
             return 0
         finally:
             db.close()
+
+    @classmethod
+    def detalles_vencimientos_por_ids(cls, ids):
+        if not ids:
+            return []
+
+        db = SessionLocal()
+        try:
+            resultados = (
+                db.query(
+                    Cliente.nombre.label("cliente"),
+                    Extintor.numeracion,
+                    Marca.nombre.label("marca"),
+                    Recarga.nuevo_control_recarga.label("vto_recarga"),
+                    Recarga.vto_ph.label("vto_ph")
+                )
+                .join(Extintor, Extintor.id == Recarga.extintor_id)
+                .join(Cliente, Cliente.id == Extintor.cliente_id)
+                .join(Marca, Marca.id == Extintor.marca_id)
+                .filter(Recarga.id.in_(ids))
+                .order_by(Recarga.nuevo_control_recarga)
+                .all()
+            )
+            return resultados
+        except Exception as e:
+            print(f"Error al obtener detalles por IDs: {e}")
+            return []
+        finally:
+            db.close()
+
