@@ -23,16 +23,17 @@ class VencimientosController:
         self.ui.pushButton_2.setIcon(QIcon(get_image("anterior"))) 
         self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
         self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
-        #self.ui.restaurar.clicked.connect(self.restaurar_cuenta)
+        self.ui.restaurar.clicked.connect(self.restaurar_cuenta)
         self.ui.pushButton_5.clicked.connect(self.calcular_vencimientos_dias)
         self.ui.lineEdit.setValidator(QIntValidator(1,9999))
 
     def mostrar_vencimientos(self):
         mostrar_fecha_actual = datetime.today().date()
+        fecha_actual_formateada = mostrar_fecha_actual.strftime("%d-%m-%Y")
         dias = self.dias_vencimiento or 30  
         ids = Extintor.vencimientos_proximos(dias, page=self.pagina_actual, per_page=self.filas_por_pagina)
         vencimientos_proximos=Extintor.detalles_vencimientos_por_ids(ids)
-        self.ui.dateEdit.setText(str(mostrar_fecha_actual))
+        self.ui.dateEdit.setText(str(fecha_actual_formateada))
         self.ui.text_dias.setText(f"⚠️¡Los extintores mostrados en pantalla se vencen dentro de {dias} días!")
         self.ui.tableWidget.setRowCount(0)
         if vencimientos_proximos:
@@ -64,6 +65,7 @@ class VencimientosController:
                 item_estado.setFont(font)
                 self.ui.tableWidget.setItem(index, 5, item_estado)
             self.actualizar_estado_paginado()
+            self.mostrar_btn_restaurar()
 
     def calcular_vencimientos_dias(self):
         texto = self.ui.lineEdit.text()
@@ -113,3 +115,16 @@ class VencimientosController:
         if self.pagina_actual != self.total_paginas:
             self.pagina_actual = self.total_paginas
             self.mostrar_vencimientos()
+
+    def mostrar_btn_restaurar(self):
+        calculadora_activa = (
+            self.ui.lineEdit.text() != ""
+        )
+        self.ui.restaurar.setVisible(calculadora_activa)
+    
+    def restaurar_cuenta(self):
+        self.dias_vencimiento=None
+        self.ui.lineEdit.clear()
+        self.pagina_actual = 1
+        self.mostrar_vencimientos()
+        self.ui.restaurar.setVisible(False)

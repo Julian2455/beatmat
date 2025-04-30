@@ -93,7 +93,7 @@ class MainController:
         
         self.alta_recarga = RecargaRegisterUi()
         self.extintor_details_tab.btnAgregarRecarga.clicked.connect(self.mostrar_form_recarga)
-        self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller)
+        self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller, None)
     
     def init_caja_tab(self):
         # Configurar la tab de caja
@@ -133,6 +133,7 @@ class MainController:
         self.vencimientos_controller=VencimientosController(self.vencimientos_tab)
         self.vencimientos_controller.vencimientos_ui = self.vencimientos_details
         self.vencimientos_details.btnAtras.clicked.connect(self.show_vencimientos_tab)
+        self.recarga_form_controller.vencimientos_controller = self.vencimientos_controller
 
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
