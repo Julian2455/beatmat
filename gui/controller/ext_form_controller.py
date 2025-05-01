@@ -6,13 +6,14 @@ from PyQt6.QtGui import QPixmap
 from PyQt6 import QtCore
 
 class ExtFormController(QDialog):
-    def __init__(self,ui,extintor_controller, extintor_id=None, agregar_extintor_controller=None):
+    def __init__(self,ui,extintor_controller, extintor_id=None, agregar_extintor_controller=None, precios_controller=None):
         super().__init__()
         self.ui = ui
         self.extintor_controller = extintor_controller
         self.agregar_extintor_controller=agregar_extintor_controller
         self.extintor_id = extintor_id
-        if self.extintor_id: 
+        self.precios_controller=precios_controller
+        if self.extintor_id:
             self.cargar_datos_extintor()
         self.ui.guardar_extintor.clicked.connect(self.guardar_extintor)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
@@ -80,6 +81,9 @@ class ExtFormController(QDialog):
         self.extintor_controller.mostrar_extintores()
         if self.agregar_extintor_controller:
             self.agregar_extintor_controller.cargar_datos()
+        if self.precios_controller:
+            self.precios_controller.cargar_precio_nuevos()
+            self.precios_controller.cargar_precio_recargas()
         self.ui.close()
         self.limpiar_formulario()
         self.llenar_combobox()

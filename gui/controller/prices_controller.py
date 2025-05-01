@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QLabel, QHBoxLayout, QLineEdit, QMessageBox
+from PyQt6.QtWidgets import QLabel, QHBoxLayout, QLineEdit, QMessageBox, QVBoxLayout, QWidget
 from models import *
 from utils import get_image
 from PyQt6.QtGui import QIcon, QDoubleValidator
@@ -24,6 +24,7 @@ class PricesController(QObject):
         self.validator.setLocale(self.locale)
 
     def cargar_precio_nuevos(self):
+        self.limpiar_layout(self.ui.verticalLayoutNuevos)
         tipos = Precios.precio_nuevos()
         self.line_edits_nuevos = {}  
         for listado in tipos:
@@ -46,6 +47,7 @@ class PricesController(QObject):
         self.ui.verticalLayoutNuevos.addStretch()
     
     def cargar_precio_recargas(self):
+        self.limpiar_layout(self.ui.verticalLayoutRecargas)
         tipos = Precios.precio_recargas()
         self.line_edits_recargas = {} 
         for listado in tipos:
@@ -102,17 +104,9 @@ class PricesController(QObject):
         if cambios:
             try:
                 Precios.actualizar_precios(cambios)
-                print(cambios)
                 QMessageBox.information(self.ui, "Éxito", "Los precios se han actualizado correctamente.")
-                for id_precio, datos in cambios.items():
-                    if datos['tipo'] == 'recarga': #Ver como funciona esta forma, si no cambiar por consulta/restaurar y llamar al metodo otra vez
-                        self.line_edits_recargas[id_precio].setProperty("valor_original", datos['valor'])
-                        self.line_edits_recargas[id_precio].setText(self.locale.toString(float(datos['valor']), 'f', 2))
-                        self.line_edits_recargas[id_precio].setStyleSheet("background-color: white;")
-                    else:
-                        self.line_edits_nuevos[id_precio].setProperty("valor_original", datos['valor'])
-                        self.line_edits_nuevos[id_precio].setText(self.locale.toString(float(datos['valor']), 'f', 2))
-                        self.line_edits_nuevos[id_precio].setStyleSheet("background-color: white;")
+                self.cargar_precio_recargas()
+                self.cargar_precio_nuevos()
             except Exception as e:
                 QMessageBox.critical(self.ui, "Error", f"No se pudieron guardar los cambios: {str(e)}")
         else:
@@ -129,3 +123,16 @@ class PricesController(QObject):
             line_edit.setText(self.locale.toString(float(valor_original), 'f', 2))
             line_edit.setStyleSheet("background-color: white;")
         QMessageBox.information(self.ui, "Información", "Se han descartado los cambios.")
+
+    def limpiar_layout(self, layout):
+        """Elimina todos los widgets y layouts hijos del layout proporcionado"""
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            if widget is not None:
+                widget.deleteLater()
+            else:
+                child_layout = item.layout()
+                if child_layout is not None:
+                    self.limpiar_layout(child_layout)
+                    child_layout.deleteLater()

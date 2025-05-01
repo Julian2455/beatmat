@@ -73,3 +73,53 @@ class Precios(Base):
             return False
         finally:
             db.close()
+    
+    def verificar_y_agregar_precio(marca_id, tipo_id, capacidad_id):
+        db = SessionLocal()
+        try:
+            recarga_existente = (
+                db.query(Precios)
+                .filter(
+                    Precios.capacidad_id == capacidad_id,
+                    Precios.nuevo == False
+                )
+                .first()
+            )
+            if not recarga_existente:
+                nuevo_precio_recarga = Precios(
+                    valor=0.0,
+                    nuevo=False,
+                    capacidad_id=capacidad_id,
+                    tipo_id=None,
+                    marca_id=None
+                )
+                db.add(nuevo_precio_recarga)
+            nuevo_existente = (
+                db.query(Precios)
+                .filter(
+                    Precios.marca_id == marca_id,
+                    Precios.tipo_id == tipo_id,
+                    Precios.capacidad_id == capacidad_id,
+                    Precios.nuevo == True
+                )
+                .first()
+            )
+            if not nuevo_existente:
+                nuevo_precio_extintor = Precios(
+                    valor=0.0, 
+                    nuevo=True,
+                    capacidad_id=capacidad_id,
+                    tipo_id=tipo_id,
+                    marca_id=marca_id
+                )
+                db.add(nuevo_precio_extintor)
+            if not recarga_existente or not nuevo_existente:
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            db.rollback()
+            print(f"Error al verificar/agregar precios: {e}")
+            return False
+        finally:
+            db.close()

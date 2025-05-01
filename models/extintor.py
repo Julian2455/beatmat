@@ -89,6 +89,8 @@ class Extintor(Base):
             db = SessionLocal()
             db.add(datos)
             db.commit()
+            from .precios import Precios  # Esto se importa aca para evitar la importación circular con la relacion de la tabla
+            Precios.verificar_y_agregar_precio(marca, tipo, capacidad)
             return True
         except Exception as e:
             print(e)

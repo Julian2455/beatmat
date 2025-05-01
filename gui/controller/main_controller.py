@@ -14,11 +14,11 @@ class MainController:
         self.ui.setupUi(self.ventana)
         
         # Iniciar componentes
+        self.init_prices_bar()
         self.init_clientes_tab()
         self.init_extintores_tab()
         self.init_caja_tab()
         self.init_vencimientos_tab() 
-        self.init_prices_bar()
         
         # Configurar iconos para las tabs
         self.setup_tab_icons()
@@ -79,11 +79,11 @@ class MainController:
         # Formularios para alta y edicion de extintores
         self.alta_extintor = RegisterExtUi()
         self.extintor_tab.pushButton_5.clicked.connect(self.alta_extintor.mostrar_form)
-        self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller)
+        self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, precios_controller=self.precios_controller)
         
         self.edit_extintor = RegisterExtUi()
         self.extintor_controller.set_edit_form_ext(self.edit_extintor)
-        self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller)
+        self.edit_extintor_controller = ExtFormController(self.edit_extintor, self.extintor_controller, precios_controller=self.precios_controller)
         self.extintor_controller.edit_extintor_controller = self.edit_extintor_controller
         
         # Formularios para tareas y recargas
