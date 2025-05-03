@@ -467,6 +467,11 @@ QTableWidget::item:selected {
         </column>
         <column>
          <property name="text">
+          <string>Nuevo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Recarga</string>
          </property>
         </column>

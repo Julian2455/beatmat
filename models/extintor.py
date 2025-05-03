@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, func, and_
+from sqlalchemy import Column, Integer, String, ForeignKey, func, and_, Boolean
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
 from .cliente import Cliente
@@ -17,6 +17,7 @@ class Extintor(Base):
     ubicacion=Column(String(70),nullable=False)
     tipo_id=Column(Integer, ForeignKey('tipo.id'), nullable=False)
     capacidad_id=Column(Integer, ForeignKey('capacidad.id'), nullable=False)
+    nuevo = Column(Boolean, nullable=True)
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
@@ -84,7 +85,7 @@ class Extintor(Base):
     
     @classmethod
     def registrar(cls,numeracion,marca,ubicacion,tipo,capacidad):
-        datos=cls(numeracion=numeracion,marca_id=marca,ubicacion=ubicacion,tipo_id=tipo,capacidad_id=capacidad)
+        datos=cls(numeracion=numeracion,marca_id=marca,ubicacion=ubicacion,tipo_id=tipo,capacidad_id=capacidad,nuevo=True)
         try:
             db = SessionLocal()
             db.add(datos)
@@ -325,7 +326,8 @@ class Extintor(Base):
                 db.query(
                 Extintor.id,
                 Extintor.numeracion,
-                Capacidad.nombre.label('capacidad_nombre')
+                Capacidad.nombre.label('capacidad_nombre'),
+                Extintor.nuevo
                 )
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .filter(cls.cliente_id == client_id)
@@ -349,8 +351,30 @@ class Extintor(Base):
                 .filter(cls.id == extintor_id)
                 .first()
             )
-            print(extintores)
             return extintores
+        finally:
+            db.close()
+    
+    @classmethod
+    def new_prices(cls, extintor_id):
+        db = SessionLocal()
+        try:
+            extintor = (
+                db.query(
+                cls.id,
+                cls.marca_id,
+                cls.tipo_id,
+                cls.capacidad_id
+                )
+                .filter(cls.id == extintor_id).first()
+            )
+            precio=(
+                db.query(
+                    Precios.valor.label("valor_num")
+                )
+                .filter(Precios.marca_id == extintor.marca_id, Precios.tipo_id==extintor.tipo_id, Precios.capacidad_id==extintor.capacidad_id).first()
+            )
+            return precio
         finally:
             db.close()
 
