@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/extintor_form.ui'
+# Form implementation generated from reading ui file 'extintor_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,16 +12,57 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorForm(object):
     def setupUi(self, ExtintorForm):
         ExtintorForm.setObjectName("ExtintorForm")
-        ExtintorForm.resize(368, 550)
-        ExtintorForm.setStyleSheet("background-color: rgb(255, 255, 255);")
+        ExtintorForm.resize(614, 550)
+        ExtintorForm.setStyleSheet("QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"QLineEdit {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"   QLineEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+" QPushButton {\n"
+"     border: none;\n"
+"     padding: 8px 16px;\n"
+"     border-radius: 5px;\n"
+"     font-weight: bold;\n"
+"   }\n"
+"   QPushButton#cancelar_form {\n"
+"     background-color: #f44336;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#cancelar_form:hover {\n"
+"     background-color: #d32f2f;\n"
+"   }\n"
+"   QPushButton#guardar_extintor {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#guardar_extintort:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(ExtintorForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtWidgets.QWidget(parent=ExtintorForm)
-        self.widget.setStyleSheet("border: none;\n"
-"border-radius: 5px;\n"
-"background-color: rgb(221, 221, 221);\n"
+        self.widget.setStyleSheet("background: #2C3E50;\n"
+"border-bottom: 6px solid #5F9EA0;\n"
+"border-bottom: 5px solid #007BFF;\n"
 "")
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
@@ -33,7 +74,7 @@ class Ui_ExtintorForm(object):
         self.label.setMaximumSize(QtCore.QSize(30, 30))
         self.label.setStyleSheet("border:none;")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/extintor.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -46,7 +87,7 @@ class Ui_ExtintorForm(object):
         font.setItalic(False)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("border:none;\n"
-"color:black;")
+"color:rgb(255, 255, 255)")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -56,94 +97,118 @@ class Ui_ExtintorForm(object):
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
         self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.verticalLayout_2.addItem(spacerItem3)
-        self.label_numeracion = QtWidgets.QLabel(parent=self.widget_3)
+        self.widget_5 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_5.setObjectName("widget_5")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_5)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.widget_6 = QtWidgets.QWidget(parent=self.widget_5)
+        self.widget_6.setMaximumSize(QtCore.QSize(330, 16777215))
+        self.widget_6.setObjectName("widget_6")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget_6)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.label_numeracion = QtWidgets.QLabel(parent=self.widget_6)
+        self.label_numeracion.setMaximumSize(QtCore.QSize(300, 16777215))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         self.label_numeracion.setFont(font)
         self.label_numeracion.setStyleSheet("color:black;")
         self.label_numeracion.setObjectName("label_numeracion")
-        self.verticalLayout_2.addWidget(self.label_numeracion, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.lineEdit_numeracion = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.lineEdit_numeracion.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.verticalLayout_4.addWidget(self.label_numeracion)
+        self.lineEdit_numeracion = QtWidgets.QLineEdit(parent=self.widget_6)
+        self.lineEdit_numeracion.setMaximumSize(QtCore.QSize(310, 16777215))
+        self.lineEdit_numeracion.setStyleSheet("")
         self.lineEdit_numeracion.setObjectName("lineEdit_numeracion")
-        self.verticalLayout_2.addWidget(self.lineEdit_numeracion)
-        self.label_marca = QtWidgets.QLabel(parent=self.widget_3)
+        self.verticalLayout_4.addWidget(self.lineEdit_numeracion)
+        self.horizontalLayout_4.addWidget(self.widget_6)
+        self.widget_8 = QtWidgets.QWidget(parent=self.widget_5)
+        self.widget_8.setObjectName("widget_8")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget_8)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.label_marca = QtWidgets.QLabel(parent=self.widget_8)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         self.label_marca.setFont(font)
         self.label_marca.setStyleSheet("color:black;")
         self.label_marca.setObjectName("label_marca")
-        self.verticalLayout_2.addWidget(self.label_marca, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.comboBox_marca = QtWidgets.QComboBox(parent=self.widget_3)
-        self.comboBox_marca.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.verticalLayout_3.addWidget(self.label_marca)
+        self.comboBox_marca = QtWidgets.QComboBox(parent=self.widget_8)
+        self.comboBox_marca.setStyleSheet("")
         self.comboBox_marca.setEditable(True)
         self.comboBox_marca.setObjectName("comboBox_marca")
-        self.verticalLayout_2.addWidget(self.comboBox_marca)
-        self.label_ubicacion = QtWidgets.QLabel(parent=self.widget_3)
+        self.verticalLayout_3.addWidget(self.comboBox_marca)
+        self.horizontalLayout_4.addWidget(self.widget_8)
+        self.verticalLayout_2.addWidget(self.widget_5)
+        self.widget_7 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_7.setObjectName("widget_7")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_7)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.widget_10 = QtWidgets.QWidget(parent=self.widget_7)
+        self.widget_10.setMaximumSize(QtCore.QSize(330, 16777215))
+        self.widget_10.setObjectName("widget_10")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_10)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.label_ubicacion = QtWidgets.QLabel(parent=self.widget_10)
+        self.label_ubicacion.setMaximumSize(QtCore.QSize(300, 16777215))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         self.label_ubicacion.setFont(font)
         self.label_ubicacion.setStyleSheet("color:black;")
         self.label_ubicacion.setObjectName("label_ubicacion")
-        self.verticalLayout_2.addWidget(self.label_ubicacion, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.lineEdit_ubicacion = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.lineEdit_ubicacion.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.verticalLayout_6.addWidget(self.label_ubicacion)
+        self.lineEdit_ubicacion = QtWidgets.QLineEdit(parent=self.widget_10)
+        self.lineEdit_ubicacion.setMaximumSize(QtCore.QSize(310, 16777215))
+        self.lineEdit_ubicacion.setStyleSheet("")
         self.lineEdit_ubicacion.setObjectName("lineEdit_ubicacion")
-        self.verticalLayout_2.addWidget(self.lineEdit_ubicacion)
-        self.label_tipo = QtWidgets.QLabel(parent=self.widget_3)
+        self.verticalLayout_6.addWidget(self.lineEdit_ubicacion)
+        self.horizontalLayout_5.addWidget(self.widget_10)
+        self.widget_11 = QtWidgets.QWidget(parent=self.widget_7)
+        self.widget_11.setObjectName("widget_11")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_11)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.label_tipo = QtWidgets.QLabel(parent=self.widget_11)
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         self.label_tipo.setFont(font)
         self.label_tipo.setStyleSheet("color:black;")
         self.label_tipo.setObjectName("label_tipo")
-        self.verticalLayout_2.addWidget(self.label_tipo, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.comboBox_tipo = QtWidgets.QComboBox(parent=self.widget_3)
-        self.comboBox_tipo.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.verticalLayout_5.addWidget(self.label_tipo)
+        self.comboBox_tipo = QtWidgets.QComboBox(parent=self.widget_11)
+        self.comboBox_tipo.setStyleSheet("")
         self.comboBox_tipo.setEditable(True)
         self.comboBox_tipo.setObjectName("comboBox_tipo")
-        self.verticalLayout_2.addWidget(self.comboBox_tipo)
-        self.label_capacidad = QtWidgets.QLabel(parent=self.widget_3)
+        self.verticalLayout_5.addWidget(self.comboBox_tipo)
+        self.horizontalLayout_5.addWidget(self.widget_11)
+        self.verticalLayout_2.addWidget(self.widget_7)
+        self.widget_9 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_9.setObjectName("widget_9")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_9)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label_capacidad = QtWidgets.QLabel(parent=self.widget_9)
+        self.label_capacidad.setMaximumSize(QtCore.QSize(70, 16777215))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
         self.label_capacidad.setFont(font)
         self.label_capacidad.setStyleSheet("color:black;")
         self.label_capacidad.setObjectName("label_capacidad")
-        self.verticalLayout_2.addWidget(self.label_capacidad, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.comboBox_capacidad = QtWidgets.QComboBox(parent=self.widget_3)
-        self.comboBox_capacidad.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
+        self.verticalLayout_7.addWidget(self.label_capacidad, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.comboBox_capacidad = QtWidgets.QComboBox(parent=self.widget_9)
+        self.comboBox_capacidad.setMinimumSize(QtCore.QSize(550, 0))
+        self.comboBox_capacidad.setMaximumSize(QtCore.QSize(16777215, 16777215))
+        self.comboBox_capacidad.setStyleSheet("\n"
 "")
         self.comboBox_capacidad.setEditable(True)
         self.comboBox_capacidad.setObjectName("comboBox_capacidad")
-        self.verticalLayout_2.addWidget(self.comboBox_capacidad)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
+        self.verticalLayout_7.addWidget(self.comboBox_capacidad, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_2.addWidget(self.widget_9)
         self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -155,19 +220,17 @@ class Ui_ExtintorForm(object):
         self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem5)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_3.addItem(spacerItem2)
         self.guardar_extintor = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
         self.guardar_extintor.setFont(font)
-        self.guardar_extintor.setStyleSheet("color: rgb(17, 0, 255)")
+        self.guardar_extintor.setStyleSheet("color: rgb(255, 255, 255)")
         self.guardar_extintor.setObjectName("guardar_extintor")
         self.horizontalLayout_3.addWidget(self.guardar_extintor)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem6)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)

@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/caja_tab.ui'
+# Form implementation generated from reading ui file 'caja_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,17 +12,19 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Caja(object):
     def setupUi(self, Caja):
         Caja.setObjectName("Caja")
-        Caja.resize(959, 572)
+        Caja.resize(959, 575)
         Caja.setStyleSheet("QWidget {\n"
 "    background-color: #f5f5f5;\n"
 "    color: #333333;\n"
+"    \n"
 "}\n"
 "QFrame {\n"
-"    border: 1px solid #cccccc;\n"
+"    border:1px solid #cccccc;\n"
 "    border-radius: 4px;\n"
 "}\n"
 "QLabel {\n"
 "    color: #333333;\n"
+"    border: none;\n"
 "}\n"
 "QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -85,6 +87,7 @@ class Ui_Caja(object):
         font.setPointSize(12)
         font.setBold(True)
         self.labelTitle.setFont(font)
+        self.labelTitle.setStyleSheet("")
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_1.addWidget(self.labelTitle)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -132,7 +135,7 @@ class Ui_Caja(object):
         font.setBold(True)
         self.btnNuevoCliente.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnNuevoCliente.setIcon(icon)
         self.btnNuevoCliente.setObjectName("btnNuevoCliente")
         self.horizontalLayout_2.addWidget(self.btnNuevoCliente)
@@ -188,7 +191,7 @@ class Ui_Caja(object):
         self.btnAgregarExtintores.setFont(font)
         self.btnAgregarExtintores.setVisible(False)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnAgregarExtintores.setIcon(icon1)
         self.btnAgregarExtintores.setObjectName("btnAgregarExtintores")
         self.horizontalLayout_3.addWidget(self.btnAgregarExtintores)
@@ -313,7 +316,7 @@ class Ui_Caja(object):
         font.setBold(True)
         self.btnGuardar.setFont(font)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnGuardar.setIcon(icon2)
         self.btnGuardar.setObjectName("btnGuardar")
         self.horizontalLayout_6.addWidget(self.btnGuardar)
@@ -324,7 +327,7 @@ class Ui_Caja(object):
         self.btnImprimir.setFont(font)
         self.btnImprimir.setStyleSheet("background-color: #27ae60;")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnImprimir.setIcon(icon3)
         self.btnImprimir.setObjectName("btnImprimir")
         self.horizontalLayout_6.addWidget(self.btnImprimir)
@@ -335,7 +338,7 @@ class Ui_Caja(object):
         self.btnCancelar.setFont(font)
         self.btnCancelar.setStyleSheet("background-color: rgb(237, 51, 59);")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnCancelar.setIcon(icon4)
         self.btnCancelar.setObjectName("btnCancelar")
         self.horizontalLayout_6.addWidget(self.btnCancelar)

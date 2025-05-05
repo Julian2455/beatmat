@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>959</width>
-    <height>572</height>
+    <height>575</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,13 +17,15 @@
    <string notr="true">QWidget {
     background-color: #f5f5f5;
     color: #333333;
+	
 }
 QFrame {
-    border: 1px solid #cccccc;
+    border:1px solid #cccccc;
     border-radius: 4px;
 }
 QLabel {
     color: #333333;
+	border: none;
 }
 QPushButton {
     background-color: #3498db;
@@ -127,6 +129,9 @@ QTableWidget::item:selected {
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
         </property>
         <property name="text">
          <string>FACTURACIÓN - EXTINTORES</string>

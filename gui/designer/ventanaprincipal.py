@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/ventanaprincipal.ui'
+# Form implementation generated from reading ui file 'ventanaprincipal.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,7 +12,35 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(774, 555)
+        MainWindow.resize(864, 555)
+        MainWindow.setStyleSheet("/* Fondo gris para la barra de navegación */\n"
+"QTabBar {\n"
+"    background: #D3D3D3; /* Gris claro */\n"
+"}\n"
+"/* QTabWidget (barra de navegación) */\n"
+"QTabBar::tab {\n"
+"    background: #2C3E50;\n"
+"    color: white;\n"
+"    padding: 7px 18px;\n"
+"    border-top-left-radius: 6px;\n"
+"    border-top-right-radius: 6px;    \n"
+"    border: 1px solid rgb(255, 255, 255);\n"
+"\n"
+"}\n"
+"QTabBar::tab:selected {\n"
+"    background: #34495E;\n"
+"    font-weight: bold;\n"
+"    border-bottom: 5px solid #007BFF;\n"
+"}\n"
+"\n"
+"QTabBar::tab:hover {\n"
+"    background: #3E556E;\n"
+"\n"
+"}\n"
+"\n"
+"background-color: rgb(191, 191, 191);\n"
+"\n"
+"")
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.centralwidget)
@@ -24,69 +52,46 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frame)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.horizontalLayout = QtWidgets.QHBoxLayout(self.frame)
+        self.horizontalLayout.setObjectName("horizontalLayout")
         self.tabWidget = QtWidgets.QTabWidget(parent=self.frame)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
-        font.setWeight(50)
         self.tabWidget.setFont(font)
-        self.tabWidget.setStyleSheet("\n"
-"\n"
-"/* Estilo de las pestañas (QTabBar dentro del QTabWidget) */\n"
-"QTabBar::tab {\n"
-"    background-color: rgb(218, 218, 218);  /* Color de pestañas normales */\n"
-"    border: 1px solid #595959;\n"
-"    border-top-left-radius: 5px;\n"
-"    border-top-right-radius: 5px;\n"
-"    padding: 2px;\n"
-"}\n"
-"\n"
-"/* Efecto hover: Cambia el color cuando el mouse pasa sobre la pestaña */\n"
-"QTabBar::tab:hover {\n"
-"    background-color: rgb(255, 255, 255);  /* Cambia el color al pasar el mouse */\n"
-" \n"
-"}\n"
-"\n"
-"/* Efecto para la pestaña seleccionada */\n"
-"QTabBar::tab:selected {\n"
-"    background-color: rgb(170, 255, 255);  /* Color de la pestaña activa */\n"
-"    color: black;\n"
-"    font-weight: bold;\n"
-"}")
+        self.tabWidget.setStyleSheet("")
         self.tabWidget.setIconSize(QtCore.QSize(30, 30))
         self.tabWidget.setObjectName("tabWidget")
         self.Clientes = QtWidgets.QWidget()
         self.Clientes.setObjectName("Clientes")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/avatar.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/avatar.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Clientes, icon, "")
         self.Matafuegos = QtWidgets.QWidget()
         self.Matafuegos.setObjectName("Matafuegos")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/extintor-de-incendios (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Matafuegos, icon1, "")
         self.Caja = QtWidgets.QWidget()
         self.Caja.setObjectName("Caja")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/salario.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/salario.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Caja, icon2, "")
         self.Reportes = QtWidgets.QWidget()
         self.Reportes.setObjectName("Reportes")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/estadisticas.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/estadisticas.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Reportes, icon3, "")
         self.Vencimientos = QtWidgets.QWidget()
         self.Vencimientos.setObjectName("Vencimientos")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/fecha-de-vencimiento.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("../images/fecha-de-vencimiento.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Vencimientos, icon4, "")
-        self.verticalLayout_2.addWidget(self.tabWidget)
+        self.horizontalLayout.addWidget(self.tabWidget)
         self.horizontalLayout_2.addWidget(self.frame)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menuBar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 774, 22))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 864, 22))
         self.menuBar.setObjectName("menuBar")
         self.menuConfiguraci_n = QtWidgets.QMenu(parent=self.menuBar)
         self.menuConfiguraci_n.setObjectName("menuConfiguraci_n")

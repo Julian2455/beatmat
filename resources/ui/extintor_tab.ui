@@ -6,12 +6,94 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1075</width>
+    <width>810</width>
     <height>513</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QPushButton {
+    background-color: #007BFF;
+    color: white;
+    border-radius: 8px;
+    padding: 6px 16px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #0056b3;
+}
+
+/* QLineEdit (buscador) */
+QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: white;
+}
+QLineEdit:focus {
+    border-color: #007BFF;
+}
+ QComboBox {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 2px 8px;
+    background-color: white;
+}
+/* QTableWidget / QTableView */
+QHeaderView::section {
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
+    font-weight: bold;
+}
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
+}
+
+/* QTabWidget (barra de navegación) */
+QTabBar::tab {
+    background: #2C3E50;
+    color: white;
+    padding: 10px 20px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #34495E;
+    font-weight: bold;
+    border-bottom: 2px solid #007BFF;
+}
+QTabBar::tab:hover {
+    background: #3E556E;
+}
+
+/* Paginación (si usás QLabel/QPushButton para ello) */
+QLabel#paginaActual {
+    color: #007BFF;
+    font-weight: bold;
+}
+QPushButton#btnAnterior, QPushButton#btnSiguiente {
+    background-color: transparent;
+    border: none;
+    color: #007BFF;
+    font-size: 16px;
+}
+QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
+    color: #0056b3;
+    font-weight: bold;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
@@ -139,6 +221,9 @@ color:black</string>
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
+        <property name="visible">
+         <bool>false</bool>
+        </property>
         <property name="styleSheet">
          <string notr="true">border:2px solid rgb(0, 0, 255);
 border-radius: 10px;
@@ -147,9 +232,6 @@ background-color: rgb(0, 120, 215);</string>
         </property>
         <property name="text">
          <string>Restaurar filtros</string>
-        </property>
-        <property name="visible">
-         <bool>false</bool>
         </property>
        </widget>
       </item>

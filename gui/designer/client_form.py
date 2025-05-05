@@ -12,17 +12,46 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ClientForm(object):
     def setupUi(self, ClientForm):
         ClientForm.setObjectName("ClientForm")
-        ClientForm.resize(327, 476)
-        ClientForm.setStyleSheet("background-color: rgb(255, 255, 255);")
+        ClientForm.resize(327, 520)
+        ClientForm.setStyleSheet("QLineEdit {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"   QLineEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+" QPushButton {\n"
+"     border: none;\n"
+"     padding: 8px 16px;\n"
+"     border-radius: 5px;\n"
+"     font-weight: bold;\n"
+"   }\n"
+"   QPushButton#cancelar_form {\n"
+"     background-color: #f44336;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#cancelar_form:hover {\n"
+"     background-color: #d32f2f;\n"
+"   }\n"
+"   QPushButton#guardar_client {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#guardar_client:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(ClientForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtWidgets.QWidget(parent=ClientForm)
-        self.widget.setStyleSheet("border: none ;\n"
-"border-radius: 5px;\n"
-"background-color: rgb(221, 221, 221);\n"
-"")
+        self.widget.setStyleSheet("background: #2C3E50;\n"
+"border-bottom: 6px solid #5F9EA0;\n"
+"border-bottom: 5px solid #007BFF;")
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
         self.horizontalLayout.setObjectName("horizontalLayout")
@@ -45,8 +74,9 @@ class Ui_ClientForm(object):
         font.setBold(True)
         font.setItalic(False)
         self.label_2.setFont(font)
-        self.label_2.setStyleSheet("border:none;\n"
-"color:black;")
+        self.label_2.setStyleSheet("font-weight: bold;\n"
+"border:none;\n"
+"color:rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -56,63 +86,58 @@ class Ui_ClientForm(object):
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
         self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.verticalLayout_2.addItem(spacerItem3)
-        self.label_3 = QtWidgets.QLabel(parent=self.widget_3)
+        self.widget_5 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_5.setObjectName("widget_5")
+        self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.widget_5)
+        self.horizontalLayout_4.setObjectName("horizontalLayout_4")
+        self.label_3 = QtWidgets.QLabel(parent=self.widget_5)
         font = QtGui.QFont()
-        font.setPointSize(11)
         font.setBold(True)
         self.label_3.setFont(font)
-        self.label_3.setStyleSheet("color:black;")
         self.label_3.setObjectName("label_3")
-        self.verticalLayout_2.addWidget(self.label_3, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.lineEdit.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.horizontalLayout_4.addWidget(self.label_3)
+        spacerItem2 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_4.addItem(spacerItem2)
+        self.lineEdit = QtWidgets.QLineEdit(parent=self.widget_5)
         self.lineEdit.setObjectName("lineEdit")
-        self.verticalLayout_2.addWidget(self.lineEdit)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
-        self.label_4 = QtWidgets.QLabel(parent=self.widget_3)
+        self.horizontalLayout_4.addWidget(self.lineEdit)
+        self.verticalLayout_2.addWidget(self.widget_5)
+        self.widget_6 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_6.setObjectName("widget_6")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_6)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.label_4 = QtWidgets.QLabel(parent=self.widget_6)
         font = QtGui.QFont()
-        font.setPointSize(11)
         font.setBold(True)
         self.label_4.setFont(font)
-        self.label_4.setStyleSheet("color:black;")
         self.label_4.setObjectName("label_4")
-        self.verticalLayout_2.addWidget(self.label_4, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.lineEdit_2.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;")
+        self.horizontalLayout_5.addWidget(self.label_4)
+        spacerItem3 = QtWidgets.QSpacerItem(6, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_5.addItem(spacerItem3)
+        self.lineEdit_2 = QtWidgets.QLineEdit(parent=self.widget_6)
         self.lineEdit_2.setObjectName("lineEdit_2")
-        self.verticalLayout_2.addWidget(self.lineEdit_2)
-        spacerItem5 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem5)
-        self.label_5 = QtWidgets.QLabel(parent=self.widget_3)
+        self.horizontalLayout_5.addWidget(self.lineEdit_2)
+        self.verticalLayout_2.addWidget(self.widget_6)
+        self.widget_7 = QtWidgets.QWidget(parent=self.widget_3)
+        self.widget_7.setObjectName("widget_7")
+        self.horizontalLayout_6 = QtWidgets.QHBoxLayout(self.widget_7)
+        self.horizontalLayout_6.setObjectName("horizontalLayout_6")
+        self.label_5 = QtWidgets.QLabel(parent=self.widget_7)
         font = QtGui.QFont()
-        font.setPointSize(11)
         font.setBold(True)
         self.label_5.setFont(font)
         self.label_5.setObjectName("label_5")
-        self.verticalLayout_2.addWidget(self.label_5, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.lineEdit_3 = QtWidgets.QLineEdit(parent=self.widget_3)
-        self.lineEdit_3.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.horizontalLayout_6.addWidget(self.label_5)
+        spacerItem4 = QtWidgets.QSpacerItem(10, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem4)
+        self.lineEdit_3 = QtWidgets.QLineEdit(parent=self.widget_7)
         self.lineEdit_3.setObjectName("lineEdit_3")
-        self.verticalLayout_2.addWidget(self.lineEdit_3)
-        spacerItem6 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem6)
+        self.horizontalLayout_6.addWidget(self.lineEdit_3)
+        self.verticalLayout_2.addWidget(self.widget_7)
         self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -124,19 +149,15 @@ class Ui_ClientForm(object):
         self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem7 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem7)
         self.guardar_client = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
         self.guardar_client.setFont(font)
-        self.guardar_client.setStyleSheet("color: rgb(17, 0, 255)")
+        self.guardar_client.setStyleSheet("")
         self.guardar_client.setObjectName("guardar_client")
         self.horizontalLayout_3.addWidget(self.guardar_client)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem8 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem8)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
@@ -149,11 +170,8 @@ class Ui_ClientForm(object):
         ClientForm.setWindowTitle(_translate("ClientForm", "Dialog"))
         self.label_2.setText(_translate("ClientForm", "NUEVO CLIENTE"))
         self.label_3.setText(_translate("ClientForm", "Nombre"))
-        self.lineEdit.setPlaceholderText(_translate("ClientForm", "Ingrese el nombre del cliente"))
-        self.label_4.setText(_translate("ClientForm", "Dirección"))
-        self.lineEdit_2.setPlaceholderText(_translate("ClientForm", "Ingrese la dirección"))
+        self.label_4.setText(_translate("ClientForm", "Domicilio"))
         self.label_5.setText(_translate("ClientForm", "Teléfono"))
-        self.lineEdit_3.setPlaceholderText(_translate("ClientForm", "Ingrese el teléfono"))
         self.cancelar_form.setText(_translate("ClientForm", "Cancelar"))
         self.guardar_client.setText(_translate("ClientForm", "Guardar"))
 

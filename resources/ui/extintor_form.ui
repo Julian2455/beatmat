@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>368</width>
+    <width>614</width>
     <height>550</height>
    </rect>
   </property>
@@ -14,7 +14,48 @@
    <string>Nuevo Extintor</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">QComboBox {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+QComboBox:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+QLineEdit {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+   QLineEdit:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+ QPushButton {
+     border: none;
+     padding: 8px 16px;
+     border-radius: 5px;
+     font-weight: bold;
+   }
+   QPushButton#cancelar_form {
+     background-color: #f44336;
+     color: white;
+   }
+   QPushButton#cancelar_form:hover {
+     background-color: #d32f2f;
+   }
+   QPushButton#guardar_extintor {
+     background-color: #1976d2;
+     color: white;
+   }
+   QPushButton#guardar_extintort:hover {
+     background-color: #0d47a1;
+   }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
    <property name="spacing">
@@ -35,9 +76,9 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">border: none;
-border-radius: 5px;
-background-color: rgb(221, 221, 221);
+      <string notr="true">background: #2C3E50;
+border-bottom: 6px solid #5F9EA0;
+border-bottom: 5px solid #007BFF;
 </string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -105,7 +146,7 @@ background-color: rgb(221, 221, 221);
         </property>
         <property name="styleSheet">
          <string notr="true">border:none;
-color:black;</string>
+color:rgb(255, 255, 255)</string>
         </property>
         <property name="text">
          <string>NUEVO EXTINTOR</string>
@@ -132,204 +173,243 @@ color:black;</string>
     <widget class="QWidget" name="widget_2" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <widget class="QWidget" name="widget_3" native="true">
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <spacer name="verticalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_numeracion">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Numeración</string>
-           </property>
+          <widget class="QWidget" name="widget_5" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QWidget" name="widget_6" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>330</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLabel" name="label_numeracion">
+                 <property name="maximumSize">
+                  <size>
+                   <width>300</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:black;</string>
+                 </property>
+                 <property name="text">
+                  <string>Numeración</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_numeracion">
+                 <property name="maximumSize">
+                  <size>
+                   <width>310</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Ingrese la numeración</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_8" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_marca">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:black;</string>
+                 </property>
+                 <property name="text">
+                  <string>Marca</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_marca">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Seleccione o ingrese la marca</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_numeracion">
-           <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
+          <widget class="QWidget" name="widget_7" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QWidget" name="widget_10" native="true">
+              <property name="maximumSize">
+               <size>
+                <width>330</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_ubicacion">
+                 <property name="maximumSize">
+                  <size>
+                   <width>300</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:black;</string>
+                 </property>
+                 <property name="text">
+                  <string>Ubicación</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_ubicacion">
+                 <property name="maximumSize">
+                  <size>
+                   <width>310</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Ingrese la ubicación</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_11" native="true">
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QLabel" name="label_tipo">
+                 <property name="font">
+                  <font>
+                   <pointsize>11</pointsize>
+                   <bold>true</bold>
+                  </font>
+                 </property>
+                 <property name="styleSheet">
+                  <string notr="true">color:black;</string>
+                 </property>
+                 <property name="text">
+                  <string>Tipo</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox_tipo">
+                 <property name="styleSheet">
+                  <string notr="true"/>
+                 </property>
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="placeholderText">
+                  <string>Seleccione o ingrese el tipo</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_9" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_capacidad">
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color:black;</string>
+              </property>
+              <property name="text">
+               <string>Capacidad</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QComboBox" name="comboBox_capacidad">
+              <property name="minimumSize">
+               <size>
+                <width>550</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">
 </string>
-           </property>
-           <property name="placeholderText">
-            <string>Ingrese la numeración</string>
-           </property>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="placeholderText">
+               <string>Seleccione o ingrese la capacidad</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </widget>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_marca">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Marca</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_marca">
-           <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-</string>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Seleccione o ingrese la marca</string>
-           </property>
-          </widget>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_ubicacion">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Ubicación</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLineEdit" name="lineEdit_ubicacion">
-           <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-</string>
-           </property>
-           <property name="placeholderText">
-            <string>Ingrese la ubicación</string>
-           </property>
-          </widget>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_tipo">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Tipo</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_tipo">
-           <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-</string>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Seleccione o ingrese el tipo</string>
-           </property>
-          </widget>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_capacidad">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Capacidad</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_capacidad">
-           <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-</string>
-           </property>
-           <property name="editable">
-            <bool>true</bool>
-           </property>
-           <property name="placeholderText">
-            <string>Seleccione o ingrese la capacidad</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <spacer name="verticalSpacer">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
          </item>
          <item>
           <widget class="QWidget" name="widget_4" native="true">
@@ -350,9 +430,12 @@ color:black;
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_5">
+             <spacer name="horizontalSpacer_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
               </property>
               <property name="sizeHint" stdset="0">
                <size>
@@ -370,7 +453,7 @@ color:black;
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: rgb(17, 0, 255)</string>
+               <string notr="true">color: rgb(255, 255, 255)</string>
               </property>
               <property name="text">
                <string>Guardar</string>
@@ -382,22 +465,6 @@ color:black;
          </item>
         </layout>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

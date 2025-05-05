@@ -123,22 +123,17 @@ class MainController:
     #PARTE DE VENCIMIENTOS 
     def init_vencimientos_tab(self):
         self.vencimientos_tab=VencimientosUi()
-        self.vencimientos_details = VencDetailsUi()
         self.ui.Vencimientos.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Vencimientos.layout().addWidget(self.vencimientos_tab)
-        self.ui.Vencimientos.layout().addWidget(self.vencimientos_details)
-        self.vencimientos_details.hide()
 
         #conectar controladores
         self.vencimientos_controller=VencimientosController(self.vencimientos_tab)
-        self.vencimientos_controller.vencimientos_ui = self.vencimientos_details
-        self.vencimientos_details.btnAtras.clicked.connect(self.show_vencimientos_tab)
         self.recarga_form_controller.vencimientos_controller = self.vencimientos_controller
 
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
         self.ui.tabWidget.setTabIcon(0, QIcon(get_image("avatar")))
-        self.ui.tabWidget.setTabIcon(1, QIcon(get_image("extintor")))
+        self.ui.tabWidget.setTabIcon(1, QIcon(get_image("extintor-de-incendios(1)")))
         self.ui.tabWidget.setTabIcon(2, QIcon(get_image("salario")))
         self.ui.tabWidget.setTabIcon(3, QIcon(get_image("estadisticas")))
         self.ui.tabWidget.setTabIcon(4, QIcon(get_image("fecha_de_vencimiento")))

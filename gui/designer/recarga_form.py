@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/recarga_form.ui'
+# Form implementation generated from reading ui file 'recarga_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,16 +12,59 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_RecargaForm(object):
     def setupUi(self, RecargaForm):
         RecargaForm.setObjectName("RecargaForm")
-        RecargaForm.resize(371, 500)
-        RecargaForm.setStyleSheet("background-color: rgb(255, 255, 255);")
+        RecargaForm.resize(400, 547)
+        RecargaForm.setStyleSheet("QSpinBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"    padding:6px;\n"
+"   }\n"
+"QSpinBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"QDateEdit {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"padding:6px;\n"
+"   }\n"
+"QDateEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+" QPushButton {\n"
+"     border: none;\n"
+"     padding: 8px 16px;\n"
+"     border-radius: 5px;\n"
+"     font-weight: bold;\n"
+"   }\n"
+"   QPushButton#cancelar_form {\n"
+"     background-color: #f44336;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#cancelar_form:hover {\n"
+"     background-color: #d32f2f;\n"
+"   }\n"
+"   QPushButton#guardar_recarga {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#guardar_recarga:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(RecargaForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtWidgets.QWidget(parent=RecargaForm)
-        self.widget.setStyleSheet("border: none;\n"
-"border-radius: 5px;\n"
-"background-color: rgb(221, 221, 221);\n"
+        self.widget.setStyleSheet("background: #2C3E50;\n"
+"border-bottom: 6px solid #5F9EA0;\n"
+"border-bottom: 5px solid #007BFF;\n"
 "")
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
@@ -33,7 +76,7 @@ class Ui_RecargaForm(object):
         self.label.setMaximumSize(QtCore.QSize(30, 30))
         self.label.setStyleSheet("border:none;")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/extintor.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -46,7 +89,7 @@ class Ui_RecargaForm(object):
         font.setItalic(False)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("border:none;\n"
-"color:black;")
+"color:rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -56,15 +99,12 @@ class Ui_RecargaForm(object):
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
         self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.verticalLayout_2.addItem(spacerItem3)
         self.label_title = QtWidgets.QLabel(parent=self.widget_3)
+        self.label_title.setMaximumSize(QtCore.QSize(16777215, 70))
         font = QtGui.QFont()
         font.setPointSize(11)
         font.setBold(True)
@@ -73,80 +113,87 @@ class Ui_RecargaForm(object):
         self.label_title.setObjectName("label_title")
         self.verticalLayout_2.addWidget(self.label_title, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_fechas = QtWidgets.QFrame(parent=self.widget_3)
-        self.frame_fechas.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;")
+        self.frame_fechas.setStyleSheet("")
         self.frame_fechas.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_fechas.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_fechas.setObjectName("frame_fechas")
-        self.formLayout = QtWidgets.QFormLayout(self.frame_fechas)
-        self.formLayout.setObjectName("formLayout")
-        self.label_vto_control = QtWidgets.QLabel(parent=self.frame_fechas)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.frame_fechas)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.widget_5 = QtWidgets.QWidget(parent=self.frame_fechas)
+        self.widget_5.setObjectName("widget_5")
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout(self.widget_5)
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.label_vto_control = QtWidgets.QLabel(parent=self.widget_5)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         self.label_vto_control.setFont(font)
         self.label_vto_control.setObjectName("label_vto_control")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.LabelRole, self.label_vto_control)
-        self.dateEdit_vto_control = QtWidgets.QDateEdit(parent=self.frame_fechas)
-        self.dateEdit_vto_control.setStyleSheet("border: 1px solid rgb(38, 38, 38);\n"
-"border-radius: 3px;\n"
-"padding: 3px;")
-        self.dateEdit_vto_control.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2100, 12, 31), QtCore.QTime(23, 59, 59)))
+        self.verticalLayout_4.addWidget(self.label_vto_control)
+        self.dateEdit_vto_control = QtWidgets.QDateEdit(parent=self.widget_5)
+        self.dateEdit_vto_control.setStyleSheet("")
+        self.dateEdit_vto_control.setMaximumDateTime(QtCore.QDateTime(QtCore.QDate(2101, 1, 1), QtCore.QTime(23, 59, 59)))
         self.dateEdit_vto_control.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(1900, 9, 14), QtCore.QTime(0, 0, 0)))
         self.dateEdit_vto_control.setCalendarPopup(True)
         self.dateEdit_vto_control.setObjectName("dateEdit_vto_control")
-        self.formLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.dateEdit_vto_control)
-        self.label_nuevo_control = QtWidgets.QLabel(parent=self.frame_fechas)
+        self.verticalLayout_4.addWidget(self.dateEdit_vto_control)
+        self.verticalLayout_3.addWidget(self.widget_5)
+        self.widget_6 = QtWidgets.QWidget(parent=self.frame_fechas)
+        self.widget_6.setObjectName("widget_6")
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout(self.widget_6)
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.label_nuevo_control = QtWidgets.QLabel(parent=self.widget_6)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         self.label_nuevo_control.setFont(font)
         self.label_nuevo_control.setObjectName("label_nuevo_control")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.LabelRole, self.label_nuevo_control)
-        self.dateEdit_nuevo_control = QtWidgets.QDateEdit(parent=self.frame_fechas)
-        self.dateEdit_nuevo_control.setStyleSheet("border: 1px solid rgb(38, 38, 38);\n"
-"border-radius: 3px;\n"
-"padding: 3px;")
+        self.verticalLayout_6.addWidget(self.label_nuevo_control)
+        self.dateEdit_nuevo_control = QtWidgets.QDateEdit(parent=self.widget_6)
+        self.dateEdit_nuevo_control.setStyleSheet("")
         self.dateEdit_nuevo_control.setCalendarPopup(True)
         self.dateEdit_nuevo_control.setObjectName("dateEdit_nuevo_control")
-        self.formLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.FieldRole, self.dateEdit_nuevo_control)
-        self.label_vto_ph = QtWidgets.QLabel(parent=self.frame_fechas)
+        self.verticalLayout_6.addWidget(self.dateEdit_nuevo_control)
+        self.verticalLayout_3.addWidget(self.widget_6)
+        self.widget_7 = QtWidgets.QWidget(parent=self.frame_fechas)
+        self.widget_7.setObjectName("widget_7")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout(self.widget_7)
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.label_vto_ph = QtWidgets.QLabel(parent=self.widget_7)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         self.label_vto_ph.setFont(font)
         self.label_vto_ph.setObjectName("label_vto_ph")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.LabelRole, self.label_vto_ph)
-        self.spinBox_vto_ph = QtWidgets.QSpinBox(parent=self.frame_fechas)
-        self.spinBox_vto_ph.setStyleSheet("border: 1px solid rgb(38, 38, 38);\n"
-"border-radius: 3px;\n"
-"padding: 3px;")
+        self.verticalLayout_7.addWidget(self.label_vto_ph)
+        self.spinBox_vto_ph = QtWidgets.QSpinBox(parent=self.widget_7)
+        self.spinBox_vto_ph.setStyleSheet("")
         self.spinBox_vto_ph.setMinimum(1900)
         self.spinBox_vto_ph.setMaximum(2100)
         self.spinBox_vto_ph.setProperty("value", 2023)
         self.spinBox_vto_ph.setObjectName("spinBox_vto_ph")
-        self.formLayout.setWidget(2, QtWidgets.QFormLayout.ItemRole.FieldRole, self.spinBox_vto_ph)
-        self.label_fabricacion = QtWidgets.QLabel(parent=self.frame_fechas)
+        self.verticalLayout_7.addWidget(self.spinBox_vto_ph)
+        self.verticalLayout_3.addWidget(self.widget_7)
+        self.widget_8 = QtWidgets.QWidget(parent=self.frame_fechas)
+        self.widget_8.setObjectName("widget_8")
+        self.verticalLayout_5 = QtWidgets.QVBoxLayout(self.widget_8)
+        self.verticalLayout_5.setObjectName("verticalLayout_5")
+        self.label_fabricacion = QtWidgets.QLabel(parent=self.widget_8)
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
         self.label_fabricacion.setFont(font)
         self.label_fabricacion.setObjectName("label_fabricacion")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.ItemRole.LabelRole, self.label_fabricacion)
-        self.spinBox_fabricacion = QtWidgets.QSpinBox(parent=self.frame_fechas)
-        self.spinBox_fabricacion.setStyleSheet("border: 1px solid rgb(38, 38, 38);\n"
-"border-radius: 3px;\n"
-"padding: 3px;")
+        self.verticalLayout_5.addWidget(self.label_fabricacion)
+        self.spinBox_fabricacion = QtWidgets.QSpinBox(parent=self.widget_8)
+        self.spinBox_fabricacion.setStyleSheet("")
         self.spinBox_fabricacion.setMinimum(1950)
         self.spinBox_fabricacion.setMaximum(2100)
         self.spinBox_fabricacion.setProperty("value", 2020)
         self.spinBox_fabricacion.setObjectName("spinBox_fabricacion")
-        self.formLayout.setWidget(3, QtWidgets.QFormLayout.ItemRole.FieldRole, self.spinBox_fabricacion)
+        self.verticalLayout_5.addWidget(self.spinBox_fabricacion)
+        self.verticalLayout_3.addWidget(self.widget_8)
         self.verticalLayout_2.addWidget(self.frame_fechas)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
         self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -158,19 +205,15 @@ class Ui_RecargaForm(object):
         self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem5)
         self.guardar_recarga = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
         self.guardar_recarga.setFont(font)
-        self.guardar_recarga.setStyleSheet("color: rgb(17, 0, 255)")
+        self.guardar_recarga.setStyleSheet("color:rgb(255, 255, 255)")
         self.guardar_recarga.setObjectName("guardar_recarga")
         self.horizontalLayout_3.addWidget(self.guardar_recarga)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem6)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
@@ -183,12 +226,12 @@ class Ui_RecargaForm(object):
         RecargaForm.setWindowTitle(_translate("RecargaForm", "Recarga de Extintores"))
         self.label_2.setText(_translate("RecargaForm", "RECARGA DE EXTINTORES"))
         self.label_title.setText(_translate("RecargaForm", "Datos de Recarga"))
-        self.label_vto_control.setText(_translate("RecargaForm", "Vencimiento Control:"))
+        self.label_vto_control.setText(_translate("RecargaForm", "Vencimiento Control"))
         self.dateEdit_vto_control.setDisplayFormat(_translate("RecargaForm", "dd-MM-yyyy"))
-        self.label_nuevo_control.setText(_translate("RecargaForm", "Nuevo Control:"))
+        self.label_nuevo_control.setText(_translate("RecargaForm", "Nuevo Control"))
         self.dateEdit_nuevo_control.setDisplayFormat(_translate("RecargaForm", "dd-MM-yyyy"))
-        self.label_vto_ph.setText(_translate("RecargaForm", "VTO PH (año):"))
-        self.label_fabricacion.setText(_translate("RecargaForm", "Fabricación (año):"))
+        self.label_vto_ph.setText(_translate("RecargaForm", "VTO PH (año)"))
+        self.label_fabricacion.setText(_translate("RecargaForm", "Fabricación (año)"))
         self.cancelar_form.setText(_translate("RecargaForm", "Cancelar"))
         self.guardar_recarga.setText(_translate("RecargaForm", "Guardar"))
 

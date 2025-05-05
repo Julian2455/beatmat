@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/extintor_tab.ui'
+# Form implementation generated from reading ui file 'extintor_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,7 +12,87 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Extintor(object):
     def setupUi(self, Extintor):
         Extintor.setObjectName("Extintor")
-        Extintor.resize(1075, 513)
+        Extintor.resize(810, 513)
+        Extintor.setStyleSheet("QPushButton {\n"
+"    background-color: #007BFF;\n"
+"    color: white;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 16px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #0056b3;\n"
+"}\n"
+"\n"
+"/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}\n"
+" QComboBox {\n"
+"    border: 1px solid #ddd;\n"
+"    border-radius: 10px;\n"
+"    padding: 2px 8px;\n"
+"    background-color: white;\n"
+"}\n"
+"/* QTableWidget / QTableView */\n"
+"QHeaderView::section {\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
+"}\n"
+"\n"
+"/* QTabWidget (barra de navegación) */\n"
+"QTabBar::tab {\n"
+"    background: #2C3E50;\n"
+"    color: white;\n"
+"    padding: 10px 20px;\n"
+"    border-top-left-radius: 6px;\n"
+"    border-top-right-radius: 6px;\n"
+"}\n"
+"QTabBar::tab:selected {\n"
+"    background: #34495E;\n"
+"    font-weight: bold;\n"
+"    border-bottom: 2px solid #007BFF;\n"
+"}\n"
+"QTabBar::tab:hover {\n"
+"    background: #3E556E;\n"
+"}\n"
+"\n"
+"/* Paginación (si usás QLabel/QPushButton para ello) */\n"
+"QLabel#paginaActual {\n"
+"    color: #007BFF;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton#btnAnterior, QPushButton#btnSiguiente {\n"
+"    background-color: transparent;\n"
+"    border: none;\n"
+"    color: #007BFF;\n"
+"    font-size: 16px;\n"
+"}\n"
+"QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {\n"
+"    color: #0056b3;\n"
+"    font-weight: bold;\n"
+"}")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(Extintor)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.frame_2 = QtWidgets.QFrame(parent=Extintor)
@@ -25,7 +105,7 @@ class Ui_Extintor(object):
         self.label.setMinimumSize(QtCore.QSize(23, 23))
         self.label.setMaximumSize(QtCore.QSize(23, 23))
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/buscar.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/buscar.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout_3.addWidget(self.label)
@@ -65,11 +145,11 @@ class Ui_Extintor(object):
         font.setBold(True)
         self.btnRestaurarFiltros.setFont(font)
         self.btnRestaurarFiltros.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnRestaurarFiltros.setVisible(False)
         self.btnRestaurarFiltros.setStyleSheet("border:2px solid rgb(0, 0, 255);\n"
 "border-radius: 10px;\n"
 "color: white;\n"
 "background-color: rgb(0, 120, 215);")
-        self.btnRestaurarFiltros.setVisible(False)
         self.btnRestaurarFiltros.setObjectName("btnRestaurarFiltros")
         self.horizontalLayout_3.addWidget(self.btnRestaurarFiltros)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -86,7 +166,7 @@ class Ui_Extintor(object):
 "border-color: red;\n"
 "background-color: rgb(255, 0, 0);")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_5.setIcon(icon)
         self.pushButton_5.setIconSize(QtCore.QSize(23, 23))
         self.pushButton_5.setObjectName("pushButton_5")
@@ -166,7 +246,7 @@ class Ui_Extintor(object):
         self.pushButton_3.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_3.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_3.setIcon(icon1)
         self.pushButton_3.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_3.setObjectName("pushButton_3")
@@ -175,7 +255,7 @@ class Ui_Extintor(object):
         self.pushButton_2.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_2.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_2.setIcon(icon2)
         self.pushButton_2.setObjectName("pushButton_2")
         self.horizontalLayout.addWidget(self.pushButton_2)
@@ -189,7 +269,7 @@ class Ui_Extintor(object):
         self.pushButton.setStyleSheet("")
         self.pushButton.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton.setIcon(icon3)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout.addWidget(self.pushButton)
@@ -198,7 +278,7 @@ class Ui_Extintor(object):
         self.pushButton_4.setStyleSheet("")
         self.pushButton_4.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton_4.setIcon(icon4)
         self.pushButton_4.setIconSize(QtCore.QSize(18, 18))
         self.pushButton_4.setObjectName("pushButton_4")

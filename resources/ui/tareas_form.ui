@@ -6,15 +6,62 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>371</width>
-    <height>681</height>
+    <width>411</width>
+    <height>673</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Tareas de Mantenimiento</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: rgb(255, 255, 255);</string>
+   <string notr="true">QDateEdit:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+QCheckBox {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+	padding:6px;
+   }
+QCheckBox:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+QTextEdit , QDateEdit {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+padding:6px;
+   }
+QTextEdit:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+ QPushButton {
+     border: none;
+     padding: 8px 16px;
+     border-radius: 5px;
+     font-weight: bold;
+   }
+   QPushButton#cancelar_form {
+     background-color: #f44336;
+     color: white;
+   }
+   QPushButton#cancelar_form:hover {
+     background-color: #d32f2f;
+   }
+   QPushButton#guardar_tareas {
+     background-color: #1976d2;
+     color: white;
+   }
+   QPushButton#guardar_tareas:hover {
+     background-color: #0d47a1;
+   }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
    <property name="spacing">
@@ -35,9 +82,10 @@
    <item>
     <widget class="QWidget" name="widget" native="true">
      <property name="styleSheet">
-      <string notr="true">border: none;
-border-radius: 5px;
-background-color: rgb(221, 221, 221);
+      <string notr="true">background: #2C3E50;
+border-bottom: 6px solid #5F9EA0;
+border-bottom: 5px solid #007BFF;
+
 </string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
@@ -105,7 +153,7 @@ background-color: rgb(221, 221, 221);
         </property>
         <property name="styleSheet">
          <string notr="true">border:none;
-color:black;</string>
+color:rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>TAREAS DE MANTENIMIENTO</string>
@@ -131,19 +179,6 @@ color:black;</string>
    <item>
     <widget class="QWidget" name="widget_2" native="true">
      <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item>
        <widget class="QWidget" name="widget_3" native="true">
         <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -182,10 +217,7 @@ color:black;</string>
          <item>
           <widget class="QFrame" name="frame_checkboxes">
            <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-padding: 5px;</string>
+            <string notr="true"/>
            </property>
            <property name="frameShape">
             <enum>QFrame::StyledPanel</enum>
@@ -194,6 +226,18 @@ padding: 5px;</string>
             <enum>QFrame::Raised</enum>
            </property>
            <layout class="QGridLayout" name="gridLayout">
+            <item row="4" column="1">
+             <widget class="QCheckBox" name="checkBox_valvula">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Válvula</string>
+              </property>
+             </widget>
+            </item>
             <item row="0" column="0">
              <widget class="QCheckBox" name="checkBox_tamizacion">
               <property name="font">
@@ -206,27 +250,15 @@ padding: 5px;</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QCheckBox" name="checkBox_peso">
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="checkBox_otro">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Peso</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="checkBox_control_tacho">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Control de Tacho</string>
+               <string>Otro</string>
               </property>
              </widget>
             </item>
@@ -242,15 +274,15 @@ padding: 5px;</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="checkBox_cambio_manometro">
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="checkBox_bastago_bronce">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Cambio Manómetro</string>
+               <string>Bastago Bronce</string>
               </property>
              </widget>
             </item>
@@ -266,6 +298,18 @@ padding: 5px;</string>
               </property>
              </widget>
             </item>
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="checkBox_pintura">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Pintura</string>
+              </property>
+             </widget>
+            </item>
             <item row="3" column="0">
              <widget class="QCheckBox" name="checkBox_gatillo">
               <property name="font">
@@ -278,15 +322,27 @@ padding: 5px;</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
-             <widget class="QCheckBox" name="checkBox_pintura">
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="checkBox_cambio_manometro">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Pintura</string>
+               <string>Cambio Manómetro</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="checkBox_control_tacho">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Control de Tacho</string>
               </property>
              </widget>
             </item>
@@ -302,39 +358,15 @@ padding: 5px;</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
-             <widget class="QCheckBox" name="checkBox_valvula">
+            <item row="0" column="1">
+             <widget class="QCheckBox" name="checkBox_peso">
               <property name="font">
                <font>
                 <pointsize>10</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>Válvula</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="checkBox_bastago_bronce">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Bastago Bronce</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="checkBox_otro">
-              <property name="font">
-               <font>
-                <pointsize>10</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>Otro</string>
+               <string>Peso</string>
               </property>
              </widget>
             </item>
@@ -360,10 +392,7 @@ padding: 5px;</string>
          <item>
           <widget class="QTextEdit" name="textEdit_observacion">
            <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-</string>
+            <string notr="true"/>
            </property>
            <property name="placeholderText">
             <string>Ingrese las observaciones</string>
@@ -389,11 +418,7 @@ color:black;
          <item>
           <widget class="QDateEdit" name="dateEdit_fecha">
            <property name="styleSheet">
-            <string notr="true">border: 2px solid rgb(38, 38, 38);
-border-radius: 5px;
-color:black;
-padding: 5px;
-</string>
+            <string notr="true"/>
            </property>
            <property name="buttonSymbols">
             <enum>QAbstractSpinBox::PlusMinus</enum>
@@ -452,19 +477,6 @@ padding: 5px;
              </widget>
             </item>
             <item>
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
              <widget class="QPushButton" name="guardar_tareas">
               <property name="font">
                <font>
@@ -472,7 +484,7 @@ padding: 5px;
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: rgb(17, 0, 255)</string>
+               <string notr="true"/>
               </property>
               <property name="text">
                <string>Guardar</string>
@@ -484,22 +496,6 @@ padding: 5px;
          </item>
         </layout>
        </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

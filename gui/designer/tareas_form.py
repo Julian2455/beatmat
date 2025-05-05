@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/tareas_form.ui'
+# Form implementation generated from reading ui file 'tareas_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,16 +12,64 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_TareasForm(object):
     def setupUi(self, TareasForm):
         TareasForm.setObjectName("TareasForm")
-        TareasForm.resize(371, 681)
-        TareasForm.setStyleSheet("background-color: rgb(255, 255, 255);")
+        TareasForm.resize(411, 673)
+        TareasForm.setStyleSheet("QDateEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"QCheckBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"    padding:6px;\n"
+"   }\n"
+"QCheckBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"QTextEdit , QDateEdit {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"padding:6px;\n"
+"   }\n"
+"QTextEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+" QPushButton {\n"
+"     border: none;\n"
+"     padding: 8px 16px;\n"
+"     border-radius: 5px;\n"
+"     font-weight: bold;\n"
+"   }\n"
+"   QPushButton#cancelar_form {\n"
+"     background-color: #f44336;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#cancelar_form:hover {\n"
+"     background-color: #d32f2f;\n"
+"   }\n"
+"   QPushButton#guardar_tareas {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#guardar_tareas:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(TareasForm)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.widget = QtWidgets.QWidget(parent=TareasForm)
-        self.widget.setStyleSheet("border: none;\n"
-"border-radius: 5px;\n"
-"background-color: rgb(221, 221, 221);\n"
+        self.widget.setStyleSheet("background: #2C3E50;\n"
+"border-bottom: 6px solid #5F9EA0;\n"
+"border-bottom: 5px solid #007BFF;\n"
+"\n"
 "")
         self.widget.setObjectName("widget")
         self.horizontalLayout = QtWidgets.QHBoxLayout(self.widget)
@@ -33,7 +81,7 @@ class Ui_TareasForm(object):
         self.label.setMaximumSize(QtCore.QSize(30, 30))
         self.label.setStyleSheet("border:none;")
         self.label.setText("")
-        self.label.setPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"))
+        self.label.setPixmap(QtGui.QPixmap("../images/extintor.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -46,7 +94,7 @@ class Ui_TareasForm(object):
         font.setItalic(False)
         self.label_2.setFont(font)
         self.label_2.setStyleSheet("border:none;\n"
-"color:black;")
+"color:rgb(255, 255, 255);")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout.addWidget(self.label_2)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -56,14 +104,12 @@ class Ui_TareasForm(object):
         self.widget_2.setObjectName("widget_2")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_2)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem2)
         self.widget_3 = QtWidgets.QWidget(parent=self.widget_2)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.verticalLayout_2.addItem(spacerItem3)
+        spacerItem2 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.verticalLayout_2.addItem(spacerItem2)
         self.label_title = QtWidgets.QLabel(parent=self.widget_3)
         font = QtGui.QFont()
         font.setPointSize(11)
@@ -73,87 +119,84 @@ class Ui_TareasForm(object):
         self.label_title.setObjectName("label_title")
         self.verticalLayout_2.addWidget(self.label_title, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.frame_checkboxes = QtWidgets.QFrame(parent=self.widget_3)
-        self.frame_checkboxes.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;")
+        self.frame_checkboxes.setStyleSheet("")
         self.frame_checkboxes.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_checkboxes.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_checkboxes.setObjectName("frame_checkboxes")
         self.gridLayout = QtWidgets.QGridLayout(self.frame_checkboxes)
         self.gridLayout.setObjectName("gridLayout")
-        self.checkBox_tamizacion = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_tamizacion.setFont(font)
-        self.checkBox_tamizacion.setObjectName("checkBox_tamizacion")
-        self.gridLayout.addWidget(self.checkBox_tamizacion, 0, 0, 1, 1)
-        self.checkBox_peso = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_peso.setFont(font)
-        self.checkBox_peso.setObjectName("checkBox_peso")
-        self.gridLayout.addWidget(self.checkBox_peso, 0, 1, 1, 1)
-        self.checkBox_control_tacho = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_control_tacho.setFont(font)
-        self.checkBox_control_tacho.setObjectName("checkBox_control_tacho")
-        self.gridLayout.addWidget(self.checkBox_control_tacho, 1, 0, 1, 1)
-        self.checkBox_relleno_polvo = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_relleno_polvo.setFont(font)
-        self.checkBox_relleno_polvo.setObjectName("checkBox_relleno_polvo")
-        self.gridLayout.addWidget(self.checkBox_relleno_polvo, 1, 1, 1, 1)
-        self.checkBox_cambio_manometro = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_cambio_manometro.setFont(font)
-        self.checkBox_cambio_manometro.setObjectName("checkBox_cambio_manometro")
-        self.gridLayout.addWidget(self.checkBox_cambio_manometro, 2, 0, 1, 1)
-        self.checkBox_oring = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_oring.setFont(font)
-        self.checkBox_oring.setObjectName("checkBox_oring")
-        self.gridLayout.addWidget(self.checkBox_oring, 2, 1, 1, 1)
-        self.checkBox_gatillo = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_gatillo.setFont(font)
-        self.checkBox_gatillo.setObjectName("checkBox_gatillo")
-        self.gridLayout.addWidget(self.checkBox_gatillo, 3, 0, 1, 1)
-        self.checkBox_pintura = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_pintura.setFont(font)
-        self.checkBox_pintura.setObjectName("checkBox_pintura")
-        self.gridLayout.addWidget(self.checkBox_pintura, 3, 1, 1, 1)
-        self.checkBox_interior = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
-        font = QtGui.QFont()
-        font.setPointSize(10)
-        self.checkBox_interior.setFont(font)
-        self.checkBox_interior.setObjectName("checkBox_interior")
-        self.gridLayout.addWidget(self.checkBox_interior, 4, 0, 1, 1)
         self.checkBox_valvula = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.checkBox_valvula.setFont(font)
         self.checkBox_valvula.setObjectName("checkBox_valvula")
         self.gridLayout.addWidget(self.checkBox_valvula, 4, 1, 1, 1)
-        self.checkBox_bastago_bronce = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        self.checkBox_tamizacion = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
         font = QtGui.QFont()
         font.setPointSize(10)
-        self.checkBox_bastago_bronce.setFont(font)
-        self.checkBox_bastago_bronce.setObjectName("checkBox_bastago_bronce")
-        self.gridLayout.addWidget(self.checkBox_bastago_bronce, 5, 0, 1, 1)
+        self.checkBox_tamizacion.setFont(font)
+        self.checkBox_tamizacion.setObjectName("checkBox_tamizacion")
+        self.gridLayout.addWidget(self.checkBox_tamizacion, 0, 0, 1, 1)
         self.checkBox_otro = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
         font = QtGui.QFont()
         font.setPointSize(10)
         self.checkBox_otro.setFont(font)
         self.checkBox_otro.setObjectName("checkBox_otro")
         self.gridLayout.addWidget(self.checkBox_otro, 5, 1, 1, 1)
+        self.checkBox_relleno_polvo = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_relleno_polvo.setFont(font)
+        self.checkBox_relleno_polvo.setObjectName("checkBox_relleno_polvo")
+        self.gridLayout.addWidget(self.checkBox_relleno_polvo, 1, 1, 1, 1)
+        self.checkBox_bastago_bronce = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_bastago_bronce.setFont(font)
+        self.checkBox_bastago_bronce.setObjectName("checkBox_bastago_bronce")
+        self.gridLayout.addWidget(self.checkBox_bastago_bronce, 5, 0, 1, 1)
+        self.checkBox_oring = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_oring.setFont(font)
+        self.checkBox_oring.setObjectName("checkBox_oring")
+        self.gridLayout.addWidget(self.checkBox_oring, 2, 1, 1, 1)
+        self.checkBox_pintura = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_pintura.setFont(font)
+        self.checkBox_pintura.setObjectName("checkBox_pintura")
+        self.gridLayout.addWidget(self.checkBox_pintura, 3, 1, 1, 1)
+        self.checkBox_gatillo = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_gatillo.setFont(font)
+        self.checkBox_gatillo.setObjectName("checkBox_gatillo")
+        self.gridLayout.addWidget(self.checkBox_gatillo, 3, 0, 1, 1)
+        self.checkBox_cambio_manometro = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_cambio_manometro.setFont(font)
+        self.checkBox_cambio_manometro.setObjectName("checkBox_cambio_manometro")
+        self.gridLayout.addWidget(self.checkBox_cambio_manometro, 2, 0, 1, 1)
+        self.checkBox_control_tacho = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_control_tacho.setFont(font)
+        self.checkBox_control_tacho.setObjectName("checkBox_control_tacho")
+        self.gridLayout.addWidget(self.checkBox_control_tacho, 1, 0, 1, 1)
+        self.checkBox_interior = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_interior.setFont(font)
+        self.checkBox_interior.setObjectName("checkBox_interior")
+        self.gridLayout.addWidget(self.checkBox_interior, 4, 0, 1, 1)
+        self.checkBox_peso = QtWidgets.QCheckBox(parent=self.frame_checkboxes)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.checkBox_peso.setFont(font)
+        self.checkBox_peso.setObjectName("checkBox_peso")
+        self.gridLayout.addWidget(self.checkBox_peso, 0, 1, 1, 1)
         self.verticalLayout_2.addWidget(self.frame_checkboxes)
         self.label_observacion = QtWidgets.QLabel(parent=self.widget_3)
         font = QtGui.QFont()
@@ -164,10 +207,7 @@ class Ui_TareasForm(object):
         self.label_observacion.setObjectName("label_observacion")
         self.verticalLayout_2.addWidget(self.label_observacion, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.textEdit_observacion = QtWidgets.QTextEdit(parent=self.widget_3)
-        self.textEdit_observacion.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"")
+        self.textEdit_observacion.setStyleSheet("")
         self.textEdit_observacion.setObjectName("textEdit_observacion")
         self.verticalLayout_2.addWidget(self.textEdit_observacion)
         self.label_fecha = QtWidgets.QLabel(parent=self.widget_3)
@@ -179,19 +219,15 @@ class Ui_TareasForm(object):
         self.label_fecha.setObjectName("label_fecha")
         self.verticalLayout_2.addWidget(self.label_fecha, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.dateEdit_fecha = QtWidgets.QDateEdit(parent=self.widget_3)
-        self.dateEdit_fecha.setStyleSheet("border: 2px solid rgb(38, 38, 38);\n"
-"border-radius: 5px;\n"
-"color:black;\n"
-"padding: 5px;\n"
-"")
+        self.dateEdit_fecha.setStyleSheet("")
         self.dateEdit_fecha.setButtonSymbols(QtWidgets.QAbstractSpinBox.ButtonSymbols.PlusMinus)
         self.dateEdit_fecha.setMaximumDate(QtCore.QDate(2100, 12, 31))
         self.dateEdit_fecha.setMinimumDate(QtCore.QDate(2000, 9, 14))
         self.dateEdit_fecha.setCalendarPopup(True)
         self.dateEdit_fecha.setObjectName("dateEdit_fecha")
         self.verticalLayout_2.addWidget(self.dateEdit_fecha)
-        spacerItem4 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
-        self.verticalLayout_2.addItem(spacerItem4)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_2.addItem(spacerItem3)
         self.widget_4 = QtWidgets.QWidget(parent=self.widget_3)
         self.widget_4.setObjectName("widget_4")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_4)
@@ -203,19 +239,15 @@ class Ui_TareasForm(object):
         self.cancelar_form.setStyleSheet("color:black;")
         self.cancelar_form.setObjectName("cancelar_form")
         self.horizontalLayout_3.addWidget(self.cancelar_form)
-        spacerItem5 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_3.addItem(spacerItem5)
         self.guardar_tareas = QtWidgets.QPushButton(parent=self.widget_4)
         font = QtGui.QFont()
         font.setBold(True)
         self.guardar_tareas.setFont(font)
-        self.guardar_tareas.setStyleSheet("color: rgb(17, 0, 255)")
+        self.guardar_tareas.setStyleSheet("")
         self.guardar_tareas.setObjectName("guardar_tareas")
         self.horizontalLayout_3.addWidget(self.guardar_tareas)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
-        spacerItem6 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
-        self.horizontalLayout_2.addItem(spacerItem6)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
@@ -228,18 +260,18 @@ class Ui_TareasForm(object):
         TareasForm.setWindowTitle(_translate("TareasForm", "Tareas de Mantenimiento"))
         self.label_2.setText(_translate("TareasForm", "TAREAS DE MANTENIMIENTO"))
         self.label_title.setText(_translate("TareasForm", "Tareas Realizadas"))
-        self.checkBox_tamizacion.setText(_translate("TareasForm", "Tamización"))
-        self.checkBox_peso.setText(_translate("TareasForm", "Peso"))
-        self.checkBox_control_tacho.setText(_translate("TareasForm", "Control de Tacho"))
-        self.checkBox_relleno_polvo.setText(_translate("TareasForm", "Relleno de Polvo"))
-        self.checkBox_cambio_manometro.setText(_translate("TareasForm", "Cambio Manómetro"))
-        self.checkBox_oring.setText(_translate("TareasForm", "O-Ring"))
-        self.checkBox_gatillo.setText(_translate("TareasForm", "Gatillo"))
-        self.checkBox_pintura.setText(_translate("TareasForm", "Pintura"))
-        self.checkBox_interior.setText(_translate("TareasForm", "Interior"))
         self.checkBox_valvula.setText(_translate("TareasForm", "Válvula"))
-        self.checkBox_bastago_bronce.setText(_translate("TareasForm", "Bastago Bronce"))
+        self.checkBox_tamizacion.setText(_translate("TareasForm", "Tamización"))
         self.checkBox_otro.setText(_translate("TareasForm", "Otro"))
+        self.checkBox_relleno_polvo.setText(_translate("TareasForm", "Relleno de Polvo"))
+        self.checkBox_bastago_bronce.setText(_translate("TareasForm", "Bastago Bronce"))
+        self.checkBox_oring.setText(_translate("TareasForm", "O-Ring"))
+        self.checkBox_pintura.setText(_translate("TareasForm", "Pintura"))
+        self.checkBox_gatillo.setText(_translate("TareasForm", "Gatillo"))
+        self.checkBox_cambio_manometro.setText(_translate("TareasForm", "Cambio Manómetro"))
+        self.checkBox_control_tacho.setText(_translate("TareasForm", "Control de Tacho"))
+        self.checkBox_interior.setText(_translate("TareasForm", "Interior"))
+        self.checkBox_peso.setText(_translate("TareasForm", "Peso"))
         self.label_observacion.setText(_translate("TareasForm", "Observación"))
         self.textEdit_observacion.setPlaceholderText(_translate("TareasForm", "Ingrese las observaciones"))
         self.label_fecha.setText(_translate("TareasForm", "Fecha"))
