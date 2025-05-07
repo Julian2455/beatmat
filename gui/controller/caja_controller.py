@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView, QMenu, QMessageBox, QCheckBox, QLineEdit
 from models import *
 from utils import get_image
-from PyQt6.QtGui import QIcon, QAction
+from PyQt6.QtGui import QIcon, QAction, QDoubleValidator
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtCore import QDate, Qt, QObject
+from PyQt6.QtCore import QDate, Qt, QObject, QLocale
 
 class CajaController(QObject):
     def __init__(self,ui):
@@ -11,6 +11,7 @@ class CajaController(QObject):
         self.ui = ui
         self.cliente=None
         self.clientes_combobox()
+        self.configurar_validadores()
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
         self.ui.tableExtintoresCliente.verticalHeader().setVisible(False)
         self.ui.tableDetalleFactura.verticalHeader().setVisible(False)
@@ -23,6 +24,9 @@ class CajaController(QObject):
         self.ui.tableExtintoresCliente.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.selected_extintores={}
         self.selected_nuevos={}
+        self.ui.lineCobro.setDisabled(True)
+        self.ui.btnGuardar.clicked.connect(self.confirmar_compra) 
+        self.ui.lineCobro.textChanged.connect(self.cobrar)
     
     def clientes_combobox(self):
         self.ui.comboClientes.clear()
@@ -32,6 +36,15 @@ class CajaController(QObject):
             self.ui.comboClientes.addItem(cliente.nombre)
             index=self.ui.comboClientes.count()-1
             self.ui.comboClientes.setItemData(index, cliente.id, QtCore.Qt.ItemDataRole.UserRole)
+    
+    def configurar_validadores(self):
+        self.validator = QDoubleValidator()
+        self.validator.setDecimals(2)
+        self.validator.setNotation(QDoubleValidator.Notation.StandardNotation)
+        self.locale = QLocale(QLocale.Language.Spanish)
+        self.locale.setNumberOptions(QLocale.NumberOption.OmitGroupSeparator)
+        self.validator.setLocale(self.locale)
+        self.ui.lineCobro.setValidator(self.validator)
 
     def seleccionar_cliente(self):
         indice = self.ui.comboClientes.currentIndex()
@@ -41,9 +54,9 @@ class CajaController(QObject):
         self.selected_extintores={}
         self.selected_nuevos={}
         if indice == 0 or texto=="":
-            self.cliente = None
-            self.ui.btnAgregarExtintores.setVisible(False)
+            self.limpiar_campos()
         else:
+            self.ui.lineCobro.setDisabled(False)
             self.ui.btnAgregarExtintores.setVisible(True)
             self.cliente = self.ui.comboClientes.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
             self.ui.cliente_id_actual = self.cliente
@@ -122,6 +135,7 @@ class CajaController(QObject):
                     checkbox.setProperty("nuevo", False)
                     checkbox.stateChanged.connect(self.checkbox_state_changed)
                     linePrecio = QLineEdit()
+                    linePrecio.setValidator(self.validator)
                     self.ui.tableDetalleFactura.setItem(index, 0, id_extintor)
                     if extintor.nuevo==True:
                         checkboxn = QCheckBox()
@@ -189,16 +203,16 @@ class CajaController(QObject):
                     precio_total += self.selected_nuevos[extintor_id]
                 if texto:
                     try:
-                        precio_extra = float(texto)
+                        precio_extra = self.locale.toDouble(texto)[0]
                         precio_total += precio_extra
                     except ValueError:
                         pass
                 if precio_total > 0:
-                    self.ui.tableDetalleFactura.setItem(fila, 4, QTableWidgetItem(str(precio_total)))
+                    self.ui.tableDetalleFactura.setItem(fila, 4, QTableWidgetItem(self.locale.toString(float(precio_total), 'f', 2)))
                 else:
                     self.ui.tableDetalleFactura.setItem(fila, 4, QTableWidgetItem(""))
                 break
-        self.calcular_total()        
+        self.calcular_total()    
     
     def calcular_total(self):
         total = 0
@@ -206,8 +220,113 @@ class CajaController(QObject):
             item = self.ui.tableDetalleFactura.item(fila, 4)
             if item and item.text():
                 try:
-                    valor = float(item.text())
+                    valor = self.locale.toDouble(item.text())[0]
                     total += valor
                 except ValueError:
                     pass
-        self.ui.labelTotalAmount.setText(f"{total:.2f}")
+        self.ui.labelTotalAmount.setText(self.locale.toString(float(total), 'f', 2))
+        self.ui.lineCobro.setText("")
+        self.ui.lineAdeudado.setText("")
+        self.total=total
+    
+    def cobrar(self):
+        if hasattr(self, 'total') and self.total:
+            texto = self.ui.lineCobro.text()
+            if texto:
+                try:
+                    cobro = self.locale.toDouble(texto)[0]
+                    deuda = self.total - cobro
+                    self.ui.lineAdeudado.setText(self.locale.toString(float(deuda), 'f', 2))
+                    if cobro<self.total:
+                        self.ui.lineAdeudado.setStyleSheet("color:red;")
+                    else:
+                        self.ui.lineAdeudado.setStyleSheet("color:green;")
+                except ValueError:
+                    self.ui.lineAdeudado.setText("")
+            else:
+                self.ui.lineAdeudado.setText("")
+        else:
+            pass
+    
+    def confirmar_compra(self):
+        if not self.cliente:
+            self.mostrar_error("Seleccione un cliente", "Debe seleccionar un cliente para continuar.")
+            return
+        cobro = self.ui.lineCobro.text().strip()
+        if not cobro:
+            self.mostrar_error("Monto de cobro vacío", "Debe ingresar un monto de cobro.")
+            return
+        if not hasattr(self, 'total') or self.total <= 0:
+            self.mostrar_error("Total inválido", "El total de la compra debe ser mayor a cero.")
+            return
+        precios_adicionales = {}
+        precios_totales = {}
+        cobro_num = self.locale.toDouble(cobro)[0]
+        deuda = self.ui.lineAdeudado.text()
+        if deuda:
+            deuda_num = self.locale.toDouble(deuda)[0]
+        else:
+            deuda_num = 0
+        fecha = self.ui.dateEdit.date().toPyDate()
+        descripcion = self.ui.lineDescripcion.text()
+        for fila in range(self.ui.tableDetalleFactura.rowCount()):
+            extintor_id = self.ui.tableDetalleFactura.item(fila, 0).data(QtCore.Qt.ItemDataRole.UserRole)
+            line_edit = self.ui.tableDetalleFactura.cellWidget(fila, 3)
+            if line_edit and line_edit.text():
+                try:
+                    precio_adicional = self.locale.toDouble(line_edit.text())[0]
+                    if precio_adicional > 0:
+                        precios_adicionales[extintor_id] = precio_adicional
+                except ValueError:
+                    pass
+            item_total = self.ui.tableDetalleFactura.item(fila, 4)
+            if item_total and item_total.text():
+                try:
+                    precio_total = self.locale.toDouble(item_total.text())[0]
+                    precios_totales[extintor_id] = precio_total
+                except ValueError:
+                    pass
+        if not self.selected_extintores and not self.selected_nuevos and not precios_adicionales:
+            self.mostrar_error("Sin valores seleccionados", "Debe asignar al menos un valor (nuevo, recarga u otros ).")
+            return
+        exito = Caja.confirmar_compra(
+            self.cliente, fecha, self.total, cobro_num, deuda_num, 
+            precios_totales, self.selected_extintores, self.selected_nuevos, 
+            precios_adicionales, descripcion
+        )
+        if exito:
+            self.mostrar_info("Compra registrada", "La compra se ha registrado correctamente.")
+            self.limpiar_campos()
+        else:
+            self.mostrar_error("Error", "Ocurrió un error al registrar la compra.")
+
+    def limpiar_campos(self):
+        self.ui.lineCobro.setText("")
+        self.ui.lineAdeudado.setText("")
+        self.ui.lineDescripcion.setText("")
+        self.ui.dateEdit.setDate(QDate.currentDate())
+        self.ui.labelTotalAmount.setText("0.00")
+        self.ui.comboClientes.setCurrentIndex(0)
+        self.ui.tableExtintoresCliente.setRowCount(0)
+        self.ui.tableDetalleFactura.setRowCount(0)
+        self.selected_extintores = {}
+        self.selected_nuevos = {}
+        self.ui.lineCobro.setDisabled(True)
+        self.cliente = None
+        self.ui.btnAgregarExtintores.setVisible(False)
+    
+    def mostrar_error(self, titulo, mensaje):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Critical)
+        msg.setWindowTitle(titulo)
+        msg.setText(mensaje)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()
+    
+    def mostrar_info(self, titulo, mensaje):
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Icon.Information)
+        msg.setWindowTitle(titulo)
+        msg.setText(mensaje)
+        msg.setStandardButtons(QMessageBox.StandardButton.Ok)
+        msg.exec()

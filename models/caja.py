@@ -8,9 +8,9 @@ class Caja(Base):
 
     id=Column(Integer,primary_key=True,autoincrement=True)
     fecha=Column(Date,nullable=False)
-    gastos=Column(Float)
-    cobros=Column(Float)
+    cobro=Column(Float)
     adeudado=Column(Float)
+    total=Column(Float)
     descripcion=Column(String(255))
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
@@ -18,23 +18,24 @@ class Caja(Base):
     cliente=relationship('Cliente',back_populates='caja')
     detcaja=relationship('DetCaja',back_populates='caja')
 
+    @property
+    def fecha_formateado(self):
+        if self.fecha:
+            return self.fecha.strftime("%d-%m-%Y")
+        return ""
+
     @classmethod
-    def show_all(cls,page=1, per_page=10):
-        db = SessionLocal()
+    def confirmar_compra(cls,id,fecha,total,cobro,deuda,totales,recargas,nuevos,adicionales,descripcion=None):
+        datos=cls(fecha=fecha,cliente_id=id,cobro=cobro,adeudado=deuda,total=total,descripcion=descripcion)
         try:
-            cajas = (
-                db.query(cls)
-                .offset((page -1) * per_page)
-                .limit(per_page)
-                .all()
-            )
-            return cajas
+            db = SessionLocal()
+            db.add(datos)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
         finally:
             db.close()
     
-    @classmethod
-    def contar_cajas(cls):
-        db = SessionLocal()
-        total = db.query(cls).count()
-        db.close()
-        return total
