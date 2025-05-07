@@ -495,3 +495,20 @@ class Extintor(Base):
             return precios
         finally:
             db.close()
+    
+    @classmethod
+    def actualizar_nuevo(cls, nuevos):
+        try:
+            db = SessionLocal()
+            for id_extintor in nuevos.keys():
+                extintor = db.query(cls).filter_by(id=id_extintor).first()
+                if extintor:
+                    extintor.nuevo=False 
+            db.commit()
+            return True
+        except Exception as e:
+            print(f"Error al actualizar extintor: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
