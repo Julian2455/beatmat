@@ -31,7 +31,8 @@ IMAGE_MAP = {
     "encabezado-impresion":resource_path("resources/images/encabezado-impresion.png"),
     "encabezado-impresion-dos":resource_path("resources/images/encabezado-impresion-dos.png"),
     "notificacion": resource_path("resources/images/notificacion"),
-    "extintor-de-incendios(1)": resource_path("resources/images/extintor-de-incendios(1)")
+    "extintor-de-incendios(1)": resource_path("resources/images/extintor-de-incendios(1)"),
+    "config2": resource_path("resources/images/config2.png")
 
 }
 

@@ -75,6 +75,8 @@ class MainController:
         self.extintor_controller = ExtintorController(self.extintor_tab)
         self.extintor_controller.details_ui = self.extintor_details_tab
         self.extintor_details_tab.btnAtras.clicked.connect(self.show_extintor_tab)
+        self.precios_controller = PricesController(self.precios_ui, self.config_form, self.extintor_controller)
+
         
         # Formularios para alta y edicion de extintores
         self.alta_extintor = RegisterExtUi()
@@ -117,8 +119,12 @@ class MainController:
     def init_prices_bar(self):
         # Instancia de PreciosUi y conexion con el formulario
         self.precios_ui = PreciosUi()
-        self.precios_controller = PricesController(self.precios_ui)
+        self.config_form = ConfigUi()
+        self.precios_controller = None
         self.ui.actionPrecios.triggered.connect(self.mostrar_form_precios)
+        self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
+        self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
+        self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))
     
     #PARTE DE VENCIMIENTOS 
     def init_vencimientos_tab(self):
@@ -174,6 +180,9 @@ class MainController:
     
     def mostrar_form_precios(self):
         self.precios_ui.mostrar_form()
+
+    def mostrar_form_universal(self, tipo):
+        self.precios_controller.mostrar_formulario_universal(tipo)
     
     def show(self):
         self.ventana.show()

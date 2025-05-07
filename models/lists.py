@@ -19,6 +19,21 @@ class Marca(Base):
             return clientes
         finally:
             db.close()
+    
+    @classmethod
+    def registrar_marca(cls, nombre):
+        dato=cls(nombre=nombre)
+        try:
+            db = SessionLocal()
+            db.add(dato)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
 
 class Tipo(Base):
     __tablename__ = 'tipo'
@@ -37,6 +52,22 @@ class Tipo(Base):
             return clientes
         finally:
             db.close()
+    
+    @classmethod
+    def registrar_tipo(cls, nombre):
+        dato=cls(nombre=nombre)
+        try:
+            db = SessionLocal()
+            db.add(dato)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+
 
 class Capacidad(Base):
     __tablename__ = 'capacidad'
@@ -53,5 +84,20 @@ class Capacidad(Base):
                 db.query(cls).all()
             )
             return clientes
+        finally:
+            db.close()
+
+    @classmethod
+    def registrar_capacidad(cls, nombre):
+        dato=cls(nombre=nombre)
+        try:
+            db = SessionLocal()
+            db.add(dato)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
         finally:
             db.close()

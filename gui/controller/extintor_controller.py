@@ -336,9 +336,9 @@ class ExtintorController:
         self.ui.comboBox_marca.clear()
         self.ui.comboBox_tipo.clear()
         self.ui.comboBox_capacidad.clear()
-        self.ui.comboBox_marca.addItem("----Marca----")
-        self.ui.comboBox_tipo.addItem("----Tipo----")
-        self.ui.comboBox_capacidad.addItem("----Capacidad----")
+        self.ui.comboBox_marca.addItem("Marca")
+        self.ui.comboBox_tipo.addItem("Tipo")
+        self.ui.comboBox_capacidad.addItem("Capacidad")
         marcas=Marca.show_all()
         for marca in marcas:
             self.ui.comboBox_marca.addItem(marca.nombre)

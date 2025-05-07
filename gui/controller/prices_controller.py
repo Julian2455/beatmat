@@ -1,19 +1,25 @@
 from PyQt6.QtWidgets import QLabel, QHBoxLayout, QLineEdit, QMessageBox, QVBoxLayout, QWidget
 from models import *
 from utils import get_image
-from PyQt6.QtGui import QIcon, QDoubleValidator
+from PyQt6.QtGui import QIcon, QDoubleValidator, QPixmap
 from PyQt6 import QtCore
 from PyQt6.QtCore import Qt, QObject, QLocale
 
 class PricesController(QObject):
-    def __init__(self,ui):
+    def __init__(self,ui,config_controller, extintor_controller):
         super().__init__()
         self.ui = ui
+        self.config_controller = config_controller
+        self.extintor_controller = extintor_controller
+        self.tipo_formulario = None
         self.formato_decimales()
         self.cargar_precio_nuevos()
         self.cargar_precio_recargas()
         self.ui.btnGuardar.clicked.connect(self.guardar_cambios)
         self.ui.btnCancelar.clicked.connect(self.cancelar_cambios)
+        self.config_controller.guardar_detalle.clicked.connect(self.guardar_detalle)
+        self.config_controller.cancelar_form.clicked.connect(self.cancelar)
+        self.config_controller.label.setPixmap(QPixmap(get_image("config2")))
 
     def formato_decimales(self):
         self.validator = QDoubleValidator()
@@ -136,3 +142,52 @@ class PricesController(QObject):
                 if child_layout is not None:
                     self.limpiar_layout(child_layout)
                     child_layout.deleteLater()
+    
+    """Empieza la parte de registrar marcas, tipos y capacidades"""
+    def cancelar(self):
+        self.config_controller.close()
+        self.config_controller.lineEdit.clear()
+    
+    def limpiar_formulario(self):
+        self.config_controller.lineEdit.clear()
+
+    def mostrar_formulario_universal(self, tipo):
+        self.tipo_formulario = tipo
+        self.config_controller.label_config.setText(f" {tipo}")
+        self.config_controller.nombre_detalle.setText(f"{tipo}")
+        self.config_controller.show()
+    
+    def guardar_detalle(self):
+        tipo = self.tipo_formulario
+        nombre = self.config_controller.lineEdit.text().strip().title()
+        if not nombre or not tipo:
+            msg=QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Error")
+            msg.setText(f"Por favor, completa el campo de {tipo}. Es obligatorio.")
+            msg.exec()
+            return
+        if tipo == "Marca":
+            if Marca.registrar_marca(nombre) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Marca registrada correctamente.")
+                msg.exec()
+        elif tipo == "Tipo":
+            if Tipo.registrar_tipo(nombre) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Tipo registrado correctamente.")
+                msg.exec()
+        elif tipo == "Capacidad":
+            if Capacidad.registrar_capacidad(nombre) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Capacidad registrada correctamente.")
+                msg.exec()
+        self.extintor_controller.llenar_combobox_filtro()
+        self.config_controller.close()
+        self.limpiar_formulario()

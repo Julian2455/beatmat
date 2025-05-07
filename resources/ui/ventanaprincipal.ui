@@ -157,13 +157,39 @@ background-color: rgb(191, 191, 191);
     <property name="title">
      <string>Configuración</string>
     </property>
+    <widget class="QMenu" name="menuExtintores">
+     <property name="title">
+      <string>Extintores</string>
+     </property>
+     <addaction name="actionMarcas"/>
+     <addaction name="separator"/>
+     <addaction name="actionTipos"/>
+     <addaction name="separator"/>
+     <addaction name="actionCapacidad"/>
+    </widget>
     <addaction name="actionPrecios"/>
+    <addaction name="menuExtintores"/>
    </widget>
    <addaction name="menuConfiguraci_n"/>
   </widget>
   <action name="actionPrecios">
    <property name="text">
     <string>Precios</string>
+   </property>
+  </action>
+  <action name="actionMarcas">
+   <property name="text">
+    <string>Marcas</string>
+   </property>
+  </action>
+  <action name="actionTipos">
+   <property name="text">
+    <string>Tipos</string>
+   </property>
+  </action>
+  <action name="actionCapacidad">
+   <property name="text">
+    <string>Capacidad</string>
    </property>
   </action>
  </widget>
