@@ -17,6 +17,7 @@ class MainController:
         self.init_prices_bar()
         self.init_clientes_tab()
         self.init_extintores_tab()
+        self.init_mtc_bar()
         self.init_caja_tab()
         self.init_vencimientos_tab() 
         
@@ -75,8 +76,6 @@ class MainController:
         self.extintor_controller = ExtintorController(self.extintor_tab)
         self.extintor_controller.details_ui = self.extintor_details_tab
         self.extintor_details_tab.btnAtras.clicked.connect(self.show_extintor_tab)
-        self.precios_controller = PricesController(self.precios_ui, self.config_form, self.extintor_controller)
-
         
         # Formularios para alta y edicion de extintores
         self.alta_extintor = RegisterExtUi()
@@ -119,13 +118,16 @@ class MainController:
     def init_prices_bar(self):
         # Instancia de PreciosUi y conexion con el formulario
         self.precios_ui = PreciosUi()
-        self.config_form = ConfigUi()
-        self.precios_controller = None
+        self.precios_controller = PricesController(self.precios_ui)
         self.ui.actionPrecios.triggered.connect(self.mostrar_form_precios)
+
+    def init_mtc_bar(self):
+        self.config_form = ConfigUi()
+        self.mtc_controller = MtcController(self.config_form, self.extintor_controller)
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))
-    
+
     #PARTE DE VENCIMIENTOS 
     def init_vencimientos_tab(self):
         self.vencimientos_tab=VencimientosUi()
@@ -182,7 +184,7 @@ class MainController:
         self.precios_ui.mostrar_form()
 
     def mostrar_form_universal(self, tipo):
-        self.precios_controller.mostrar_formulario_universal(tipo)
+        self.mtc_controller.mostrar_form(tipo)
     
     def show(self):
         self.ventana.show()

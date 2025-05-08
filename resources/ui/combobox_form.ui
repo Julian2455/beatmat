@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>359</width>
-    <height>253</height>
+    <width>492</width>
+    <height>311</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,11 +38,11 @@
    QPushButton#cancelar_form:hover {
      background-color: #d32f2f;
    }
-   QPushButton#guardar_client {
+   QPushButton#guardar_detalle {
      background-color: #1976d2;
      color: white;
    }
-   QPushButton#guardar_client:hover {
+   QPushButton#guardar_detalle:hover {
      background-color: #0d47a1;
    }</string>
   </property>
@@ -235,6 +235,38 @@ color:rgb(255, 255, 255);</string>
              </widget>
             </item>
            </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QWidget" name="widget_6" native="true">
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QWidget" name="widget_7" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_registro">
+              <property name="text">
+               <string>lsd</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QTableWidget" name="tableWidget">
+           <property name="maximumSize">
+            <size>
+             <width>150</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <attribute name="horizontalHeaderDefaultSectionSize">
+            <number>160</number>
+           </attribute>
           </widget>
          </item>
         </layout>

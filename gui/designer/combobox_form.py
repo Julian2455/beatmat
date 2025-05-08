@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ConfigForm(object):
     def setupUi(self, ConfigForm):
         ConfigForm.setObjectName("ConfigForm")
-        ConfigForm.resize(359, 253)
+        ConfigForm.resize(492, 311)
         ConfigForm.setStyleSheet("QLineEdit {\n"
 "     border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
@@ -37,11 +37,11 @@ class Ui_ConfigForm(object):
 "   QPushButton#cancelar_form:hover {\n"
 "     background-color: #d32f2f;\n"
 "   }\n"
-"   QPushButton#guardar_client {\n"
+"   QPushButton#guardar_detalle {\n"
 "     background-color: #1976d2;\n"
 "     color: white;\n"
 "   }\n"
-"   QPushButton#guardar_client:hover {\n"
+"   QPushButton#guardar_detalle:hover {\n"
 "     background-color: #0d47a1;\n"
 "   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(ConfigForm)
@@ -127,6 +127,26 @@ class Ui_ConfigForm(object):
         self.horizontalLayout_3.addWidget(self.guardar_detalle)
         self.verticalLayout_2.addWidget(self.widget_4)
         self.horizontalLayout_2.addWidget(self.widget_3)
+        self.widget_6 = QtWidgets.QWidget(parent=self.widget_2)
+        self.widget_6.setObjectName("widget_6")
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget_6)
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.widget_7 = QtWidgets.QWidget(parent=self.widget_6)
+        self.widget_7.setObjectName("widget_7")
+        self.horizontalLayout_5 = QtWidgets.QHBoxLayout(self.widget_7)
+        self.horizontalLayout_5.setObjectName("horizontalLayout_5")
+        self.label_registro = QtWidgets.QLabel(parent=self.widget_7)
+        self.label_registro.setObjectName("label_registro")
+        self.horizontalLayout_5.addWidget(self.label_registro, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_3.addWidget(self.widget_7)
+        self.tableWidget = QtWidgets.QTableWidget(parent=self.widget_6)
+        self.tableWidget.setMaximumSize(QtCore.QSize(150, 16777215))
+        self.tableWidget.setObjectName("tableWidget")
+        self.tableWidget.setColumnCount(0)
+        self.tableWidget.setRowCount(0)
+        self.tableWidget.horizontalHeader().setDefaultSectionSize(160)
+        self.verticalLayout_3.addWidget(self.tableWidget, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.horizontalLayout_2.addWidget(self.widget_6)
         self.verticalLayout.addWidget(self.widget_2)
         self.verticalLayout.setStretch(0, 2)
         self.verticalLayout.setStretch(1, 8)
@@ -140,6 +160,7 @@ class Ui_ConfigForm(object):
         self.label_config.setText(_translate("ConfigForm", "REGISTRAR"))
         self.cancelar_form.setText(_translate("ConfigForm", "Cancelar"))
         self.guardar_detalle.setText(_translate("ConfigForm", "Guardar"))
+        self.label_registro.setText(_translate("ConfigForm", "lsd"))
 
 
 if __name__ == "__main__":
