@@ -26,9 +26,10 @@ QPushButton {
     background-color: #007BFF;
     color: white;
     border-radius: 8px;
-    padding: 6px 16px;
+    padding: 8px 20px;
     font-weight: bold;
 }
+
 QPushButton:hover {
     background-color: #0056b3;
 }
@@ -139,6 +140,11 @@ QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
       </item>
       <item>
        <widget class="QLabel" name="label_3">
+        <property name="styleSheet">
+         <string notr="true">color:#27ae60;;
+background-color: rgb(255, 255, 255);
+ font-weight: bold;</string>
+        </property>
         <property name="text">
          <string>Fecha actual:</string>
         </property>
@@ -177,7 +183,7 @@ QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
          <string notr="true">border:none;</string>
         </property>
         <property name="text">
-         <string>Por pantalla se muestran por predeterminado los extintores a vencer dentro de 30 días a la fecha actual.</string>
+         <string>Por predeterminado, en pantalla se muestran los extintores a vencer dentro de 30 días a la fecha actual.</string>
         </property>
        </widget>
       </item>
@@ -367,6 +373,19 @@ border: none;</string>
      </column>
      <column>
       <property name="text">
+       <string>Ubicación</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+     <column>
+      <property name="text">
        <string>N° Extintor</string>
       </property>
       <property name="textAlignment">
@@ -529,6 +548,20 @@ border: none;</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="imprimir">
+        <property name="styleSheet">
+         <string notr="true">background-color: #27ae60;</string>
+        </property>
+        <property name="text">
+         <string>Imprimir</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../images/print.png</normaloff>../images/print.png</iconset>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

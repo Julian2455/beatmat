@@ -384,7 +384,6 @@ class Extintor(Base):
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
-
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -393,8 +392,6 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
-
-            # Solo obtenemos los IDs de Recarga que cumplen con el criterio, paginados
             recargas_ids = (
                 db.query(Recarga.id)
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
@@ -405,9 +402,7 @@ class Extintor(Base):
                 .limit(per_page)
                 .all()
             )
-
             return [r.id for r in recargas_ids]
-
         except Exception as e:
             print(f"Error al obtener IDs de vencimientos paginados: {e}")
             return []
@@ -420,7 +415,6 @@ class Extintor(Base):
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
-
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -429,7 +423,6 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
-
             total = (
                 db.query(func.count())
                 .select_from(Recarga)
@@ -438,24 +431,23 @@ class Extintor(Base):
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
                 .scalar()
             )
-
             return total
-
         except Exception as e:
             print(f"Error al contar vencimientos: {e}")
             return 0
         finally:
             db.close()
+    
     @classmethod
     def detalles_vencimientos_por_ids(cls, ids):
         if not ids:
             return []
-
         db = SessionLocal()
         try:
             resultados = (
                 db.query(
                     Cliente.nombre.label("cliente"),
+                    Cliente.direccion.label("ubicacion"),
                     Extintor.numeracion,
                     Marca.nombre.label("marca"),
                     Recarga.nuevo_control_recarga.label("vto_recarga"),

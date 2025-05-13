@@ -25,9 +25,10 @@ class Ui_Vencimientos(object):
 "    background-color: #007BFF;\n"
 "    color: white;\n"
 "    border-radius: 8px;\n"
-"    padding: 6px 16px;\n"
+"    padding: 8px 20px;\n"
 "    font-weight: bold;\n"
 "}\n"
+"\n"
 "QPushButton:hover {\n"
 "    background-color: #0056b3;\n"
 "}\n"
@@ -115,6 +116,9 @@ class Ui_Vencimientos(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.label_3 = QtWidgets.QLabel(parent=self.frame_2)
+        self.label_3.setStyleSheet("color:#27ae60;;\n"
+"background-color: rgb(255, 255, 255);\n"
+" font-weight: bold;")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
         self.dateEdit = QtWidgets.QLabel(parent=self.frame_2)
@@ -168,9 +172,8 @@ class Ui_Vencimientos(object):
         self.pushButton_5.setObjectName("pushButton_5")
         self.horizontalLayout_3.addWidget(self.pushButton_5, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.restaurar = QtWidgets.QPushButton(parent=self.widget_2)
-        self.restaurar.setVisible(False)
         self.restaurar.setStyleSheet("background-color: rgb(255, 0, 0);")
-        self.restaurar.setText("Restaurar")
+        self.restaurar.setText("")
         self.restaurar.setObjectName("restaurar")
         self.horizontalLayout_3.addWidget(self.restaurar)
         self.verticalLayout_7.addWidget(self.widget_2)
@@ -207,7 +210,7 @@ class Ui_Vencimientos(object):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tableWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(6)
+        self.tableWidget.setColumnCount(7)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -217,6 +220,9 @@ class Ui_Vencimientos(object):
         self.tableWidget.setHorizontalHeaderItem(0, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        font = QtGui.QFont()
+        font.setBold(True)
+        item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -230,6 +236,9 @@ class Ui_Vencimientos(object):
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.tableWidget.setHorizontalHeaderItem(5, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.tableWidget.setHorizontalHeaderItem(6, item)
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
@@ -288,6 +297,13 @@ class Ui_Vencimientos(object):
         self.horizontalLayout.addWidget(self.pushButton_4)
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem4)
+        self.imprimir = QtWidgets.QPushButton(parent=self.widget)
+        self.imprimir.setStyleSheet("background-color: #27ae60;")
+        icon4 = QtGui.QIcon()
+        icon4.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.imprimir.setIcon(icon4)
+        self.imprimir.setObjectName("imprimir")
+        self.horizontalLayout.addWidget(self.imprimir)
         self.verticalLayout_7.addWidget(self.widget)
 
         self.retranslateUi(Vencimientos)
@@ -298,7 +314,7 @@ class Ui_Vencimientos(object):
         Vencimientos.setWindowTitle(_translate("Vencimientos", "Form"))
         self.label.setText(_translate("Vencimientos", "EXTINTORES PRÓXIMO A VENCERSE "))
         self.label_3.setText(_translate("Vencimientos", "Fecha actual:"))
-        self.label_5.setText(_translate("Vencimientos", "Por pantalla se muestran por predeterminado los extintores a vencer dentro de 30 días a la fecha actual."))
+        self.label_5.setText(_translate("Vencimientos", "Por predeterminado, en pantalla se muestran los extintores a vencer dentro de 30 días a la fecha actual."))
         self.label_2.setText(_translate("Vencimientos", "Si desea ver por pantalla los extintores que vencen en los días de su preferencia, hagalo en el apartado de abajo, ingresando la diferencia de dias con la fecha actual."))
         self.label_4.setText(_translate("Vencimientos", "Ingrese la cantidad días "))
         self.lineEdit.setPlaceholderText(_translate("Vencimientos", "Solo números"))
@@ -307,15 +323,18 @@ class Ui_Vencimientos(object):
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Vencimientos", "Cliente"))
         item = self.tableWidget.horizontalHeaderItem(1)
-        item.setText(_translate("Vencimientos", "N° Extintor"))
+        item.setText(_translate("Vencimientos", "Ubicación"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Vencimientos", "Marca"))
+        item.setText(_translate("Vencimientos", "N° Extintor"))
         item = self.tableWidget.horizontalHeaderItem(3)
-        item.setText(_translate("Vencimientos", "Vencimiento de recarga"))
+        item.setText(_translate("Vencimientos", "Marca"))
         item = self.tableWidget.horizontalHeaderItem(4)
-        item.setText(_translate("Vencimientos", "Vencimiento de prueba hidráulica"))
+        item.setText(_translate("Vencimientos", "Vencimiento de recarga"))
         item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("Vencimientos", "Vencimiento de prueba hidráulica"))
+        item = self.tableWidget.horizontalHeaderItem(6)
         item.setText(_translate("Vencimientos", "Días restantes"))
+        self.imprimir.setText(_translate("Vencimientos", "Imprimir"))
 
 
 if __name__ == "__main__":
