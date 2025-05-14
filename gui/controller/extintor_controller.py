@@ -111,6 +111,7 @@ class ExtintorController:
         self.details_ui.extintor_id_actual = id_extintor
         self.ui.hide()
         self.details_ui.show()
+        self.details_ui.btnAtras.setIcon(QIcon(get_image("btn-atras")))
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
         self.details_ui.tableWidgetExtintores.setRowCount(0)

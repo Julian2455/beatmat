@@ -13,19 +13,16 @@ class Ui_ExtintorClientsDetails(object):
     def setupUi(self, ExtintorClientsDetails):
         ExtintorClientsDetails.setObjectName("ExtintorClientsDetails")
         ExtintorClientsDetails.resize(803, 455)
-        ExtintorClientsDetails.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
-"}\n"
-"QFrame {\n"
-"    border: 1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"}\n"
-"QLabel {\n"
-"    color: #333333;\n"
+        ExtintorClientsDetails.setStyleSheet("QLabel {\n"
+"    color:rgb(0, 0, 0);\n"
+"    font-weight: bold;\n"
 "}\n"
 "QPushButton {\n"
-"    background-color: #3498db;\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(19, 109, 255);\n"
+"    background-color: rgb(35, 39, 255);\n"
+"    color: rgb(8, 0, 255);\n"
+"    background-color: #007BFF;\n"
 "    color: white;\n"
 "    border: none;\n"
 "    border-radius: 4px;\n"
@@ -38,33 +35,26 @@ class Ui_ExtintorClientsDetails(object):
 "QPushButton:disabled {\n"
 "    background-color: #bdc3c7;\n"
 "}\n"
-"QPushButton#btnCerrarCaja {\n"
-"    background-color: #e74c3c;\n"
-"}\n"
-"QPushButton#btnCerrarCaja:hover {\n"
-"    background-color: #c0392b;\n"
-"}\n"
-"QLineEdit, QComboBox, QDateEdit {\n"
-"    border: 1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"    padding: 3px;\n"
-"    background: white;\n"
-"}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
+"\n"
+"/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
 "    font-weight: bold;\n"
 "}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(ExtintorClientsDetails)
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -76,15 +66,13 @@ class Ui_ExtintorClientsDetails(object):
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnAtras = QtWidgets.QPushButton(parent=self.widget)
         self.btnAtras.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btnAtras.setStyleSheet("color: black; \n"
-"background-color: #f0f0f0; \n"
-"border: 1px solid #a0a0a0; \n"
-"border-radius: 5px; \n"
-"padding: 5px 10px;\n"
-"")
+        self.btnAtras.setStyleSheet("border-radius: 10px;\n"
+"color:#007BFF")
+        self.btnAtras.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../images/flecha-izquierda.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/btn-atras.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnAtras.setIcon(icon)
+        self.btnAtras.setIconSize(QtCore.QSize(35, 35))
         self.btnAtras.setObjectName("btnAtras")
         self.horizontalLayout.addWidget(self.btnAtras)
         spacerItem = QtWidgets.QSpacerItem(546, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -99,30 +87,55 @@ class Ui_ExtintorClientsDetails(object):
         self.widget_2.setObjectName("widget_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.widget_2)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
-        self.label = QtWidgets.QLabel(parent=self.widget_2)
+        self.widget_4 = QtWidgets.QWidget(parent=self.widget_2)
+        self.widget_4.setObjectName("widget_4")
+        self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.widget_4)
+        self.horizontalLayout_2.setObjectName("horizontalLayout_2")
+        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem1)
+        self.pushButton_2 = QtWidgets.QPushButton(parent=self.widget_4)
+        self.pushButton_2.setMaximumSize(QtCore.QSize(30, 30))
+        self.pushButton_2.setStyleSheet("background-color: None;")
+        self.pushButton_2.setText("")
+        icon1 = QtGui.QIcon()
+        icon1.addPixmap(QtGui.QPixmap("../images/plantilla.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton_2.setIcon(icon1)
+        self.pushButton_2.setIconSize(QtCore.QSize(30, 30))
+        self.pushButton_2.setObjectName("pushButton_2")
+        self.horizontalLayout_2.addWidget(self.pushButton_2, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.label = QtWidgets.QLabel(parent=self.widget_4)
         font = QtGui.QFont()
         font.setPointSize(16)
         font.setBold(True)
-        font.setUnderline(True)
+        font.setUnderline(False)
         self.label.setFont(font)
-        self.label.setStyleSheet("color:black;")
+        self.label.setStyleSheet("")
         self.label.setObjectName("label")
-        self.verticalLayout_3.addWidget(self.label, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.labelCliente = QtWidgets.QLabel(parent=self.widget_2)
+        self.horizontalLayout_2.addWidget(self.label, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_2.addItem(spacerItem2)
+        self.verticalLayout_3.addWidget(self.widget_4)
+        self.widget_5 = QtWidgets.QWidget(parent=self.widget_2)
+        self.widget_5.setObjectName("widget_5")
+        self.horizontalLayout_3 = QtWidgets.QHBoxLayout(self.widget_5)
+        self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+        self.labelCliente = QtWidgets.QLabel(parent=self.widget_5)
         font = QtGui.QFont()
-        font.setPointSize(14)
+        font.setPointSize(11)
         font.setBold(True)
-        font.setUnderline(True)
+        font.setItalic(False)
+        font.setUnderline(False)
         self.labelCliente.setFont(font)
         self.labelCliente.setObjectName("labelCliente")
-        self.verticalLayout_3.addWidget(self.labelCliente, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.horizontalLayout_3.addWidget(self.labelCliente)
+        self.verticalLayout_3.addWidget(self.widget_5)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Expanding)
+        self.verticalLayout_3.addItem(spacerItem3)
         self.verticalLayout.addWidget(self.widget_2)
         self.widget_3 = QtWidgets.QWidget(parent=ExtintorClientsDetails)
         self.widget_3.setObjectName("widget_3")
         self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.widget_3)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        spacerItem1 = QtWidgets.QSpacerItem(10, 10, QtWidgets.QSizePolicy.Policy.Minimum, QtWidgets.QSizePolicy.Policy.Preferred)
-        self.verticalLayout_2.addItem(spacerItem1)
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=self.widget_3)
         self.tableWidgetExtintores.setStyleSheet("color:black;")
         self.tableWidgetExtintores.setObjectName("tableWidgetExtintores")
@@ -251,20 +264,22 @@ class Ui_ExtintorClientsDetails(object):
         self.tableWidgetExtintores.horizontalHeader().setDefaultSectionSize(153)
         self.verticalLayout_2.addWidget(self.tableWidgetExtintores)
         self.pushButton = QtWidgets.QPushButton(parent=self.widget_3)
+        self.pushButton.setEnabled(True)
         self.pushButton.setMinimumSize(QtCore.QSize(90, 31))
         font = QtGui.QFont()
         font.setBold(True)
         self.pushButton.setFont(font)
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton.setStyleSheet("background-color: #27ae60;")
-        icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
-        self.pushButton.setIcon(icon1)
+        icon2 = QtGui.QIcon()
+        icon2.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.pushButton.setIcon(icon2)
         self.pushButton.setObjectName("pushButton")
         self.verticalLayout_2.addWidget(self.pushButton, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.verticalLayout.addWidget(self.widget_3)
         self.verticalLayout.setStretch(0, 1)
         self.verticalLayout.setStretch(1, 1)
-        self.verticalLayout.setStretch(2, 8)
+        self.verticalLayout.setStretch(2, 10)
 
         self.retranslateUi(ExtintorClientsDetails)
         QtCore.QMetaObject.connectSlotsByName(ExtintorClientsDetails)
@@ -272,9 +287,8 @@ class Ui_ExtintorClientsDetails(object):
     def retranslateUi(self, ExtintorClientsDetails):
         _translate = QtCore.QCoreApplication.translate
         ExtintorClientsDetails.setWindowTitle(_translate("ExtintorClientsDetails", "Form"))
-        self.btnAtras.setText(_translate("ExtintorClientsDetails", "Atrás"))
-        self.label.setText(_translate("ExtintorClientsDetails", "PLANILLA DE SEGUIMIENTO DE RECARGA DE EXTINTORES"))
-        self.labelCliente.setText(_translate("ExtintorClientsDetails", "Asociado a:"))
+        self.label.setText(_translate("ExtintorClientsDetails", "Planilla de seguimiento - Recarga de extintores"))
+        self.labelCliente.setText(_translate("ExtintorClientsDetails", "CLIENTE:"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(0)
         item.setText(_translate("ExtintorClientsDetails", "N° Extintor"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(1)

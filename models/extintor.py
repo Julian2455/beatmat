@@ -438,6 +438,36 @@ class Extintor(Base):
         finally:
             db.close()
     
+            
+    @classmethod
+    def print_vencimientos(cls, dias):
+        db = SessionLocal()
+        try:
+            fecha_actual = datetime.today().date()
+            fecha_limite = fecha_actual + timedelta(days=dias)
+            subconsulta = (
+                db.query(
+                    Recarga.extintor_id,
+                    func.max(Recarga.nuevo_control_recarga).label("ultima_fecha")
+                )
+                .group_by(Recarga.extintor_id)
+                .subquery()
+            )
+            recargas_ids = (
+                db.query(Recarga.id)
+                .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
+                                (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .order_by(Recarga.nuevo_control_recarga)
+                .all()
+            )
+            return [r.id for r in recargas_ids]
+        except Exception as e:
+            print(f"Error al obtener IDs de vencimientos paginados: {e}")
+            return []
+        finally:
+            db.close()
+    
     @classmethod
     def detalles_vencimientos_por_ids(cls, ids):
         if not ids:

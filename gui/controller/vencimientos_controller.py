@@ -159,10 +159,10 @@ class VencimientosController:
             alignment=0,  
             spaceAfter=6,
             fontName="Helvetica-Bold",
-            textColor=colors.red
+            textColor=colors.black
         )
         dias = dias
-        ids = Extintor.vencimientos_proximos(dias, page=self.pagina_actual, per_page=self.filas_por_pagina)
+        ids = Extintor.print_vencimientos(dias)
         vencimientos_proximos=Extintor.detalles_vencimientos_por_ids(ids)
         encabezados = ["Cliente", "Ubicación", "N° Extintor", "Marca", "Vencimiento de recarga", "Vencimiento de prueba hidráulica", "Días restantes"]
         dato = [encabezados]
@@ -179,7 +179,7 @@ class VencimientosController:
                 dias_restantes
             ]
             dato.append(fila)
-        titulo_vencimiento=Paragraph("EXTINTORES A VENCERSE", estilo_titulo)
+        titulo_vencimiento=Paragraph("PLANILLA DE SEGUIMIENTO - VENCIMIENTOS", estilo_titulo)
         elementos.append(Spacer(10, 40))
         vencimientos_proximos = LongTable(dato, repeatRows=1, hAlign='LEFT')
         vencimientos_proximos.setStyle(TableStyle([
@@ -187,11 +187,12 @@ class VencimientosController:
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.black),
             ('ALIGN', (0, 0), (-1, -1),"CENTER"),
             ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
-            ('FONTSIZE', (0, 0), (-1, -1), 6),
+            ('FONTSIZE', (0, 0), (-1, -1), 9),
             ('BOTTOMPADDING', (0, 0), (-1, 0), 6),
             ('GRID', (0, 0), (-1, -1), 0.25, colors.black),
         ]))
         elementos.append(titulo_vencimiento)
+        elementos.append(Spacer(10, 40))
         elementos.append(vencimientos_proximos)
         elementos.append(Spacer(10, 40))
         pdf.build(elementos)

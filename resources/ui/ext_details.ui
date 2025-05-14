@@ -7,14 +7,56 @@
     <x>0</x>
     <y>0</y>
     <width>989</width>
-    <height>864</height>
+    <height>895</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">color:black;</string>
+   <string notr="true">QLabel {
+	color:rgb(0, 0, 0);
+	font-weight: bold;
+}
+QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(19, 109, 255);
+	background-color: rgb(35, 39, 255);
+	color: rgb(8, 0, 255);
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-height: 25px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
+}
+
+/* QTableWidget / QTableView */
+QHeaderView::section {
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
+    font-weight: bold;
+}
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
+}</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
@@ -25,16 +67,21 @@
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-color: black; 
-background-color: #f0f0f0; 
-border: 1px solid #a0a0a0; 
-border-radius: 5px; 
-padding: 5px 10px;
-</string>
+        <string notr="true">border-radius: 10px;
+color:#007BFF</string>
        </property>
        <property name="text">
-        <string>Atrás</string>
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../images/btn-atras.png</normaloff>../images/btn-atras.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>35</width>
+         <height>35</height>
+        </size>
        </property>
       </widget>
      </item>
@@ -63,7 +110,7 @@ padding: 5px 10px;
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true">color: #333333; text-decoration: underline;</string>
+      <string notr="true">color: black; text-decoration: underline;</string>
      </property>
      <property name="text">
       <string/>
@@ -78,8 +125,7 @@ padding: 5px 10px;
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -110,17 +156,16 @@ padding: 5px 10px;
      </item>
      <item>
       <widget class="QPushButton" name="btnAgregarRecarga">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-color: black; 
-background-color: #f0f0f0; 
-border: 1px solid #a0a0a0; 
-border-radius: 5px; 
-padding: 5px 10px;
-</string>
+        <string notr="true">background-color: rgb(255, 38, 38);</string>
        </property>
        <property name="text">
         <string>Agregar recarga</string>
@@ -128,6 +173,26 @@ padding: 5px 10px;
       </widget>
      </item>
     </layout>
+   </item>
+   <item>
+    <widget class="QLabel" name="labelMantenimiento">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: black; text-decoration: underline;</string>
+     </property>
+     <property name="text">
+      <string>Historial de Mantenimiento</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidgetExtintores">
@@ -243,32 +308,11 @@ padding: 5px 10px;
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labelMantenimiento">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <bold>true</bold>
-       <underline>true</underline>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: #333333; text-decoration: underline;</string>
-     </property>
-     <property name="text">
-      <string>Historial de Mantenimiento</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="labelDetallesMantenimiento">
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-       <weight>50</weight>
-       <bold>false</bold>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -299,17 +343,16 @@ padding: 5px 10px;
      </item>
      <item>
       <widget class="QPushButton" name="btnAgregarTareas">
+       <property name="font">
+        <font>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="cursor">
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">
-color: black; 
-background-color: #f0f0f0; 
-border: 1px solid #a0a0a0; 
-border-radius: 5px; 
-padding: 5px 10px;
-</string>
+        <string notr="true">background-color: rgb(2, 143, 0);</string>
        </property>
        <property name="text">
         <string>Agregar tareas</string>

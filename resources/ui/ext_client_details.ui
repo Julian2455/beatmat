@@ -14,19 +14,16 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    background-color: #f5f5f5;
-    color: #333333;
-}
-QFrame {
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-}
-QLabel {
-    color: #333333;
+   <string notr="true">QLabel {
+	color:rgb(0, 0, 0);
+	font-weight: bold;
 }
 QPushButton {
-    background-color: #3498db;
+	color: rgb(255, 255, 255);
+	background-color: rgb(19, 109, 255);
+	background-color: rgb(35, 39, 255);
+	color: rgb(8, 0, 255);
+    background-color: #007BFF;
     color: white;
     border: none;
     border-radius: 4px;
@@ -39,36 +36,29 @@ QPushButton:hover {
 QPushButton:disabled {
     background-color: #bdc3c7;
 }
-QPushButton#btnCerrarCaja {
-    background-color: #e74c3c;
-}
-QPushButton#btnCerrarCaja:hover {
-    background-color: #c0392b;
-}
-QLineEdit, QComboBox, QDateEdit {
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 3px;
-    background: white;
-}
-QTableWidget {
-    border: 1px solid #cccccc;
-    background-color: white;
-    gridline-color: #dddddd;
-}
+
+/* QTableWidget / QTableView */
 QHeaderView::section {
-    background-color: #e0e0e0;
-    color: #333333;
-    padding: 3px;
-    border: 1px solid #cccccc;
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
     font-weight: bold;
 }
-QTableWidget::item:selected {
-    background-color: #3498db;
-    color: white;
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,8">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,1,10">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -93,19 +83,21 @@ QTableWidget::item:selected {
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: black; 
-background-color: #f0f0f0; 
-border: 1px solid #a0a0a0; 
-border-radius: 5px; 
-padding: 5px 10px;
-</string>
+         <string notr="true">border-radius: 10px;
+color:#007BFF</string>
         </property>
         <property name="text">
-         <string>Atrás</string>
+         <string/>
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../images/flecha-izquierda.png</normaloff>../images/flecha-izquierda.png</iconset>
+          <normaloff>../images/btn-atras.png</normaloff>../images/btn-atras.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>35</width>
+          <height>35</height>
+         </size>
         </property>
        </widget>
       </item>
@@ -135,36 +127,114 @@ padding: 5px 10px;
       </font>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="label">
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-          <bold>true</bold>
-          <underline>true</underline>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:black;</string>
-        </property>
-        <property name="text">
-         <string>PLANILLA DE SEGUIMIENTO DE RECARGA DE EXTINTORES</string>
-        </property>
+      <item>
+       <widget class="QWidget" name="widget_4" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <item>
+          <spacer name="horizontalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QPushButton" name="pushButton_2">
+           <property name="maximumSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color: None;</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../images/plantilla.png</normaloff>../images/plantilla.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>30</width>
+             <height>30</height>
+            </size>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label">
+           <property name="font">
+            <font>
+             <pointsize>16</pointsize>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>Planilla de seguimiento - Recarga de extintores</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="horizontalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </widget>
       </item>
-      <item alignment="Qt::AlignHCenter">
-       <widget class="QLabel" name="labelCliente">
-        <property name="font">
-         <font>
-          <pointsize>14</pointsize>
-          <bold>true</bold>
-          <underline>true</underline>
-         </font>
-        </property>
-        <property name="text">
-         <string>Asociado a:</string>
-        </property>
+      <item>
+       <widget class="QWidget" name="widget_5" native="true">
+        <layout class="QHBoxLayout" name="horizontalLayout_3">
+         <item>
+          <widget class="QLabel" name="labelCliente">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <italic>false</italic>
+             <bold>true</bold>
+             <underline>false</underline>
+            </font>
+           </property>
+           <property name="text">
+            <string>CLIENTE:</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
+      </item>
+      <item>
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </widget>
@@ -172,22 +242,6 @@ padding: 5px 10px;
    <item>
     <widget class="QWidget" name="widget_3" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeType">
-         <enum>QSizePolicy::Preferred</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
       <item>
        <widget class="QTableWidget" name="tableWidgetExtintores">
         <property name="styleSheet">
@@ -460,6 +514,9 @@ padding: 5px 10px;
       </item>
       <item alignment="Qt::AlignRight">
        <widget class="QPushButton" name="pushButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="minimumSize">
          <size>
           <width>90</width>
@@ -470,6 +527,9 @@ padding: 5px 10px;
          <font>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: #27ae60;</string>
