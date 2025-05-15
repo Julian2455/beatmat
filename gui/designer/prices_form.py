@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/prices_form.ui'
+# Form implementation generated from reading ui file 'prices_form.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,61 +12,54 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_FormPrecios(object):
     def setupUi(self, FormPrecios):
         FormPrecios.setObjectName("FormPrecios")
-        FormPrecios.resize(800, 500)
-        FormPrecios.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
-"}\n"
-"QFrame {\n"
-"    border: 1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"}\n"
-"QLabel {\n"
-"    color: #333333;\n"
-"}\n"
-"QPushButton {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"    border: none;\n"
-"    border-radius: 4px;\n"
-"    padding: 3px 8px;\n"
-"    min-height: 25px;\n"
-"}\n"
-"QPushButton:hover {\n"
-"    background-color: #2980b9;\n"
-"}\n"
-"QPushButton:disabled {\n"
-"    background-color: #bdc3c7;\n"
-"}\n"
-"QLineEdit, QComboBox {\n"
-"    border: 1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"    padding: 3px;\n"
-"    background: white;\n"
-"}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
-"QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
-"    font-weight: bold;\n"
-"}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
+        FormPrecios.resize(800, 501)
+        FormPrecios.setStyleSheet("QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"\n"
+" QPushButton {\n"
+"     border: none;\n"
+"     padding: 8px 16px;\n"
+"     border-radius: 5px;\n"
+"     font-weight: bold;\n"
+"   }\n"
+"   QPushButton#btnCancelar {\n"
+"     background-color: #f44336;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#btnCancelar:hover {\n"
+"     background-color: rgb(255, 88, 99);\n"
+"   }\n"
+"   QPushButton#btnGuardar {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#btnGuardar:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }\n"
+"QScrollArea {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(FormPrecios)
-        self.verticalLayout.setContentsMargins(6, 6, 6, 6)
-        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setSpacing(0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.frameHeader = QtWidgets.QFrame(parent=FormPrecios)
         self.frameHeader.setMinimumSize(QtCore.QSize(0, 50))
         self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frameHeader.setStyleSheet("background: #2C3E50;\n"
+"border-bottom: 5px solid #007BFF;")
         self.frameHeader.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameHeader.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameHeader.setObjectName("frameHeader")
@@ -79,6 +72,8 @@ class Ui_FormPrecios(object):
         font.setPointSize(12)
         font.setBold(True)
         self.labelTitle.setFont(font)
+        self.labelTitle.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border:none;")
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_1.addWidget(self.labelTitle)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -156,7 +151,7 @@ class Ui_FormPrecios(object):
         self.scrollAreaRecargas.setWidgetResizable(True)
         self.scrollAreaRecargas.setObjectName("scrollAreaRecargas")
         self.scrollAreaWidgetContentsRecargas = QtWidgets.QWidget()
-        self.scrollAreaWidgetContentsRecargas.setGeometry(QtCore.QRect(0, 0, 374, 307))
+        self.scrollAreaWidgetContentsRecargas.setGeometry(QtCore.QRect(0, 0, 378, 331))
         self.scrollAreaWidgetContentsRecargas.setObjectName("scrollAreaWidgetContentsRecargas")
         self.verticalLayoutRecargas = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContentsRecargas)
         self.verticalLayoutRecargas.setObjectName("verticalLayoutRecargas")
@@ -187,7 +182,7 @@ class Ui_FormPrecios(object):
         self.scrollAreaNuevos.setWidgetResizable(True)
         self.scrollAreaNuevos.setObjectName("scrollAreaNuevos")
         self.scrollAreaWidgetContentsNuevos = QtWidgets.QWidget()
-        self.scrollAreaWidgetContentsNuevos.setGeometry(QtCore.QRect(0, 0, 374, 307))
+        self.scrollAreaWidgetContentsNuevos.setGeometry(QtCore.QRect(0, 0, 378, 331))
         self.scrollAreaWidgetContentsNuevos.setObjectName("scrollAreaWidgetContentsNuevos")
         self.verticalLayoutNuevos = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContentsNuevos)
         self.verticalLayoutNuevos.setObjectName("verticalLayoutNuevos")
@@ -200,18 +195,22 @@ class Ui_FormPrecios(object):
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_6.addItem(spacerItem2)
         self.btnGuardar = QtWidgets.QPushButton(parent=FormPrecios)
-        self.btnGuardar.setMinimumSize(QtCore.QSize(100, 31))
+        self.btnGuardar.setMinimumSize(QtCore.QSize(100, 0))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnGuardar.setFont(font)
+        self.btnGuardar.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnGuardar.setObjectName("btnGuardar")
         self.horizontalLayout_6.addWidget(self.btnGuardar)
+        spacerItem3 = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_6.addItem(spacerItem3)
         self.btnCancelar = QtWidgets.QPushButton(parent=FormPrecios)
-        self.btnCancelar.setMinimumSize(QtCore.QSize(100, 31))
+        self.btnCancelar.setMinimumSize(QtCore.QSize(100, 0))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnCancelar.setFont(font)
-        self.btnCancelar.setStyleSheet("background-color: rgb(237, 51, 59);")
+        self.btnCancelar.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnCancelar.setStyleSheet("")
         self.btnCancelar.setObjectName("btnCancelar")
         self.horizontalLayout_6.addWidget(self.btnCancelar)
         self.verticalLayout.addLayout(self.horizontalLayout_6)

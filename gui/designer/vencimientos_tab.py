@@ -20,18 +20,25 @@ class Ui_Vencimientos(object):
 "    font-size: 14px;\n"
 "}\n"
 "\n"
-"/* Botón \"Nuevo cliente\" */\n"
 "QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(19, 109, 255);\n"
+"    background-color: rgb(35, 39, 255);\n"
+"    color: rgb(8, 0, 255);\n"
 "    background-color: #007BFF;\n"
 "    color: white;\n"
-"    border-radius: 8px;\n"
-"    padding: 8px 20px;\n"
-"    font-weight: bold;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 8px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
 "}\n"
 "\n"
-"QPushButton:hover {\n"
-"    background-color: #0056b3;\n"
-"}\n"
 "\n"
 "/* QLineEdit (buscador) */\n"
 "QLineEdit {\n"
@@ -116,9 +123,13 @@ class Ui_Vencimientos(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.label_3 = QtWidgets.QLabel(parent=self.frame_2)
+        self.label_3.setMaximumSize(QtCore.QSize(35, 35))
         self.label_3.setStyleSheet("color:#27ae60;;\n"
 "background-color: rgb(255, 255, 255);\n"
 " font-weight: bold;")
+        self.label_3.setText("")
+        self.label_3.setPixmap(QtGui.QPixmap("../images/calendario.png"))
+        self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
         self.dateEdit = QtWidgets.QLabel(parent=self.frame_2)
@@ -169,11 +180,18 @@ class Ui_Vencimientos(object):
         self.lineEdit.setObjectName("lineEdit")
         self.horizontalLayout_3.addWidget(self.lineEdit, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.pushButton_5 = QtWidgets.QPushButton(parent=self.widget_2)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.pushButton_5.setFont(font)
+        self.pushButton_5.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.pushButton_5.setObjectName("pushButton_5")
         self.horizontalLayout_3.addWidget(self.pushButton_5, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.restaurar = QtWidgets.QPushButton(parent=self.widget_2)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.restaurar.setFont(font)
+        self.restaurar.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.restaurar.setStyleSheet("background-color: rgb(255, 0, 0);")
-        self.restaurar.setText("")
         self.restaurar.setObjectName("restaurar")
         self.horizontalLayout_3.addWidget(self.restaurar)
         self.verticalLayout_7.addWidget(self.widget_2)
@@ -298,7 +316,12 @@ class Ui_Vencimientos(object):
         spacerItem4 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem4)
         self.imprimir = QtWidgets.QPushButton(parent=self.widget)
-        self.imprimir.setStyleSheet("background-color: #27ae60;")
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.imprimir.setFont(font)
+        self.imprimir.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.imprimir.setStyleSheet("background-color: #27ae60;\n"
+"")
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.imprimir.setIcon(icon4)
@@ -313,12 +336,12 @@ class Ui_Vencimientos(object):
         _translate = QtCore.QCoreApplication.translate
         Vencimientos.setWindowTitle(_translate("Vencimientos", "Form"))
         self.label.setText(_translate("Vencimientos", "EXTINTORES PRÓXIMO A VENCERSE "))
-        self.label_3.setText(_translate("Vencimientos", "Fecha actual:"))
         self.label_5.setText(_translate("Vencimientos", "Por predeterminado, en pantalla se muestran los extintores a vencer dentro de 30 días a la fecha actual."))
         self.label_2.setText(_translate("Vencimientos", "Si desea ver por pantalla los extintores que vencen en los días de su preferencia, hagalo en el apartado de abajo, ingresando la diferencia de dias con la fecha actual."))
         self.label_4.setText(_translate("Vencimientos", "Ingrese la cantidad días "))
         self.lineEdit.setPlaceholderText(_translate("Vencimientos", "Solo números"))
         self.pushButton_5.setText(_translate("Vencimientos", "Calcular"))
+        self.restaurar.setText(_translate("Vencimientos", "Restaurar"))
         self.text_dias.setText(_translate("Vencimientos", " ¡Los extintores mostrados en pantalla se vencen en los proximos 30 días! ⚠️"))
         item = self.tableWidget.horizontalHeaderItem(0)
         item.setText(_translate("Vencimientos", "Cliente"))

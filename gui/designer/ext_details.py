@@ -12,22 +12,21 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_ExtintorDetails(object):
     def setupUi(self, ExtintorDetails):
         ExtintorDetails.setObjectName("ExtintorDetails")
-        ExtintorDetails.resize(989, 895)
-        ExtintorDetails.setStyleSheet("QLabel {\n"
+        ExtintorDetails.resize(754, 889)
+        ExtintorDetails.setStyleSheet("QWidget{\n"
+"border: none;\n"
+"}\n"
+"QLabel {\n"
 "    color:rgb(0, 0, 0);\n"
 "    font-weight: bold;\n"
 "}\n"
 "QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
-"    background-color: rgb(19, 109, 255);\n"
-"    background-color: rgb(35, 39, 255);\n"
 "    color: rgb(8, 0, 255);\n"
 "    background-color: #007BFF;\n"
 "    color: white;\n"
-"    border: none;\n"
 "    border-radius: 4px;\n"
-"    padding: 5px 10px;\n"
-"    min-height: 25px;\n"
+"    padding: 6px\n"
 "}\n"
 "QPushButton:hover {\n"
 "    background-color: #2980b9;\n"
@@ -50,20 +49,30 @@ class Ui_ExtintorDetails(object):
 "    gridline-color: #ccc;\n"
 "    alternate-background-color: #f2f2f2;\n"
 "}\n"
-"QTableWidget::item {\n"
-"    padding: 6px;\n"
-"}\n"
-"QTableWidget::item:hover {\n"
-"    background-color: #f0f8ff;\n"
-"}")
+"")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(ExtintorDetails)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.btnAtras = QtWidgets.QPushButton(parent=ExtintorDetails)
         self.btnAtras.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btnAtras.setStyleSheet("border-radius: 10px;\n"
-"color:#007BFF")
+        self.btnAtras.setStyleSheet("\n"
+"    QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: #007BF;\n"
+"    color: rgb(8, 0, 255);\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 10px;\n"
+"    padding: 5px 10px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"}")
         self.btnAtras.setText("")
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("../images/btn-atras.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
@@ -103,20 +112,27 @@ class Ui_ExtintorDetails(object):
         font.setBold(True)
         self.btnAgregarRecarga.setFont(font)
         self.btnAgregarRecarga.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btnAgregarRecarga.setStyleSheet("background-color: rgb(255, 38, 38);")
+        self.btnAgregarRecarga.setStyleSheet("\n"
+"\n"
+"    QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(255, 38, 38);\n"
+"    color: rgb(8, 0, 255);\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 5px 10px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"}")
         self.btnAgregarRecarga.setObjectName("btnAgregarRecarga")
         self.horizontalLayout_2.addWidget(self.btnAgregarRecarga)
         self.verticalLayout_7.addLayout(self.horizontalLayout_2)
-        self.labelMantenimiento = QtWidgets.QLabel(parent=ExtintorDetails)
-        font = QtGui.QFont()
-        font.setPointSize(12)
-        font.setBold(True)
-        font.setUnderline(True)
-        self.labelMantenimiento.setFont(font)
-        self.labelMantenimiento.setStyleSheet("color: black; text-decoration: underline;")
-        self.labelMantenimiento.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.labelMantenimiento.setObjectName("labelMantenimiento")
-        self.verticalLayout_7.addWidget(self.labelMantenimiento)
         self.tableWidgetExtintores = QtWidgets.QTableWidget(parent=ExtintorDetails)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -166,6 +182,16 @@ class Ui_ExtintorDetails(object):
         self.tableWidgetExtintores.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidgetExtintores.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_7.addWidget(self.tableWidgetExtintores)
+        self.labelMantenimiento = QtWidgets.QLabel(parent=ExtintorDetails)
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setUnderline(True)
+        self.labelMantenimiento.setFont(font)
+        self.labelMantenimiento.setStyleSheet("color: black; text-decoration: underline;")
+        self.labelMantenimiento.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelMantenimiento.setObjectName("labelMantenimiento")
+        self.verticalLayout_7.addWidget(self.labelMantenimiento)
         self.labelDetallesMantenimiento = QtWidgets.QLabel(parent=ExtintorDetails)
         font = QtGui.QFont()
         font.setPointSize(10)
@@ -184,7 +210,23 @@ class Ui_ExtintorDetails(object):
         font.setBold(True)
         self.btnAgregarTareas.setFont(font)
         self.btnAgregarTareas.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-        self.btnAgregarTareas.setStyleSheet("background-color: rgb(2, 143, 0);")
+        self.btnAgregarTareas.setStyleSheet("\n"
+"    QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(2, 143, 0);\n"
+"    color: rgb(8, 0, 255);\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 5px 10px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
+"}")
         self.btnAgregarTareas.setObjectName("btnAgregarTareas")
         self.horizontalLayout_3.addWidget(self.btnAgregarTareas)
         self.verticalLayout_7.addLayout(self.horizontalLayout_3)
@@ -292,7 +334,6 @@ class Ui_ExtintorDetails(object):
         ExtintorDetails.setWindowTitle(_translate("ExtintorDetails", "Form"))
         self.labelDetallesExtintores.setText(_translate("ExtintorDetails", "Historial de recargas"))
         self.btnAgregarRecarga.setText(_translate("ExtintorDetails", "Agregar recarga"))
-        self.labelMantenimiento.setText(_translate("ExtintorDetails", "Historial de Mantenimiento"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(0)
         item.setText(_translate("ExtintorDetails", "Fecha vencida de control"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(1)
@@ -301,6 +342,7 @@ class Ui_ExtintorDetails(object):
         item.setText(_translate("ExtintorDetails", "Vencimiento de PH"))
         item = self.tableWidgetExtintores.horizontalHeaderItem(3)
         item.setText(_translate("ExtintorDetails", "Fecha de fabricacion"))
+        self.labelMantenimiento.setText(_translate("ExtintorDetails", "Historial de Mantenimiento"))
         self.labelDetallesMantenimiento.setText(_translate("ExtintorDetails", "Registro de Servicios y Revisiones"))
         self.btnAgregarTareas.setText(_translate("ExtintorDetails", "Agregar tareas"))
         item = self.tableWidgetTareas.verticalHeaderItem(0)
@@ -331,13 +373,3 @@ class Ui_ExtintorDetails(object):
         item.setText(_translate("ExtintorDetails", "Otro"))
         item = self.tableWidgetTareas.verticalHeaderItem(13)
         item.setText(_translate("ExtintorDetails", "Observaciones"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    ExtintorDetails = QtWidgets.QWidget()
-    ui = Ui_ExtintorDetails()
-    ui.setupUi(ExtintorDetails)
-    ExtintorDetails.show()
-    sys.exit(app.exec())

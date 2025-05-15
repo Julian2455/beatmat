@@ -13,7 +13,14 @@ class Ui_Extintor(object):
     def setupUi(self, Extintor):
         Extintor.setObjectName("Extintor")
         Extintor.resize(810, 513)
-        Extintor.setStyleSheet("QPushButton {\n"
+        Extintor.setStyleSheet("/* Fondo general */\n"
+"QMainWindow {\n"
+"    background-color: #f9f9f9;\n"
+"    font-family: \"Poppins\", \"Segoe UI\", sans-serif;\n"
+"    font-size: 14px;\n"
+"}\n"
+"\n"
+"QPushButton {\n"
 "    background-color: #007BFF;\n"
 "    color: white;\n"
 "    border-radius: 8px;\n"
@@ -34,12 +41,17 @@ class Ui_Extintor(object):
 "QLineEdit:focus {\n"
 "    border-color: #007BFF;\n"
 "}\n"
-" QComboBox {\n"
-"    border: 1px solid #ddd;\n"
-"    border-radius: 10px;\n"
-"    padding: 2px 8px;\n"
-"    background-color: white;\n"
-"}\n"
+"QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
 "/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
 "    background-color: #ececec;\n"
@@ -54,11 +66,9 @@ class Ui_Extintor(object):
 "    gridline-color: #ccc;\n"
 "    alternate-background-color: #f2f2f2;\n"
 "}\n"
-"QTableWidget::item {\n"
-"    padding: 6px;\n"
-"}\n"
-"QTableWidget::item:hover {\n"
-"    background-color: #f0f8ff;\n"
+"\n"
+"QTableWidget{\n"
+"    border: none;\n"
 "}\n"
 "\n"
 "/* QTabWidget (barra de navegación) */\n"
@@ -94,6 +104,8 @@ class Ui_Extintor(object):
 "    font-weight: bold;\n"
 "}")
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(Extintor)
+        self.verticalLayout_7.setContentsMargins(9, 9, 9, 9)
+        self.verticalLayout_7.setSpacing(6)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.frame_2 = QtWidgets.QFrame(parent=Extintor)
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
@@ -117,25 +129,19 @@ class Ui_Extintor(object):
         self.horizontalLayout_3.addWidget(self.lineEdit)
         self.comboBox_marca = QtWidgets.QComboBox(parent=self.frame_2)
         self.comboBox_marca.setMinimumSize(QtCore.QSize(120, 0))
-        self.comboBox_marca.setStyleSheet("border: 2px solid;\n"
-"border-radius: 5px;\n"
-"color:black")
+        self.comboBox_marca.setStyleSheet("")
         self.comboBox_marca.setObjectName("comboBox_marca")
         self.comboBox_marca.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_marca)
         self.comboBox_tipo = QtWidgets.QComboBox(parent=self.frame_2)
         self.comboBox_tipo.setMinimumSize(QtCore.QSize(120, 0))
-        self.comboBox_tipo.setStyleSheet("border: 2px solid;\n"
-"border-radius: 5px;\n"
-"color:black")
+        self.comboBox_tipo.setStyleSheet("")
         self.comboBox_tipo.setObjectName("comboBox_tipo")
         self.comboBox_tipo.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_tipo)
         self.comboBox_capacidad = QtWidgets.QComboBox(parent=self.frame_2)
         self.comboBox_capacidad.setMinimumSize(QtCore.QSize(120, 0))
-        self.comboBox_capacidad.setStyleSheet("border: 2px solid;\n"
-"border-radius: 5px;\n"
-"color:black")
+        self.comboBox_capacidad.setStyleSheet("")
         self.comboBox_capacidad.setObjectName("comboBox_capacidad")
         self.comboBox_capacidad.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_capacidad)
@@ -182,9 +188,7 @@ class Ui_Extintor(object):
         font = QtGui.QFont()
         font.setKerning(True)
         self.tableWidget.setFont(font)
-        self.tableWidget.setStyleSheet("color: rgb(0, 0, 0);\n"
-"border:none;\n"
-"")
+        self.tableWidget.setStyleSheet("")
         self.tableWidget.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.tableWidget.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tableWidget.setAutoScroll(True)
@@ -301,22 +305,12 @@ class Ui_Extintor(object):
         self.btnRestaurarFiltros.setText(_translate("Extintor", "Restaurar filtros"))
         self.pushButton_5.setText(_translate("Extintor", "Nuevo extintor"))
         item = self.tableWidget.horizontalHeaderItem(0)
-        item.setText(_translate("Extintor", "Numeracion"))
+        item.setText(_translate("Extintor", "Numeración"))
         item = self.tableWidget.horizontalHeaderItem(1)
         item.setText(_translate("Extintor", "Marca"))
         item = self.tableWidget.horizontalHeaderItem(2)
-        item.setText(_translate("Extintor", "Ubicacion"))
+        item.setText(_translate("Extintor", "Ubicación"))
         item = self.tableWidget.horizontalHeaderItem(3)
         item.setText(_translate("Extintor", "Tipo"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Extintor", "Capacidad"))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Extintor = QtWidgets.QWidget()
-    ui = Ui_Extintor()
-    ui.setupUi(Extintor)
-    Extintor.show()
-    sys.exit(app.exec())

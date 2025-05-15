@@ -34,7 +34,8 @@ IMAGE_MAP = {
     "extintor-de-incendios(1)": resource_path("resources/images/extintor-de-incendios(1)"),
     "config2": resource_path("resources/images/config2.png"),
     "btn-atras": resource_path("resources/images/btn-atras.png"),
-    "plantilla": resource_path("resources/images/plantilla.png")
+    "plantilla": resource_path("resources/images/plantilla.png"),
+    "calendario": resource_path("resources/images/calendario.png")
 }
 
 def get_image(name):

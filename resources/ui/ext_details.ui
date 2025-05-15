@@ -6,29 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>989</width>
-    <height>895</height>
+    <width>754</width>
+    <height>889</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QLabel {
+   <string notr="true">QWidget{
+border: none;
+}
+QLabel {
 	color:rgb(0, 0, 0);
 	font-weight: bold;
 }
 QPushButton {
 	color: rgb(255, 255, 255);
-	background-color: rgb(19, 109, 255);
-	background-color: rgb(35, 39, 255);
 	color: rgb(8, 0, 255);
     background-color: #007BFF;
     color: white;
-    border: none;
     border-radius: 4px;
-    padding: 5px 10px;
-    min-height: 25px;
+	padding: 6px
 }
 QPushButton:hover {
     background-color: #2980b9;
@@ -51,12 +50,7 @@ QTableWidget {
     gridline-color: #ccc;
     alternate-background-color: #f2f2f2;
 }
-QTableWidget::item {
-    padding: 6px;
-}
-QTableWidget::item:hover {
-    background-color: #f0f8ff;
-}</string>
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_7">
    <item>
@@ -67,8 +61,23 @@ QTableWidget::item:hover {
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">border-radius: 10px;
-color:#007BFF</string>
+        <string notr="true">
+	QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: #007BF;
+	color: rgb(8, 0, 255);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    min-height: 25px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
+}</string>
        </property>
        <property name="text">
         <string/>
@@ -165,7 +174,24 @@ color:#007BFF</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 38, 38);</string>
+        <string notr="true">
+
+	QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(255, 38, 38);
+	color: rgb(8, 0, 255);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-height: 25px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
+}</string>
        </property>
        <property name="text">
         <string>Agregar recarga</string>
@@ -173,26 +199,6 @@ color:#007BFF</string>
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="labelMantenimiento">
-     <property name="font">
-      <font>
-       <pointsize>12</pointsize>
-       <bold>true</bold>
-       <underline>true</underline>
-      </font>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">color: black; text-decoration: underline;</string>
-     </property>
-     <property name="text">
-      <string>Historial de Mantenimiento</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
    </item>
    <item>
     <widget class="QTableWidget" name="tableWidgetExtintores">
@@ -308,6 +314,26 @@ color:#007BFF</string>
     </widget>
    </item>
    <item>
+    <widget class="QLabel" name="labelMantenimiento">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+       <underline>true</underline>
+      </font>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">color: black; text-decoration: underline;</string>
+     </property>
+     <property name="text">
+      <string>Historial de Mantenimiento</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="labelDetallesMantenimiento">
      <property name="font">
       <font>
@@ -352,7 +378,23 @@ color:#007BFF</string>
         <cursorShape>PointingHandCursor</cursorShape>
        </property>
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(2, 143, 0);</string>
+        <string notr="true">
+	QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(2, 143, 0);
+	color: rgb(8, 0, 255);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    min-height: 25px;
+}
+QPushButton:hover {
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
+}</string>
        </property>
        <property name="text">
         <string>Agregar tareas</string>

@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox
-from PyQt6.QtGui import QIcon, QIntValidator, QColor, QFont
+from PyQt6.QtGui import QIcon, QIntValidator, QColor, QFont, QPixmap
 from PyQt6.QtCore import QDate
 from models import *
 from utils import get_image
@@ -29,6 +29,7 @@ class VencimientosController:
         self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
         self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
         self.ui.imprimir.setIcon(QIcon(get_image("print")))
+        self.ui.label_3.setPixmap(QPixmap(get_image("calendario")))
         self.ui.restaurar.clicked.connect(self.restaurar_cuenta)
         self.ui.pushButton_5.clicked.connect(self.calcular_vencimientos_dias)
         self.ui.lineEdit.setValidator(QIntValidator(1,9999))
