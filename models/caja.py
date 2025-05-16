@@ -32,8 +32,10 @@ class Caja(Base):
         try:
             db.add(datos)
             db.flush()
+            extintores_ids=set()
             from .detcaja import DetCaja
             for extintor_id in set(list(totales.keys()) + list(recargas.keys()) + list(nuevos.keys()) + list(adicionales.keys())):
+                extintores_ids.add(extintor_id)
                 recarga_valor = recargas.get(extintor_id, None)
                 nuevo_valor = nuevos.get(extintor_id, None)
                 extra_valor = adicionales.get(extintor_id, None)
@@ -50,6 +52,7 @@ class Caja(Base):
             db.commit()
             from .extintor import Extintor
             Extintor.actualizar_nuevo(nuevos)
+            Extintor.actualizar_impreso(extintores_ids)
             return True
         except Exception as e:
             print(f"Error al confirmar compra: {e}")

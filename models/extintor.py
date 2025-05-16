@@ -18,6 +18,7 @@ class Extintor(Base):
     tipo_id=Column(Integer, ForeignKey('tipo.id'), nullable=False)
     capacidad_id=Column(Integer, ForeignKey('capacidad.id'), nullable=False)
     nuevo = Column(Boolean, nullable=True)
+    impreso=Column(Boolean, nullable=False)
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
@@ -85,7 +86,7 @@ class Extintor(Base):
     
     @classmethod
     def registrar(cls,numeracion,marca,ubicacion,tipo,capacidad):
-        datos=cls(numeracion=numeracion,marca_id=marca,ubicacion=ubicacion,tipo_id=tipo,capacidad_id=capacidad,nuevo=True)
+        datos=cls(numeracion=numeracion,marca_id=marca,ubicacion=ubicacion,tipo_id=tipo,capacidad_id=capacidad,nuevo=True,impreso=True)
         try:
             db = SessionLocal()
             db.add(datos)
@@ -526,6 +527,23 @@ class Extintor(Base):
                 extintor = db.query(cls).filter_by(id=id_extintor).first()
                 if extintor:
                     extintor.nuevo=False 
+            db.commit()
+            return True
+        except Exception as e:
+            print(f"Error al actualizar extintor: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def actualizar_impreso(cls, extintor_ids):
+        try:
+            db = SessionLocal()
+            for id_extintor in extintor_ids:
+                extintor = db.query(cls).filter_by(id=id_extintor).first()
+                if extintor:
+                    extintor.impreso=False 
             db.commit()
             return True
         except Exception as e:
