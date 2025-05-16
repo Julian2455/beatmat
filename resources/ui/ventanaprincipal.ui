@@ -77,6 +77,7 @@ background-color: rgb(191, 191, 191);
          <property name="font">
           <font>
            <pointsize>10</pointsize>
+           <weight>50</weight>
            <bold>false</bold>
           </font>
          </property>
@@ -104,7 +105,7 @@ background-color: rgb(191, 191, 191);
          <widget class="QWidget" name="Matafuegos">
           <attribute name="icon">
            <iconset>
-            <normaloff>../images/extintor-de-incendios (1).png</normaloff>../images/extintor-de-incendios (1).png</iconset>
+            <normaloff>../images/extintor-de-incendios(1).png</normaloff>../images/extintor-de-incendios(1).png</iconset>
           </attribute>
           <attribute name="title">
            <string>Matafuegos</string>
@@ -117,6 +118,15 @@ background-color: rgb(191, 191, 191);
           </attribute>
           <attribute name="title">
            <string>Caja</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="Historial">
+          <attribute name="icon">
+           <iconset>
+            <normaloff>../images/clock_history.png</normaloff>../images/clock_history.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string>Historial</string>
           </attribute>
          </widget>
          <widget class="QWidget" name="Reportes">

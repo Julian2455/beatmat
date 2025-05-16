@@ -11,6 +11,7 @@ IMAGE_MAP = {
     "buscar": resource_path("resources/images/buscar.png"),
     "busqueda": resource_path("resources/images/busqueda.png"),
     "caja_registradora": resource_path("resources/images/caja-registradora.png"),
+    "historial":resource_path("resources/images/clock_history.png"),
     "estadisticas": resource_path("resources/images/estadisticas.png"),
     "extintor_de_incendios": resource_path("resources/images/extintor-de-incendios.png"),
     "extintor": resource_path("resources/images/extintor.png"),

@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
-from sqlalchemy.orm import relationship,sessionmaker
+from sqlalchemy.orm import relationship,sessionmaker,joinedload
 from db import Base, engine, SessionLocal
+from datetime import date
 from .cliente import Cliente
 
 class Caja(Base):
@@ -57,3 +58,84 @@ class Caja(Base):
         finally:
             db.close()
     
+    @classmethod
+    def show_all(cls, page=1, per_page=10):
+        db = SessionLocal()
+        try:
+            ventas = (
+                db.query(
+                    cls, 
+                    Cliente.nombre.label('nombre')
+                )
+                .join(Cliente, cls.cliente_id == Cliente.id)
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            return ventas
+        finally:
+            db.close()
+    
+    @classmethod
+    def contar_ventas(cls):
+        db = SessionLocal()
+        total = db.query(cls).count()
+        db.close()
+        return total
+    
+    @classmethod
+    def obtener_fecha_minima(cls):
+        db = SessionLocal()
+        try:
+            resultado = db.query(cls.fecha).order_by(cls.fecha.asc()).first()
+            if resultado:
+                return resultado[0]
+            else:
+                return date(2000, 1, 1) 
+        finally:
+            db.close()
+    
+    @classmethod
+    def buscar(cls, cliente, fecha, page=1, per_page=10):
+        try:
+            db = SessionLocal()
+            query = (
+                db.query(
+                    cls,
+                    Cliente.nombre.label('nombre_cliente')
+                )
+                .join(Cliente, cls.cliente_id == Cliente.id)
+            )
+            if cliente:
+                query = query.filter(cls.cliente_id == cliente)
+            if fecha:
+                query = query.filter(cls.fecha == fecha)
+            resultado = (
+                query
+                .offset((page - 1) * per_page)
+                .limit(per_page)
+                .all()
+            )
+            return resultado
+        except Exception as e:
+            print(f"Error al buscar: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def contar_buscar(cls, cliente, fecha):
+        try:
+            db = SessionLocal()
+            query = db.query(cls)
+            if cliente:
+                query = query.filter(cls.cliente_id == cliente)
+            if fecha:
+                query = query.filter(cls.fecha == fecha)
+            total = query.count()
+            return total
+        except Exception as e:
+            print(f"Error al contar resultados: {e}")
+            return 0
+        finally:
+            db.close()

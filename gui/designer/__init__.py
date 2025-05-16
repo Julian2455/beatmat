@@ -12,3 +12,4 @@ from .caja_tab import Ui_Caja
 from .vencimientos_tab import Ui_Vencimientos
 from .prices_form import Ui_FormPrecios
 from. combobox_form import Ui_ConfigForm
+from .hist_tab import Ui_HistorialCompras
