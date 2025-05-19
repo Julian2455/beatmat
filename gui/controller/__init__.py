@@ -10,4 +10,5 @@ from .caja_form_controller import CajaFormController
 from .prices_controller import PricesController
 from .mtc_controller import MtcController
 from .hist_controller import HistorialController
+from .hist_det_controller import HistDetController
 from .main_controller import MainController

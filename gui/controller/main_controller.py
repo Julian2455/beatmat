@@ -18,8 +18,8 @@ class MainController:
         self.init_clientes_tab()
         self.init_extintores_tab()
         self.init_mtc_bar()
-        self.init_caja_tab()
         self.init_history_tab()
+        self.init_caja_tab()
         self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
@@ -100,7 +100,7 @@ class MainController:
     def init_caja_tab(self):
         # Configurar la tab de caja
         self.caja_tab = CajaUi()
-        self.caja_controller = CajaController(self.caja_tab)
+        self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller)
         self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Caja.layout().addWidget(self.caja_tab)
         
@@ -122,6 +122,11 @@ class MainController:
         self.historial_controller = HistorialController(self.historial_tab)
         self.ui.Historial.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Historial.layout().addWidget(self.historial_tab)
+
+        # Configurar la ventana para detalles de compra
+        self.historial_det = HistorialDetUi()
+        self.hist_det_controller = HistDetController(self.historial_det)
+        self.historial_tab.tableHistorialCompras.doubleClicked.connect(self.mostrar_detalle_historial)
     
     def init_prices_bar(self):
         # Instancia de PreciosUi y conexion con el formulario
@@ -188,6 +193,12 @@ class MainController:
             self.agregar_extintor_controller.reiniciar(cliente_id)    
         self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)        
         self.agregar_extintor.mostrar_form()
+    
+    def mostrar_detalle_historial(self):
+        id_compra = self.historial_controller.mostrar_detalles_compra()
+        if id_compra is not None:
+            self.hist_det_controller.cargar_detalles(id_compra)
+            self.historial_det.mostrar_form()
     
     def mostrar_form_precios(self):
         self.precios_ui.mostrar_form()

@@ -142,3 +142,74 @@ class Caja(Base):
             return 0
         finally:
             db.close()
+
+    @classmethod
+    def obtener_detalle_venta(cls, id_caja):
+        from .detcaja import DetCaja
+        from .extintor import Extintor
+        from .lists import Capacidad, Marca, Tipo
+        db = SessionLocal()
+        try:
+            caja_info = (
+                db.query(
+                    cls.id,
+                    cls.fecha,
+                    cls.cobro,
+                    cls.adeudado,
+                    cls.total,
+                    cls.descripcion,
+                    Cliente.nombre.label('cliente_nombre'),
+                    Cliente.direccion.label('cliente_direccion'),
+                    Cliente.telefono.label('cliente_telefono')
+                )
+                .join(Cliente, cls.cliente_id == Cliente.id)
+                .filter(cls.id == id_caja)
+                .first()
+            )
+            detalles = (
+                db.query(
+                    DetCaja.recarga,
+                    DetCaja.nuevo,
+                    DetCaja.extras,
+                    DetCaja.total,
+                    Extintor.numeracion,
+                    Marca.nombre.label('marca_nombre'),
+                    Capacidad.nombre.label('capacidad_nombre'),
+                    Tipo.nombre.label('tipo_nombre')
+                )
+                .join(Extintor, DetCaja.id_extintor == Extintor.id)
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .filter(DetCaja.id_caja == id_caja)
+                .all()
+            )
+            resultado = {
+                'id': caja_info.id,
+                'fecha': caja_info.fecha,
+                'cobro': caja_info.cobro,
+                'adeudado': caja_info.adeudado,
+                'total': caja_info.total,
+                'descripcion': caja_info.descripcion,
+                'cliente': caja_info.cliente_nombre,
+                'direccion': caja_info.cliente_direccion,
+                'telefono': caja_info.cliente_telefono,
+                'detalles': []
+            }
+            for detalle in detalles:
+                resultado['detalles'].append({
+                    'numeracion': detalle.numeracion,
+                    'marca': detalle.marca_nombre,
+                    'capacidad': detalle.capacidad_nombre,
+                    'tipo': detalle.tipo_nombre,
+                    'recarga': detalle.recarga,
+                    'nuevo': detalle.nuevo,
+                    'extras': detalle.extras,
+                    'total': detalle.total
+                })   
+            return resultado
+        except Exception as e:
+            print(f"Error al obtener detalles de venta: {e}")
+            return None
+        finally:
+            db.close()

@@ -6,7 +6,7 @@ from datetime import timedelta
 from models import *  
 from utils import get_image
 
-class HistorialController(QObject): #Cuando termine asegurarme que la caja llama al metodo mostrar para que se actualice
+class HistorialController(QObject):
     def __init__(self, ui):
         super().__init__()
         self.ui = ui
@@ -25,6 +25,7 @@ class HistorialController(QObject): #Cuando termine asegurarme que la caja llama
         self.ui.tableHistorialCompras.verticalHeader().setVisible(False)
         self.ui.btnRestaurar.clicked.connect(self.limpiar_filtros)
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
+        self.ui.tableHistorialCompras.doubleClicked.connect(self.mostrar_detalles_compra)
         self.clientes_combobox()
         self.setupDateEdits()
         self.mostrar_ventas()
@@ -133,3 +134,16 @@ class HistorialController(QObject): #Cuando termine asegurarme que la caja llama
             self.ui.tableHistorialCompras.setItem(index, 5, QTableWidgetItem(str(venta.total)))
             self.ui.tableHistorialCompras.setItem(index, 6, QTableWidgetItem(venta.descripcion or ""))
         self.actualizar_estado_paginado()
+    
+    def obtener_id_compra(self):
+        item_seleccionado = self.ui.tableHistorialCompras.currentItem()
+        if item_seleccionado:
+            fila = item_seleccionado.row()
+            item_con_id = self.ui.tableHistorialCompras.item(fila, 0) 
+            id_compra = item_con_id.data(Qt.ItemDataRole.UserRole)
+            return id_compra
+        return None
+    
+    def mostrar_detalles_compra(self):
+        id_compra = self.obtener_id_compra()
+        return id_compra
