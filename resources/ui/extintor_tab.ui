@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>810</width>
-    <height>513</height>
+    <width>821</width>
+    <height>504</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,14 +22,22 @@ QMainWindow {
 }
 
 QPushButton {
+	color: rgb(255, 255, 255);
+	background-color: rgb(19, 109, 255);
+	background-color: rgb(35, 39, 255);
+	color: rgb(8, 0, 255);
     background-color: #007BFF;
     color: white;
-    border-radius: 8px;
-    padding: 6px 16px;
-    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    padding: 3px 8px;
+    min-height: 25px;
 }
 QPushButton:hover {
-    background-color: #0056b3;
+    background-color: #2980b9;
+}
+QPushButton:disabled {
+    background-color: #bdc3c7;
 }
 
 /* QLineEdit (buscador) */
@@ -229,7 +237,7 @@ color:black</string>
         <property name="minimumSize">
          <size>
           <width>120</width>
-          <height>30</height>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
@@ -272,7 +280,7 @@ background-color: rgb(0, 120, 215);</string>
         <property name="minimumSize">
          <size>
           <width>120</width>
-          <height>30</height>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
@@ -437,6 +445,26 @@ background-color: rgb(255, 0, 0);</string>
        <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
+     <column>
+      <property name="text">
+       <string>Imprimir</string>
+      </property>
+      <property name="font">
+       <font>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="textAlignment">
+       <set>AlignLeading|AlignVCenter</set>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item alignment="Qt::AlignRight">
+    <widget class="QLabel" name="contador">
+     <property name="text">
+      <string>Total selecionados: 6</string>
+     </property>
     </widget>
    </item>
    <item>
@@ -561,6 +589,43 @@ border: none;</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="print_ext">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: #27ae60;</string>
+        </property>
+        <property name="text">
+         <string>Imprimir</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../images/print.png</normaloff>../images/print.png</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_6">
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>Restaurar</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

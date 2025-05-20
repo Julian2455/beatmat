@@ -41,7 +41,8 @@ class Extintor(Base):
                 Marca.nombre.label('marca_nombre'),
                 Extintor.ubicacion,
                 Tipo.nombre.label('tipo_nombre'),
-                Capacidad.nombre.label('capacidad_nombre')
+                Capacidad.nombre.label('capacidad_nombre'),
+                Extintor.impreso
                 )
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)

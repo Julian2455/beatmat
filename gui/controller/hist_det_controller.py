@@ -21,7 +21,7 @@ class HistDetController(QDialog):
         self.ui.labelCliente.setText(venta['cliente'])
         self.ui.labelFecha.setText(str(venta['fecha']))
         self.ui.labelDireccion.setText(venta['direccion'])
-        self.ui.labelTelefono.setText(venta['telefono'])
+        self.ui.labelTelefono.setText(str(venta['telefono']))
         self.ui.labelDescripcion.setText(venta['descripcion'])
         self.ui.labelTotal.setText(str(venta['total']))
         self.ui.tableDetalles.setRowCount(len(lista))

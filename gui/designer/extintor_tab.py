@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Extintor(object):
     def setupUi(self, Extintor):
         Extintor.setObjectName("Extintor")
-        Extintor.resize(810, 513)
+        Extintor.resize(821, 504)
         Extintor.setStyleSheet("/* Fondo general */\n"
 "QMainWindow {\n"
 "    background-color: #f9f9f9;\n"
@@ -21,14 +21,22 @@ class Ui_Extintor(object):
 "}\n"
 "\n"
 "QPushButton {\n"
+"    color: rgb(255, 255, 255);\n"
+"    background-color: rgb(19, 109, 255);\n"
+"    background-color: rgb(35, 39, 255);\n"
+"    color: rgb(8, 0, 255);\n"
 "    background-color: #007BFF;\n"
 "    color: white;\n"
-"    border-radius: 8px;\n"
-"    padding: 6px 16px;\n"
-"    font-weight: bold;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 8px;\n"
+"    min-height: 25px;\n"
 "}\n"
 "QPushButton:hover {\n"
-"    background-color: #0056b3;\n"
+"    background-color: #2980b9;\n"
+"}\n"
+"QPushButton:disabled {\n"
+"    background-color: #bdc3c7;\n"
 "}\n"
 "\n"
 "/* QLineEdit (buscador) */\n"
@@ -146,7 +154,7 @@ class Ui_Extintor(object):
         self.comboBox_capacidad.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_capacidad)
         self.btnRestaurarFiltros = QtWidgets.QPushButton(parent=self.frame_2)
-        self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(120, 30))
+        self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(120, 35))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnRestaurarFiltros.setFont(font)
@@ -161,7 +169,7 @@ class Ui_Extintor(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem)
         self.pushButton_5 = QtWidgets.QPushButton(parent=self.frame_2)
-        self.pushButton_5.setMinimumSize(QtCore.QSize(120, 30))
+        self.pushButton_5.setMinimumSize(QtCore.QSize(120, 35))
         font = QtGui.QFont()
         font.setBold(True)
         self.pushButton_5.setFont(font)
@@ -196,7 +204,7 @@ class Ui_Extintor(object):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tableWidget.setHorizontalScrollMode(QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem)
         self.tableWidget.setObjectName("tableWidget")
-        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setColumnCount(6)
         self.tableWidget.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -231,12 +239,21 @@ class Ui_Extintor(object):
         font.setBold(True)
         item.setFont(font)
         self.tableWidget.setHorizontalHeaderItem(4, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        font = QtGui.QFont()
+        font.setBold(True)
+        item.setFont(font)
+        self.tableWidget.setHorizontalHeaderItem(5, item)
         self.tableWidget.horizontalHeader().setVisible(True)
         self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
         self.tableWidget.horizontalHeader().setHighlightSections(True)
         self.tableWidget.horizontalHeader().setSortIndicatorShown(False)
         self.tableWidget.horizontalHeader().setStretchLastSection(True)
         self.verticalLayout_7.addWidget(self.tableWidget)
+        self.contador = QtWidgets.QLabel(parent=Extintor)
+        self.contador.setObjectName("contador")
+        self.verticalLayout_7.addWidget(self.contador, 0, QtCore.Qt.AlignmentFlag.AlignRight)
         self.widget = QtWidgets.QWidget(parent=Extintor)
         self.widget.setMaximumSize(QtCore.QSize(16777215, 50))
         self.widget.setStyleSheet("background-color: rgb(255, 255, 255);\n"
@@ -289,6 +306,25 @@ class Ui_Extintor(object):
         self.horizontalLayout.addWidget(self.pushButton_4)
         spacerItem2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout.addItem(spacerItem2)
+        self.print_ext = QtWidgets.QPushButton(parent=self.widget)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.print_ext.setFont(font)
+        self.print_ext.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.print_ext.setStyleSheet("background-color: #27ae60;")
+        icon5 = QtGui.QIcon()
+        icon5.addPixmap(QtGui.QPixmap("../images/print.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        self.print_ext.setIcon(icon5)
+        self.print_ext.setObjectName("print_ext")
+        self.horizontalLayout.addWidget(self.print_ext)
+        self.pushButton_6 = QtWidgets.QPushButton(parent=self.widget)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.pushButton_6.setFont(font)
+        self.pushButton_6.setVisible(False)
+        self.pushButton_6.setStyleSheet("background-color: rgb(255, 0, 0);")
+        self.pushButton_6.setObjectName("pushButton_6")
+        self.horizontalLayout.addWidget(self.pushButton_6)
         self.verticalLayout_7.addWidget(self.widget)
 
         self.retranslateUi(Extintor)
@@ -314,3 +350,18 @@ class Ui_Extintor(object):
         item.setText(_translate("Extintor", "Tipo"))
         item = self.tableWidget.horizontalHeaderItem(4)
         item.setText(_translate("Extintor", "Capacidad"))
+        item = self.tableWidget.horizontalHeaderItem(5)
+        item.setText(_translate("Extintor", "Imprimir"))
+        self.contador.setText(_translate("Extintor", ""))
+        self.print_ext.setText(_translate("Extintor", "Imprimir"))
+        self.pushButton_6.setText(_translate("Extintor", "Restaurar"))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    Extintor = QtWidgets.QWidget()
+    ui = Ui_Extintor()
+    ui.setupUi(Extintor)
+    Extintor.show()
+    sys.exit(app.exec())

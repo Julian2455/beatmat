@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
+from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QCheckBox, QMessageBox, QPushButton
 from PyQt6.QtGui import QAction, QColor, QBrush, QFont, QIcon, QPixmap
 from PyQt6.QtCore import Qt
 from PyQt6 import QtCore
@@ -12,6 +12,9 @@ class ExtintorController:
         self.marca_filter = None
         self.tipo_filter = None
         self.capacidad_filter = None
+        self.checkboxes_impresion = []
+        self.extintores_seleccionados = {} 
+        self.extintores_deshabilitados = set()
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_extintores = Extintor.contar_extintores()
@@ -34,10 +37,12 @@ class ExtintorController:
         self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
         self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
         self.ui.pushButton_5.setIcon(QIcon(get_image("extintor")))
+        self.ui.print_ext.setIcon(QIcon(get_image("print")))
         self.ui.comboBox_marca.currentIndexChanged.connect(self.filtrar_por_marca)
         self.ui.comboBox_tipo.currentIndexChanged.connect(self.filtrar_por_tipo)
         self.ui.comboBox_capacidad.currentIndexChanged.connect(self.filtrar_por_capacidad)
         self.ui.btnRestaurarFiltros.clicked.connect(self.restaurar_filtros)
+        self.ui.pushButton_6.clicked.connect(self.restaurar_seleccionados)
 
     def mostrar_extintores(self):
         if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
@@ -47,6 +52,7 @@ class ExtintorController:
         else:
             extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(extintores))
+        self.checkboxes_impresion = []
         for index, extintor in enumerate(extintores):
             id_extintor = QTableWidgetItem(str(extintor.numeracion))
             id_extintor.setData(Qt.ItemDataRole.UserRole, extintor.id)
@@ -55,6 +61,19 @@ class ExtintorController:
             self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(extintor.ubicacion))
             self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(extintor.tipo_nombre))
             self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad_nombre))
+
+
+            check = QCheckBox()
+            id_ext = extintor.id
+            seleccionado = self.extintores_seleccionados.get(id_ext, False)
+            check.setChecked(seleccionado)
+            if extintor.impreso:
+                check.setEnabled(False)
+            else:
+                check.setEnabled(True)
+            check.stateChanged.connect(lambda state, cb=check, eid=id_ext: self.actualizar_seleccion(cb, eid))
+            self.ui.tableWidget.setCellWidget(index, 5, check)
+            self.checkboxes_impresion.append(check)
 
         self.actualizar_estado_paginado()
         self.mostrar_boton_restaurar()
@@ -400,3 +419,57 @@ class ExtintorController:
         self.capacidad_filter = None
         self.pagina_actual = 1
         self.mostrar_extintores()
+    
+    ##############################SELECCION DE CHECKBOX E IMPRESION##################################
+    def contador_select(self):
+        total = len([eid for eid, marcado in self.extintores_seleccionados.items() if marcado])
+        self.ui.contador.setText(f"Total seleccionado: {total}")
+        if total >= 6:
+            self.ui.contador.setStyleSheet("color: red; font-weight: bold;")
+        else:
+            self.ui.contador.setStyleSheet("color: black;")
+
+    def mostrar_btn_restaurar(self):
+        hay_seleccion = any(self.extintores_seleccionados.values())
+        self.ui.pushButton_6.setVisible(hay_seleccion)
+    
+    def restaurar_seleccionados(self):
+        self.extintores_seleccionados.clear()
+        for cb in self.checkboxes_impresion:
+            cb.blockSignals(True)
+            cb.setChecked(False)
+            cb.setEnabled(True)
+            cb.blockSignals(False)
+        self.contador_select()
+        self.pagina_actual = 1
+        self.mostrar_extintores()
+        self.ui.pushButton_6.setVisible(False)
+
+    def actualizar_seleccion(self, checkbox, extintor_id):
+        self.extintores_seleccionados[extintor_id] = checkbox.isChecked()
+        self.limitar_seleccion_checkboxes(checkbox)
+        self.contador_select()
+        self.mostrar_btn_restaurar()
+
+    def limitar_seleccion_checkboxes(self, checkbox):
+        seleccionados = [eid for eid, marcado in self.extintores_seleccionados.items() if marcado]
+        cantidad_seleccionados = len(seleccionados)
+        if cantidad_seleccionados > 6:
+            checkbox.blockSignals(True)
+            checkbox.setChecked(False)
+            checkbox.blockSignals(False)
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Máximo alcanzado")
+            msg.setText("Solo se pueden seleccionar 6 extintores a imprimir.")
+            msg.exec()
+            return
+        if cantidad_seleccionados == 6:
+            for cb in self.checkboxes_impresion:
+                if not cb.isChecked():
+                    cb.setEnabled(False)
+        else:
+            for cb in self.checkboxes_impresion:
+                if not cb.isEnabled() and not cb.isChecked():
+                    cb.setEnabled(True)
+
