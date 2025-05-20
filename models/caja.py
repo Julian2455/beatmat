@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, desc
 from sqlalchemy.orm import relationship,sessionmaker,joinedload
 from db import Base, engine, SessionLocal
 from datetime import date
@@ -71,6 +71,7 @@ class Caja(Base):
                     Cliente.nombre.label('nombre')
                 )
                 .join(Cliente, cls.cliente_id == Cliente.id)
+                .order_by(desc(cls.fecha))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
@@ -115,6 +116,7 @@ class Caja(Base):
                 query = query.filter(cls.fecha == fecha)
             resultado = (
                 query
+                .order_by(desc(cls.fecha))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()

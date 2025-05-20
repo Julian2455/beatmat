@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>959</width>
-    <height>575</height>
+    <width>1064</width>
+    <height>708</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -127,7 +127,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -214,7 +214,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -255,6 +255,31 @@ QTableWidget::item:selected {
        </spacer>
       </item>
       <item>
+         <widget class="QPushButton" name="btnAgregarExtintores">
+          <property name="minimumSize">
+           <size>
+            <width>140</width>
+            <height>31</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+           <bold>true</bold>
+           </font>
+          </property>
+          <property name="visible">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Agregar Extintores</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
+          </property>
+         </widget>
+        </item>
+      <item>
        <widget class="QPushButton" name="btnNuevoCliente">
         <property name="minimumSize">
          <size>
@@ -264,7 +289,7 @@ QTableWidget::item:selected {
         </property>
         <property name="font">
          <font>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -320,11 +345,11 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="text">
-         <string>Extintores del Cliente</string>
+         <string>Detalle de Facturación</string>
         </property>
        </widget>
       </item>
@@ -367,109 +392,6 @@ QTableWidget::item:selected {
           <string>Capacidad</string>
          </property>
         </column>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnAgregarExtintores">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="visible">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Agregar Extintores</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="frameDetalleFactura">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <property name="spacing">
-       <number>4</number>
-      </property>
-      <property name="leftMargin">
-       <number>6</number>
-      </property>
-      <property name="topMargin">
-       <number>6</number>
-      </property>
-      <property name="rightMargin">
-       <number>6</number>
-      </property>
-      <property name="bottomMargin">
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="labelDetalleFactura">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Detalle de Facturación</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QTableWidget" name="tableDetalleFactura">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>120</height>
-         </size>
-        </property>
-        <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>90</number>
-        </attribute>
-        <attribute name="horizontalHeaderStretchLastSection">
-         <bool>true</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string>Numeración</string>
-         </property>
-        </column>
         <column>
          <property name="text">
           <string>Nuevo</string>
@@ -493,9 +415,9 @@ QTableWidget::item:selected {
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <spacer name="horizontalSpacer_4">
+         <spacer name="horizontalSpacer_3">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
           </property>
@@ -512,7 +434,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-            <bold>true</bold>
+           <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -531,7 +453,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>12</pointsize>
-            <bold>true</bold>
+           <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -599,7 +521,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-            <bold>true</bold>
+           <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -628,7 +550,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-            <bold>true</bold>
+           <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -662,7 +584,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -711,7 +633,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-         <bold>true</bold>
+        <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -720,31 +642,6 @@ QTableWidget::item:selected {
        <property name="icon">
         <iconset>
          <normaloff>../images/save.png</normaloff>../images/save.png</iconset>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btnImprimir">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>31</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: #27ae60;</string>
-       </property>
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-       <property name="icon">
-        <iconset>
-         <normaloff>../images/print.png</normaloff>../images/print.png</iconset>
        </property>
       </widget>
      </item>
@@ -758,7 +655,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-         <bold>true</bold>
+        <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">

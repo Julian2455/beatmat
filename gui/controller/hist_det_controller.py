@@ -12,6 +12,7 @@ class HistDetController(QDialog):
         self.ui.tableDetalles.verticalHeader().setVisible(False)
         self.ui.setWindowTitle("Detalles de transacción")
         self.ui.tableDetalles.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.ui.btnCerrar.clicked.connect(self.cerrar)
     
     def cargar_detalles(self, id_compra):
         self.ui.tableDetalles.setRowCount(0)
@@ -50,3 +51,6 @@ class HistDetController(QDialog):
             self.ui.tableDetalles.setItem(index, 5, item_nuevo)
             self.ui.tableDetalles.setItem(index, 6, item_extras)
             self.ui.tableDetalles.setItem(index, 7, item_total)
+    
+    def cerrar(self):
+        self.ui.close()

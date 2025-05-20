@@ -15,8 +15,7 @@ class CajaController(QObject):
         self.configurar_validadores()
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
         self.ui.tableExtintoresCliente.verticalHeader().setVisible(False)
-        self.ui.tableDetalleFactura.verticalHeader().setVisible(False)
-        self.ui.tableDetalleFactura.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
+        self.ui.tableExtintoresCliente.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
         self.ui.tableExtintoresCliente.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.ui.comboClientes.editTextChanged.connect(self.seleccionar_cliente)
         self.ui.dateEdit.setDate(QDate.currentDate())
@@ -27,6 +26,7 @@ class CajaController(QObject):
         self.selected_nuevos={}
         self.ui.lineCobro.setDisabled(True)
         self.ui.btnGuardar.clicked.connect(self.confirmar_compra) 
+        self.ui.btnCancelar.clicked.connect(self.cancelar) 
         self.ui.lineCobro.textChanged.connect(self.cobrar)
     
     def clientes_combobox(self):
@@ -51,7 +51,6 @@ class CajaController(QObject):
         indice = self.ui.comboClientes.currentIndex()
         texto = self.ui.comboClientes.currentText()
         self.ui.tableExtintoresCliente.setRowCount(0)
-        self.ui.tableDetalleFactura.setRowCount(0)
         self.selected_extintores={}
         self.selected_nuevos={}
         if indice == 0 or texto=="":
@@ -126,10 +125,7 @@ class CajaController(QObject):
         if self.cliente:
             extintores = Extintor.show_all_client_pay(client_id=self.cliente)
             if extintores:
-                self.ui.tableDetalleFactura.setRowCount(len(extintores))
                 for index, extintor in enumerate(extintores):
-                    id_extintor = QTableWidgetItem(str(extintor.numeracion))
-                    id_extintor.setData(QtCore.Qt.ItemDataRole.UserRole, extintor.id)
                     checkbox = QCheckBox()
                     checkbox.setProperty("extintor_id", extintor.id)
                     checkbox.setStyleSheet("QCheckBox { margin-left: 30px; }")
@@ -137,7 +133,6 @@ class CajaController(QObject):
                     checkbox.stateChanged.connect(self.checkbox_state_changed)
                     linePrecio = QLineEdit()
                     linePrecio.setValidator(self.validator)
-                    self.ui.tableDetalleFactura.setItem(index, 0, id_extintor)
                     if extintor.nuevo==True:
                         checkboxn = QCheckBox()
                         checkboxn.setProperty("extintor_id", extintor.id)
@@ -145,14 +140,13 @@ class CajaController(QObject):
                         checkboxn.setStyleSheet("QCheckBox { margin-left: 30px; }")
                         checkboxn.stateChanged.connect(self.checkbox_state_changed)
                         checkboxn.setChecked(True)
-                        self.ui.tableDetalleFactura.setCellWidget(index, 1, checkboxn)
+                        self.ui.tableExtintoresCliente.setCellWidget(index, 5, checkboxn)
                         precio_nuevo = Extintor.new_prices(extintor_id=extintor.id)
                         if precio_nuevo:
                             self.selected_nuevos[extintor.id] = precio_nuevo.valor_num
-                    self.ui.tableDetalleFactura.setCellWidget(index, 2, checkbox)
-                    self.ui.tableDetalleFactura.setCellWidget(index, 3, linePrecio)
+                    self.ui.tableExtintoresCliente.setCellWidget(index, 6, checkbox)
+                    self.ui.tableExtintoresCliente.setCellWidget(index, 7, linePrecio)
                     linePrecio.textChanged.connect(self.actualizar_precio_fila)
-                self.ui.tableDetalleFactura.setColumnWidth(1, 80)
                 self.actualizar_todos_precios()
     
     def checkbox_state_changed(self, state):
@@ -161,10 +155,10 @@ class CajaController(QObject):
         nuevo = checkbox.property("nuevo")
         if extintor_id is None:
             return
-        for fila in range(self.ui.tableDetalleFactura.rowCount()):
-            item = self.ui.tableDetalleFactura.item(fila, 0)
+        for fila in range(self.ui.tableExtintoresCliente.rowCount()):
+            item = self.ui.tableExtintoresCliente.item(fila, 0)
             if item and item.data(QtCore.Qt.ItemDataRole.UserRole) == extintor_id:
-                line_edit = self.ui.tableDetalleFactura.cellWidget(fila, 3)
+                line_edit = self.ui.tableExtintoresCliente.cellWidget(fila, 7)
                 if line_edit is None:
                     continue
                 if nuevo:
@@ -187,16 +181,16 @@ class CajaController(QObject):
                 break
     
     def actualizar_todos_precios(self):
-        for fila in range(self.ui.tableDetalleFactura.rowCount()):
-            line_edit = self.ui.tableDetalleFactura.cellWidget(fila, 3)
+        for fila in range(self.ui.tableExtintoresCliente.rowCount()):
+            line_edit = self.ui.tableExtintoresCliente.cellWidget(fila, 7)
             if line_edit:
                 line_edit.textChanged.emit(line_edit.text())
 
     def actualizar_precio_fila(self, texto):
         line_edit = self.sender()
-        for fila in range(self.ui.tableDetalleFactura.rowCount()):
-            if self.ui.tableDetalleFactura.cellWidget(fila, 3) == line_edit:
-                extintor_id = self.ui.tableDetalleFactura.item(fila, 0).data(QtCore.Qt.ItemDataRole.UserRole)
+        for fila in range(self.ui.tableExtintoresCliente.rowCount()):
+            if self.ui.tableExtintoresCliente.cellWidget(fila, 7) == line_edit:
+                extintor_id = self.ui.tableExtintoresCliente.item(fila, 0).data(QtCore.Qt.ItemDataRole.UserRole)
                 precio_total = 0
                 if extintor_id in self.selected_extintores:
                     precio_total += self.selected_extintores[extintor_id]
@@ -209,16 +203,16 @@ class CajaController(QObject):
                     except ValueError:
                         pass
                 if precio_total > 0:
-                    self.ui.tableDetalleFactura.setItem(fila, 4, QTableWidgetItem(self.locale.toString(float(precio_total), 'f', 2)))
+                    self.ui.tableExtintoresCliente.setItem(fila, 8, QTableWidgetItem(self.locale.toString(float(precio_total), 'f', 2)))
                 else:
-                    self.ui.tableDetalleFactura.setItem(fila, 4, QTableWidgetItem(""))
+                    self.ui.tableExtintoresCliente.setItem(fila, 8, QTableWidgetItem(""))
                 break
         self.calcular_total()    
     
     def calcular_total(self):
         total = 0
-        for fila in range(self.ui.tableDetalleFactura.rowCount()):
-            item = self.ui.tableDetalleFactura.item(fila, 4)
+        for fila in range(self.ui.tableExtintoresCliente.rowCount()):
+            item = self.ui.tableExtintoresCliente.item(fila, 8)
             if item and item.text():
                 try:
                     valor = self.locale.toDouble(item.text())[0]
@@ -270,9 +264,9 @@ class CajaController(QObject):
             deuda_num = 0
         fecha = self.ui.dateEdit.date().toPyDate()
         descripcion = self.ui.lineDescripcion.text()
-        for fila in range(self.ui.tableDetalleFactura.rowCount()):
-            extintor_id = self.ui.tableDetalleFactura.item(fila, 0).data(QtCore.Qt.ItemDataRole.UserRole)
-            line_edit = self.ui.tableDetalleFactura.cellWidget(fila, 3)
+        for fila in range(self.ui.tableExtintoresCliente.rowCount()):
+            extintor_id = self.ui.tableExtintoresCliente.item(fila, 0).data(QtCore.Qt.ItemDataRole.UserRole)
+            line_edit = self.ui.tableExtintoresCliente.cellWidget(fila, 7)
             if line_edit and line_edit.text():
                 try:
                     precio_adicional = self.locale.toDouble(line_edit.text())[0]
@@ -280,7 +274,7 @@ class CajaController(QObject):
                         precios_adicionales[extintor_id] = precio_adicional
                 except ValueError:
                     pass
-            item_total = self.ui.tableDetalleFactura.item(fila, 4)
+            item_total = self.ui.tableExtintoresCliente.item(fila, 4)
             if item_total and item_total.text():
                 try:
                     precio_total = self.locale.toDouble(item_total.text())[0]
@@ -311,7 +305,6 @@ class CajaController(QObject):
         self.ui.labelTotalAmount.setText("0.00")
         self.ui.comboClientes.setCurrentIndex(0)
         self.ui.tableExtintoresCliente.setRowCount(0)
-        self.ui.tableDetalleFactura.setRowCount(0)
         self.selected_extintores = {}
         self.selected_nuevos = {}
         self.ui.lineCobro.setDisabled(True)
@@ -333,3 +326,6 @@ class CajaController(QObject):
         msg.setText(mensaje)
         msg.setStandardButtons(QMessageBox.StandardButton.Ok)
         msg.exec()
+    
+    def cancelar(self):
+        self.limpiar_campos()
