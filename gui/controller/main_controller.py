@@ -17,6 +17,7 @@ class MainController:
         self.init_prices_bar()
         self.init_clientes_tab()
         self.init_extintores_tab()
+        self.init_card_bar()
         self.init_mtc_bar()
         self.init_history_tab()
         self.init_caja_tab()
@@ -96,6 +97,9 @@ class MainController:
         self.alta_recarga = RecargaRegisterUi()
         self.extintor_details_tab.btnAgregarRecarga.clicked.connect(self.mostrar_form_recarga)
         self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller, None)
+
+        # Impresion de las tarjetitas
+
     
     def init_caja_tab(self):
         # Configurar la tab de caja
@@ -140,6 +144,11 @@ class MainController:
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))
+
+    def init_card_bar(self):
+        self.tarjetas_ui = ImpresionUi()
+        self.tarjetas_controller = ImpresionController(self.tarjetas_ui)
+        self.ui.actionTarjetas.triggered.connect(self.mostrar_print_card)
 
     #PARTE DE VENCIMIENTOS 
     def init_vencimientos_tab(self):
@@ -205,6 +214,9 @@ class MainController:
 
     def mostrar_form_universal(self, tipo):
         self.mtc_controller.mostrar_form(tipo)
+    
+    def mostrar_print_card(self):
+        self.tarjetas_ui.mostrar_form()
     
     def show(self):
         self.ventana.show()

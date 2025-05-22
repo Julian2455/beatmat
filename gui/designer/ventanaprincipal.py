@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/ventanaprincipal.ui'
+# Form implementation generated from reading ui file 'ventanaprincipal.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -58,7 +58,6 @@ class Ui_MainWindow(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(False)
-        font.setWeight(50)
         self.tabWidget.setFont(font)
         self.tabWidget.setStyleSheet("")
         self.tabWidget.setIconSize(QtCore.QSize(30, 30))
@@ -66,32 +65,32 @@ class Ui_MainWindow(object):
         self.Clientes = QtWidgets.QWidget()
         self.Clientes.setObjectName("Clientes")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/avatar.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/avatar.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Clientes, icon, "")
         self.Matafuegos = QtWidgets.QWidget()
         self.Matafuegos.setObjectName("Matafuegos")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor-de-incendios(1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/extintor-de-incendios(1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Matafuegos, icon1, "")
         self.Caja = QtWidgets.QWidget()
         self.Caja.setObjectName("Caja")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/salario.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/salario.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Caja, icon2, "")
         self.Historial = QtWidgets.QWidget()
         self.Historial.setObjectName("Historial")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/clock_history.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/clock_history.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Historial, icon3, "")
         self.Reportes = QtWidgets.QWidget()
         self.Reportes.setObjectName("Reportes")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/estadisticas.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("../images/estadisticas.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Reportes, icon4, "")
         self.Vencimientos = QtWidgets.QWidget()
         self.Vencimientos.setObjectName("Vencimientos")
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("resources/ui/../images/fecha-de-vencimiento.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon5.addPixmap(QtGui.QPixmap("../images/fecha-de-vencimiento.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.tabWidget.addTab(self.Vencimientos, icon5, "")
         self.horizontalLayout.addWidget(self.tabWidget)
         self.horizontalLayout_2.addWidget(self.frame)
@@ -112,6 +111,8 @@ class Ui_MainWindow(object):
         self.actionTipos.setObjectName("actionTipos")
         self.actionCapacidad = QtGui.QAction(parent=MainWindow)
         self.actionCapacidad.setObjectName("actionCapacidad")
+        self.actionTarjetas = QtGui.QAction(parent=MainWindow)
+        self.actionTarjetas.setObjectName("actionTarjetas")
         self.menuExtintores.addAction(self.actionMarcas)
         self.menuExtintores.addSeparator()
         self.menuExtintores.addAction(self.actionTipos)
@@ -119,6 +120,7 @@ class Ui_MainWindow(object):
         self.menuExtintores.addAction(self.actionCapacidad)
         self.menuConfiguraci_n.addAction(self.actionPrecios)
         self.menuConfiguraci_n.addAction(self.menuExtintores.menuAction())
+        self.menuConfiguraci_n.addAction(self.actionTarjetas)
         self.menuBar.addAction(self.menuConfiguraci_n.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -140,6 +142,7 @@ class Ui_MainWindow(object):
         self.actionMarcas.setText(_translate("MainWindow", "Marcas"))
         self.actionTipos.setText(_translate("MainWindow", "Tipos"))
         self.actionCapacidad.setText(_translate("MainWindow", "Capacidad"))
+        self.actionTarjetas.setText(_translate("MainWindow", "Tarjetas"))
 
 
 if __name__ == "__main__":

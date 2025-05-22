@@ -54,6 +54,28 @@ class Extintor(Base):
             return extintores
         finally:
             db.close()
+        
+    @classmethod
+    def show_all_card(cls):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.nombre.label('marca_nombre'),
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.nombre.label('capacidad_nombre'),
+                Extintor.impreso
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
     
     @classmethod
     def show_all_client(cls, client_id):
@@ -199,7 +221,7 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, page=1, per_page=10, disponible=None):
+    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter, page=1, per_page=10, disponible=None):
         try:
             db = SessionLocal()
             query = (
@@ -209,7 +231,8 @@ class Extintor(Base):
                     Marca.nombre.label('marca_nombre'),
                     Extintor.ubicacion,
                     Tipo.nombre.label('tipo_nombre'),
-                    Capacidad.nombre.label('capacidad_nombre')
+                    Capacidad.nombre.label('capacidad_nombre'),
+                    Extintor.impreso
                 )
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
@@ -225,6 +248,8 @@ class Extintor(Base):
                 query = query.filter(Extintor.capacidad_id == capacidad_filter)
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
+            if impreso_filter:
+                query = query.filter(Extintor.impreso == impreso_filter)
             extintores = (
                 query
                 .offset((page - 1) * per_page)
@@ -237,9 +262,49 @@ class Extintor(Base):
             return []
         finally:
             db.close()
+    
+    @classmethod
+    def buscar_card(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter,disponible=None):
+        try:
+            db = SessionLocal()
+            query = (
+                db.query(
+                    Extintor.id,
+                    Extintor.numeracion,
+                    Marca.nombre.label('marca_nombre'),
+                    Tipo.nombre.label('tipo_nombre'),
+                    Capacidad.nombre.label('capacidad_nombre'),
+                    Extintor.impreso
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+            )
+            if numeracion:
+                query = query.filter(Extintor.numeracion.like(f"{numeracion}%"))
+            if marca_filter:
+                query = query.filter(Extintor.marca_id == marca_filter)
+            if tipo_filter:
+                query = query.filter(Extintor.tipo_id == tipo_filter)
+            if capacidad_filter:
+                query = query.filter(Extintor.capacidad_id == capacidad_filter)
+            if disponible:
+                query = query.filter(Extintor.cliente_id.is_(None))
+            if impreso_filter:
+                query = query.filter(Extintor.impreso == impreso_filter)
+            extintores = (
+                query
+                .all()
+            )
+            return extintores
+        except Exception as e:
+            print(f"Error al buscar: {e}")
+            return []
+        finally:
+            db.close()
 
     @classmethod
-    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, disponible=None):
+    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter, disponible=None):
         try:
             db = SessionLocal()
             query = db.query(cls)
@@ -253,6 +318,8 @@ class Extintor(Base):
                 query = query.filter(cls.capacidad_id == capacidad_filter)
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
+            if impreso_filter:
+                query = query.filter(Extintor.impreso == impreso_filter)
             total = query.count()
             return total
         except Exception as e:

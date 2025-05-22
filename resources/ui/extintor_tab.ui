@@ -445,26 +445,6 @@ background-color: rgb(255, 0, 0);</string>
        <set>AlignLeading|AlignVCenter</set>
       </property>
      </column>
-     <column>
-      <property name="text">
-       <string>Imprimir</string>
-      </property>
-      <property name="font">
-       <font>
-        <bold>true</bold>
-       </font>
-      </property>
-      <property name="textAlignment">
-       <set>AlignLeading|AlignVCenter</set>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item alignment="Qt::AlignRight">
-    <widget class="QLabel" name="contador">
-     <property name="text">
-      <string>Total selecionados: 6</string>
-     </property>
     </widget>
    </item>
    <item>
@@ -589,43 +569,6 @@ border: none;</string>
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="print_ext">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: #27ae60;</string>
-        </property>
-        <property name="text">
-         <string>Imprimir</string>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>../images/print.png</normaloff>../images/print.png</iconset>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_6">
-        <property name="font">
-         <font>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 0, 0);</string>
-        </property>
-        <property name="text">
-         <string>Restaurar</string>
-        </property>
-       </widget>
       </item>
      </layout>
     </widget>
