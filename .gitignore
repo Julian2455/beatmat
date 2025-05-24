@@ -12,3 +12,4 @@ env/
 dist/
 build/
 *.spec
+tarjetas_pdf/

@@ -1,8 +1,11 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QCheckBox, QDialog
-from PyQt6.QtGui import QIcon, QPixmap
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QTableWidgetItem, QCheckBox, QDialog, QMessageBox
+from PyQt6.QtGui import QIcon, QPixmap, QDesktopServices
+from PyQt6.QtCore import Qt, QUrl
+from PyQt6 import QtWidgets
 from models import *  
 from utils import get_image
+from utils import CardPDFGenerator 
+import os
 
 class ImpresionController(QDialog):
     def __init__(self,ui):
@@ -12,22 +15,24 @@ class ImpresionController(QDialog):
         self.marca_filter = None
         self.tipo_filter = None
         self.capacidad_filter = None
-        self.impreso_filter = None
         self.checkboxes_impresion = []
         self.extintores_seleccionados = {} 
+        self.pdf_generator = CardPDFGenerator()
         self.mostrar_extintores()
         self.ui.tableWidget.verticalHeader().setVisible(False)
+        self.ui.tableWidget.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
         self.ui.imprimir.setIcon(QIcon(get_image("print")))
         self.ui.label.setPixmap(QPixmap(get_image("print")))
         self.ui.pushButton.setIcon(QIcon(get_image("buscar")))
         self.ui.pushButton_6.clicked.connect(self.restaurar_seleccionados)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.lineEdit.textChanged.connect(self.buscar_extintor)
+        self.ui.imprimir.clicked.connect(self.imprimir_tarjetas)
 
     def mostrar_extintores(self):
         if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
             extintores = Extintor.buscar_card(numeracion=self.query, marca_filter=self.marca_filter, 
-                tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter, impreso_filter=self.impreso_filter)
+                tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter)
         else:
             extintores = Extintor.show_all_card()
         self.ui.tableWidget.setRowCount(len(extintores))
@@ -105,4 +110,35 @@ class ImpresionController(QDialog):
     
     def buscar_extintor(self):
         self.query = self.ui.lineEdit.text()
+        self.mostrar_extintores()
+    
+    def imprimir_tarjetas(self):
+        extintores_seleccionados_ids = [eid for eid, marcado in self.extintores_seleccionados.items() if marcado]
+        if not extintores_seleccionados_ids:
+            QMessageBox.warning(self.ui, "Advertencia", "No hay extintores seleccionados para imprimir.")
+            return
+        try:
+            extintores_data = self.obtener_datos_extintores(extintores_seleccionados_ids)
+            pdf_path = self.pdf_generator.generar_pdf_tarjetas(extintores_data)
+            self.marcar_como_impresos(extintores_seleccionados_ids)
+            QMessageBox.information(
+                self.ui, 
+                "Éxito", 
+                f"Tarjetas generadas exitosamente.\nArchivo: {os.path.basename(pdf_path)}"
+            )
+            QDesktopServices.openUrl(QUrl.fromLocalFile(os.path.abspath(pdf_path)))
+            self.restaurar_seleccionados()
+        except Exception as e:
+            QMessageBox.critical(self.ui, "Error", f"Error al generar las tarjetas: {str(e)}")
+    
+    def obtener_datos_extintores(self, extintores_ids):
+        extintores_data = []
+        for extintor_id in extintores_ids:
+            extintor = Extintor.obtener_datos_para_tarjeta(extintor_id)
+            if extintor:
+                extintores_data.append(extintor)
+        return extintores_data
+    
+    def marcar_como_impresos(self, extintores_ids):
+        Extintor.marcar_como_impresos(extintores_ids)
         self.mostrar_extintores()

@@ -6,11 +6,12 @@ from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import QDate, Qt, QObject, QLocale
 
 class CajaController(QObject):
-    def __init__(self,ui,historial_controller=None):
+    def __init__(self,ui,historial_controller=None,print_controller=None):
         super().__init__()
         self.ui = ui
         self.cliente=None
         self.historial_controller=historial_controller
+        self.print_controller=print_controller
         self.clientes_combobox()
         self.configurar_validadores()
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
@@ -294,6 +295,8 @@ class CajaController(QObject):
             self.limpiar_campos()
             if self.historial_controller:
                 self.historial_controller.mostrar_ventas()
+            if self.print_controller:
+                self.print_controller.mostrar_extintores()
         else:
             self.mostrar_error("Error", "Ocurrió un error al registrar la compra.")
 

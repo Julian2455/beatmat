@@ -104,7 +104,7 @@ class MainController:
     def init_caja_tab(self):
         # Configurar la tab de caja
         self.caja_tab = CajaUi()
-        self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller)
+        self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller, print_controller=self.tarjetas_controller)
         self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Caja.layout().addWidget(self.caja_tab)
         
@@ -118,7 +118,6 @@ class MainController:
         self.client_form_controller = ClientFormController(self.alta_client, self.client_controller, caja_controller=self.caja_controller)
         # Conexion para cargar extintores desde el formulario en la tab de caja
         self.agregar_extintor.btnNuevoExtintor.clicked.connect(self.alta_extintor.mostrar_form)
-        #self.extintor_form_controller = ExtFormController(self.alta_extintor, self.extintor_controller, agregar_extintor_controller=self.agregar_extintor_controller)
     
     def init_history_tab(self):
         # Configurar tab para historial de compras

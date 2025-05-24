@@ -71,6 +71,7 @@ class Extintor(Base):
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.impreso==False)
                 .all()
             )
             return extintores
@@ -264,7 +265,7 @@ class Extintor(Base):
             db.close()
     
     @classmethod
-    def buscar_card(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter,disponible=None):
+    def buscar_card(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter=True,disponible=None):
         try:
             db = SessionLocal()
             query = (
@@ -291,7 +292,7 @@ class Extintor(Base):
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
             if impreso_filter:
-                query = query.filter(Extintor.impreso == impreso_filter)
+                query = query.filter(cls.impreso==False)
             extintores = (
                 query
                 .all()
@@ -618,5 +619,66 @@ class Extintor(Base):
             print(f"Error al actualizar extintor: {e}")
             db.rollback()
             return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def marcar_como_impresos(cls, extintor_ids):
+        try:
+            db = SessionLocal()
+            for id_extintor in extintor_ids:
+                extintor = db.query(cls).filter_by(id=id_extintor).first()
+                if extintor:
+                    extintor.impreso=True
+            db.commit()
+            return True
+        except Exception as e:
+            print(f"Error al actualizar extintor: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def obtener_datos_para_tarjeta(cls, extintor_id):
+        db = SessionLocal()
+        try:
+            extintor_query = (
+                db.query(
+                    Extintor.id,
+                    Extintor.numeracion,
+                    Cliente.nombre.label('cliente_nombre'),
+                    Tipo.nombre.label('tipo_nombre'),
+                    Capacidad.nombre.label('capacidad_nombre')
+                )
+                .outerjoin(Cliente, Extintor.cliente_id == Cliente.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(Extintor.id == extintor_id)
+                .first()
+            )
+            ultima_recarga = (
+                db.query(Recarga)
+                .filter(Recarga.extintor_id == extintor_id)
+                .order_by(Recarga.nuevo_control_recarga.desc())
+                .first()
+            )
+            if ultima_recarga:
+                if ultima_recarga.vto_ph:
+                    vto_ph = str(ultima_recarga.vto_ph)
+                if ultima_recarga.nuevo_control_recarga:
+                    fecha_vencimiento = ultima_recarga.nuevo_control_recarga.strftime("%d/%m/%Y")
+            resultado = {
+                'propietario': extintor_query.cliente_nombre or '',
+                'clase': extintor_query.tipo_nombre or '',
+                'capacidad': extintor_query.capacidad_nombre or '',
+                'vto_prueba_hidraulica': vto_ph,
+                'fecha_vencimiento': fecha_vencimiento,
+                'numero': str(extintor_query.numeracion) if extintor_query.numeracion else ''
+            }
+            return resultado
+        except Exception as e:
+            print(f"Error al obtener información completa del extintor: {e}")
+            return None
         finally:
             db.close()
