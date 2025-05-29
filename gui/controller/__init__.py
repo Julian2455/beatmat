@@ -12,4 +12,6 @@ from .mtc_controller import MtcController
 from .hist_controller import HistorialController
 from .hist_det_controller import HistDetController
 from .print_controller import ImpresionController
+from .gastos_controller import GastosController
+from .gts_form_controller import GastosFormController
 from .main_controller import MainController

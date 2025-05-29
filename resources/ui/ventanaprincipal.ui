@@ -84,7 +84,7 @@ background-color: rgb(191, 191, 191);
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>0</number>
+          <number>4</number>
          </property>
          <property name="iconSize">
           <size>
@@ -126,6 +126,15 @@ background-color: rgb(191, 191, 191);
           </attribute>
           <attribute name="title">
            <string>Historial</string>
+          </attribute>
+         </widget>
+         <widget class="QWidget" name="Gastos">
+          <attribute name="icon">
+           <iconset>
+            <normaloff>../images/presupuesto.png</normaloff>../images/presupuesto.png</iconset>
+          </attribute>
+          <attribute name="title">
+           <string>Gastos</string>
           </attribute>
          </widget>
          <widget class="QWidget" name="Reportes">

@@ -36,8 +36,10 @@ IMAGE_MAP = {
     "config2": resource_path("resources/images/config2.png"),
     "btn-atras": resource_path("resources/images/btn-atras.png"),
     "plantilla": resource_path("resources/images/plantilla.png"),
-    "calendario": resource_path("resources/images/calendario.png")
-}
+    "calendario": resource_path("resources/images/calendario.png"),
+    "presupuesto": resource_path("resources/images/presupuesto.png"),
+    "dinero": resource_path("resources/images/dinero.png")
+}   
 
 def get_image(name):
     return IMAGE_MAP.get(name, "")

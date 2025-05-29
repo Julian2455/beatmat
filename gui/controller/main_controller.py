@@ -19,6 +19,7 @@ class MainController:
         self.init_extintores_tab()
         self.init_card_bar()
         self.init_mtc_bar()
+        self.init_gastos_tab()
         self.init_history_tab()
         self.init_caja_tab()
         self.init_vencimientos_tab() 
@@ -131,6 +132,18 @@ class MainController:
         self.hist_det_controller = HistDetController(self.historial_det)
         self.historial_tab.tableHistorialCompras.doubleClicked.connect(self.mostrar_detalle_historial)
     
+    def init_gastos_tab(self):
+        # Configurar tab para gastos de insumos
+        self.gastos_tab=GastosUi()
+        self.gastos_controller = GastosController(self.gastos_tab)
+        self.ui.Gastos.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Gastos.layout().addWidget(self.gastos_tab)
+
+        #formulario para registrar gastos
+        self.alta_gasto = RegisterGastosUi()
+        self.gastos_tab.pushButton.clicked.connect(self.alta_gasto.mostrar_form)
+        self.gts_form_controller = GastosFormController(self.alta_gasto, self.gastos_controller)
+    
     def init_prices_bar(self):
         # Instancia de PreciosUi y conexion con el formulario
         self.precios_ui = PreciosUi()
@@ -165,8 +178,9 @@ class MainController:
         self.ui.tabWidget.setTabIcon(1, QIcon(get_image("extintor-de-incendios(1)")))
         self.ui.tabWidget.setTabIcon(2, QIcon(get_image("salario")))
         self.ui.tabWidget.setTabIcon(3, QIcon(get_image("historial")))
-        self.ui.tabWidget.setTabIcon(4, QIcon(get_image("estadisticas")))
-        self.ui.tabWidget.setTabIcon(5, QIcon(get_image("fecha_de_vencimiento")))
+        self.ui.tabWidget.setTabIcon(4, QIcon(get_image("presupuesto")))
+        self.ui.tabWidget.setTabIcon(5, QIcon(get_image("estadisticas")))
+        self.ui.tabWidget.setTabIcon(6, QIcon(get_image("fecha_de_vencimiento")))
     
     def show_extintor_tab(self):
         # Alternar contenido/detalles
