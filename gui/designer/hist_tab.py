@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/hist_tab.ui'
+# Form implementation generated from reading ui file 'hist_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -13,17 +13,13 @@ class Ui_HistorialCompras(object):
     def setupUi(self, HistorialCompras):
         HistorialCompras.setObjectName("HistorialCompras")
         HistorialCompras.resize(959, 575)
-        HistorialCompras.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
+        HistorialCompras.setStyleSheet("QFrame {\n"
+"    border-radius: 6px;\n"
 "}\n"
-"QFrame {\n"
-"    border:1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"}\n"
-"QLabel {\n"
-"    color: #333333;\n"
-"    border: none;\n"
+"QMainWindow {\n"
+"    background-color: #f9f9f9;\n"
+"    font-family: \"Poppins\", \"Segoe UI\", sans-serif;\n"
+"    font-size: 14px;\n"
 "}\n"
 "QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -39,16 +35,10 @@ class Ui_HistorialCompras(object):
 "QPushButton:disabled {\n"
 "    background-color: #bdc3c7;\n"
 "}\n"
-"QPushButton#btnDetalles {\n"
-"    background-color: #f39c12;\n"
-"}\n"
-"QPushButton#btnDetalles:hover {\n"
-"    background-color: #d35400;\n"
-"}\n"
-"QPushButton#btnCerrar {\n"
+"QPushButton#btnCerrarCaja {\n"
 "    background-color: #e74c3c;\n"
 "}\n"
-"QPushButton#btnCerrar:hover {\n"
+"QPushButton#btnCerrarCaja:hover {\n"
 "    background-color: #c0392b;\n"
 "}\n"
 "QLineEdit, QComboBox, QDateEdit {\n"
@@ -57,22 +47,60 @@ class Ui_HistorialCompras(object):
 "    padding: 3px;\n"
 "    background: white;\n"
 "}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
+"\n"
+"/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
 "    font-weight: bold;\n"
 "}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"}")
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
+"}\n"
+"/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}\n"
+"QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QDateEdit {\n"
+"     border: 2px solid  rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"\n"
+"QDateEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(HistorialCompras)
         self.verticalLayout.setContentsMargins(6, 6, 6, 6)
         self.verticalLayout.setSpacing(6)
@@ -80,6 +108,7 @@ class Ui_HistorialCompras(object):
         self.frameHeader = QtWidgets.QFrame(parent=HistorialCompras)
         self.frameHeader.setMinimumSize(QtCore.QSize(0, 40))
         self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frameHeader.setStyleSheet("background:#34495E;")
         self.frameHeader.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameHeader.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameHeader.setObjectName("frameHeader")
@@ -92,7 +121,7 @@ class Ui_HistorialCompras(object):
         font.setPointSize(12)
         font.setBold(True)
         self.labelTitle.setFont(font)
-        self.labelTitle.setStyleSheet("")
+        self.labelTitle.setStyleSheet("color: rgb(255, 255, 255);")
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_1.addWidget(self.labelTitle)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -131,13 +160,17 @@ class Ui_HistorialCompras(object):
         self.horizontalLayout_2.addWidget(self.labelFiltroFecha)
         self.dateEdit = QtWidgets.QDateEdit(parent=self.frameClienteSelection)
         self.dateEdit.setMinimumSize(QtCore.QSize(100, 25))
+        self.dateEdit.setStyleSheet("")
         self.dateEdit.setCalendarPopup(True)
         self.dateEdit.setObjectName("dateEdit")
         self.horizontalLayout_2.addWidget(self.dateEdit)
         self.btnRestaurar = QtWidgets.QPushButton(parent=self.frameClienteSelection)
         self.btnRestaurar.setMinimumSize(QtCore.QSize(80, 31))
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.btnRestaurar.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/filter.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/filter.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnRestaurar.setIcon(icon)
         self.btnRestaurar.setObjectName("btnRestaurar")
         self.horizontalLayout_2.addWidget(self.btnRestaurar)
@@ -194,7 +227,7 @@ class Ui_HistorialCompras(object):
         self.btnFirstPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnFirstPage.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnFirstPage.setIcon(icon1)
         self.btnFirstPage.setIconSize(QtCore.QSize(18, 18))
         self.btnFirstPage.setObjectName("btnFirstPage")
@@ -203,7 +236,7 @@ class Ui_HistorialCompras(object):
         self.btnPreviousPage.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnPreviousPage.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/anterior.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnPreviousPage.setIcon(icon2)
         self.btnPreviousPage.setObjectName("btnPreviousPage")
         self.horizontalLayout_3.addWidget(self.btnPreviousPage)
@@ -217,7 +250,7 @@ class Ui_HistorialCompras(object):
         self.btnNextPage.setStyleSheet("")
         self.btnNextPage.setText("")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/sssiguiente.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnNextPage.setIcon(icon3)
         self.btnNextPage.setObjectName("btnNextPage")
         self.horizontalLayout_3.addWidget(self.btnNextPage)
@@ -226,7 +259,7 @@ class Ui_HistorialCompras(object):
         self.btnLastPage.setStyleSheet("")
         self.btnLastPage.setText("")
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon4.addPixmap(QtGui.QPixmap("../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnLastPage.setIcon(icon4)
         self.btnLastPage.setIconSize(QtCore.QSize(18, 18))
         self.btnLastPage.setObjectName("btnLastPage")

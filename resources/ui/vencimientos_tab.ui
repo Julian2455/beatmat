@@ -14,7 +14,10 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">/* Fondo general */
+   <string notr="true">QFrame {
+    border-radius: 6px;
+}
+/* Fondo general */
 QMainWindow {
     background-color: #f9f9f9;
     font-family: &quot;Poppins&quot;, &quot;Segoe UI&quot;, sans-serif;
@@ -110,7 +113,7 @@ QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
    <item>
     <widget class="QFrame" name="frame_2">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background:#34495E;</string>
      </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
@@ -126,6 +129,9 @@ QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
           <pointsize>12</pointsize>
           <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>EXTINTORES PRÓXIMO A VENCERSE </string>
@@ -171,6 +177,9 @@ background-color: rgb(255, 255, 255);
       </item>
       <item>
        <widget class="QLabel" name="dateEdit">
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string/>
         </property>

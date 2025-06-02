@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/caja_tab.ui'
+# Form implementation generated from reading ui file 'caja_tab.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -12,19 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Caja(object):
     def setupUi(self, Caja):
         Caja.setObjectName("Caja")
-        Caja.resize(1064, 708)
-        Caja.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
-"    \n"
+        Caja.resize(1064, 706)
+        Caja.setStyleSheet("QFrame {\n"
+"    border-radius: 6px;\n"
 "}\n"
-"QFrame {\n"
-"    border:1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"}\n"
-"QLabel {\n"
-"    color: #333333;\n"
-"    border: none;\n"
+"QMainWindow {\n"
+"    background-color: #f9f9f9;\n"
+"    font-family: \"Poppins\", \"Segoe UI\", sans-serif;\n"
+"    font-size: 14px;\n"
 "}\n"
 "QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -52,22 +47,56 @@ class Ui_Caja(object):
 "    padding: 3px;\n"
 "    background: white;\n"
 "}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
+"\n"
+"/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
 "    font-weight: bold;\n"
 "}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"}")
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
+"}\n"
+"/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}\n"
+"QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QDateEdit {\n"
+"     border: 2px solid rgb(255, 255, 255);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"")
         self.verticalLayout = QtWidgets.QVBoxLayout(Caja)
         self.verticalLayout.setContentsMargins(6, 6, 6, 6)
         self.verticalLayout.setSpacing(6)
@@ -75,6 +104,8 @@ class Ui_Caja(object):
         self.frameHeader = QtWidgets.QFrame(parent=Caja)
         self.frameHeader.setMinimumSize(QtCore.QSize(0, 50))
         self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 50))
+        self.frameHeader.setStyleSheet("background:#34495E;\n"
+"")
         self.frameHeader.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameHeader.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameHeader.setObjectName("frameHeader")
@@ -87,7 +118,8 @@ class Ui_Caja(object):
         font.setPointSize(12)
         font.setBold(True)
         self.labelTitle.setFont(font)
-        self.labelTitle.setStyleSheet("")
+        self.labelTitle.setStyleSheet("color: rgb(255, 255, 255);\n"
+"border:none;")
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_1.addWidget(self.labelTitle)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -96,10 +128,14 @@ class Ui_Caja(object):
         font = QtGui.QFont()
         font.setPointSize(10)
         self.labelFecha.setFont(font)
+        self.labelFecha.setStyleSheet("border:none;\n"
+"color: rgb(255, 255, 255);")
         self.labelFecha.setObjectName("labelFecha")
         self.horizontalLayout_1.addWidget(self.labelFecha)
         self.dateEdit = QtWidgets.QDateEdit(parent=self.frameHeader)
         self.dateEdit.setMinimumSize(QtCore.QSize(100, 25))
+        self.dateEdit.setStyleSheet("\n"
+"color: rgb(255, 255, 255);")
         self.dateEdit.setCalendarPopup(True)
         self.dateEdit.setObjectName("dateEdit")
         self.horizontalLayout_1.addWidget(self.dateEdit)
@@ -130,23 +166,32 @@ class Ui_Caja(object):
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.btnAgregarExtintores = QtWidgets.QPushButton(parent=self.frameClienteSelection)
-        self.btnAgregarExtintores.setMinimumSize(QtCore.QSize(140, 31))
+        self.btnAgregarExtintores.setMinimumSize(QtCore.QSize(140, 35))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnAgregarExtintores.setFont(font)
         self.btnAgregarExtintores.setVisible(False)
+        self.btnAgregarExtintores.setStyleSheet("border:2px solid rgb(0, 4, 255);\n"
+"border-radius: 10px;\n"
+"color: white;\n"
+"border-color: red;\n"
+"background-color: rgb(255, 0, 0);")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/extintor.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnAgregarExtintores.setIcon(icon)
         self.btnAgregarExtintores.setObjectName("btnAgregarExtintores")
         self.horizontalLayout_2.addWidget(self.btnAgregarExtintores)
         self.btnNuevoCliente = QtWidgets.QPushButton(parent=self.frameClienteSelection)
-        self.btnNuevoCliente.setMinimumSize(QtCore.QSize(110, 31))
+        self.btnNuevoCliente.setMinimumSize(QtCore.QSize(110, 35))
         font = QtGui.QFont()
         font.setBold(True)
         self.btnNuevoCliente.setFont(font)
+        self.btnNuevoCliente.setStyleSheet("border:2px solid rgb(0, 4, 255);\n"
+"border-radius: 10px;\n"
+"color: white;\n"
+"background-color:rgb(0, 4, 255)")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("../images/agregar-usuario2.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnNuevoCliente.setIcon(icon1)
         self.btnNuevoCliente.setObjectName("btnNuevoCliente")
         self.horizontalLayout_2.addWidget(self.btnNuevoCliente)
@@ -285,7 +330,7 @@ class Ui_Caja(object):
         font.setBold(True)
         self.btnGuardar.setFont(font)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("resources/ui/../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("../images/save.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnGuardar.setIcon(icon2)
         self.btnGuardar.setObjectName("btnGuardar")
         self.horizontalLayout_6.addWidget(self.btnGuardar)
@@ -296,7 +341,7 @@ class Ui_Caja(object):
         self.btnCancelar.setFont(font)
         self.btnCancelar.setStyleSheet("background-color: rgb(237, 51, 59);")
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon3.addPixmap(QtGui.QPixmap("../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnCancelar.setIcon(icon3)
         self.btnCancelar.setObjectName("btnCancelar")
         self.horizontalLayout_6.addWidget(self.btnCancelar)

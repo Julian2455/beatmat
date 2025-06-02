@@ -14,17 +14,13 @@
    <string>Historial de Compras - Extintores</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    background-color: #f5f5f5;
-    color: #333333;
+   <string notr="true">QFrame {
+    border-radius: 6px;
 }
-QFrame {
-    border:1px solid #cccccc;
-    border-radius: 4px;
-}
-QLabel {
-    color: #333333;
-    border: none;
+QMainWindow {
+    background-color: #f9f9f9;
+    font-family: &quot;Poppins&quot;, &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
 }
 QPushButton {
     background-color: #3498db;
@@ -40,16 +36,10 @@ QPushButton:hover {
 QPushButton:disabled {
     background-color: #bdc3c7;
 }
-QPushButton#btnDetalles {
-    background-color: #f39c12;
-}
-QPushButton#btnDetalles:hover {
-    background-color: #d35400;
-}
-QPushButton#btnCerrar {
+QPushButton#btnCerrarCaja {
     background-color: #e74c3c;
 }
-QPushButton#btnCerrar:hover {
+QPushButton#btnCerrarCaja:hover {
     background-color: #c0392b;
 }
 QLineEdit, QComboBox, QDateEdit {
@@ -58,22 +48,60 @@ QLineEdit, QComboBox, QDateEdit {
     padding: 3px;
     background: white;
 }
-QTableWidget {
-    border: 1px solid #cccccc;
-    background-color: white;
-    gridline-color: #dddddd;
-}
+
+/* QTableWidget / QTableView */
 QHeaderView::section {
-    background-color: #e0e0e0;
-    color: #333333;
-    padding: 3px;
-    border: 1px solid #cccccc;
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
     font-weight: bold;
 }
-QTableWidget::item:selected {
-    background-color: #3498db;
-    color: white;
-}</string>
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
+}
+/* QLineEdit (buscador) */
+QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: white;
+}
+QLineEdit:focus {
+    border-color: #007BFF;
+}
+QComboBox {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+QDateEdit {
+     border: 2px solid  rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+QComboBox:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+
+QDateEdit:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -105,6 +133,9 @@ QTableWidget::item:selected {
        <height>40</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background:#34495E;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -132,11 +163,11 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>HISTORIAL DE COMPRAS - EXTINTORES</string>
@@ -194,7 +225,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -254,6 +285,9 @@ QTableWidget::item:selected {
           <height>25</height>
          </size>
         </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="displayFormat">
          <string>dd/MM/yyyy</string>
         </property>
@@ -269,6 +303,11 @@ QTableWidget::item:selected {
           <width>80</width>
           <height>31</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Restaurar</string>

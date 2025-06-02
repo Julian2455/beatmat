@@ -7,25 +7,20 @@
     <x>0</x>
     <y>0</y>
     <width>1064</width>
-    <height>708</height>
+    <height>706</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Sistema de Facturación - Extintores</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">QWidget {
-    background-color: #f5f5f5;
-    color: #333333;
-	
+   <string notr="true">QFrame {
+    border-radius: 6px;
 }
-QFrame {
-    border:1px solid #cccccc;
-    border-radius: 4px;
-}
-QLabel {
-    color: #333333;
-	border: none;
+QMainWindow {
+    background-color: #f9f9f9;
+    font-family: &quot;Poppins&quot;, &quot;Segoe UI&quot;, sans-serif;
+    font-size: 14px;
 }
 QPushButton {
     background-color: #3498db;
@@ -53,22 +48,56 @@ QLineEdit, QComboBox, QDateEdit {
     padding: 3px;
     background: white;
 }
-QTableWidget {
-    border: 1px solid #cccccc;
-    background-color: white;
-    gridline-color: #dddddd;
-}
+
+/* QTableWidget / QTableView */
 QHeaderView::section {
-    background-color: #e0e0e0;
-    color: #333333;
-    padding: 3px;
-    border: 1px solid #cccccc;
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
     font-weight: bold;
 }
-QTableWidget::item:selected {
-    background-color: #3498db;
-    color: white;
-}</string>
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
+}
+/* QLineEdit (buscador) */
+QLineEdit {
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 6px 12px;
+    background-color: white;
+}
+QLineEdit:focus {
+    border-color: #007BFF;
+}
+QComboBox {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+QDateEdit {
+     border: 2px solid rgb(255, 255, 255);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+QComboBox:focus {
+     border: 1px solid #0078d7;
+     background-color: #eef6ff;
+   }
+</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
@@ -100,6 +129,10 @@ QTableWidget::item:selected {
        <height>50</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background:#34495E;
+</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -127,11 +160,12 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true"/>
+         <string notr="true">color: rgb(255, 255, 255);
+border:none;</string>
         </property>
         <property name="text">
          <string>FACTURACIÓN - EXTINTORES</string>
@@ -158,6 +192,10 @@ QTableWidget::item:selected {
           <pointsize>10</pointsize>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">border:none;
+color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
          <string>Fecha:</string>
         </property>
@@ -170,6 +208,10 @@ QTableWidget::item:selected {
           <width>100</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+color: rgb(255, 255, 255);</string>
         </property>
         <property name="calendarPopup">
          <bool>true</bool>
@@ -214,7 +256,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -255,42 +297,55 @@ QTableWidget::item:selected {
        </spacer>
       </item>
       <item>
-         <widget class="QPushButton" name="btnAgregarExtintores">
-          <property name="minimumSize">
-           <size>
-            <width>140</width>
-            <height>31</height>
-           </size>
-          </property>
-          <property name="font">
-           <font>
-           <bold>true</bold>
-           </font>
-          </property>
-          <property name="visible">
-           <bool>false</bool>
-          </property>
-          <property name="text">
-           <string>Agregar Extintores</string>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
-          </property>
-         </widget>
-        </item>
+       <widget class="QPushButton" name="btnAgregarExtintores">
+        <property name="minimumSize">
+         <size>
+          <width>140</width>
+          <height>35</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="visible">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:2px solid rgb(0, 4, 255);
+border-radius: 10px;
+color: white;
+border-color: red;
+background-color: rgb(255, 0, 0);</string>
+        </property>
+        <property name="text">
+         <string>Agregar Extintores</string>
+        </property>
+        <property name="icon">
+         <iconset>
+          <normaloff>../images/extintor.png</normaloff>../images/extintor.png</iconset>
+        </property>
+       </widget>
+      </item>
       <item>
        <widget class="QPushButton" name="btnNuevoCliente">
         <property name="minimumSize">
          <size>
           <width>110</width>
-          <height>31</height>
+          <height>35</height>
          </size>
         </property>
         <property name="font">
          <font>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border:2px solid rgb(0, 4, 255);
+border-radius: 10px;
+color: white;
+background-color:rgb(0, 4, 255)</string>
         </property>
         <property name="text">
          <string>Nuevo Cliente</string>
@@ -345,7 +400,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -434,7 +489,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -453,7 +508,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>12</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -521,7 +576,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -550,7 +605,7 @@ QTableWidget::item:selected {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="text">
@@ -584,7 +639,7 @@ QTableWidget::item:selected {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -633,7 +688,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -655,7 +710,7 @@ QTableWidget::item:selected {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">

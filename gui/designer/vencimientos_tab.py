@@ -13,7 +13,10 @@ class Ui_Vencimientos(object):
     def setupUi(self, Vencimientos):
         Vencimientos.setObjectName("Vencimientos")
         Vencimientos.resize(1058, 477)
-        Vencimientos.setStyleSheet("/* Fondo general */\n"
+        Vencimientos.setStyleSheet("QFrame {\n"
+"    border-radius: 6px;\n"
+"}\n"
+"/* Fondo general */\n"
 "QMainWindow {\n"
 "    background-color: #f9f9f9;\n"
 "    font-family: \"Poppins\", \"Segoe UI\", sans-serif;\n"
@@ -107,7 +110,7 @@ class Ui_Vencimientos(object):
         self.verticalLayout_7 = QtWidgets.QVBoxLayout(Vencimientos)
         self.verticalLayout_7.setObjectName("verticalLayout_7")
         self.frame_2 = QtWidgets.QFrame(parent=Vencimientos)
-        self.frame_2.setStyleSheet("")
+        self.frame_2.setStyleSheet("background:#34495E;")
         self.frame_2.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_2.setObjectName("frame_2")
@@ -118,6 +121,7 @@ class Ui_Vencimientos(object):
         font.setPointSize(12)
         font.setBold(True)
         self.label.setFont(font)
+        self.label.setStyleSheet("color: rgb(255, 255, 255);")
         self.label.setObjectName("label")
         self.horizontalLayout_2.addWidget(self.label)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
@@ -133,6 +137,7 @@ class Ui_Vencimientos(object):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)
         self.dateEdit = QtWidgets.QLabel(parent=self.frame_2)
+        self.dateEdit.setStyleSheet("color: rgb(255, 255, 255);")
         self.dateEdit.setText("")
         self.dateEdit.setObjectName("dateEdit")
         self.horizontalLayout_2.addWidget(self.dateEdit)

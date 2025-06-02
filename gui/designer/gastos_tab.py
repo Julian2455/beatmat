@@ -12,18 +12,14 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Gastos(object):
     def setupUi(self, Gastos):
         Gastos.setObjectName("Gastos")
-        Gastos.resize(959, 570)
-        Gastos.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
+        Gastos.resize(959, 554)
+        Gastos.setStyleSheet("QFrame {\n"
+"    border-radius: 6px;\n"
 "}\n"
-"QFrame {\n"
-"    border:1px solid #cccccc;\n"
-"    border-radius: 4px;\n"
-"}\n"
-"QLabel {\n"
-"    color: #333333;\n"
-"    border: none;\n"
+"QMainWindow {\n"
+"    background-color: #f9f9f9;\n"
+"    font-family: \"Poppins\", \"Segoe UI\", sans-serif;\n"
+"    font-size: 14px;\n"
 "}\n"
 "QPushButton {\n"
 "    background-color: #3498db;\n"
@@ -39,16 +35,10 @@ class Ui_Gastos(object):
 "QPushButton:disabled {\n"
 "    background-color: #bdc3c7;\n"
 "}\n"
-"QPushButton#btnDetalles {\n"
-"    background-color: #f39c12;\n"
-"}\n"
-"QPushButton#btnDetalles:hover {\n"
-"    background-color: #d35400;\n"
-"}\n"
-"QPushButton#btnCerrar {\n"
+"QPushButton#btnCerrarCaja {\n"
 "    background-color: #e74c3c;\n"
 "}\n"
-"QPushButton#btnCerrar:hover {\n"
+"QPushButton#btnCerrarCaja:hover {\n"
 "    background-color: #c0392b;\n"
 "}\n"
 "QLineEdit, QComboBox, QDateEdit {\n"
@@ -57,22 +47,60 @@ class Ui_Gastos(object):
 "    padding: 3px;\n"
 "    background: white;\n"
 "}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
+"\n"
+"/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
 "    font-weight: bold;\n"
 "}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: #3498db;\n"
-"    color: white;\n"
-"}")
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
+"}\n"
+"/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}\n"
+"QComboBox {\n"
+"     border: 2px solid rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QDateEdit {\n"
+"     border: 2px solid  rgb(85, 85, 127);\n"
+"     border-radius: 5px;\n"
+"     padding: 5px 8px;\n"
+"     color: #333;\n"
+"     background-color: #fff;\n"
+"   }\n"
+"QComboBox:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }\n"
+"\n"
+"QDateEdit:focus {\n"
+"     border: 1px solid #0078d7;\n"
+"     background-color: #eef6ff;\n"
+"   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(Gastos)
         self.verticalLayout.setContentsMargins(6, 6, 6, 6)
         self.verticalLayout.setSpacing(6)
@@ -80,6 +108,8 @@ class Ui_Gastos(object):
         self.frameHeader = QtWidgets.QFrame(parent=Gastos)
         self.frameHeader.setMinimumSize(QtCore.QSize(0, 40))
         self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frameHeader.setStyleSheet("\n"
+"background:#34495E;")
         self.frameHeader.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameHeader.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameHeader.setObjectName("frameHeader")
@@ -92,7 +122,7 @@ class Ui_Gastos(object):
         font.setPointSize(12)
         font.setBold(True)
         self.labelTitle.setFont(font)
-        self.labelTitle.setStyleSheet("")
+        self.labelTitle.setStyleSheet("color: rgb(255, 255, 255);")
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_1.addWidget(self.labelTitle)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)

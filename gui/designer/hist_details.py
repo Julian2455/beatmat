@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'resources/ui/hist_details.ui'
+# Form implementation generated from reading ui file 'hist_details.ui'
 #
 # Created by: PyQt6 UI code generator 6.8.1
 #
@@ -13,12 +13,9 @@ class Ui_DetallesCompra(object):
     def setupUi(self, DetallesCompra):
         DetallesCompra.setObjectName("DetallesCompra")
         DetallesCompra.resize(842, 596)
-        DetallesCompra.setStyleSheet("QWidget {\n"
-"    background-color: #f5f5f5;\n"
-"    color: #333333;\n"
-"}\n"
+        DetallesCompra.setStyleSheet("\n"
 "QFrame {\n"
-"    border:1px solid #cccccc;\n"
+"    border:1px solid rgb(0, 0, 0);\n"
 "    border-radius: 4px;\n"
 "}\n"
 "QLabel {\n"
@@ -51,17 +48,25 @@ class Ui_DetallesCompra(object):
 "QPushButton#btnCerrar:hover {\n"
 "    background-color: #c0392b;\n"
 "}\n"
-"QTableWidget {\n"
-"    border: 1px solid #cccccc;\n"
-"    background-color: white;\n"
-"    gridline-color: #dddddd;\n"
-"}\n"
+"/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
-"    background-color: #e0e0e0;\n"
-"    color: #333333;\n"
-"    padding: 3px;\n"
-"    border: 1px solid #cccccc;\n"
+"    background-color: #ececec;\n"
+"    color: #333;\n"
+"    padding: 4px;\n"
+"    border: none;\n"
 "    font-weight: bold;\n"
+"}\n"
+"QTableWidget {\n"
+"    border: 1px solid #ddd;\n"
+"    background-color: white;\n"
+"    gridline-color: #ccc;\n"
+"    alternate-background-color: #f2f2f2;\n"
+"}\n"
+"QTableWidget::item {\n"
+"    padding: 6px;\n"
+"}\n"
+"QTableWidget::item:hover {\n"
+"    background-color: #f0f8ff;\n"
 "}")
         self.verticalLayout = QtWidgets.QVBoxLayout(DetallesCompra)
         self.verticalLayout.setContentsMargins(6, 6, 6, 6)
@@ -245,7 +250,7 @@ class Ui_DetallesCompra(object):
         font.setBold(True)
         self.btnCerrar.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("resources/ui/../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../images/cancel.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnCerrar.setIcon(icon)
         self.btnCerrar.setObjectName("btnCerrar")
         self.horizontalLayout_3.addWidget(self.btnCerrar)
