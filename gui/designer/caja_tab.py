@@ -269,7 +269,7 @@ class Ui_Caja(object):
         self.verticalLayout.addWidget(self.frameExtintoresCliente)
         self.framePagos = QtWidgets.QFrame(parent=Caja)
         self.framePagos.setMinimumSize(QtCore.QSize(0, 70))
-        self.framePagos.setMaximumSize(QtCore.QSize(16777215, 70))
+        self.framePagos.setMaximumSize(QtCore.QSize(16777215, 70)) 
         self.framePagos.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.framePagos.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.framePagos.setObjectName("framePagos")
