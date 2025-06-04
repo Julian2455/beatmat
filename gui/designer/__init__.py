@@ -14,6 +14,7 @@ from .prices_form import Ui_FormPrecios
 from. combobox_form import Ui_ConfigForm
 from .hist_tab import Ui_HistorialCompras
 from .hist_details import Ui_DetallesCompra
+from .reportes_tab import Ui_Reportes
 from .impresion_tarjetas import Ui_Impresion
 from .gastos_tab import Ui_Gastos
 from .gastos_form import Ui_GastosForm

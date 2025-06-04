@@ -123,3 +123,145 @@ class Precios(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def revisar_nuevos(cls):
+        db = SessionLocal()
+        from .extintor import Extintor
+        try:
+            combinations_ids = (
+                db.query(
+                    Extintor.marca_id,
+                    Extintor.tipo_id,
+                    Extintor.capacidad_id
+                )
+                .distinct()
+            ).all()
+            for marca_id, tipo_id, capacidad_id in combinations_ids:
+                existing_precio = (
+                    db.query(cls)
+                    .filter(
+                        cls.marca_id == marca_id,
+                        cls.tipo_id == tipo_id,
+                        cls.capacidad_id == capacidad_id,
+                        cls.nuevo == True
+                    )
+                    .first()
+                )
+                if not existing_precio:
+                    nuevo_precio_extintor = Precios(
+                        valor=0.0, 
+                        nuevo=True,
+                        capacidad_id=capacidad_id,
+                        tipo_id=tipo_id,
+                        marca_id=marca_id
+                    )
+                    db.add(nuevo_precio_extintor)
+            db.commit()
+        except Exception as e:
+            db.rollback()
+            print(f"Error al revisar los precios: {e}")
+        finally:
+            db.close()
+
+    @classmethod
+    def limpiar_nuevos(cls):
+        db = SessionLocal()
+        from .extintor import Extintor
+        try:
+            existing_extintor_combinations = (
+                db.query(
+                    Extintor.marca_id,
+                    Extintor.tipo_id,
+                    Extintor.capacidad_id
+                )
+                .distinct()
+            ).all()
+            existing_extintor_set = set(existing_extintor_combinations)
+            all_precio_extintores = (
+                db.query(
+                    cls.id,
+                    cls.marca_id,
+                    cls.tipo_id,
+                    cls.capacidad_id
+                )
+                .filter(cls.nuevo == True)
+            ).all()
+            precios_a_eliminar_ids = []
+            for precio_id, marca_id, tipo_id, capacidad_id in all_precio_extintores:
+                current_precio_combination = (marca_id, tipo_id, capacidad_id)
+                if current_precio_combination not in existing_extintor_set:
+                    precios_a_eliminar_ids.append(precio_id)
+            if precios_a_eliminar_ids:
+                db.query(cls).filter(cls.id.in_(precios_a_eliminar_ids)).delete(synchronize_session=False)
+                db.commit()
+        except Exception as e:
+            db.rollback()
+            print(f"Error: {e}")
+        finally:
+            db.close()
+    
+    @classmethod
+    def revisar_recargas(cls):
+        db = SessionLocal()
+        from .extintor import Extintor
+        try:
+            existing_extintor_capacities = (
+                db.query(Extintor.capacidad_id)
+                .distinct()
+            ).all()
+            existing_extintor_capacity_set = set(c for c, in existing_extintor_capacities)
+            existing_precio_recarga_capacities = (
+                db.query(cls.capacidad_id)
+                .filter(cls.nuevo == False)
+                .distinct()
+            ).all()
+            existing_precio_recarga_capacity_set = set(c for c, in existing_precio_recarga_capacities)
+            capacidades_a_agregar_recarga = []
+            for cap_id in existing_extintor_capacity_set:
+                if cap_id not in existing_precio_recarga_capacity_set:
+                    capacidades_a_agregar_recarga.append(cap_id)
+            if capacidades_a_agregar_recarga:
+                for capacidad_id in capacidades_a_agregar_recarga:
+                    nuevo_precio_recarga = Precios(
+                        valor=0.0,
+                        nuevo=False,
+                        capacidad_id=capacidad_id
+                    )
+                    db.add(nuevo_precio_recarga)
+                db.commit()
+        except Exception as e:
+            db.rollback()
+            print(f"Error al agregar precios de recargas faltantes: {e}")
+        finally:
+            db.close()
+
+    @classmethod
+    def limpiar_recargas(cls):
+        db = SessionLocal()
+        from .extintor import Extintor
+        try:
+            existing_capacidad_ids = (
+                db.query(Extintor.capacidad_id)
+                .distinct()
+            ).all()
+            existing_capacidad_set = set(c for c, in existing_capacidad_ids)
+            all_precio_recargas = (
+                db.query(
+                    cls.id,
+                    cls.capacidad_id
+                )
+                .filter(cls.nuevo == False)
+            ).all()
+            precios_recargas_a_eliminar_ids = []
+            for precio_id, capacidad_id in all_precio_recargas:
+                if capacidad_id not in existing_capacidad_set:
+                    precios_recargas_a_eliminar_ids.append(precio_id)
+            if precios_recargas_a_eliminar_ids:
+                db.query(cls).filter(cls.id.in_(precios_recargas_a_eliminar_ids)).delete(synchronize_session=False)
+                db.commit()
+        except Exception as e:
+            db.rollback()
+            print(f"Error: {e}")
+        finally:
+            db.close()

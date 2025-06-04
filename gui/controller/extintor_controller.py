@@ -12,7 +12,6 @@ class ExtintorController:
         self.marca_filter = None
         self.tipo_filter = None
         self.capacidad_filter = None
-        self.impreso_filter = None
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_extintores = Extintor.contar_extintores()
@@ -43,7 +42,7 @@ class ExtintorController:
     def mostrar_extintores(self):
         if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
             extintores = Extintor.buscar(numeracion=self.query, marca_filter=self.marca_filter, 
-                tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter, impreso_filter=self.impreso_filter,
+                tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter,
                 page=self.pagina_actual, per_page=self.filas_por_pagina)
         else:
             extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
@@ -71,10 +70,10 @@ class ExtintorController:
         return None
     
     def actualizar_estado_paginado(self):
-        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter or self.impreso_filter:
+        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
             self.total_extintores = Extintor.contar_buscar(
                 numeracion=self.query, marca_filter=self.marca_filter, tipo_filter=self.tipo_filter, 
-                capacidad_filter=self.capacidad_filter, impreso_filter=self.impreso_filter)
+                capacidad_filter=self.capacidad_filter)
         else:
             self.total_extintores = Extintor.contar_extintores()
         self.total_paginas = (self.total_extintores // self.filas_por_pagina) + (1 if self.total_extintores % self.filas_por_pagina else 0)

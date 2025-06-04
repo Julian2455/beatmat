@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, desc
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, desc, func, case
 from sqlalchemy.orm import relationship,sessionmaker,joinedload
 from db import Base, engine, SessionLocal
 from datetime import date
@@ -215,3 +215,277 @@ class Caja(Base):
             return None
         finally:
             db.close()
+    
+    @classmethod
+    def obtener_estado_cliente(cls, cliente_id):
+        db = SessionLocal()
+        try:
+            resultado = (
+                db.query(
+                    func.sum(cls.total).label('total_compras'),
+                    func.sum(cls.cobro).label('total_cobrado'),
+                    func.sum(cls.adeudado).label('total_adeudado')
+                )
+                .filter(cls.cliente_id == cliente_id)
+                .first()
+            )
+            
+            if resultado:
+                total_compras = resultado.total_compras or 0
+                total_cobrado = resultado.total_cobrado or 0
+                total_adeudado = resultado.total_adeudado or 0
+                saldo = total_cobrado - total_compras
+                return {
+                    'cliente_id': cliente_id,
+                    'total_compras': total_compras,
+                    'total_cobrado': total_cobrado,
+                    'total_adeudado': total_adeudado,
+                    'saldo': saldo,
+                    'estado': 'DEBE' if saldo < 0 else 'A FAVOR' if saldo > 0 else 'AL DIA'
+                }
+        finally:
+            db.close()
+    
+    @classmethod
+    def clientes_con_deuda(cls):
+        db = SessionLocal()
+        try:
+            subquery = (
+                db.query(
+                    cls.cliente_id,
+                    (func.sum(cls.total) - func.sum(cls.cobro)).label('deuda')
+                )
+                .group_by(cls.cliente_id)
+                .having(func.sum(cls.total) - func.sum(cls.cobro) > 0)
+                .subquery()
+            )
+            resultado = (
+                db.query(Cliente.nombre, subquery.c.deuda)
+                .join(subquery, Cliente.id == subquery.c.cliente_id)
+                .order_by(desc(subquery.c.deuda))
+                .all()
+            )
+            return resultado
+        finally:
+            db.close()
+
+    @classmethod
+    def clientes_saldo_favor(cls):
+        db = SessionLocal()
+        try:
+            subquery = (
+                db.query(
+                    cls.cliente_id,
+                    (func.sum(cls.cobro) - func.sum(cls.total)).label('saldo_favor')
+                )
+                .group_by(cls.cliente_id)
+                .having(func.sum(cls.cobro) - func.sum(cls.total) > 0)
+                .subquery()
+            )
+            resultado = (
+                db.query(Cliente.nombre, subquery.c.saldo_favor)
+                .join(subquery, Cliente.id == subquery.c.cliente_id)
+                .order_by(desc(subquery.c.saldo_favor))
+                .all()
+            )
+            return resultado
+        finally:
+            db.close()
+    
+    @classmethod
+    def estado_financiero(cls):
+        db = SessionLocal()
+        try:
+            totales = db.query(
+                func.sum(cls.total).label('total_ventas'),
+                func.sum(cls.cobro).label('total_cobros'),
+                func.sum(cls.adeudado).label('total_adeudado'),
+                func.count(func.distinct(cls.cliente_id)).label('clientes_activos')
+            ).first()
+            subquery = (
+                db.query(
+                    cls.cliente_id,
+                    (func.sum(cls.cobro) - func.sum(cls.total)).label('saldo')
+                )
+                .group_by(cls.cliente_id)
+                .subquery()
+            )
+            estados = db.query(
+                func.sum(case((subquery.c.saldo < 0, 1), else_=0)).label('clientes_deben'),
+                func.sum(case((subquery.c.saldo > 0, 1), else_=0)).label('clientes_favor'),
+                func.sum(case((subquery.c.saldo == 0, 1), else_=0)).label('clientes_al_dia')
+            ).select_from(subquery).first()
+            return {
+                'totales': {
+                    'total_ventas': totales.total_ventas or 0,
+                    'total_cobros': totales.total_cobros or 0,
+                    'total_adeudado': totales.total_adeudado or 0,
+                    'clientes_activos': totales.clientes_activos or 0
+                },
+                'estados': {
+                    'clientes_deben': estados.clientes_deben or 0,
+                    'clientes_favor': estados.clientes_favor or 0,
+                    'clientes_al_dia': estados.clientes_al_dia or 0
+                }
+            }
+        finally:
+            db.close()
+    
+    @classmethod
+    def ventas_por_mes_anual(cls, año):
+        db = SessionLocal()
+        try:
+            resultado = (
+                db.query(
+                    func.strftime('%Y-%m', cls.fecha).label('mes'),
+                    func.sum(cls.total).label('total_ventas_mes'),
+                    func.sum(cls.cobro).label('total_cobros_mes'),
+                    func.sum(cls.adeudado).label('total_adeudado_mes')
+                )
+                .filter(func.strftime('%Y', cls.fecha) == str(año))
+                .group_by(func.strftime('%Y-%m', cls.fecha))
+                .order_by(func.strftime('%Y-%m', cls.fecha))
+                .all()
+            )
+            estadisticas_mensuales = []
+            for row in resultado:
+                estadisticas_mensuales.append({
+                    'mes': row.mes,
+                    'total_ventas': row.total_ventas_mes or 0,
+                    'total_cobros': row.total_cobros_mes or 0,
+                    'total_adeudado': row.total_adeudado_mes or 0
+                })
+            return estadisticas_mensuales
+        except Exception as e:
+            print(f"Error al obtener ventas por mes y año: {e}")
+            return []
+        finally:
+            db.close()
+    
+    @classmethod
+    def obtener_años_disponibles(cls):
+        db = SessionLocal()
+        try:
+            resultado = (
+                db.query(func.strftime('%Y', cls.fecha).label('año'))
+                .distinct()
+                .order_by(func.strftime('%Y', cls.fecha).desc())
+                .all()
+            )
+            return [int(row.año) for row in resultado] if resultado else []
+        except Exception as e:
+            print(f"Error al obtener años disponibles: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def obtener_resumen_mensual_detallado(cls, año):
+        db = SessionLocal()
+        try:
+            meses_completos = []
+            for mes in range(1, 13):
+                meses_completos.append({
+                    'mes_num': mes,
+                    'mes_nombre': [
+                        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+                    ][mes-1],
+                    'total_ventas': 0,
+                    'total_cobros': 0,
+                    'total_adeudado': 0,
+                    'diferencia': 0,
+                    'num_transacciones': 0
+                })
+            resultado = (
+                db.query(
+                    func.strftime('%m', cls.fecha).label('mes'),
+                    func.sum(cls.total).label('total_ventas_mes'),
+                    func.sum(cls.cobro).label('total_cobros_mes'),
+                    func.sum(cls.adeudado).label('total_adeudado_mes'),
+                    func.count(cls.id).label('num_transacciones')
+                )
+                .filter(func.strftime('%Y', cls.fecha) == str(año))
+                .group_by(func.strftime('%m', cls.fecha))
+                .all()
+            )
+            for row in resultado:
+                mes_idx = int(row.mes) - 1
+                if 0 <= mes_idx < 12:
+                    meses_completos[mes_idx].update({
+                        'total_ventas': float(row.total_ventas_mes or 0),
+                        'total_cobros': float(row.total_cobros_mes or 0),
+                        'total_adeudado': float(row.total_adeudado_mes or 0),
+                        'diferencia': float((row.total_cobros_mes or 0) - (row.total_ventas_mes or 0)),
+                        'num_transacciones': int(row.num_transacciones or 0)
+                    })
+            return meses_completos
+        except Exception as e:
+            print(f"Error al obtener resumen mensual detallado: {e}")
+            return []
+        finally:
+            db.close()
+
+    @classmethod
+    def obtener_estadisticas_generales(cls):
+        db = SessionLocal()
+        try:
+            totales = db.query(
+                func.sum(cls.total).label('total_ventas'),
+                func.sum(cls.cobro).label('total_cobros'),
+                func.sum(cls.adeudado).label('total_adeudado'),
+                func.count(cls.id).label('total_transacciones'),
+                func.count(func.distinct(cls.cliente_id)).label('clientes_activos'),
+                func.min(cls.fecha).label('fecha_primera_venta'),
+                func.max(cls.fecha).label('fecha_ultima_venta')
+            ).first()
+            promedio_venta = (totales.total_ventas / totales.total_transacciones) if totales.total_transacciones > 0 else 0
+            porcentaje_cobro = ((totales.total_cobros / totales.total_ventas) * 100) if totales.total_ventas > 0 else 0
+            return {
+                'total_ventas': float(totales.total_ventas or 0),
+                'total_cobros': float(totales.total_cobros or 0),
+                'total_adeudado': float(totales.total_adeudado or 0),
+                'total_transacciones': int(totales.total_transacciones or 0),
+                'clientes_activos': int(totales.clientes_activos or 0),
+                'promedio_venta': float(promedio_venta),
+                'porcentaje_cobro': float(porcentaje_cobro),
+                'fecha_primera_venta': totales.fecha_primera_venta,
+                'fecha_ultima_venta': totales.fecha_ultima_venta,
+                'saldo_pendiente': float((totales.total_ventas or 0) - (totales.total_cobros or 0))
+            }
+        except Exception as e:
+            print(f"Error al obtener estadísticas generales: {e}")
+            return {}
+        finally:
+            db.close()
+
+    @classmethod
+    def obtener_datos_grafico_mensual(cls, año):
+        datos_mensuales = cls.ventas_por_mes_anual(año)
+        meses_nombres = [
+            'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+            'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+        ]
+        
+        datos_grafico = []
+        for i in range(1, 13):
+            mes_str = f"{año}-{i:02d}"
+            datos_mes = next((d for d in datos_mensuales if d['mes'] == mes_str), None)
+            
+            if datos_mes:
+                datos_grafico.append({
+                    'mes': meses_nombres[i-1],
+                    'mes_completo': f"{meses_nombres[i-1]} {año}",
+                    'ventas': datos_mes['total_ventas'],
+                    'cobros': datos_mes['total_cobros'],
+                    'adeudado': datos_mes['total_adeudado']
+                })
+            else:
+                datos_grafico.append({
+                    'mes': meses_nombres[i-1],
+                    'mes_completo': f"{meses_nombres[i-1]} {año}",
+                    'ventas': 0,
+                    'cobros': 0,
+                    'adeudado': 0
+                })
+        return datos_grafico

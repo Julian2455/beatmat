@@ -9,12 +9,18 @@ class PricesController(QObject):
     def __init__(self,ui):
         super().__init__()
         self.ui = ui
-        self.tipo_formulario = None
+        self.check_prices()
         self.formato_decimales()
         self.cargar_precio_nuevos()
         self.cargar_precio_recargas()
         self.ui.btnGuardar.clicked.connect(self.guardar_cambios)
         self.ui.btnCancelar.clicked.connect(self.cancelar_cambios)
+    
+    def check_prices(self):
+        Precios.revisar_nuevos()
+        Precios.revisar_recargas()
+        Precios.limpiar_nuevos()
+        Precios.limpiar_recargas()
 
     def formato_decimales(self):
         self.validator = QDoubleValidator()

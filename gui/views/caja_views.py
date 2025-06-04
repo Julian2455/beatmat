@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QWidget, QDialog
-from gui.designer import Ui_Caja, Ui_AgregarExtintores, Ui_FormPrecios, Ui_ConfigForm
+from gui.designer import Ui_Caja, Ui_AgregarExtintores, Ui_FormPrecios, Ui_ConfigForm, Ui_Reportes
 
 class CajaUi(QWidget, Ui_Caja):
     def __init__(self):
@@ -30,3 +30,8 @@ class ConfigUi(QDialog,Ui_ConfigForm):
     
     def mostrar_form(self, tipo=None):
         self.exec()
+
+class ReportesUi(QWidget, Ui_Reportes):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)

@@ -222,7 +222,7 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter, page=1, per_page=10, disponible=None):
+    def buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, page=1, per_page=10, disponible=None):
         try:
             db = SessionLocal()
             query = (
@@ -249,8 +249,6 @@ class Extintor(Base):
                 query = query.filter(Extintor.capacidad_id == capacidad_filter)
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
-            if impreso_filter:
-                query = query.filter(Extintor.impreso == impreso_filter)
             extintores = (
                 query
                 .offset((page - 1) * per_page)
@@ -305,7 +303,7 @@ class Extintor(Base):
             db.close()
 
     @classmethod
-    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, impreso_filter, disponible=None):
+    def contar_buscar(cls, numeracion, marca_filter, tipo_filter, capacidad_filter, disponible=None):
         try:
             db = SessionLocal()
             query = db.query(cls)
@@ -319,8 +317,6 @@ class Extintor(Base):
                 query = query.filter(cls.capacidad_id == capacidad_filter)
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
-            if impreso_filter:
-                query = query.filter(Extintor.impreso == impreso_filter)
             total = query.count()
             return total
         except Exception as e:

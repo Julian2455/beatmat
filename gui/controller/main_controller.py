@@ -22,6 +22,7 @@ class MainController:
         self.init_gastos_tab()
         self.init_history_tab()
         self.init_caja_tab()
+        self.init_reportes_tab()
         self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
@@ -143,6 +144,12 @@ class MainController:
         self.alta_gasto = RegisterGastosUi()
         self.gastos_tab.pushButton.clicked.connect(self.alta_gasto.mostrar_form)
         self.gts_form_controller = GastosFormController(self.alta_gasto, self.gastos_controller)
+    
+    def init_reportes_tab(self):
+        self.reportes_tab=ReportesUi()
+        self.reportes_controller=ReportesController(self.reportes_tab)
+        self.ui.Reportes.setLayout(QtWidgets.QVBoxLayout())
+        self.ui.Reportes.layout().addWidget(self.reportes_tab)
     
     def init_prices_bar(self):
         # Instancia de PreciosUi y conexion con el formulario
