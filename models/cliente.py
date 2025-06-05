@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, asc
+from sqlalchemy import Column, Integer, String, ForeignKey, asc, Boolean
 from sqlalchemy.orm import sessionmaker, relationship
 from db import Base, engine, SessionLocal
 
@@ -9,6 +9,7 @@ class Cliente(Base):
     nombre = Column(String(70), nullable=False)
     direccion = Column(String(70), nullable=False)
     telefono = Column(Integer, nullable=True)
+    estado = Column(Boolean, default=True)
 
     extintor=relationship('Extintor',back_populates='cliente')
     caja=relationship('Caja',back_populates='cliente')
@@ -19,6 +20,7 @@ class Cliente(Base):
         try:
             clientes = (
                 db.query(cls)
+                .filter(cls.estado==True)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
@@ -87,7 +89,7 @@ class Cliente(Base):
             db=SessionLocal()
             cliente = db.query(cls).filter_by(id=cliente_id).first()
             if cliente:
-                db.delete(cliente)
+                cliente.estado = False
                 db.commit()
                 return True
             return False

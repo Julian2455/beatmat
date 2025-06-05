@@ -68,6 +68,15 @@ class ExtintorController:
             id_extintor = item_con_id.data(Qt.ItemDataRole.UserRole)
             return id_extintor
         return None
+
+    def obtener_numeracion_extintor(self):
+        item_seleccionado = self.ui.tableWidget.currentItem()
+        if item_seleccionado:
+            fila = item_seleccionado.row()
+            item_con_numeracion = self.ui.tableWidget.item(fila, 0)
+            if item_con_numeracion:
+                return item_con_numeracion.text()
+        return None
     
     def actualizar_estado_paginado(self):
         if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
@@ -257,8 +266,28 @@ class ExtintorController:
 
     def eliminar_extintor(self):
         id_extintor = self.obtener_id_extintor()
-        if id_extintor:
-            print(f"Eliminar : {id_extintor}")
+        numeracion_extintor = self.obtener_numeracion_extintor()
+        if id_extintor and numeracion_extintor:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Extintor")
+            msg.setText(f"¿Estás seguro que quieres eliminar al extintor n° '{numeracion_extintor}'?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+
+            if respuesta == QMessageBox.StandardButton.Yes and Extintor.eliminar_extintor(id_extintor) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Extintor eliminado correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        self.mostrar_extintores()
     
     def actualizar_tablas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
         extintor = Extintor.get_by_id(id_extintor)

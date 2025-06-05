@@ -159,7 +159,7 @@ class MainController:
 
     def init_mtc_bar(self):
         self.config_form = ConfigUi()
-        self.mtc_controller = MtcController(self.config_form, self.extintor_controller)
+        self.mtc_controller = MtcController(self.config_form, self.extintor_controller, self.extintor_form_controller)
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))

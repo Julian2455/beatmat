@@ -6,10 +6,11 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import Qt, QObject, QLocale
 
 class MtcController(QObject):
-    def __init__(self,ui, extintor_controller):
+    def __init__(self,ui, extintor_controller, extintor_form_controller):
         super().__init__()
         self.ui = ui
         self.extintor_controller = extintor_controller
+        self.extintor_form_controller = extintor_form_controller
         self.tipo_formulario = None
         self.ui.guardar_detalle.clicked.connect(self.guardar_detalle)
         self.ui.cancelar_form.clicked.connect(self.cancelar)
@@ -78,5 +79,6 @@ class MtcController(QObject):
                 msg.setText(f"Capacidad '{nombre}' registrada correctamente.")
                 msg.exec()
         self.extintor_controller.llenar_combobox_filtro()
+        self.extintor_form_controller.llenar_combobox()
         self.ui.close()
         self.limpiar_formulario()

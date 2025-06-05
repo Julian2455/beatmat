@@ -19,6 +19,7 @@ class Extintor(Base):
     capacidad_id=Column(Integer, ForeignKey('capacidad.id'), nullable=False)
     nuevo = Column(Boolean, nullable=True)
     impreso=Column(Boolean, nullable=False)
+    estado=Column(Boolean, default=True)
 
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
@@ -47,6 +48,7 @@ class Extintor(Base):
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.estado==True)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
@@ -141,6 +143,23 @@ class Extintor(Base):
             return False
         except Exception as e:
             print(f"Error al actualizar extintor: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_extintor(cls,extintor_id):
+        try:
+            db=SessionLocal()
+            extintor = db.query(cls).filter_by(id=extintor_id).first()
+            if extintor:
+                extintor.estado = False
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
             db.rollback()
             return False
         finally:

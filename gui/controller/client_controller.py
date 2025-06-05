@@ -90,6 +90,15 @@ class ClientController:
             id_cliente = item_con_id.data(Qt.ItemDataRole.UserRole)
             return id_cliente
         return None
+    
+    def obtener_nombre_cliente(self):
+        item_seleccionado = self.ui.tableWidget.currentItem()
+        if item_seleccionado:
+            fila = item_seleccionado.row()
+            item_con_nombre = self.ui.tableWidget.item(fila, 0)
+            if item_con_nombre:
+                return item_con_nombre.text()
+        return None
 
     def editar_cliente(self):
         id_cliente = self.obtener_id_cliente()
@@ -105,9 +114,30 @@ class ClientController:
                 self.edit_form_cli.mostrar_form()
     
     def eliminar_cliente(self):
-        id_cliente = self.obtener_id_cliente()
-        if id_cliente: #Aca tiene que ir la logica para eliminar y el mensaje, pero hay que hacerlo despues, por la relacion con las otras tablas
-            print(f"Eliminar : {id_cliente}")
+        cliente_id = self.obtener_id_cliente()
+        nombre_cliente = self.obtener_nombre_cliente()
+        if nombre_cliente and cliente_id:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Cliente")
+            msg.setText(f"¿Estás seguro que quieres eliminar al cliente '{nombre_cliente}'?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+
+            if respuesta == QMessageBox.StandardButton.Yes and Cliente.eliminar_cliente(cliente_id) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Cliente eliminado correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        self.mostrar_clientes()
+                
 
     def actualizar_estado_paginado(self):
         if self.query:

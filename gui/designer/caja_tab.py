@@ -13,7 +13,10 @@ class Ui_Caja(object):
     def setupUi(self, Caja):
         Caja.setObjectName("Caja")
         Caja.resize(1064, 706)
-        Caja.setStyleSheet("QFrame {\n"
+        Caja.setStyleSheet("QLineEdit {\n"
+"    border: none;\n"
+"}\n"
+"QFrame {\n"
 "    border-radius: 6px;\n"
 "}\n"
 "QMainWindow {\n"
@@ -41,7 +44,7 @@ class Ui_Caja(object):
 "QPushButton#btnCerrarCaja:hover {\n"
 "    background-color: #c0392b;\n"
 "}\n"
-"QLineEdit, QComboBox, QDateEdit {\n"
+"QComboBox, QDateEdit {\n"
 "    border: 1px solid #cccccc;\n"
 "    border-radius: 4px;\n"
 "    padding: 3px;\n"
@@ -68,16 +71,7 @@ class Ui_Caja(object):
 "QTableWidget::item:hover {\n"
 "    background-color: #f0f8ff;\n"
 "}\n"
-"/* QLineEdit (buscador) */\n"
-"QLineEdit {\n"
-"    border: 2px solid #ddd;\n"
-"    border-radius: 8px;\n"
-"    padding: 6px 12px;\n"
-"    background-color: white;\n"
-"}\n"
-"QLineEdit:focus {\n"
-"    border-color: #007BFF;\n"
-"}\n"
+"\n"
 "QComboBox {\n"
 "     border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
@@ -269,7 +263,7 @@ class Ui_Caja(object):
         self.verticalLayout.addWidget(self.frameExtintoresCliente)
         self.framePagos = QtWidgets.QFrame(parent=Caja)
         self.framePagos.setMinimumSize(QtCore.QSize(0, 70))
-        self.framePagos.setMaximumSize(QtCore.QSize(16777215, 70)) 
+        self.framePagos.setMaximumSize(QtCore.QSize(16777215, 70))
         self.framePagos.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.framePagos.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.framePagos.setObjectName("framePagos")
@@ -291,6 +285,16 @@ class Ui_Caja(object):
         self.lineCobro = QtWidgets.QLineEdit(parent=self.framePagos)
         self.lineCobro.setMinimumSize(QtCore.QSize(100, 25))
         self.lineCobro.setMaximumSize(QtCore.QSize(100, 25))
+        self.lineCobro.setStyleSheet("/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}")
         self.lineCobro.setObjectName("lineCobro")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.ItemRole.FieldRole, self.lineCobro)
         self.labelAdeudado = QtWidgets.QLabel(parent=self.framePagos)
@@ -303,6 +307,16 @@ class Ui_Caja(object):
         self.lineAdeudado = QtWidgets.QLineEdit(parent=self.framePagos)
         self.lineAdeudado.setMinimumSize(QtCore.QSize(100, 25))
         self.lineAdeudado.setMaximumSize(QtCore.QSize(100, 25))
+        self.lineAdeudado.setStyleSheet("/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}")
         self.lineAdeudado.setReadOnly(True)
         self.lineAdeudado.setObjectName("lineAdeudado")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.ItemRole.FieldRole, self.lineAdeudado)
@@ -317,6 +331,16 @@ class Ui_Caja(object):
         self.horizontalLayout_5.addWidget(self.labelDescripcion)
         self.lineDescripcion = QtWidgets.QLineEdit(parent=self.framePagos)
         self.lineDescripcion.setMinimumSize(QtCore.QSize(250, 25))
+        self.lineDescripcion.setStyleSheet("/* QLineEdit (buscador) */\n"
+"QLineEdit {\n"
+"    border: 2px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"    padding: 6px 12px;\n"
+"    background-color: white;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border-color: #007BFF;\n"
+"}")
         self.lineDescripcion.setObjectName("lineDescripcion")
         self.horizontalLayout_5.addWidget(self.lineDescripcion)
         self.verticalLayout.addWidget(self.framePagos)

@@ -84,7 +84,7 @@ background-color: rgb(191, 191, 191);
           <string notr="true"/>
          </property>
          <property name="currentIndex">
-          <number>4</number>
+          <number>0</number>
          </property>
          <property name="iconSize">
           <size>
