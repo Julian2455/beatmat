@@ -310,6 +310,9 @@ border:none;</string>
         </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaRecargas">
+          <property name="styleSheet">
+           <string notr="true">color:black;</string>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -319,7 +322,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>378</width>
-             <height>331</height>
+             <height>330</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutRecargas"/>
@@ -374,6 +377,9 @@ border:none;</string>
         </item>
         <item>
          <widget class="QScrollArea" name="scrollAreaNuevos">
+          <property name="styleSheet">
+           <string notr="true">color:black;</string>
+          </property>
           <property name="widgetResizable">
            <bool>true</bool>
           </property>
@@ -383,7 +389,7 @@ border:none;</string>
              <x>0</x>
              <y>0</y>
              <width>378</width>
-             <height>331</height>
+             <height>330</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayoutNuevos"/>

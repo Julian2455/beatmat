@@ -163,7 +163,7 @@ QDateEdit:focus {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -225,8 +225,11 @@ QDateEdit:focus {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
         </property>
         <property name="text">
          <string>Cliente:</string>
@@ -240,6 +243,9 @@ QDateEdit:focus {
           <width>250</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
         </property>
         <property name="editable">
          <bool>false</bool>
@@ -271,6 +277,9 @@ QDateEdit:focus {
          <font>
           <pointsize>9</pointsize>
          </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
         </property>
         <property name="text">
          <string>Filtrar por fecha:</string>
@@ -306,7 +315,7 @@ QDateEdit:focus {
         </property>
         <property name="font">
          <font>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="text">
@@ -353,6 +362,9 @@ QDateEdit:focus {
       </property>
       <item>
        <widget class="QTableWidget" name="tableHistorialCompras">
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
+        </property>
         <property name="editTriggers">
          <set>QAbstractItemView::NoEditTriggers</set>
         </property>

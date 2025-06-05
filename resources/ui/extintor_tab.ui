@@ -242,7 +242,7 @@ color:black</string>
         </property>
         <property name="font">
          <font>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
@@ -285,7 +285,7 @@ background-color: rgb(0, 120, 215);</string>
         </property>
         <property name="font">
          <font>
-          <bold>true</bold>
+         <bold>true</bold>
          </font>
         </property>
         <property name="cursor">
@@ -336,7 +336,7 @@ background-color: rgb(255, 0, 0);</string>
       </font>
      </property>
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">color:black;</string>
      </property>
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
@@ -377,7 +377,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="font">
        <font>
-        <bold>true</bold>
+       <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -399,7 +399,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="font">
        <font>
-        <bold>true</bold>
+       <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -412,7 +412,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="font">
        <font>
-        <bold>true</bold>
+       <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -425,7 +425,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="font">
        <font>
-        <bold>true</bold>
+       <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -438,7 +438,7 @@ background-color: rgb(255, 0, 0);</string>
       </property>
       <property name="font">
        <font>
-        <bold>true</bold>
+       <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">

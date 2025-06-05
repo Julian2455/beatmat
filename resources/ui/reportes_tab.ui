@@ -674,26 +674,6 @@ QTabBar::tab:hover {
                    </property>
                   </spacer>
                  </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBoxMostrarCobros">
-                   <property name="text">
-                    <string>Mostrar Cobros</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QCheckBox" name="checkBoxMostrarAdeudado">
-                   <property name="text">
-                    <string>Mostrar Adeudado</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
               </item>
@@ -802,6 +782,11 @@ QTabBar::tab:hover {
                 <column>
                  <property name="text">
                   <string>Diferencia</string>
+                 </property>
+                </column>
+                <column>
+                 <property name="text">
+                  <string>Total Transacciones</string>
                  </property>
                 </column>
                </widget>
