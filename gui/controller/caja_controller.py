@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView, QMenu, QMessageBox, QCheckBox, QLineEdit
 from models import *
 from utils import get_image
-from PyQt6.QtGui import QIcon, QAction, QDoubleValidator
+from PyQt6.QtGui import QIcon, QAction, QDoubleValidator, QIntValidator
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import QDate, Qt, QObject, QLocale
 
@@ -29,6 +29,7 @@ class CajaController(QObject):
         self.ui.btnGuardar.clicked.connect(self.confirmar_compra) 
         self.ui.btnCancelar.clicked.connect(self.cancelar) 
         self.ui.lineCobro.textChanged.connect(self.cobrar)
+        self.ui.lineCobro.setValidator(QIntValidator(1,9999))
     
     def clientes_combobox(self):
         self.ui.comboClientes.clear()

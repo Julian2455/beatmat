@@ -36,7 +36,7 @@ IMAGE_MAP = {
     "config2": resource_path("resources/images/config2.png"),
     "btn-atras": resource_path("resources/images/btn-atras.png"),
     "plantilla": resource_path("resources/images/plantilla.png"),
-    "calendario": resource_path("resources/images/calendario.png"),
+    "calendariod": resource_path("resources/images/calendariod.png"),
     "presupuesto": resource_path("resources/images/presupuesto.png"),
     "dinero": resource_path("resources/images/dinero.png")
 }   

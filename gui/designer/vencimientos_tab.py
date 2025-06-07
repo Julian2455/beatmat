@@ -127,12 +127,13 @@ class Ui_Vencimientos(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem)
         self.label_3 = QtWidgets.QLabel(parent=self.frame_2)
-        self.label_3.setMaximumSize(QtCore.QSize(35, 35))
+        self.label_3.setMaximumSize(QtCore.QSize(23, 23))
         self.label_3.setStyleSheet("color:#27ae60;;\n"
 "background-color: rgb(255, 255, 255);\n"
-" font-weight: bold;")
+" font-weight: bold;\n"
+"border-radius: 10px")
         self.label_3.setText("")
-        self.label_3.setPixmap(QtGui.QPixmap("../images/calendario.png"))
+        self.label_3.setPixmap(QtGui.QPixmap("../../../../Beatman/beatmat/resources/images/calendario.png"))
         self.label_3.setScaledContents(True)
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_2.addWidget(self.label_3)

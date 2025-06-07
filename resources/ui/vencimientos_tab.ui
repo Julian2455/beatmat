@@ -155,20 +155,21 @@ QPushButton#btnAnterior:hover, QPushButton#btnSiguiente:hover {
        <widget class="QLabel" name="label_3">
         <property name="maximumSize">
          <size>
-          <width>35</width>
-          <height>35</height>
+          <width>23</width>
+          <height>23</height>
          </size>
         </property>
         <property name="styleSheet">
          <string notr="true">color:#27ae60;;
 background-color: rgb(255, 255, 255);
- font-weight: bold;</string>
+ font-weight: bold;
+border-radius: 10px</string>
         </property>
         <property name="text">
          <string/>
         </property>
         <property name="pixmap">
-         <pixmap>../images/calendario.png</pixmap>
+         <pixmap>../../../../Beatman/beatmat/resources/images/calendario.png</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>

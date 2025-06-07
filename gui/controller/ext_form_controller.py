@@ -2,7 +2,7 @@ from gui.controller import *
 from models import *
 from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
-from PyQt6.QtGui import QPixmap
+from PyQt6.QtGui import QPixmap, QIntValidator
 from PyQt6 import QtCore
 
 class ExtFormController(QDialog):
@@ -20,6 +20,7 @@ class ExtFormController(QDialog):
         self.ui.setWindowTitle("Registrar Extintor")
         self.llenar_combobox()
         self.ui.label.setPixmap(QPixmap(get_image("extintor")))
+        self.ui.lineEdit_numeracion.setValidator(QIntValidator(1,9999)) #Cambiar este validador debido a que tiene que aceptar mas numeris
     
     def cerrar_form(self):
         self.ui.close()

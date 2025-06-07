@@ -29,7 +29,7 @@ class VencimientosController:
         self.ui.pushButton_3.setIcon(QIcon(get_image("anterior_1"))) 
         self.ui.pushButton_4.setIcon(QIcon(get_image("proximo_1"))) 
         self.ui.imprimir.setIcon(QIcon(get_image("print")))
-        self.ui.label_3.setPixmap(QPixmap(get_image("calendario")))
+        self.ui.label_3.setPixmap(QPixmap(get_image("calendariod")))
         self.ui.restaurar.clicked.connect(self.restaurar_cuenta)
         self.ui.pushButton_5.clicked.connect(self.calcular_vencimientos_dias)
         self.ui.lineEdit.setValidator(QIntValidator(1,9999))

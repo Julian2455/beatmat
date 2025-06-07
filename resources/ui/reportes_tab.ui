@@ -19,9 +19,9 @@
     color: #333333;
 }
 QFrame {
-    border:1px solid #cccccc;
-    border-radius: 4px;
+    border-radius: 6px;
 }
+
 QLabel {
     color: #333333;
     border: none;
@@ -64,21 +64,25 @@ QLineEdit, QComboBox, QDateEdit, QSpinBox {
     padding: 3px;
     background: white;
 }
-QTableWidget {
-    border: 1px solid #cccccc;
-    background-color: white;
-    gridline-color: #dddddd;
-}
+/* QTableWidget / QTableView */
 QHeaderView::section {
-    background-color: #e0e0e0;
-    color: #333333;
-    padding: 3px;
-    border: 1px solid #cccccc;
+    background-color: #ececec;
+    color: #333;
+    padding: 4px;
+    border: none;
     font-weight: bold;
 }
-QTableWidget::item:selected {
-    background-color: #3498db;
-    color: white;
+QTableWidget {
+    border: 1px solid #ddd;
+    background-color: white;
+    gridline-color: #ccc;
+    alternate-background-color: #f2f2f2;
+}
+QTableWidget::item {
+    padding: 6px;
+}
+QTableWidget::item:hover {
+    background-color: #f0f8ff;
 }
 QGroupBox {
     font-weight: bold;
@@ -147,6 +151,9 @@ QTabBar::tab:hover {
        <height>50</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true">background:#34495E;</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -173,12 +180,15 @@ QTabBar::tab:hover {
        <widget class="QLabel" name="labelTitle">
         <property name="font">
          <font>
-          <pointsize>14</pointsize>
-         <bold>true</bold>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
          </font>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(255, 255, 255);</string>
+        </property>
         <property name="text">
-         <string>ESTADÍSTICAS Y ESTADO DE DEUDAS</string>
+         <string>ESTADÍSTICAS Y ESTADO DE CUENTAS</string>
         </property>
        </widget>
       </item>
@@ -234,6 +244,9 @@ QTabBar::tab:hover {
        </property>
        <item>
         <widget class="QGroupBox" name="groupBoxDashboard">
+         <property name="styleSheet">
+          <string notr="true">border: 2px solid #007BFF</string>
+         </property>
          <property name="title">
           <string>Estadisticas Generales</string>
          </property>
@@ -243,6 +256,9 @@ QTabBar::tab:hover {
           </property>
           <item>
            <widget class="QFrame" name="frameResumenGeneral">
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid #007BFF</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -253,16 +269,55 @@ QTabBar::tab:hover {
              <property name="spacing">
               <number>10</number>
              </property>
+             <item row="2" column="0">
+              <widget class="QLabel" name="labelTotalAdeudado">
+               <property name="font">
+                <font>
+                 <pointsize>9</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none</string>
+               </property>
+               <property name="text">
+                <string>Total Adeudado:</string>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <widget class="QLabel" name="labelTotalVentas">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none</string>
                </property>
                <property name="text">
                 <string>Total Ventas:</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLabel" name="labelClientesActivosValor">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">color: #f39c12;
+border:none</string>
+               </property>
+               <property name="text">
+                <string>0</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                </property>
               </widget>
              </item>
@@ -271,75 +326,12 @@ QTabBar::tab:hover {
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: #27ae60;</string>
-               </property>
-               <property name="text">
-                <string>$0.00</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="labelTotalCobros">
-               <property name="font">
-                <font>
-                 <pointsize>9</pointsize>
-                <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Total Cobros:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
-              <widget class="QLabel" name="labelTotalCobrosValor">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: #3498db;</string>
-               </property>
-               <property name="text">
-                <string>$0.00</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QLabel" name="labelTotalAdeudado">
-               <property name="font">
-                <font>
-                 <pointsize>9</pointsize>
-                <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Total Adeudado:</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="1">
-              <widget class="QLabel" name="labelTotalAdeudadoValor">
-               <property name="font">
-                <font>
-                 <pointsize>10</pointsize>
-                <bold>true</bold>
-                </font>
-               </property>
-               <property name="styleSheet">
-                <string notr="true">color: #e74c3c;</string>
+                <string notr="true">color: #27ae60;
+border:none</string>
                </property>
                <property name="text">
                 <string>$0.00</string>
@@ -354,30 +346,71 @@ QTabBar::tab:hover {
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none</string>
                </property>
                <property name="text">
                 <string>Clientes Activos:</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QLabel" name="labelClientesActivosValor">
+             <item row="2" column="1">
+              <widget class="QLabel" name="labelTotalAdeudadoValor">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: #f39c12;</string>
+                <string notr="true">color: #e74c3c;
+border:none</string>
                </property>
                <property name="text">
-                <string>0</string>
+                <string>$0.00</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLabel" name="labelTotalCobrosValor">
+               <property name="font">
+                <font>
+                 <pointsize>10</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none;
+color: #3498db;</string>
+               </property>
+               <property name="text">
+                <string>$0.00</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelTotalCobros">
+               <property name="font">
+                <font>
+                 <pointsize>9</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none
+</string>
+               </property>
+               <property name="text">
+                <string>Total Cobros:</string>
                </property>
               </widget>
              </item>
@@ -386,6 +419,9 @@ QTabBar::tab:hover {
           </item>
           <item>
            <widget class="QFrame" name="frameEstadosClientes">
+            <property name="styleSheet">
+             <string notr="true">border: 1px solid #007BFF</string>
+            </property>
             <property name="frameShape">
              <enum>QFrame::StyledPanel</enum>
             </property>
@@ -396,16 +432,20 @@ QTabBar::tab:hover {
              <property name="spacing">
               <number>10</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QLabel" name="labelClientesDeben">
+             <item row="1" column="0">
+              <widget class="QLabel" name="labelClientesFavor">
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
+               <property name="styleSheet">
+                <string notr="true">border:none
+</string>
+               </property>
                <property name="text">
-                <string>Clientes que Deben:</string>
+                <string>Clientes a Favor:</string>
                </property>
               </widget>
              </item>
@@ -414,11 +454,13 @@ QTabBar::tab:hover {
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: #e74c3c;</string>
+                <string notr="true">
+border:none;
+color: #e74c3c;</string>
                </property>
                <property name="text">
                 <string>0</string>
@@ -428,29 +470,17 @@ QTabBar::tab:hover {
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
-              <widget class="QLabel" name="labelClientesFavor">
-               <property name="font">
-                <font>
-                 <pointsize>9</pointsize>
-                <bold>true</bold>
-                </font>
-               </property>
-               <property name="text">
-                <string>Clientes a Favor:</string>
-               </property>
-              </widget>
-             </item>
              <item row="1" column="1">
               <widget class="QLabel" name="labelClientesFavorValor">
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: #27ae60;</string>
+                <string notr="true">color: #27ae60;
+border:none</string>
                </property>
                <property name="text">
                 <string>0</string>
@@ -465,8 +495,12 @@ QTabBar::tab:hover {
                <property name="font">
                 <font>
                  <pointsize>9</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none
+</string>
                </property>
                <property name="text">
                 <string>Clientes al Día:</string>
@@ -478,17 +512,35 @@ QTabBar::tab:hover {
                <property name="font">
                 <font>
                  <pointsize>10</pointsize>
-                <bold>true</bold>
+                 <bold>true</bold>
                 </font>
                </property>
                <property name="styleSheet">
-                <string notr="true">color: #3498db;</string>
+                <string notr="true">border:none;
+color: #3498db;</string>
                </property>
                <property name="text">
                 <string>0</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QLabel" name="labelClientesDeben">
+               <property name="font">
+                <font>
+                 <pointsize>9</pointsize>
+                 <bold>true</bold>
+                </font>
+               </property>
+               <property name="styleSheet">
+                <string notr="true">border:none
+</string>
+               </property>
+               <property name="text">
+                <string>Clientes que Deben:</string>
                </property>
               </widget>
              </item>
@@ -520,7 +572,7 @@ QTabBar::tab:hover {
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>0</number>
+          <number>1</number>
          </property>
          <widget class="QWidget" name="tabDeudas">
           <attribute name="title">
@@ -621,7 +673,7 @@ QTabBar::tab:hover {
                    <property name="font">
                     <font>
                      <pointsize>10</pointsize>
-                    <bold>true</bold>
+                     <bold>true</bold>
                     </font>
                    </property>
                    <property name="text">
@@ -656,8 +708,13 @@ QTabBar::tab:hover {
                      <height>31</height>
                     </size>
                    </property>
+                   <property name="font">
+                    <font>
+                     <bold>true</bold>
+                    </font>
+                   </property>
                    <property name="text">
-                    <string>Cargar Gráfico</string>
+                    <string>Generar Gráfico</string>
                    </property>
                   </widget>
                  </item>
@@ -719,7 +776,7 @@ QTabBar::tab:hover {
                     <string notr="true">color: #7f8c8d; border: 2px dashed #bdc3c7; border-radius: 8px;</string>
                    </property>
                    <property name="text">
-                    <string>Seleccione un año y haga clic en &quot;Cargar Gráfico&quot; para mostrar las estadísticas de ventas mensuales</string>
+                    <string>Seleccione un año y haga clic en &quot;Generar Gráfico&quot; para mostrar las estadísticas de ventas mensuales</string>
                    </property>
                    <property name="alignment">
                     <set>Qt::AlignCenter</set>

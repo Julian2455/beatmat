@@ -6,12 +6,13 @@ from models import *
 from utils import get_image
 
 class ExtintorController:
-    def __init__(self, ui):
+    def __init__(self, ui, client_controller):
         self.ui = ui
         self.query=None
         self.marca_filter = None
         self.tipo_filter = None
         self.capacidad_filter = None
+        self.client_controller = client_controller
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_extintores = Extintor.contar_extintores()
@@ -288,6 +289,7 @@ class ExtintorController:
                 msg.setText("Eliminacion cancelada.")
                 msg.exec()
         self.mostrar_extintores()
+        self.client_controller.extintores_clientes()
     
     def actualizar_tablas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
         extintor = Extintor.get_by_id(id_extintor)

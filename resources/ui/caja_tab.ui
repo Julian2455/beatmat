@@ -45,12 +45,7 @@ QPushButton#btnCerrarCaja {
 QPushButton#btnCerrarCaja:hover {
     background-color: #c0392b;
 }
-QComboBox, QDateEdit {
-    border: 1px solid #cccccc;
-    border-radius: 4px;
-    padding: 3px;
-    background: white;
-}
+
 
 /* QTableWidget / QTableView */
 QHeaderView::section {
@@ -80,13 +75,7 @@ QComboBox {
      color: #333;
      background-color: #fff;
    }
-QDateEdit {
-     border: 2px solid rgb(255, 255, 255);
-     border-radius: 5px;
-     padding: 5px 8px;
-     color: #333;
-     background-color: #fff;
-   }
+
 QComboBox:focus {
      border: 1px solid #0078d7;
      background-color: #eef6ff;
@@ -154,7 +143,7 @@ QComboBox:focus {
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -250,7 +239,7 @@ color: rgb(255, 255, 255);</string>
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -306,7 +295,7 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="font">
          <font>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="visible">
@@ -338,7 +327,7 @@ background-color: rgb(255, 0, 0);</string>
         </property>
         <property name="font">
          <font>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -395,22 +384,6 @@ background-color:rgb(0, 4, 255)</string>
       <property name="bottomMargin">
        <number>6</number>
       </property>
-      <item>
-       <widget class="QLabel" name="labelExtintoresCliente">
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color:black;</string>
-        </property>
-        <property name="text">
-         <string>Detalle de Facturación</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QTableWidget" name="tableExtintoresCliente">
         <property name="styleSheet">
@@ -476,6 +449,22 @@ background-color:rgb(0, 4, 255)</string>
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="labelExtintoresCliente">
+        <property name="font">
+         <font>
+          <pointsize>9</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:black;</string>
+        </property>
+        <property name="text">
+         <string>Detalle de Facturación</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
          <spacer name="horizontalSpacer_3">
@@ -495,7 +484,7 @@ background-color:rgb(0, 4, 255)</string>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -517,7 +506,7 @@ background-color:rgb(0, 4, 255)</string>
           <property name="font">
            <font>
             <pointsize>12</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -585,7 +574,7 @@ background-color:rgb(0, 4, 255)</string>
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -611,13 +600,14 @@ background-color:rgb(0, 4, 255)</string>
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">/* QLineEdit (buscador) */
-QLineEdit {
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 6px 12px;
-    background-color: white;
-}
+           <string notr="true"> QLineEdit {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
+
 QLineEdit:focus {
     border-color: #007BFF;
 }</string>
@@ -629,7 +619,7 @@ QLineEdit:focus {
           <property name="font">
            <font>
             <pointsize>9</pointsize>
-           <bold>true</bold>
+            <bold>true</bold>
            </font>
           </property>
           <property name="styleSheet">
@@ -655,13 +645,13 @@ QLineEdit:focus {
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">/* QLineEdit (buscador) */
-QLineEdit {
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 6px 12px;
-    background-color: white;
-}
+           <string notr="true">QLineEdit {
+     border: 2px solid rgb(85, 85, 127);
+     border-radius: 5px;
+     padding: 5px 8px;
+     color: #333;
+     background-color: #fff;
+   }
 QLineEdit:focus {
     border-color: #007BFF;
 }</string>
@@ -678,7 +668,7 @@ QLineEdit:focus {
         <property name="font">
          <font>
           <pointsize>9</pointsize>
-         <bold>true</bold>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
@@ -701,13 +691,7 @@ QLineEdit:focus {
          </size>
         </property>
         <property name="styleSheet">
-         <string notr="true">/* QLineEdit (buscador) */
-QLineEdit {
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 6px 12px;
-    background-color: white;
-}
+         <string notr="true">
 QLineEdit:focus {
     border-color: #007BFF;
 }</string>
@@ -742,7 +726,7 @@ QLineEdit:focus {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="text">
@@ -764,7 +748,7 @@ QLineEdit:focus {
        </property>
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="styleSheet">

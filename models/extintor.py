@@ -74,6 +74,7 @@ class Extintor(Base):
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .filter(cls.impreso==False)
+                .filter(cls.estado==True)
                 .all()
             )
             return extintores
@@ -97,6 +98,7 @@ class Extintor(Base):
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .filter(cls.cliente_id == client_id)
+                .filter(cls.estado==True)
                 .all()
             )
             return extintores
@@ -206,6 +208,7 @@ class Extintor(Base):
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .filter(Extintor.cliente_id == id_cliente)
+                .filter(cls.estado==True)
                 .all()
             )
             resultado = []
@@ -257,6 +260,7 @@ class Extintor(Base):
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.estado==True) ##############ACA CAMBIE
             )
             if numeracion:
                 query = query.filter(Extintor.numeracion.like(f"{numeracion}%"))
@@ -297,6 +301,7 @@ class Extintor(Base):
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.estado==True)
             )
             if numeracion:
                 query = query.filter(Extintor.numeracion.like(f"{numeracion}%"))
@@ -482,6 +487,7 @@ class Extintor(Base):
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
                                 (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .filter(cls.estado==True)
                 .order_by(Recarga.nuevo_control_recarga)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
@@ -514,6 +520,7 @@ class Extintor(Base):
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
                                 (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .filter(cls.estado==True)
                 .scalar()
             )
             return total
@@ -572,6 +579,7 @@ class Extintor(Base):
                 .join(Cliente, Cliente.id == Extintor.cliente_id)
                 .join(Marca, Marca.id == Extintor.marca_id)
                 .filter(Recarga.id.in_(ids))
+                .filter(cls.estado==True)
                 .order_by(Recarga.nuevo_control_recarga)
                 .all()
             )
