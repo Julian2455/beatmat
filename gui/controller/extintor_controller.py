@@ -289,7 +289,8 @@ class ExtintorController:
                 msg.setText("Eliminacion cancelada.")
                 msg.exec()
         self.mostrar_extintores()
-        self.client_controller.extintores_clientes()
+        if self.client_controller.indice_actual:
+            self.client_controller.extintores_clientes(self.client_controller.indice_actual)
     
     def actualizar_tablas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
         extintor = Extintor.get_by_id(id_extintor)

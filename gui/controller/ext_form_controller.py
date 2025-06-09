@@ -2,8 +2,9 @@ from gui.controller import *
 from models import *
 from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
-from PyQt6.QtGui import QPixmap, QIntValidator
+from PyQt6.QtGui import QPixmap, QIntValidator, QRegularExpressionValidator
 from PyQt6 import QtCore
+from PyQt6.QtCore import QRegularExpression
 
 class ExtFormController(QDialog):
     def __init__(self,ui,extintor_controller, extintor_id=None, agregar_extintor_controller=None, precios_controller=None):
@@ -20,8 +21,10 @@ class ExtFormController(QDialog):
         self.ui.setWindowTitle("Registrar Extintor")
         self.llenar_combobox()
         self.ui.label.setPixmap(QPixmap(get_image("extintor")))
-        self.ui.lineEdit_numeracion.setValidator(QIntValidator(1,9999)) #Cambiar este validador debido a que tiene que aceptar mas numeris
-    
+        regex = QRegularExpression(r'^\d+$')
+        validator = QRegularExpressionValidator(regex)
+        self.ui.lineEdit_numeracion.setValidator(validator)
+
     def cerrar_form(self):
         self.ui.close()
         self.ui.lineEdit_numeracion.clear()

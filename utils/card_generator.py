@@ -51,11 +51,11 @@ class CardPDFGenerator:
             table.setStyle(TableStyle([
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
-                ('GRID', (0, 0), (-1, -1), 1, colors.black),
-                ('LEFTPADDING', (0, 0), (-1, -1), 3),
-                ('RIGHTPADDING', (0, 0), (-1, -1), 3),
-                ('TOPPADDING', (0, 0), (-1, -1), 3),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+                ('GRID', (0, 0), (-1, -1), 0.5, colors.grey),
+                ('LEFTPADDING', (0, 0), (-1, -1), 0),
+                ('RIGHTPADDING', (0, 0), (-1, -1), 0),
+                ('TOPPADDING', (0, 0), (-1, -1), 0),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 0),
             ]))
             story.append(table)
             if i + 6 < len(extintores_data):
@@ -66,6 +66,10 @@ class CardPDFGenerator:
     def _crear_tarjeta(self, extintor_data):
         styles = getSampleStyleSheet()
         content_width = self.card_width - 6 * mm
+
+        header_color = colors.HexColor("#2C3E50")
+        banner_color = colors.HexColor("#34495E")
+
         header_style = ParagraphStyle(
             'HeaderStyle',
             parent=styles['Normal'],
@@ -105,29 +109,30 @@ class CardPDFGenerator:
             fontName='Helvetica',
             wordWrap='LTR'
         )
+
         card_content = [
             [Table([
                 [Paragraph("LE * LO", header_style)],
                 [Paragraph("MATAFUEGOS", subtitle_style)]
-            ], colWidths=[content_width], 
+            ], colWidths=[content_width],
             style=TableStyle([
-                ('BACKGROUND', (0, 0), (-1, -1), colors.Color(0.133, 0.133, 0.133)),
+                ('BACKGROUND', (0, 0), (0, 1), header_color),
                 ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('TOPPADDING', (0, 0), (-1, -1), 3),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+                ('TOPPADDING', (0, 0), (-1, -1), 5),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
             ]))],
             [Paragraph("Bertani Sur 750 - San Rafael Mendoza", normal_style)],
             [Paragraph("2604617290 - 2604519103", normal_style)],
             [Table([
-                [Paragraph("Propietario:", label_style), 
-                 Paragraph(extintor_data.get('propietario', ''), value_style)],
-                [Paragraph("Clase:", label_style), 
-                 Paragraph(extintor_data.get('clase', ''), value_style)],
-                [Paragraph("Capacidad:", label_style), 
-                 Paragraph(f"{extintor_data.get('capacidad', '')}", value_style)],
-                [Paragraph("VTO. PRUEBA<br/>HIDRAULICA:", label_style), 
-                 Paragraph(extintor_data.get('vto_prueba_hidraulica', ''), value_style)],
-            ], colWidths=[22 * mm, 52 * mm], 
+                [Paragraph("Propietario:", label_style),
+                Paragraph(extintor_data.get('propietario', ''), value_style)],
+                [Paragraph("Clase:", label_style),
+                Paragraph(extintor_data.get('clase', ''), value_style)],
+                [Paragraph("Capacidad:", label_style),
+                Paragraph(f"{extintor_data.get('capacidad', '')}", value_style)],
+                [Paragraph("VTO. PRUEBA<br/>HIDRAULICA:", label_style),
+                Paragraph(extintor_data.get('vto_prueba_hidraulica', ''), value_style)],
+            ], colWidths=[22 * mm, 52 * mm],
             style=TableStyle([
                 ('VALIGN', (0, 0), (-1, -1), 'TOP'),
                 ('LEFTPADDING', (0, 0), (-1, -1), 3),
@@ -148,10 +153,10 @@ class CardPDFGenerator:
                 ))]
             ], colWidths=[content_width],
             style=TableStyle([
-                ('BACKGROUND', (0, 0), (-1, -1), colors.black),
+                ('BACKGROUND', (0, 0), (-1, -1), banner_color),
                 ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('TOPPADDING', (0, 0), (-1, -1), 2), 
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 2), 
+                ('TOPPADDING', (0, 0), (-1, -1), 2),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
             ]))],
             [Paragraph(extintor_data.get('fecha_vencimiento', ''), ParagraphStyle(
                 'VencimientoStyle',
@@ -159,7 +164,7 @@ class CardPDFGenerator:
                 fontSize=12,
                 alignment=TA_CENTER,
                 fontName='Helvetica-Bold',
-                textColor=colors.black,
+                textColor=header_color,
                 spaceAfter=3
             ))],
             [Paragraph(f"N°: {extintor_data.get('numero', '')}", ParagraphStyle(
@@ -168,20 +173,21 @@ class CardPDFGenerator:
                 fontSize=10,
                 alignment=TA_CENTER,
                 fontName='Helvetica-Bold',
-                textColor=colors.black
+                textColor=header_color
             ))],
             [Spacer(1, 2)],
             [Paragraph("Recarga y mantenimiento<br/>Según Normas IRAM", normal_style)],
-            [Paragraph("El propietario es responsable de la<br/>dotación de Matafuegos<br/>Decreto N° 351/79", 
-                      ParagraphStyle(
-                          'FooterStyle',
-                          parent=styles['Normal'],
-                          fontSize=7,
-                          alignment=TA_CENTER,
-                          fontName='Helvetica',
-                          textColor=colors.Color(0.3, 0.3, 0.3)
-                      ))],
+            [Paragraph("El propietario es responsable de la dotación de Matafuegos<br/>Decreto N° 351/79",
+                ParagraphStyle(
+                    'FooterStyle',
+                    parent=styles['Normal'],
+                    fontSize=7,
+                    alignment=TA_CENTER,
+                    fontName='Helvetica',
+                    textColor=colors.HexColor("#7F8C8D")  # gris suave
+                ))],
         ]
+
         card_table = Table(
             card_content,
             colWidths=[content_width],

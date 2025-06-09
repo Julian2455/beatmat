@@ -1,9 +1,9 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView, QMenu, QMessageBox, QCheckBox, QLineEdit
 from models import *
 from utils import get_image
-from PyQt6.QtGui import QIcon, QAction, QDoubleValidator, QIntValidator
+from PyQt6.QtGui import QIcon, QAction, QDoubleValidator, QIntValidator, QRegularExpressionValidator
 from PyQt6 import QtCore, QtWidgets
-from PyQt6.QtCore import QDate, Qt, QObject, QLocale
+from PyQt6.QtCore import QDate, Qt, QObject, QLocale, QRegularExpression
 
 class CajaController(QObject):
     def __init__(self,ui,historial_controller=None,print_controller=None):
@@ -29,7 +29,10 @@ class CajaController(QObject):
         self.ui.btnGuardar.clicked.connect(self.confirmar_compra) 
         self.ui.btnCancelar.clicked.connect(self.cancelar) 
         self.ui.lineCobro.textChanged.connect(self.cobrar)
-        self.ui.lineCobro.setValidator(QIntValidator(1,9999))
+        regex = QRegularExpression(r'^\d+$')
+        validator = QRegularExpressionValidator(regex)
+        self.ui.lineCobro.setValidator(validator)
+        self.ui.lineCobro.textChanged.connect(self.formatear_gasto)
     
     def clientes_combobox(self):
         self.ui.comboClientes.clear()
@@ -333,3 +336,17 @@ class CajaController(QObject):
     
     def cancelar(self):
         self.limpiar_campos()
+    
+    def formatear_gasto(self):
+        texto = self.ui.lineCobro.text()
+        texto_limpio = texto.replace(".", "")
+        if not texto_limpio:
+            return
+        try:
+            numero = int(texto_limpio)
+            texto_formateado = f"{numero:,}".replace(",", ".")
+            self.ui.lineCobro.blockSignals(True)
+            self.ui.lineCobro.setText(texto_formateado)
+            self.ui.lineCobro.blockSignals(False)
+        except ValueError:
+            pass

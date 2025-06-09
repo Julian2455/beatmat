@@ -36,6 +36,7 @@ class Cliente(Base):
             clientes = (
                 db.query(cls)
                 .order_by(asc(cls.nombre))
+                .filter(cls.estado==True)
                 .all()
             )
             return clientes

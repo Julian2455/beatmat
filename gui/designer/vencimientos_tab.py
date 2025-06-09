@@ -197,6 +197,7 @@ class Ui_Vencimientos(object):
         font.setBold(True)
         self.restaurar.setFont(font)
         self.restaurar.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.restaurar.setVisible(False)
         self.restaurar.setStyleSheet("background-color: rgb(255, 0, 0);")
         self.restaurar.setObjectName("restaurar")
         self.horizontalLayout_3.addWidget(self.restaurar)

@@ -2,7 +2,8 @@ from gui.controller import *
 from models import *
 from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
-from PyQt6.QtGui import QPixmap, QIntValidator
+from PyQt6.QtGui import QPixmap, QIntValidator, QRegularExpressionValidator
+from PyQt6.QtCore import QRegularExpression
 
 class ClientFormController(QDialog):
     def __init__(self,ui,client_controller,cliente_id=None,caja_controller=None):
@@ -17,7 +18,9 @@ class ClientFormController(QDialog):
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.setWindowTitle("Registrar Cliente")
         self.ui.label.setPixmap(QPixmap(get_image("avatar")))
-        self.ui.lineEdit_3.setValidator(QIntValidator(1,9999)) #Cambiar este validador debido a que tiene que aceptar mas numeris
+        regex = QRegularExpression(r'^\d+$')
+        validator = QRegularExpressionValidator(regex)
+        self.ui.lineEdit_3.setValidator(validator)
     
     def cerrar_form(self):
         self.ui.close()
