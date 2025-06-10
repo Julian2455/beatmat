@@ -6,12 +6,13 @@ from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import QDate, Qt, QObject, QLocale
 
 class CajaController(QObject):
-    def __init__(self,ui,historial_controller=None,print_controller=None):
+    def __init__(self,ui,historial_controller=None,print_controller=None, reportes_controller=None):
         super().__init__()
         self.ui = ui
         self.cliente=None
         self.historial_controller=historial_controller
         self.print_controller=print_controller
+        self.reportes_controller=reportes_controller
         self.clientes_combobox()
         self.configurar_validadores()
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
@@ -275,7 +276,7 @@ class CajaController(QObject):
                         precios_adicionales[extintor_id] = precio_adicional
                 except ValueError:
                     pass
-            item_total = self.ui.tableExtintoresCliente.item(fila, 4)
+            item_total = self.ui.tableExtintoresCliente.item(fila, 8)
             if item_total and item_total.text():
                 try:
                     precio_total = self.locale.toDouble(item_total.text())[0]
@@ -297,6 +298,8 @@ class CajaController(QObject):
                 self.historial_controller.mostrar_ventas()
             if self.print_controller:
                 self.print_controller.mostrar_extintores()
+            if self.reportes_controller:
+                self.reportes_controller.cargar_datos()
         else:
             self.mostrar_error("Error", "Ocurrió un error al registrar la compra.")
 

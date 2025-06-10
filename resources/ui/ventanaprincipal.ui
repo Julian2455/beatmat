@@ -189,6 +189,7 @@ background-color: rgb(191, 191, 191);
     <addaction name="actionPrecios"/>
     <addaction name="menuExtintores"/>
     <addaction name="actionTarjetas"/>
+    <addaction name="actionGastos"/>
    </widget>
    <addaction name="menuConfiguraci_n"/>
   </widget>
@@ -215,6 +216,11 @@ background-color: rgb(191, 191, 191);
   <action name="actionTarjetas">
    <property name="text">
     <string>Tarjetas</string>
+   </property>
+  </action>
+  <action name="actionGastos">
+   <property name="text">
+    <string>Gastos</string>
    </property>
   </action>
  </widget>

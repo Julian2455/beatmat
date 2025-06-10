@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>444</width>
-    <height>365</height>
+    <width>350</width>
+    <height>497</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -45,13 +45,21 @@
    QPushButton#guardar_gasto:hover {
      background-color: #0d47a1;
    }
-QTextEdit , QDateEdit {
+QTextEdit , QDateEdit, QComboBox {
      border: 2px solid rgb(85, 85, 127);
      border-radius: 5px;
      padding: 5px 8px;
      color: #333;
      background-color: #fff;
-padding:6px;
+     padding:6px;
+   }
+QComboBox::drop-down {
+     border: none;
+     background: transparent;
+   }
+QComboBox::down-arrow {
+     width: 12px;
+     height: 12px;
    }</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
@@ -146,7 +154,7 @@ border:none;
 color:rgb(255, 255, 255);</string>
         </property>
         <property name="text">
-         <string>Gastos de Insumo</string>
+         <string>Registro de Gastos</string>
         </property>
        </widget>
       </item>
@@ -171,7 +179,7 @@ color:rgb(255, 255, 255);</string>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
        <widget class="QWidget" name="widget_3" native="true">
-        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1">
+        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,0,1,1,1">
          <item alignment="Qt::AlignBottom">
           <widget class="QWidget" name="widget_8" native="true">
            <layout class="QVBoxLayout" name="verticalLayout_4">
@@ -197,77 +205,86 @@ color:rgb(255, 255, 255);</string>
            </layout>
           </widget>
          </item>
+         <item alignment="Qt::AlignBottom">
+          <widget class="QWidget" name="widget_categoria" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_categoria">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_categoria">
+              <property name="font">
+               <font>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Categoría</string>
+              </property>
+             </widget>
+            </item>
+            <item alignment="Qt::AlignTop">
+             <widget class="QComboBox" name="comboBox_categoria">
+              <item>
+               <property name="text">
+                <string>Seleccionar categoría...</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
          <item>
-          <widget class="QWidget" name="widget_5" native="true">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QWidget" name="widget_10" native="true">
-              <layout class="QVBoxLayout" name="verticalLayout_5">
-               <item alignment="Qt::AlignHCenter">
-                <widget class="QLabel" name="label_3">
-                 <property name="font">
-                  <font>
-                   <bold>true</bold>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Nombre de Insumo</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QWidget" name="widget_12" native="true">
-                 <layout class="QHBoxLayout" name="horizontalLayout_5">
-                  <item alignment="Qt::AlignTop">
-                   <widget class="QLineEdit" name="lineEdit"/>
-                  </item>
-                 </layout>
-                </widget>
-               </item>
-              </layout>
+          <widget class="QWidget" name="widget_10" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_3">
+              <property name="font">
+               <font>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="text">
+               <string>Nombre de Insumo</string>
+              </property>
              </widget>
             </item>
             <item>
-             <widget class="QWidget" name="widget_9" native="true">
-              <property name="maximumSize">
-               <size>
-                <width>130</width>
-                <height>16777215</height>
-               </size>
+             <widget class="QLineEdit" name="lineEdit"/>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="widget_9" native="true">
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item alignment="Qt::AlignHCenter">
+             <widget class="QLabel" name="label_7">
+              <property name="font">
+               <font>
+                <bold>true</bold>
+               </font>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_6">
-               <item alignment="Qt::AlignHCenter|Qt::AlignBottom">
-                <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Monto</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QWidget" name="widget_11" native="true">
+              <layout class="QHBoxLayout" name="horizontalLayout_6">
+               <item>
+                <widget class="QLabel" name="label_8">
                  <property name="font">
                   <font>
                    <bold>true</bold>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Monto</string>
+                  <string>$</string>
                  </property>
                 </widget>
                </item>
-               <item alignment="Qt::AlignRight">
-                <widget class="QWidget" name="widget_11" native="true">
-                 <layout class="QHBoxLayout" name="horizontalLayout_6">
-                  <item>
-                   <widget class="QLabel" name="label_8">
-                    <property name="font">
-                     <font>
-                      <bold>true</bold>
-                     </font>
-                    </property>
-                    <property name="text">
-                     <string>$</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item alignment="Qt::AlignBottom">
-                   <widget class="QLineEdit" name="lineEdit_3"/>
-                  </item>
-                 </layout>
-                </widget>
+               <item alignment="Qt::AlignBottom">
+                <widget class="QLineEdit" name="lineEdit_3"/>
                </item>
               </layout>
              </widget>

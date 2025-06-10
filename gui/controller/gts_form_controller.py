@@ -4,6 +4,7 @@ from utils import get_image
 from PyQt6.QtWidgets import QDialog, QMessageBox
 from PyQt6.QtGui import QPixmap,QRegularExpressionValidator
 from PyQt6.QtCore import QDate, QRegularExpression
+from PyQt6 import QtCore
 
 class GastosFormController(QDialog):
     def __init__(self,ui,gastos_controller,gasto_id=None):
@@ -12,6 +13,7 @@ class GastosFormController(QDialog):
         self.gastos_controller = gastos_controller
         self.gasto_id = gasto_id 
         self.ui.dateEdit.setDate(QDate.currentDate())
+        self.llenar_comboBox()
         self.ui.guardar_gasto.clicked.connect(self.guardar_gasto)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.label.setPixmap(QPixmap(get_image("dinero")))
@@ -27,17 +29,36 @@ class GastosFormController(QDialog):
     def limpiar_formulario(self):
         self.ui.lineEdit.clear()
         self.ui.lineEdit_3.clear()
+        self.ui.comboBox_categoria.clear()
+    
+    def llenar_comboBox(self):
+        self.ui.comboBox_categoria.clear()
+        self.ui.comboBox_categoria.addItem("Seleccionar categoría...")
+        lista=CatGasto.show_all()
+        for categoria in lista:
+            self.ui.comboBox_categoria.addItem(categoria.nombre)
+            index=self.ui.comboBox_categoria.count()-1
+            self.ui.comboBox_categoria.setItemData(index, categoria.id, QtCore.Qt.ItemDataRole.UserRole)
     
     def obtener_datos(self):
         fecha=self.ui.dateEdit.date()
         fecha=fecha.toPyDate()
         insumo = self.ui.lineEdit.text()
         gasto = self.ui.lineEdit_3.text().replace(".", "")
-        return(fecha,insumo, gasto)
+        categoria=self.ui.comboBox_categoria.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        return(fecha,insumo, gasto, categoria)
     
     def guardar_gasto(self):
-        fecha,insumo, gasto= self.obtener_datos()
-        if Gastos.registrar(fecha,insumo,gasto):
+        fecha,insumo, gasto, categoria= self.obtener_datos()
+        if not fecha or not insumo or not gasto or not categoria:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Error")
+            msg.setText("Por favor, completa todos los campos.")
+            msg.exec()
+            return
+        else: 
+            Gastos.registrar(fecha,insumo,gasto,categoria)
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Information)
             msg.setWindowTitle("Éxito")

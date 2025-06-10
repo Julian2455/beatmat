@@ -119,6 +119,8 @@ class Ui_MainWindow(object):
         self.actionCapacidad.setObjectName("actionCapacidad")
         self.actionTarjetas = QtGui.QAction(parent=MainWindow)
         self.actionTarjetas.setObjectName("actionTarjetas")
+        self.actionGastos = QtGui.QAction(parent=MainWindow)
+        self.actionGastos.setObjectName("actionGastos")
         self.menuExtintores.addAction(self.actionMarcas)
         self.menuExtintores.addSeparator()
         self.menuExtintores.addAction(self.actionTipos)
@@ -127,6 +129,7 @@ class Ui_MainWindow(object):
         self.menuConfiguraci_n.addAction(self.actionPrecios)
         self.menuConfiguraci_n.addAction(self.menuExtintores.menuAction())
         self.menuConfiguraci_n.addAction(self.actionTarjetas)
+        self.menuConfiguraci_n.addAction(self.actionGastos)
         self.menuBar.addAction(self.menuConfiguraci_n.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -150,6 +153,7 @@ class Ui_MainWindow(object):
         self.actionTipos.setText(_translate("MainWindow", "Tipos"))
         self.actionCapacidad.setText(_translate("MainWindow", "Capacidad"))
         self.actionTarjetas.setText(_translate("MainWindow", "Tarjetas"))
+        self.actionGastos.setText(_translate("MainWindow", "Gastos"))
 
 
 if __name__ == "__main__":

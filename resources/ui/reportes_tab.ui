@@ -572,7 +572,7 @@ color: #3498db;</string>
        <item>
         <widget class="QTabWidget" name="tabWidget">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="tabDeudas">
           <attribute name="title">
@@ -693,7 +693,7 @@ color: #3498db;</string>
                     <number>2020</number>
                    </property>
                    <property name="maximum">
-                    <number>2030</number>
+                    <number>2050</number>
                    </property>
                    <property name="value">
                     <number>2024</number>
@@ -846,6 +846,178 @@ color: #3498db;</string>
                   <string>Total Transacciones</string>
                  </property>
                 </column>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="tabGanancias">
+          <attribute name="title">
+           <string>Ganancias</string>
+          </attribute>
+          <layout class="QVBoxLayout" name="verticalLayout_ganancias">
+           <item>
+            <widget class="QGroupBox" name="groupBoxGraficoGanancias">
+             <property name="title">
+              <string>Ganancias Mensuales</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_grafico_ganancias">
+              <item>
+               <widget class="QWidget" name="widgetControlGanancias" native="true">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>50</height>
+                 </size>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_control_ganancias">
+                 <item>
+                  <widget class="QLabel" name="labelAñoGanancias">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Año:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="spinBoxAñoGanancias">
+                   <property name="minimumSize">
+                    <size>
+                     <width>80</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="minimum">
+                    <number>2020</number>
+                   </property>
+                   <property name="maximum">
+                    <number>2050</number>
+                   </property>
+                   <property name="value">
+                    <number>2024</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="labelMesGanancias">
+                   <property name="font">
+                    <font>
+                     <pointsize>10</pointsize>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Mes:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxMesGanancias">
+                   <property name="minimumSize">
+                    <size>
+                     <width>120</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="btnCargarGanancias">
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>31</height>
+                    </size>
+                   </property>
+                   <property name="font">
+                    <font>
+                     <bold>true</bold>
+                    </font>
+                   </property>
+                   <property name="text">
+                    <string>Generar Gráfico</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_ganancias">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QFrame" name="frameGraficoGanancias">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>300</height>
+                 </size>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Raised</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_frame_grafico_ganancias">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="labelGraficoGananciasPlaceholder">
+                   <property name="font">
+                    <font>
+                     <pointsize>12</pointsize>
+                     <italic>true</italic>
+                    </font>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">color: #7f8c8d; border: 2px dashed #bdc3c7; border-radius: 8px;</string>
+                   </property>
+                   <property name="text">
+                    <string>Seleccione un año, un mes y haga clic en &quot;Generar Gráfico&quot; para mostrar las estadísticas de ganancias</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignCenter</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                   <property name="margin">
+                    <number>20</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </widget>
               </item>
              </layout>

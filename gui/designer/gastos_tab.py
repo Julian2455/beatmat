@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Gastos(object):
     def setupUi(self, Gastos):
         Gastos.setObjectName("Gastos")
-        Gastos.resize(959, 554)
+        Gastos.resize(1200, 580)
         Gastos.setStyleSheet("QFrame {\n"
 "    border-radius: 6px;\n"
 "}\n"
@@ -27,8 +27,7 @@ class Ui_Gastos(object):
 "    border: none;\n"
 "    border-radius: 4px;\n"
 "    padding: 3px 8px;\n"
-"    min-height: 25px;\n"
-"}\n"
+"    min-height: 22px; }\n"
 "QPushButton:hover {\n"
 "    background-color: #2980b9;\n"
 "}\n"
@@ -44,16 +43,14 @@ class Ui_Gastos(object):
 "QLineEdit, QComboBox, QDateEdit {\n"
 "    border: 1px solid #cccccc;\n"
 "    border-radius: 4px;\n"
-"    padding: 3px;\n"
-"    background: white;\n"
+"    padding: 2px; background: white;\n"
 "}\n"
 "\n"
 "/* QTableWidget / QTableView */\n"
 "QHeaderView::section {\n"
 "    background-color: #ececec;\n"
 "    color: #333;\n"
-"    padding: 4px;\n"
-"    border: none;\n"
+"    padding: 3px; border: none;\n"
 "    font-weight: bold;\n"
 "}\n"
 "QTableWidget {\n"
@@ -63,8 +60,7 @@ class Ui_Gastos(object):
 "    alternate-background-color: #f2f2f2;\n"
 "}\n"
 "QTableWidget::item {\n"
-"    padding: 6px;\n"
-"}\n"
+"    padding: 4px; }\n"
 "QTableWidget::item:hover {\n"
 "    background-color: #f0f8ff;\n"
 "}\n"
@@ -72,8 +68,7 @@ class Ui_Gastos(object):
 "QLineEdit {\n"
 "    border: 2px solid #ddd;\n"
 "    border-radius: 8px;\n"
-"    padding: 6px 12px;\n"
-"    background-color: white;\n"
+"    padding: 4px 10px; background-color: white;\n"
 "}\n"
 "QLineEdit:focus {\n"
 "    border-color: #007BFF;\n"
@@ -81,15 +76,13 @@ class Ui_Gastos(object):
 "QComboBox {\n"
 "     border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
-"     padding: 5px 8px;\n"
-"     color: #333;\n"
+"     padding: 4px 6px; color: #333;\n"
 "     background-color: #fff;\n"
 "   }\n"
 "QDateEdit {\n"
 "     border: 2px solid  rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
-"     padding: 5px 8px;\n"
-"     color: #333;\n"
+"     padding: 4px 6px; color: #333;\n"
 "     background-color: #fff;\n"
 "   }\n"
 "QComboBox:focus {\n"
@@ -102,20 +95,20 @@ class Ui_Gastos(object):
 "     background-color: #eef6ff;\n"
 "   }")
         self.verticalLayout = QtWidgets.QVBoxLayout(Gastos)
-        self.verticalLayout.setContentsMargins(6, 6, 6, 6)
-        self.verticalLayout.setSpacing(6)
+        self.verticalLayout.setContentsMargins(3, 3, 3, 3)
+        self.verticalLayout.setSpacing(3)
         self.verticalLayout.setObjectName("verticalLayout")
         self.frameHeader = QtWidgets.QFrame(parent=Gastos)
-        self.frameHeader.setMinimumSize(QtCore.QSize(0, 40))
-        self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 40))
+        self.frameHeader.setMinimumSize(QtCore.QSize(0, 35))
+        self.frameHeader.setMaximumSize(QtCore.QSize(16777215, 35))
         self.frameHeader.setStyleSheet("\n"
 "background:#34495E;")
         self.frameHeader.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameHeader.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameHeader.setObjectName("frameHeader")
         self.horizontalLayout_1 = QtWidgets.QHBoxLayout(self.frameHeader)
-        self.horizontalLayout_1.setContentsMargins(6, 6, 6, 6)
-        self.horizontalLayout_1.setSpacing(6)
+        self.horizontalLayout_1.setContentsMargins(3, 3, 3, 3)
+        self.horizontalLayout_1.setSpacing(3)
         self.horizontalLayout_1.setObjectName("horizontalLayout_1")
         self.labelTitle = QtWidgets.QLabel(parent=self.frameHeader)
         font = QtGui.QFont()
@@ -128,13 +121,42 @@ class Ui_Gastos(object):
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_1.addItem(spacerItem)
         self.verticalLayout.addWidget(self.frameHeader)
-        self.frameClienteSelection = QtWidgets.QFrame(parent=Gastos)
+        self.frameContenidoPrincipal = QtWidgets.QFrame(parent=Gastos)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frameContenidoPrincipal.sizePolicy().hasHeightForWidth())
+        self.frameContenidoPrincipal.setSizePolicy(sizePolicy)
+        self.frameContenidoPrincipal.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frameContenidoPrincipal.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frameContenidoPrincipal.setObjectName("frameContenidoPrincipal")
+        self.verticalLayout_main_content = QtWidgets.QVBoxLayout(self.frameContenidoPrincipal)
+        self.verticalLayout_main_content.setContentsMargins(3, 3, 3, 3)
+        self.verticalLayout_main_content.setSpacing(3)
+        self.verticalLayout_main_content.setObjectName("verticalLayout_main_content")
+        self.mainSplitter = QtWidgets.QSplitter(parent=self.frameContenidoPrincipal)
+        self.mainSplitter.setOrientation(QtCore.Qt.Orientation.Horizontal)
+        self.mainSplitter.setObjectName("mainSplitter")
+        self.frameIzquierdo = QtWidgets.QFrame(parent=self.mainSplitter)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(1)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frameIzquierdo.sizePolicy().hasHeightForWidth())
+        self.frameIzquierdo.setSizePolicy(sizePolicy)
+        self.frameIzquierdo.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frameIzquierdo.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frameIzquierdo.setObjectName("frameIzquierdo")
+        self.verticalLayoutIzquierdo = QtWidgets.QVBoxLayout(self.frameIzquierdo)
+        self.verticalLayoutIzquierdo.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayoutIzquierdo.setSpacing(3)
+        self.verticalLayoutIzquierdo.setObjectName("verticalLayoutIzquierdo")
+        self.frameClienteSelection = QtWidgets.QFrame(parent=self.frameIzquierdo)
         self.frameClienteSelection.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
         self.frameClienteSelection.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frameClienteSelection.setObjectName("frameClienteSelection")
         self.horizontalLayout_2 = QtWidgets.QHBoxLayout(self.frameClienteSelection)
-        self.horizontalLayout_2.setContentsMargins(6, 6, 6, 6)
-        self.horizontalLayout_2.setSpacing(6)
+        self.horizontalLayout_2.setContentsMargins(3, 3, 3, 3)
+        self.horizontalLayout_2.setSpacing(3)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.label = QtWidgets.QLabel(parent=self.frameClienteSelection)
         self.label.setStyleSheet("color:black;")
@@ -163,27 +185,36 @@ class Ui_Gastos(object):
         self.pushButton.setIcon(icon)
         self.pushButton.setObjectName("pushButton")
         self.horizontalLayout_2.addWidget(self.pushButton, 0, QtCore.Qt.AlignmentFlag.AlignRight)
-        self.verticalLayout.addWidget(self.frameClienteSelection)
-        self.frameHistorialCompras = QtWidgets.QFrame(parent=Gastos)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Expanding)
-        sizePolicy.setHorizontalStretch(0)
+        self.verticalLayoutIzquierdo.addWidget(self.frameClienteSelection)
+        self.frameTabla = QtWidgets.QFrame(parent=self.frameIzquierdo)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(3)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.frameHistorialCompras.sizePolicy().hasHeightForWidth())
-        self.frameHistorialCompras.setSizePolicy(sizePolicy)
-        self.frameHistorialCompras.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
-        self.frameHistorialCompras.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
-        self.frameHistorialCompras.setObjectName("frameHistorialCompras")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.frameHistorialCompras)
-        self.verticalLayout_2.setContentsMargins(6, 6, 6, 6)
-        self.verticalLayout_2.setSpacing(4)
-        self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.tableGastos = QtWidgets.QTableWidget(parent=self.frameHistorialCompras)
+        sizePolicy.setHeightForWidth(self.frameTabla.sizePolicy().hasHeightForWidth())
+        self.frameTabla.setSizePolicy(sizePolicy)
+        self.frameTabla.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frameTabla.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frameTabla.setObjectName("frameTabla")
+        self.verticalLayoutTabla = QtWidgets.QVBoxLayout(self.frameTabla)
+        self.verticalLayoutTabla.setContentsMargins(3, 3, 3, 3)
+        self.verticalLayoutTabla.setSpacing(2)
+        self.verticalLayoutTabla.setObjectName("verticalLayoutTabla")
+        self.labelTituloTabla = QtWidgets.QLabel(parent=self.frameTabla)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        self.labelTituloTabla.setFont(font)
+        self.labelTituloTabla.setStyleSheet("color: #34495E; margin-bottom: 2px;")
+        self.labelTituloTabla.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelTituloTabla.setObjectName("labelTituloTabla")
+        self.verticalLayoutTabla.addWidget(self.labelTituloTabla)
+        self.tableGastos = QtWidgets.QTableWidget(parent=self.frameTabla)
         self.tableGastos.setStyleSheet("color:black;")
         self.tableGastos.setEditTriggers(QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers)
         self.tableGastos.setAlternatingRowColors(False)
         self.tableGastos.setSelectionBehavior(QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows)
         self.tableGastos.setObjectName("tableGastos")
-        self.tableGastos.setColumnCount(3)
+        self.tableGastos.setColumnCount(4)
         self.tableGastos.setRowCount(0)
         item = QtWidgets.QTableWidgetItem()
         item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
@@ -203,12 +234,18 @@ class Ui_Gastos(object):
         font.setBold(True)
         item.setFont(font)
         self.tableGastos.setHorizontalHeaderItem(2, item)
+        item = QtWidgets.QTableWidgetItem()
+        item.setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        font = QtGui.QFont()
+        font.setBold(True)
+        item.setFont(font)
+        self.tableGastos.setHorizontalHeaderItem(3, item)
         self.tableGastos.horizontalHeader().setDefaultSectionSize(120)
         self.tableGastos.horizontalHeader().setStretchLastSection(True)
-        self.verticalLayout_2.addWidget(self.tableGastos)
-        self.verticalLayout.addWidget(self.frameHistorialCompras)
-        self.widgetPaginacion = QtWidgets.QWidget(parent=Gastos)
-        self.widgetPaginacion.setMaximumSize(QtCore.QSize(16777215, 30))
+        self.verticalLayoutTabla.addWidget(self.tableGastos)
+        self.verticalLayoutIzquierdo.addWidget(self.frameTabla)
+        self.widgetPaginacion = QtWidgets.QWidget(parent=self.frameIzquierdo)
+        self.widgetPaginacion.setMaximumSize(QtCore.QSize(16777215, 25))
         self.widgetPaginacion.setStyleSheet("background-color: #f5f5f5;\n"
 "border: none;")
         self.widgetPaginacion.setObjectName("widgetPaginacion")
@@ -223,7 +260,7 @@ class Ui_Gastos(object):
         icon1 = QtGui.QIcon()
         icon1.addPixmap(QtGui.QPixmap("resources/ui/../images/anterior (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnFirstPage.setIcon(icon1)
-        self.btnFirstPage.setIconSize(QtCore.QSize(18, 18))
+        self.btnFirstPage.setIconSize(QtCore.QSize(16, 16))
         self.btnFirstPage.setObjectName("btnFirstPage")
         self.horizontalLayout_3.addWidget(self.btnFirstPage)
         self.btnPreviousPage = QtWidgets.QPushButton(parent=self.widgetPaginacion)
@@ -255,12 +292,165 @@ class Ui_Gastos(object):
         icon4 = QtGui.QIcon()
         icon4.addPixmap(QtGui.QPixmap("resources/ui/../images/proximo (1).png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnLastPage.setIcon(icon4)
-        self.btnLastPage.setIconSize(QtCore.QSize(18, 18))
+        self.btnLastPage.setIconSize(QtCore.QSize(16, 16))
         self.btnLastPage.setObjectName("btnLastPage")
         self.horizontalLayout_3.addWidget(self.btnLastPage)
         spacerItem3 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_3.addItem(spacerItem3)
-        self.verticalLayout.addWidget(self.widgetPaginacion)
+        self.verticalLayoutIzquierdo.addWidget(self.widgetPaginacion)
+        self.frameGrafico = QtWidgets.QFrame(parent=self.mainSplitter)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(1)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frameGrafico.sizePolicy().hasHeightForWidth())
+        self.frameGrafico.setSizePolicy(sizePolicy)
+        self.frameGrafico.setMinimumSize(QtCore.QSize(350, 0))
+        self.frameGrafico.setStyleSheet("QFrame#frameGrafico {\n"
+"    background-color: white;\n"
+"    border: 1px solid #ddd;\n"
+"    border-radius: 8px;\n"
+"}")
+        self.frameGrafico.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frameGrafico.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frameGrafico.setObjectName("frameGrafico")
+        self.verticalLayoutGrafico = QtWidgets.QVBoxLayout(self.frameGrafico)
+        self.verticalLayoutGrafico.setContentsMargins(8, 8, 8, 8)
+        self.verticalLayoutGrafico.setSpacing(4)
+        self.verticalLayoutGrafico.setObjectName("verticalLayoutGrafico")
+        self.labelTituloGrafico = QtWidgets.QLabel(parent=self.frameGrafico)
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        font.setBold(True)
+        self.labelTituloGrafico.setFont(font)
+        self.labelTituloGrafico.setStyleSheet("color: #34495E; margin-bottom: 5px;")
+        self.labelTituloGrafico.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelTituloGrafico.setObjectName("labelTituloGrafico")
+        self.verticalLayoutGrafico.addWidget(self.labelTituloGrafico)
+        self.frameControlesGrafico = QtWidgets.QFrame(parent=self.frameGrafico)
+        self.frameControlesGrafico.setMaximumSize(QtCore.QSize(16777215, 70))
+        self.frameControlesGrafico.setStyleSheet("QFrame#frameControlesGrafico {\n"
+"    background-color: #f8f9fa;\n"
+"    border: 1px solid #e9ecef;\n"
+"    border-radius: 6px;\n"
+"    margin: 3px; }")
+        self.frameControlesGrafico.setFrameShape(QtWidgets.QFrame.Shape.StyledPanel)
+        self.frameControlesGrafico.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
+        self.frameControlesGrafico.setObjectName("frameControlesGrafico")
+        self.verticalLayoutControles = QtWidgets.QVBoxLayout(self.frameControlesGrafico)
+        self.verticalLayoutControles.setContentsMargins(8, 6, 8, 6)
+        self.verticalLayoutControles.setSpacing(4)
+        self.verticalLayoutControles.setObjectName("verticalLayoutControles")
+        self.labelPeriodo = QtWidgets.QLabel(parent=self.frameControlesGrafico)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        font.setBold(True)
+        self.labelPeriodo.setFont(font)
+        self.labelPeriodo.setStyleSheet("color: #495057; border: none;")
+        self.labelPeriodo.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelPeriodo.setObjectName("labelPeriodo")
+        self.verticalLayoutControles.addWidget(self.labelPeriodo)
+        self.horizontalLayoutPeriodo = QtWidgets.QHBoxLayout()
+        self.horizontalLayoutPeriodo.setSpacing(4)
+        self.horizontalLayoutPeriodo.setObjectName("horizontalLayoutPeriodo")
+        self.labelAño = QtWidgets.QLabel(parent=self.frameControlesGrafico)
+        self.labelAño.setStyleSheet("color: #495057; border: none;")
+        self.labelAño.setObjectName("labelAño")
+        self.horizontalLayoutPeriodo.addWidget(self.labelAño)
+        self.spinBoxAño = QtWidgets.QSpinBox(parent=self.frameControlesGrafico)
+        self.spinBoxAño.setStyleSheet("QSpinBox {\n"
+"    border: 2px solid rgb(85, 85, 127);\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 5px; background-color: white;\n"
+"    color: #333;\n"
+"}\n"
+"QSpinBox:focus {\n"
+"    border-color: #0078d7;\n"
+"    background-color: #eef6ff;\n"
+"}")
+        self.spinBoxAño.setMinimum(2020)
+        self.spinBoxAño.setMaximum(2050)
+        self.spinBoxAño.setProperty("value", 2025)
+        self.spinBoxAño.setObjectName("spinBoxAño")
+        self.horizontalLayoutPeriodo.addWidget(self.spinBoxAño)
+        self.labelMes = QtWidgets.QLabel(parent=self.frameControlesGrafico)
+        self.labelMes.setStyleSheet("color: #495057; border: none;")
+        self.labelMes.setObjectName("labelMes")
+        self.horizontalLayoutPeriodo.addWidget(self.labelMes)
+        self.comboBoxMes = QtWidgets.QComboBox(parent=self.frameControlesGrafico)
+        self.comboBoxMes.setStyleSheet("QComboBox {\n"
+"    border: 2px solid rgb(85, 85, 127);\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 5px; background-color: white;\n"
+"    color: #333;\n"
+"    min-width: 80px;\n"
+"}\n"
+"QComboBox:focus {\n"
+"    border-color: #0078d7;\n"
+"    background-color: #eef6ff;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"    width: 12px;\n"
+"    height: 12px;\n"
+"}")
+        self.comboBoxMes.setObjectName("comboBoxMes")
+        self.comboBoxMes.addItem("")
+        self.horizontalLayoutPeriodo.addWidget(self.comboBoxMes)
+        self.btnGenerarGrafico = QtWidgets.QPushButton(parent=self.frameControlesGrafico)
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.btnGenerarGrafico.setFont(font)
+        self.btnGenerarGrafico.setStyleSheet("\n"
+"                 QPushButton {\n"
+"    background-color: #3498db;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 4px;\n"
+"    padding: 3px 8px;\n"
+"    min-height: 25px;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #2980b9;\n"
+"}")
+        self.btnGenerarGrafico.setObjectName("btnGenerarGrafico")
+        self.horizontalLayoutPeriodo.addWidget(self.btnGenerarGrafico)
+        self.verticalLayoutControles.addLayout(self.horizontalLayoutPeriodo)
+        self.verticalLayoutGrafico.addWidget(self.frameControlesGrafico)
+        self.frameGrafico_placeholder = QtWidgets.QFrame(parent=self.frameGrafico)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.frameGrafico_placeholder.sizePolicy().hasHeightForWidth())
+        self.frameGrafico_placeholder.setSizePolicy(sizePolicy)
+        self.frameGrafico_placeholder.setMinimumSize(QtCore.QSize(300, 250))
+        self.frameGrafico_placeholder.setStyleSheet("background-color: #fafafa; \n"
+"border: 1px dashed #ccc; \n"
+"border-radius: 6px;")
+        self.frameGrafico_placeholder.setObjectName("frameGrafico_placeholder")
+        self.layoutGrafico = QtWidgets.QVBoxLayout(self.frameGrafico_placeholder)
+        self.layoutGrafico.setObjectName("layoutGrafico")
+        self.labelPlaceholder = QtWidgets.QLabel(parent=self.frameGrafico_placeholder)
+        self.labelPlaceholder.setStyleSheet("color: #888; \n"
+"font-size: 12px; \n"
+"border: none;")
+        self.labelPlaceholder.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelPlaceholder.setObjectName("labelPlaceholder")
+        self.layoutGrafico.addWidget(self.labelPlaceholder)
+        self.verticalLayoutGrafico.addWidget(self.frameGrafico_placeholder)
+        self.labelEstadisticas = QtWidgets.QLabel(parent=self.frameGrafico)
+        font = QtGui.QFont()
+        font.setPointSize(9)
+        self.labelEstadisticas.setFont(font)
+        self.labelEstadisticas.setStyleSheet("color: #666; \n"
+"background-color: #f8f9fa; \n"
+"padding: 6px; border-radius: 4px;")
+        self.labelEstadisticas.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+        self.labelEstadisticas.setObjectName("labelEstadisticas")
+        self.verticalLayoutGrafico.addWidget(self.labelEstadisticas)
+        self.verticalLayout_main_content.addWidget(self.mainSplitter)
+        self.verticalLayout.addWidget(self.frameContenidoPrincipal)
 
         self.retranslateUi(Gastos)
         QtCore.QMetaObject.connectSlotsByName(Gastos)
@@ -272,13 +462,25 @@ class Ui_Gastos(object):
         self.label.setText(_translate("Gastos", "Filtrar por fecha:"))
         self.btnRestaurar.setText(_translate("Gastos", "Restaurar"))
         self.pushButton.setText(_translate("Gastos", "Registrar Gastos"))
+        self.labelTituloTabla.setText(_translate("Gastos", "HISTORIAL DE GASTOS"))
         self.tableGastos.setSortingEnabled(True)
         item = self.tableGastos.horizontalHeaderItem(0)
         item.setText(_translate("Gastos", "Fecha"))
         item = self.tableGastos.horizontalHeaderItem(1)
-        item.setText(_translate("Gastos", "Insumo"))
+        item.setText(_translate("Gastos", "Total"))
         item = self.tableGastos.horizontalHeaderItem(2)
-        item.setText(_translate("Gastos", "Gasto"))
+        item.setText(_translate("Gastos", "Tipo"))
+        item = self.tableGastos.horizontalHeaderItem(3)
+        item.setText(_translate("Gastos", "Insumo"))
+        self.labelTituloGrafico.setText(_translate("Gastos", "DISTRIBUCIÓN DE GASTOS"))
+        self.labelPeriodo.setText(_translate("Gastos", "Seleccionar período:"))
+        self.labelAño.setText(_translate("Gastos", "Año:"))
+        self.labelMes.setText(_translate("Gastos", "Mes:"))
+        self.comboBoxMes.setItemText(0, _translate("Gastos", "Todos"))
+        self.btnGenerarGrafico.setText(_translate("Gastos", "Generar Gráfico"))
+        self.labelPlaceholder.setText(_translate("Gastos", "Seleccione un año, un mes y haga clic en \"Generar Gráfico\" \n"
+"para mostrar las estadísticas de gastos mensuales"))
+        self.labelEstadisticas.setText(_translate("Gastos", "Total de gastos del período: $0.00"))
 
 
 if __name__ == "__main__":

@@ -227,6 +227,7 @@ class Caja(Base):
                     func.sum(cls.adeudado).label('total_adeudado')
                 )
                 .filter(cls.cliente_id == cliente_id)
+                .filter(Cliente.estado==True)
                 .first()
             )
             
@@ -262,6 +263,7 @@ class Caja(Base):
             resultado = (
                 db.query(Cliente.nombre, subquery.c.deuda)
                 .join(subquery, Cliente.id == subquery.c.cliente_id)
+                .filter(Cliente.estado==True)
                 .order_by(desc(subquery.c.deuda))
                 .all()
             )
@@ -285,6 +287,7 @@ class Caja(Base):
             resultado = (
                 db.query(Cliente.nombre, subquery.c.saldo_favor)
                 .join(subquery, Cliente.id == subquery.c.cliente_id)
+                .filter(Cliente.estado==True)
                 .order_by(desc(subquery.c.saldo_favor))
                 .all()
             )
@@ -301,13 +304,15 @@ class Caja(Base):
                 func.sum(cls.cobro).label('total_cobros'),
                 func.sum(cls.adeudado).label('total_adeudado'),
                 func.count(func.distinct(cls.cliente_id)).label('clientes_activos')
-            ).first()
+            ).join(Cliente, cls.cliente_id == Cliente.id).filter(Cliente.estado==True).first()
             subquery = (
                 db.query(
                     cls.cliente_id,
                     (func.sum(cls.cobro) - func.sum(cls.total)).label('saldo')
                 )
                 .group_by(cls.cliente_id)
+                .join(Cliente, cls.cliente_id == Cliente.id)
+                .filter(Cliente.estado==True)
                 .subquery()
             )
             estados = db.query(
@@ -489,3 +494,28 @@ class Caja(Base):
                     'adeudado': 0
                 })
         return datos_grafico
+
+    @classmethod
+    def obtener_comparacion_cobros_gastos(cls, año, mes=None):
+        try:
+            from .gastos import Gastos
+            ventas_data = cls.ventas_por_mes_anual(año)
+            total_cobros = 0
+            if mes is None:
+                for v in ventas_data:
+                    total_cobros += v['total_cobros']
+            else:
+                mes_str = f"{año}-{mes:02d}"
+                for v in ventas_data:
+                    if v['mes'] == mes_str:
+                        total_cobros += v['total_cobros']
+                        break
+            gastos_data = Gastos.gastos_por_categoria_mes(año, mes)
+            total_gastos = sum(g['total_gasto'] for g in gastos_data)
+            return {
+                'cobros': float(total_cobros),
+                'gastos': float(total_gastos)
+            }
+        except Exception as e:
+            print(f"Error al obtener la comparación de cobros y gastos: {e}")
+            return {'cobros': 0, 'gastos': 0}

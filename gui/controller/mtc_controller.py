@@ -26,6 +26,7 @@ class MtcController(QObject):
     def mostrar_form(self, tipo):
         self.tipo_formulario = tipo
         self.ui.label_config.setText(f"Registrar {tipo}")
+        self.ui.setWindowTitle(f"Registrar {tipo}")
         self.ui.nombre_detalle.setText(f"{tipo}")
         if tipo == "Marca":
             datos = Marca.show_all()
@@ -36,6 +37,9 @@ class MtcController(QObject):
         elif tipo == "Capacidad":
             datos = Capacidad.show_all()
             self.ui.label_registro.setText(f"{tipo}es registradas")
+        elif tipo == "Gastos":
+            datos= CatGasto.show_all()
+            self.ui.label_registro.setText(f"{tipo}s registrados")
         else:
             datos = []
         self.ui.tableWidget.setRowCount(len(datos))
@@ -77,6 +81,13 @@ class MtcController(QObject):
                 msg.setIcon(QMessageBox.Icon.Information)
                 msg.setWindowTitle("Exito")
                 msg.setText(f"Capacidad '{nombre}' registrada correctamente.")
+                msg.exec()
+        elif tipo == "Gastos":
+            if CatGasto.registrar_categoria(nombre) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText(f"Categoria '{nombre}' registrada correctamente.")
                 msg.exec()
         self.extintor_controller.llenar_combobox_filtro()
         self.extintor_form_controller.llenar_combobox()

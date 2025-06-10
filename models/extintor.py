@@ -439,6 +439,7 @@ class Extintor(Base):
                 )
                 .join(Precios, Extintor.capacidad_id == Precios.capacidad_id)
                 .filter(cls.id == extintor_id)
+                .filter(Precios.nuevo==False)
                 .first()
             )
             return extintores
@@ -456,6 +457,7 @@ class Extintor(Base):
                 cls.tipo_id,
                 cls.capacidad_id
                 )
+                .filter(Precios.nuevo==True)
                 .filter(cls.id == extintor_id).first()
             )
             precio=(

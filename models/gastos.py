@@ -1,15 +1,19 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, desc
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, desc, func
 from sqlalchemy.orm import relationship,sessionmaker,joinedload
 from db import Base, engine, SessionLocal
 from datetime import date
+from .lists import CatGasto
 
 class Gastos(Base):
     __tablename__='gastos'
 
     id = Column(Integer,primary_key= True,autoincrement=True)
     fecha=Column(Date,nullable=False)
+    catgasto_id = Column(Integer, ForeignKey('catgasto.id'), nullable=False)
     insumo = Column(String(70), nullable=False)
     gasto=Column(Float)
+
+    catgasto = relationship('CatGasto', back_populates='gastos')
 
     @property
     def fecha_formateado(self):
@@ -22,7 +26,14 @@ class Gastos(Base):
         db = SessionLocal()
         try:
             gastos = (
-                db.query(cls)
+                db.query(
+                    Gastos.id,
+                    Gastos.fecha,
+                    CatGasto.nombre.label("categoria_nombre"),
+                    Gastos.insumo,
+                    Gastos.gasto
+                )
+                .join(CatGasto, CatGasto.id == Gastos.catgasto_id)
                 .order_by(desc(cls.fecha))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
@@ -40,8 +51,8 @@ class Gastos(Base):
         return total
     
     @classmethod
-    def registrar(cls,fecha,insumo,gasto):
-        datos=cls(fecha=fecha,insumo=insumo,gasto=gasto)
+    def registrar(cls,fecha,insumo,gasto,categoria):
+        datos=cls(fecha=fecha,insumo=insumo,gasto=gasto,catgasto_id=categoria)
         try:
             db = SessionLocal()
             db.add(datos)
@@ -71,12 +82,19 @@ class Gastos(Base):
         try:
             db = SessionLocal()
             query = (
-                db.query(cls)
+                db.query(
+                    Gastos.id,
+                    Gastos.fecha,
+                    CatGasto.nombre.label("categoria_nombre"),
+                    Gastos.insumo,
+                    Gastos.gasto
+                )
             )
             if fecha:
                 query = query.filter(cls.fecha == fecha)
             resultado = (
                 query
+                .join(CatGasto, CatGasto.id == Gastos.catgasto_id)
                 .order_by(desc(cls.fecha))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
@@ -101,5 +119,40 @@ class Gastos(Base):
         except Exception as e:
             print(f"Error al contar resultados: {e}")
             return 0
+        finally:
+            db.close()
+    
+    @classmethod
+    def gastos_por_categoria_mes(cls, año, mes=None):
+        db = SessionLocal()
+        try:
+            query = (
+                db.query(
+                    CatGasto.nombre.label('categoria'),
+                    func.sum(cls.gasto).label('total_gasto'),
+                    func.count(cls.id).label('cantidad_gastos')
+                )
+                .join(CatGasto, cls.catgasto_id == CatGasto.id)
+                .filter(func.strftime('%Y', cls.fecha) == str(año))
+            )
+            if mes is not None:
+                query = query.filter(func.strftime('%m', cls.fecha) == f"{mes:02d}")
+            resultado = (
+                query
+                .group_by(CatGasto.id, CatGasto.nombre)
+                .order_by(func.sum(cls.gasto).desc())
+                .all()
+            )
+            datos_grafico = []
+            for row in resultado:
+                datos_grafico.append({
+                    'categoria': row.categoria,
+                    'total_gasto': float(row.total_gasto or 0),
+                    'cantidad_gastos': int(row.cantidad_gastos or 0)
+                })
+            return datos_grafico
+        except Exception as e:
+            print(f"Error al obtener gastos por categoría: {e}")
+            return []
         finally:
             db.close()

@@ -21,8 +21,8 @@ class MainController:
         self.init_mtc_bar()
         self.init_gastos_tab()
         self.init_history_tab()
-        self.init_caja_tab()
         self.init_reportes_tab()
+        self.init_caja_tab()
         self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
@@ -106,7 +106,7 @@ class MainController:
     def init_caja_tab(self):
         # Configurar la tab de caja
         self.caja_tab = CajaUi()
-        self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller, print_controller=self.tarjetas_controller)
+        self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller, print_controller=self.tarjetas_controller, reportes_controller=self.reportes_controller)
         self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Caja.layout().addWidget(self.caja_tab)
         
@@ -163,6 +163,8 @@ class MainController:
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))
+        # Se conecta aca para poder reutilizar el form
+        self.ui.actionGastos.triggered.connect(lambda: self.mostrar_form_universal("Gastos"))
 
     def init_card_bar(self):
         self.tarjetas_ui = ImpresionUi()

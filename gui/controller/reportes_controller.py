@@ -4,7 +4,7 @@ from utils import get_image
 from PyQt6.QtGui import QIcon, QAction, QDoubleValidator, QBrush, QColor, QPainter
 from PyQt6 import QtCore, QtWidgets
 from PyQt6.QtCore import QDate, Qt, QObject, QLocale
-from PyQt6.QtCharts import QChartView, QChart, QBarSeries, QBarSet, QValueAxis, QBarCategoryAxis
+from PyQt6.QtCharts import QChartView, QChart, QBarSeries, QBarSet, QValueAxis, QBarCategoryAxis, QPieSeries, QPieSlice
 
 class ReportesController(QObject):
     def __init__(self,ui):
@@ -20,7 +20,12 @@ class ReportesController(QObject):
         self.ui.tableClientesFavor.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.ui.tableResumenMensual.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.chart_view = None
+        self.ganancias_chart_view = None
+        self.ui.labelGraficoGananciasPlaceholder.show()
         self.ui.labelGraficoPlaceholder.show()
+        self.ui.btnCargarGanancias.clicked.connect(self.graficar_ganancias)
+        self.ui.spinBoxAñoGanancias.setValue(QDate.currentDate().year())
+        self.meses_combobox()
         self.cargar_datos()
 
     def cargar_datos(self):
@@ -116,3 +121,63 @@ class ReportesController(QObject):
                 self.ui.tableResumenMensual.setItem(index, 3, QTableWidgetItem(self.locale.toString(float(dato['total_adeudado']), 'f', 2)))
                 self.ui.tableResumenMensual.setItem(index, 4, QTableWidgetItem(self.locale.toString(float(dato['diferencia']), 'f', 2)))
                 self.ui.tableResumenMensual.setItem(index, 5, QTableWidgetItem(self.locale.toString(int(dato['num_transacciones']))))
+    
+    def meses_combobox(self):
+        self.ui.comboBoxMesGanancias.clear()
+        self.ui.comboBoxMesGanancias.addItem("Todos")
+        meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        num=1
+        for mes in meses:
+            self.ui.comboBoxMesGanancias.addItem(mes)
+            index=self.ui.comboBoxMesGanancias.count()-1
+            self.ui.comboBoxMesGanancias.setItemData(index, num, QtCore.Qt.ItemDataRole.UserRole)
+            num+=1
+
+    def graficar_ganancias(self):
+        año = self.ui.spinBoxAñoGanancias.value()
+        mes_seleccionado = self.ui.comboBoxMesGanancias.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        mes_para_db = mes_seleccionado if mes_seleccionado is not None else None
+        datos = Caja.obtener_comparacion_cobros_gastos(año, mes_para_db)
+        if self.ganancias_chart_view is not None:
+            self.ui.verticalLayout_frame_grafico_ganancias.removeWidget(self.ganancias_chart_view)
+            self.ganancias_chart_view.deleteLater()
+            self.ganancias_chart_view = None
+        self.ui.labelGraficoGananciasPlaceholder.hide()
+        total_ganancias_gastos = datos['cobros'] + datos['gastos']
+        if total_ganancias_gastos > 0:
+            series = QPieSeries()
+            cobros_slice = QPieSlice()
+            cobros_slice.setValue(datos['cobros'])
+            cobros_slice.setColor(QColor("#22E922")) 
+            if total_ganancias_gastos > 0:
+                percentage_cobros = (datos['cobros'] / total_ganancias_gastos) * 100
+                cobros_slice.setLabel(f"Cobros: {self.locale.toString(datos['cobros'], 'f', 2)} ({percentage_cobros:.1f}%)")
+            else:
+                cobros_slice.setLabel(f"Cobros: {self.locale.toString(datos['cobros'], 'f', 2)}")
+            cobros_slice.setLabelVisible(False)
+            series.append(cobros_slice)
+            gastos_slice = QPieSlice()
+            gastos_slice.setValue(datos['gastos'])
+            gastos_slice.setColor(QColor("#F85A48"))
+            if total_ganancias_gastos > 0:
+                percentage_gastos = (datos['gastos'] / total_ganancias_gastos) * 100
+                gastos_slice.setLabel(f"Gastos: {self.locale.toString(datos['gastos'], 'f', 2)} ({percentage_gastos:.1f}%)")
+            else:
+                gastos_slice.setLabel(f"Gastos: {self.locale.toString(datos['gastos'], 'f', 2)}")
+            gastos_slice.setLabelVisible(False) 
+            series.append(gastos_slice)
+            chart = QChart()
+            chart.addSeries(series)
+            if mes_para_db is None: 
+                chart.setTitle(f"Comparación de Cobros y Gastos - Año {año}")
+            else:
+                mes_nombre = self.ui.comboBoxMesGanancias.currentText()
+                chart.setTitle(f"Comparación de Cobros y Gastos - {mes_nombre} {año}")
+            chart.setAnimationOptions(QChart.AnimationOption.SeriesAnimations)
+            legend = chart.legend()
+            legend.setVisible(True)
+            legend.setAlignment(Qt.AlignmentFlag.AlignLeft)
+            self.ganancias_chart_view = QChartView(chart)
+            self.ganancias_chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
+            self.ui.verticalLayout_frame_grafico_ganancias.addWidget(self.ganancias_chart_view)

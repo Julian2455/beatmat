@@ -101,3 +101,35 @@ class Capacidad(Base):
             return False
         finally:
             db.close()
+
+class CatGasto(Base):
+    __tablename__ = 'catgasto'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(50), nullable=False)
+    gastos = relationship('Gastos', back_populates='catgasto')
+
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            categorias = (
+                db.query(cls).all()
+            )
+            return categorias
+        finally:
+            db.close()
+    
+    @classmethod
+    def registrar_categoria(cls, nombre):
+        dato=cls(nombre=nombre)
+        try:
+            db = SessionLocal()
+            db.add(dato)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()

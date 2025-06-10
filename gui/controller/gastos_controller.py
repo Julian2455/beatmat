@@ -1,7 +1,8 @@
-from PyQt6.QtWidgets import QTableWidgetItem
+from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView
 from PyQt6.QtCore import Qt, QObject, QDate
-from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon
-from PyQt6 import QtCore
+from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon, QPainter
+from PyQt6.QtCharts import QChart, QChartView, QPieSeries, QPieSlice
+from PyQt6 import QtCore, QtWidgets
 from models import *  
 from utils import get_image
 from datetime import timedelta
@@ -23,6 +24,7 @@ class GastosController(QObject):
         self.ui.btnLastPage.clicked.connect(self.ultima_pagina) 
         self.ui.btnRestaurar.setVisible(False)
         self.ui.tableGastos.verticalHeader().setVisible(False)
+        self.ui.tableGastos.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
         self.ui.btnRestaurar.clicked.connect(self.limpiar_filtros) 
         self.ui.btnNextPage.setIcon(QIcon(get_image("sssiguiente"))) 
         self.ui.btnPreviousPage.setIcon(QIcon(get_image("anterior"))) 
@@ -30,6 +32,8 @@ class GastosController(QObject):
         self.ui.btnLastPage.setIcon(QIcon(get_image("proximo_1"))) 
         self.ui.pushButton.setIcon(QIcon(get_image("dinero"))) 
         self.setupDateEdits()
+        self.meses_combobox()
+        self.ui.btnGenerarGrafico.clicked.connect(self.mostrar_grafico) 
 
     def setupDateEdits(self):
         fecha_minima_bd = Gastos.obtener_fecha_minima()
@@ -69,10 +73,11 @@ class GastosController(QObject):
             gasto = resultado
             id_gasto = QTableWidgetItem(str(gasto.id))
             id_gasto.setData(Qt.ItemDataRole.UserRole, gasto.id)
-            self.ui.tableGastos.setItem(index, 0, QTableWidgetItem(gasto.fecha_formateado))
-            self.ui.tableGastos.setItem(index, 1, QTableWidgetItem(str(gasto.insumo)))
+            self.ui.tableGastos.setItem(index, 0, QTableWidgetItem(str(gasto.fecha.strftime("%d-%m-%Y"))))
             gasto_formateado = f"{int(gasto.gasto):,}".replace(",", ".")
-            self.ui.tableGastos.setItem(index, 2, QTableWidgetItem(gasto_formateado))
+            self.ui.tableGastos.setItem(index, 1, QTableWidgetItem(gasto_formateado))
+            self.ui.tableGastos.setItem(index, 2, QTableWidgetItem(str(gasto.categoria_nombre)))
+            self.ui.tableGastos.setItem(index, 3, QTableWidgetItem(str(gasto.insumo)))
         self.actualizar_estado_paginado()
 
     def actualizar_estado_paginado(self):
@@ -110,3 +115,59 @@ class GastosController(QObject):
         if self.pagina_actual != self.total_paginas:
             self.pagina_actual = self.total_paginas
             self.mostrar_gastos()
+
+    def meses_combobox(self):
+        self.ui.comboBoxMes.clear()
+        self.ui.comboBoxMes.addItem("Todos")
+        meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        num=1
+        for mes in meses:
+            self.ui.comboBoxMes.addItem(mes)
+            index=self.ui.comboBoxMes.count()-1
+            self.ui.comboBoxMes.setItemData(index, num, QtCore.Qt.ItemDataRole.UserRole)
+            num+=1
+    
+    def mostrar_grafico(self):
+        año = self.ui.spinBoxAño.value()
+        mes_seleccionado = self.ui.comboBoxMes.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        mes_para_db = mes_seleccionado if mes_seleccionado is not None else None
+        datos_grafico = Gastos.gastos_por_categoria_mes(año, mes_para_db)
+        if hasattr(self, 'chart_view') and self.chart_view is not None:
+            self.ui.layoutGrafico.removeWidget(self.chart_view) 
+            self.chart_view.deleteLater()
+            self.chart_view = None
+        self.ui.labelPlaceholder.hide() 
+        if not datos_grafico:
+            self.ui.labelPlaceholder.setText("No hay datos de gastos para el período seleccionado.")
+            self.ui.labelPlaceholder.show()
+            self.ui.labelEstadisticas.setText("Total de gastos del período: $0.00")
+            self.ui.labelEstadisticas.hide() 
+            return
+        series = QPieSeries()
+        total_gastos_mes = sum(item['total_gasto'] for item in datos_grafico)
+        for dato in datos_grafico:
+            categoria = dato['categoria']
+            total_gasto = dato['total_gasto']
+            slice = QPieSlice(categoria, total_gasto)
+            if total_gastos_mes > 0:
+                percentage = (total_gasto / total_gastos_mes) * 100
+                slice.setLabel(f"{categoria}: ${total_gasto:,.0f} ({percentage:.1f}%)".replace(",", "."))
+            else:
+                slice.setLabel(f"{categoria}: ${total_gasto:,.0f}".replace(",", "."))
+            series.append(slice)
+        chart = QChart()
+        chart.addSeries(series)
+        if mes_seleccionado is None: 
+            chart.setTitle(f"Gastos por Categoría - Año {año}")
+        else:
+            mes_nombre = self.ui.comboBoxMes.currentText()
+            chart.setTitle(f"Gastos por Categoría - {mes_nombre} {año}")
+        chart.setAnimationOptions(QChart.AnimationOption.SeriesAnimations)
+        chart.legend().setVisible(True)
+        chart.legend().setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.chart_view = QChartView(chart)
+        self.chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
+        self.ui.layoutGrafico.addWidget(self.chart_view)
+        self.ui.labelEstadisticas.setText(f"Total de gastos del período: ${total_gastos_mes:,.0f}".replace(",", "."))
+        self.ui.labelEstadisticas.show()
