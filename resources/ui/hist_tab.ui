@@ -400,6 +400,11 @@ QDateEdit:focus {
         </column>
         <column>
          <property name="text">
+          <string>Medio de Pago</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Cobro</string>
          </property>
         </column>

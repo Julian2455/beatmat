@@ -21,10 +21,13 @@ class ReportesController(QObject):
         self.ui.tableResumenMensual.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
         self.chart_view = None
         self.ganancias_chart_view = None
+        self.monedero_chart_view = None
         self.ui.labelGraficoGananciasPlaceholder.show()
         self.ui.labelGraficoPlaceholder.show()
         self.ui.btnCargarGanancias.clicked.connect(self.graficar_ganancias)
+        self.ui.btnCargarMonedero.clicked.connect(self.graficar_monedero)
         self.ui.spinBoxAñoGanancias.setValue(QDate.currentDate().year())
+        self.ui.spinBoxAñoMonedero.setValue(QDate.currentDate().year())
         self.meses_combobox()
         self.cargar_datos()
 
@@ -44,23 +47,25 @@ class ReportesController(QObject):
         self.ui.labelClientesAlDiaValor.setText(self.locale.toString(float(datos['estados']['clientes_al_dia']), 'f',0))
     
     def deudas(self):
+        self.ui.tableClientesDeben.setRowCount(0)
         clientes=Caja.clientes_con_deuda()
         if clientes:
             self.ui.tableClientesDeben.setRowCount(len(clientes))
             for index, cliente in enumerate(clientes):
                 nombre_item = QTableWidgetItem(str(cliente.nombre))
-                deuda_item = QTableWidgetItem(self.locale.toString(float(cliente.deuda)))
+                deuda_item = QTableWidgetItem(self.locale.toString(float(cliente.deuda), 'f',2))
                 deuda_item.setForeground(QBrush(QColor("red")))
                 self.ui.tableClientesDeben.setItem(index, 0, nombre_item)
                 self.ui.tableClientesDeben.setItem(index, 1, deuda_item)
 
     def a_favor(self):
+        self.ui.tableClientesFavor.setRowCount(0)
         clientes=Caja.clientes_saldo_favor()
         if clientes:
             self.ui.tableClientesFavor.setRowCount(len(clientes))
             for index, cliente in enumerate(clientes):
                 nombre_item = QTableWidgetItem(str(cliente.nombre))
-                saldo_favor_item = QTableWidgetItem(self.locale.toString(float(cliente.saldo_favor)))
+                saldo_favor_item = QTableWidgetItem(self.locale.toString(float(cliente.saldo_favor), 'f',2))
                 saldo_favor_item.setForeground(QBrush(QColor("green")))
                 self.ui.tableClientesFavor.setItem(index, 0, nombre_item)   
                 self.ui.tableClientesFavor.setItem(index, 1, saldo_favor_item)  
@@ -111,6 +116,7 @@ class ReportesController(QObject):
         self.ui.verticalLayout_frame_grafico.addWidget(self.chart_view)
     
     def cargar_detalles_estadisticas(self,año):
+        self.ui.tableResumenMensual.setRowCount(0)
         datos=Caja.obtener_resumen_mensual_detallado(año)
         if datos:
             self.ui.tableResumenMensual.setRowCount(len(datos))
@@ -125,13 +131,17 @@ class ReportesController(QObject):
     def meses_combobox(self):
         self.ui.comboBoxMesGanancias.clear()
         self.ui.comboBoxMesGanancias.addItem("Todos")
+        self.ui.comboBoxMesMonedero.clear()
+        self.ui.comboBoxMesMonedero.addItem("Todos")
         meses=['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
                 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
         num=1
         for mes in meses:
             self.ui.comboBoxMesGanancias.addItem(mes)
+            self.ui.comboBoxMesMonedero.addItem(mes)
             index=self.ui.comboBoxMesGanancias.count()-1
             self.ui.comboBoxMesGanancias.setItemData(index, num, QtCore.Qt.ItemDataRole.UserRole)
+            self.ui.comboBoxMesMonedero.setItemData(index, num, QtCore.Qt.ItemDataRole.UserRole)
             num+=1
 
     def graficar_ganancias(self):
@@ -181,3 +191,43 @@ class ReportesController(QObject):
             self.ganancias_chart_view = QChartView(chart)
             self.ganancias_chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
             self.ui.verticalLayout_frame_grafico_ganancias.addWidget(self.ganancias_chart_view)
+    
+    def graficar_monedero(self):
+        año = self.ui.spinBoxAñoMonedero.value()
+        mes_seleccionado = self.ui.comboBoxMesMonedero.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        mes_para_db = mes_seleccionado if mes_seleccionado is not None else None
+        datos_grafico = Caja.obtener_ingresos_por_metodo_pago(año, mes_para_db)
+        if self.monedero_chart_view is not None:
+            self.ui.verticalLayout_frame_grafico_monedero.removeWidget(self.monedero_chart_view)
+            self.monedero_chart_view.deleteLater()
+            self.monedero_chart_view = None
+        self.ui.labelGraficoMonederoPlaceholder.hide()
+        if not datos_grafico:
+            self.ui.labelGraficoMonederoPlaceholder.setText("No hay datos de ingresos para el período seleccionado.")
+            self.ui.labelGraficoMonederoPlaceholder.show()
+            return
+        series = QPieSeries()
+        total_ingresos = sum(item['total_cobrado'] for item in datos_grafico)
+        for dato in datos_grafico:
+            medio_pago = dato['medio_pago']
+            total_cobrado = dato['total_cobrado']
+            slice = QPieSlice(medio_pago, total_cobrado)
+            if total_ingresos > 0:
+                percentage = (total_cobrado / total_ingresos) * 100
+                slice.setLabel(f"{medio_pago}: {self.locale.toString(total_cobrado, 'f', 2)} ({percentage:.1f}%)")
+            else:
+                slice.setLabel(f"{medio_pago}: {self.locale.toString(total_cobrado, 'f', 2)}")
+            series.append(slice)
+        chart = QChart()
+        chart.addSeries(series)
+        if mes_para_db is None: 
+            chart.setTitle(f"Ingresos por Método de Pago - Año {año}")
+        else:
+            mes_nombre = self.ui.comboBoxMesMonedero.currentText()
+            chart.setTitle(f"Ingresos por Método de Pago - {mes_nombre} {año}")
+        chart.setAnimationOptions(QChart.AnimationOption.SeriesAnimations)
+        chart.legend().setVisible(True)
+        chart.legend().setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.monedero_chart_view = QChartView(chart)
+        self.monedero_chart_view.setRenderHint(QPainter.RenderHint.Antialiasing)
+        self.ui.verticalLayout_frame_grafico_monedero.addWidget(self.monedero_chart_view)

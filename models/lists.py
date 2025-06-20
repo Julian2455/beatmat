@@ -133,3 +133,35 @@ class CatGasto(Base):
             return False
         finally:
             db.close()
+
+class CatPagos(Base):
+    __tablename__ = 'catpagos'
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    nombre = Column(String(50), nullable=False)
+    caja = relationship('Caja', back_populates='catpagos')
+
+    @classmethod
+    def show_all(cls):
+        db = SessionLocal()
+        try:
+            lista = (
+                db.query(cls).all()
+            )
+            return lista
+        finally:
+            db.close()
+    
+    @classmethod
+    def registrar_medio_pago(cls, nombre):
+        dato=cls(nombre=nombre)
+        try:
+            db = SessionLocal()
+            db.add(dato)
+            db.commit()
+            return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()

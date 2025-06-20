@@ -14,6 +14,7 @@ class CajaController(QObject):
         self.print_controller=print_controller
         self.reportes_controller=reportes_controller
         self.clientes_combobox()
+        self.pagos_combobox()
         self.configurar_validadores()
         self.ui.comboClientes.currentIndexChanged.connect(self.seleccionar_cliente)
         self.ui.tableExtintoresCliente.verticalHeader().setVisible(False)
@@ -40,6 +41,15 @@ class CajaController(QObject):
             index=self.ui.comboClientes.count()-1
             self.ui.comboClientes.setItemData(index, cliente.id, QtCore.Qt.ItemDataRole.UserRole)
     
+    def pagos_combobox(self):
+        self.ui.comboMedioPago.clear()
+        self.ui.comboMedioPago.addItem("--SELECCIONAR MEDIO DE PAGO--")
+        metodos=CatPagos.show_all()
+        for metodo in metodos:
+            self.ui.comboMedioPago.addItem(metodo.nombre)
+            index=self.ui.comboMedioPago.count()-1
+            self.ui.comboMedioPago.setItemData(index, metodo.id, QtCore.Qt.ItemDataRole.UserRole)
+
     def configurar_validadores(self):
         self.validator = QDoubleValidator()
         self.validator.setDecimals(2)
@@ -246,6 +256,10 @@ class CajaController(QObject):
             pass
     
     def confirmar_compra(self):
+        medio_de_pago=self.ui.comboMedioPago.currentData(QtCore.Qt.ItemDataRole.UserRole)
+        if not medio_de_pago:
+            self.mostrar_error("Seleccione un medio de pago", "Debe seleccionar un medio de pago para continuar.")
+            return
         if not self.cliente:
             self.mostrar_error("Seleccione un cliente", "Debe seleccionar un cliente para continuar.")
             return
@@ -289,7 +303,7 @@ class CajaController(QObject):
         exito = Caja.confirmar_compra(
             self.cliente, fecha, self.total, cobro_num, deuda_num, 
             precios_totales, self.selected_extintores, self.selected_nuevos, 
-            precios_adicionales, descripcion
+            precios_adicionales,medio_de_pago, descripcion
         )
         if exito:
             self.mostrar_info("Compra registrada", "La compra se ha registrado correctamente.")
@@ -310,6 +324,7 @@ class CajaController(QObject):
         self.ui.dateEdit.setDate(QDate.currentDate())
         self.ui.labelTotalAmount.setText("0.00")
         self.ui.comboClientes.setCurrentIndex(0)
+        self.ui.comboMedioPago.setCurrentIndex(0)
         self.ui.tableExtintoresCliente.setRowCount(0)
         self.selected_extintores = {}
         self.selected_nuevos = {}

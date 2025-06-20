@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>614</width>
+    <width>604</width>
     <height>550</height>
    </rect>
   </property>
@@ -140,7 +140,7 @@ border-bottom: 5px solid #007BFF;
         <property name="font">
          <font>
           <pointsize>12</pointsize>
-          <italic>false</italic>
+         <italic>false</italic>
           <bold>true</bold>
          </font>
         </property>
@@ -198,7 +198,7 @@ color:rgb(255, 255, 255)</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <bold>true</bold>
+                  <bold>true</bold>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -236,7 +236,7 @@ color:rgb(255, 255, 255)</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <bold>true</bold>
+                  <bold>true</bold>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -253,10 +253,10 @@ color:rgb(255, 255, 255)</string>
                   <string notr="true"/>
                  </property>
                  <property name="editable">
-                  <bool>true</bool>
+                  <bool>false</bool>
                  </property>
                  <property name="placeholderText">
-                  <string>Seleccione o ingrese la marca</string>
+                  <string>Seleccione la marca</string>
                  </property>
                 </widget>
                </item>
@@ -289,7 +289,7 @@ color:rgb(255, 255, 255)</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <bold>true</bold>
+                  <bold>true</bold>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -327,7 +327,7 @@ color:rgb(255, 255, 255)</string>
                  <property name="font">
                   <font>
                    <pointsize>11</pointsize>
-                   <bold>true</bold>
+                  <bold>true</bold>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -344,10 +344,10 @@ color:rgb(255, 255, 255)</string>
                   <string notr="true"/>
                  </property>
                  <property name="editable">
-                  <bool>true</bool>
+                  <bool>false</bool>
                  </property>
                  <property name="placeholderText">
-                  <string>Seleccione o ingrese el tipo</string>
+                  <string>Seleccione el tipo</string>
                  </property>
                 </widget>
                </item>
@@ -371,7 +371,7 @@ color:rgb(255, 255, 255)</string>
               <property name="font">
                <font>
                 <pointsize>11</pointsize>
-                <bold>true</bold>
+               <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -397,14 +397,13 @@ color:rgb(255, 255, 255)</string>
                </size>
               </property>
               <property name="styleSheet">
-               <string notr="true">
-</string>
+               <string notr="true"/>
               </property>
               <property name="editable">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
               <property name="placeholderText">
-               <string>Seleccione o ingrese la capacidad</string>
+               <string>Seleccione la capacidad</string>
               </property>
              </widget>
             </item>
@@ -418,7 +417,7 @@ color:rgb(255, 255, 255)</string>
              <widget class="QPushButton" name="cancelar_form">
               <property name="font">
                <font>
-                <bold>true</bold>
+               <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -449,7 +448,7 @@ color:rgb(255, 255, 255)</string>
              <widget class="QPushButton" name="guardar_extintor">
               <property name="font">
                <font>
-                <bold>true</bold>
+               <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">

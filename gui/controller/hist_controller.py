@@ -123,16 +123,17 @@ class HistorialController(QObject):
             resultados = Caja.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableHistorialCompras.setRowCount(len(resultados))
         for index, resultado in enumerate(resultados):
-            venta, nombre_cliente = resultado
+            venta, nombre_cliente, medio_pago = resultado
             id_venta = QTableWidgetItem(str(venta.id))
             id_venta.setData(Qt.ItemDataRole.UserRole, venta.id)
             self.ui.tableHistorialCompras.setItem(index, 0, id_venta)
             self.ui.tableHistorialCompras.setItem(index, 1, QTableWidgetItem(venta.fecha_formateado))
             self.ui.tableHistorialCompras.setItem(index, 2, QTableWidgetItem(nombre_cliente))
-            self.ui.tableHistorialCompras.setItem(index, 3, QTableWidgetItem(str(venta.cobro)))
-            self.ui.tableHistorialCompras.setItem(index, 4, QTableWidgetItem(str(venta.adeudado)))
-            self.ui.tableHistorialCompras.setItem(index, 5, QTableWidgetItem(str(venta.total)))
-            self.ui.tableHistorialCompras.setItem(index, 6, QTableWidgetItem(venta.descripcion or ""))
+            self.ui.tableHistorialCompras.setItem(index, 3, QTableWidgetItem(medio_pago))
+            self.ui.tableHistorialCompras.setItem(index, 4, QTableWidgetItem(str(venta.cobro)))
+            self.ui.tableHistorialCompras.setItem(index, 5, QTableWidgetItem(str(venta.adeudado)))
+            self.ui.tableHistorialCompras.setItem(index, 6, QTableWidgetItem(str(venta.total)))
+            self.ui.tableHistorialCompras.setItem(index, 7, QTableWidgetItem(venta.descripcion or ""))
         self.actualizar_estado_paginado()
     
     def obtener_id_compra(self):

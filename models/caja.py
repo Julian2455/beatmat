@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship,sessionmaker,joinedload
 from db import Base, engine, SessionLocal
 from datetime import date
 from .cliente import Cliente
+from .lists import CatPagos
 
 class Caja(Base):
     __tablename__='caja'
@@ -13,11 +14,12 @@ class Caja(Base):
     adeudado=Column(Float)
     total=Column(Float)
     descripcion=Column(String(255))
-
+    medio_pago=Column(Integer, ForeignKey('catpagos.id'))
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
     cliente=relationship('Cliente',back_populates='caja')
     detcaja=relationship('DetCaja',back_populates='caja')
+    catpagos=relationship('CatPagos',back_populates='caja')
 
     @property
     def fecha_formateado(self):
@@ -26,8 +28,8 @@ class Caja(Base):
         return ""
 
     @classmethod
-    def confirmar_compra(cls,id,fecha,total,cobro,deuda,totales,recargas,nuevos,adicionales,descripcion=None):
-        datos=cls(fecha=fecha,cliente_id=id,cobro=cobro,adeudado=deuda,total=total,descripcion=descripcion)
+    def confirmar_compra(cls,id,fecha,total,cobro,deuda,totales,recargas,nuevos,adicionales,medio_pago,descripcion=None):
+        datos=cls(fecha=fecha,cliente_id=id,cobro=cobro,adeudado=deuda,total=total,medio_pago=medio_pago,descripcion=descripcion)
         db=SessionLocal()
         try:
             db.add(datos)
@@ -68,9 +70,11 @@ class Caja(Base):
             ventas = (
                 db.query(
                     cls, 
-                    Cliente.nombre.label('nombre')
+                    Cliente.nombre.label('nombre'),
+                    CatPagos.nombre.label('nombre_metodo')
                 )
                 .join(Cliente, cls.cliente_id == Cliente.id)
+                .join(CatPagos, cls.medio_pago == CatPagos.id)
                 .order_by(desc(cls.fecha))
                 .offset((page - 1) * per_page)
                 .limit(per_page)
@@ -106,9 +110,11 @@ class Caja(Base):
             query = (
                 db.query(
                     cls,
-                    Cliente.nombre.label('nombre_cliente')
+                    Cliente.nombre.label('nombre_cliente'),
+                    CatPagos.nombre.label('nombre_metodo')
                 )
                 .join(Cliente, cls.cliente_id == Cliente.id)
+                .join(CatPagos, cls.medio_pago == CatPagos.id)
             )
             if cliente:
                 query = query.filter(cls.cliente_id == cliente)
@@ -519,3 +525,34 @@ class Caja(Base):
         except Exception as e:
             print(f"Error al obtener la comparación de cobros y gastos: {e}")
             return {'cobros': 0, 'gastos': 0}
+    
+    @classmethod
+    def obtener_ingresos_por_metodo_pago(cls, año, mes=None):
+        db = SessionLocal()
+        try:
+            query = db.query(
+                CatPagos.nombre.label('medio_pago'),
+                func.sum(cls.cobro).label('total_cobrado')
+            ).join(CatPagos, cls.medio_pago == CatPagos.id)
+            if año:
+                query = query.filter(func.strftime('%Y', cls.fecha) == str(año))
+            if mes:
+                query = query.filter(func.strftime('%m', cls.fecha) == f"{mes:02d}")
+            resultado = (
+                query
+                .group_by(CatPagos.nombre)
+                .order_by(func.sum(cls.cobro).desc())
+                .all()
+            )
+            ingresos_por_metodo = []
+            for row in resultado:
+                ingresos_por_metodo.append({
+                    'medio_pago': row.medio_pago,
+                    'total_cobrado': float(row.total_cobrado or 0)
+                })
+            return ingresos_por_metodo
+        except Exception as e:
+            print(f"Error al obtener ingresos por método de pago: {e}")
+            return []
+        finally:
+            db.close()

@@ -6,11 +6,12 @@ from PyQt6 import QtCore
 from PyQt6.QtCore import Qt, QObject, QLocale
 
 class MtcController(QObject):
-    def __init__(self,ui, extintor_controller, extintor_form_controller):
+    def __init__(self,ui, extintor_controller, extintor_form_controller,gts_form_controller=None):
         super().__init__()
         self.ui = ui
         self.extintor_controller = extintor_controller
         self.extintor_form_controller = extintor_form_controller
+        self.gts_form_controller=gts_form_controller
         self.tipo_formulario = None
         self.ui.guardar_detalle.clicked.connect(self.guardar_detalle)
         self.ui.cancelar_form.clicked.connect(self.cancelar)
@@ -39,7 +40,12 @@ class MtcController(QObject):
             self.ui.label_registro.setText(f"{tipo}es registradas")
         elif tipo == "Gastos":
             datos= CatGasto.show_all()
-            self.ui.label_registro.setText(f"{tipo}s registrados")
+            self.ui.label_registro.setText(f"Categorias registradas")
+        elif tipo == "Pagos":
+            self.ui.label_config.setText(f"Registrar medio de pago")
+            self.ui.setWindowTitle(f"Registrar medio de pago")
+            datos= CatPagos.show_all()
+            self.ui.label_registro.setText(f"Medios de pago registrados")
         else:
             datos = []
         self.ui.tableWidget.setRowCount(len(datos))
@@ -89,7 +95,17 @@ class MtcController(QObject):
                 msg.setWindowTitle("Exito")
                 msg.setText(f"Categoria '{nombre}' registrada correctamente.")
                 msg.exec()
+                if self.gts_form_controller:
+                    self.gts_form_controller.llenar_comboBox()
+        elif tipo == "Pagos":
+            if CatPagos.registrar_medio_pago(nombre) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText(f"Medio de pago '{nombre}' registrado correctamente.")
+                msg.exec()
         self.extintor_controller.llenar_combobox_filtro()
         self.extintor_form_controller.llenar_combobox()
-        self.ui.close()
+        #self.ui.close()
         self.limpiar_formulario()
+        self.mostrar_form(self.tipo_formulario)

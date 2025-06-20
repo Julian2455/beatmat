@@ -18,8 +18,8 @@ class MainController:
         self.init_clientes_tab()
         self.init_extintores_tab()
         self.init_card_bar()
-        self.init_mtc_bar()
         self.init_gastos_tab()
+        self.init_mtc_bar()
         self.init_history_tab()
         self.init_reportes_tab()
         self.init_caja_tab()
@@ -159,12 +159,13 @@ class MainController:
 
     def init_mtc_bar(self):
         self.config_form = ConfigUi()
-        self.mtc_controller = MtcController(self.config_form, self.extintor_controller, self.extintor_form_controller)
+        self.mtc_controller = MtcController(self.config_form, self.extintor_controller, self.extintor_form_controller, self.gts_form_controller)
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))
         # Se conecta aca para poder reutilizar el form
         self.ui.actionGastos.triggered.connect(lambda: self.mostrar_form_universal("Gastos"))
+        self.ui.actionMedios_de_Pago.triggered.connect(lambda: self.mostrar_form_universal("Pagos"))
 
     def init_card_bar(self):
         self.tarjetas_ui = ImpresionUi()
