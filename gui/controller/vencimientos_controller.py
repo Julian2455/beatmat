@@ -32,6 +32,7 @@ class VencimientosController:
         self.ui.label_3.setPixmap(QPixmap(get_image("calendariod")))
         self.ui.restaurar.clicked.connect(self.restaurar_cuenta)
         self.ui.pushButton_5.clicked.connect(self.calcular_vencimientos_dias)
+        self.ui.imprimir.clicked.connect(self.imprimir_vencimientos_btn)
         self.ui.lineEdit.setValidator(QIntValidator(1,9999))
 
     def mostrar_vencimientos(self):
@@ -43,7 +44,6 @@ class VencimientosController:
         self.ui.dateEdit.setText(str(fecha_actual_formateada))
         self.ui.text_dias.setText(f"⚠️¡Los extintores mostrados en pantalla se vencen dentro de {dias} días!")
         self.ui.tableWidget.setRowCount(0)
-        self.ui.imprimir.clicked.connect(lambda: self.imprimir_vencimientos(dias))
         if vencimientos_proximos:
             self.ui.tableWidget.setRowCount(len(vencimientos_proximos))
             for index, venc in enumerate(vencimientos_proximos):
@@ -78,22 +78,25 @@ class VencimientosController:
             self.ui.tableWidget.resizeColumnToContents(6)
             self.actualizar_estado_paginado()
             self.mostrar_btn_restaurar()
+            print(f"[DEBUG] Mostrando vencimientos para {dias} días - Página {self.pagina_actual}")
+
 
     def calcular_vencimientos_dias(self):
         texto = self.ui.lineEdit.text()
-        if texto == "":
-            msg=QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Warning)
-            msg.setWindowTitle("Entrada vacía")
-            msg.setText("Por favor, ingrese un número.")
-            msg.exec()
-            dias=30
+        if texto.strip() == "":
+            dias = 30
             self.ui.lineEdit.clear()
         else:
-            dias=int(texto)
+            try:
+                dias = int(texto)
+            except ValueError:
+                dias = 30
+                self.ui.lineEdit.clear()
+
         self.dias_vencimiento = dias
         self.pagina_actual = 1
         self.mostrar_vencimientos()
+
 
     def actualizar_estado_paginado(self):
         dias = self.dias_vencimiento or 30
@@ -141,6 +144,11 @@ class VencimientosController:
         self.mostrar_vencimientos()
         self.ui.restaurar.setVisible(False)
     
+    def imprimir_vencimientos_btn(self):
+        dias = self.dias_vencimiento or 30
+        self.imprimir_vencimientos(dias)
+
+
     def imprimir_vencimientos(self, dias):
         temp_dir = tempfile.gettempdir()
         archivo_pdf = os.path.join(temp_dir, f"Vencimientos_Extintores.pdf")

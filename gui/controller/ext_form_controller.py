@@ -61,7 +61,7 @@ class ExtFormController(QDialog):
     
     def guardar_extintor(self):
         numeracion, marca, ubicacion, tipo, capacidad = self.obtener_datos()
-        if not numeracion or not marca or not ubicacion or not tipo or not capacidad:
+        if not numeracion or not marca or not tipo or not capacidad:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
             msg.setWindowTitle("Error")

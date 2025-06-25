@@ -476,6 +476,7 @@ class Extintor(Base):
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
+
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -484,17 +485,20 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
+
             recargas_ids = (
                 db.query(Recarga.id)
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
                                 (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .join(Extintor, Extintor.id == Recarga.extintor_id) 
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
-                .filter(cls.estado==True)
+                .filter(Extintor.estado == True) 
                 .order_by(Recarga.nuevo_control_recarga)
                 .offset((page - 1) * per_page)
                 .limit(per_page)
                 .all()
             )
+
             return [r.id for r in recargas_ids]
         except Exception as e:
             print(f"Error al obtener IDs de vencimientos paginados: {e}")
@@ -502,12 +506,14 @@ class Extintor(Base):
         finally:
             db.close()
 
+
     @classmethod
     def contar_vencimientos_proximos(cls, dias=30):
         db = SessionLocal()
         try:
             fecha_actual = datetime.today().date()
             fecha_limite = fecha_actual + timedelta(days=dias)
+
             subconsulta = (
                 db.query(
                     Recarga.extintor_id,
@@ -516,13 +522,15 @@ class Extintor(Base):
                 .group_by(Recarga.extintor_id)
                 .subquery()
             )
+
             total = (
                 db.query(func.count())
                 .select_from(Recarga)
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
                                 (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
+                .join(Extintor, Extintor.id == Recarga.extintor_id) 
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
-                .filter(cls.estado==True)
+                .filter(Extintor.estado == True) 
                 .scalar()
             )
             return total
@@ -549,9 +557,11 @@ class Extintor(Base):
             )
             recargas_ids = (
                 db.query(Recarga.id)
+                .join(Extintor, Extintor.id == Recarga.extintor_id)
                 .join(subconsulta, (subconsulta.c.extintor_id == Recarga.extintor_id) &
                                 (subconsulta.c.ultima_fecha == Recarga.nuevo_control_recarga))
                 .filter(Recarga.nuevo_control_recarga <= fecha_limite)
+                .filter(Extintor.estado == True)
                 .order_by(Recarga.nuevo_control_recarga)
                 .all()
             )
@@ -561,6 +571,7 @@ class Extintor(Base):
             return []
         finally:
             db.close()
+
     
     @classmethod
     def detalles_vencimientos_por_ids(cls, ids):
@@ -581,7 +592,7 @@ class Extintor(Base):
                 .join(Cliente, Cliente.id == Extintor.cliente_id)
                 .join(Marca, Marca.id == Extintor.marca_id)
                 .filter(Recarga.id.in_(ids))
-                .filter(cls.estado==True)
+                .filter(Extintor.estado == True)
                 .order_by(Recarga.nuevo_control_recarga)
                 .all()
             )
@@ -591,6 +602,7 @@ class Extintor(Base):
             return []
         finally:
             db.close()
+
         
     @classmethod
     def tipos(cls): #buscar forma de usar esta consulta para automatizar el registro en la tabla precios

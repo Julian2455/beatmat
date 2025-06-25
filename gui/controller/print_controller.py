@@ -60,7 +60,7 @@ class ImpresionController(QDialog):
     def contador_select(self):
         total = len([eid for eid, marcado in self.extintores_seleccionados.items() if marcado])
         self.ui.contador.setText(f"Total seleccionado: {total}")
-        if total >= 6:
+        if total >= 4:
             self.ui.contador.setText(f"Total seleccionado: {total} (límite)")
             self.ui.contador.setStyleSheet("color: red; font-weight: bold;")
         else:
@@ -90,12 +90,12 @@ class ImpresionController(QDialog):
     def limitar_seleccion_checkboxes(self, checkbox):
         seleccionados = [eid for eid, marcado in self.extintores_seleccionados.items() if marcado]
         cantidad_seleccionados = len(seleccionados)
-        if cantidad_seleccionados > 6:
+        if cantidad_seleccionados > 4:
             checkbox.blockSignals(True)
             checkbox.setChecked(False)
             checkbox.blockSignals(False)
             return
-        if cantidad_seleccionados == 6:
+        if cantidad_seleccionados == 4:
             for cb in self.checkboxes_impresion:
                 if not cb.isChecked():
                     cb.setEnabled(False)

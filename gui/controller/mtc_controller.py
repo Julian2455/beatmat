@@ -59,7 +59,7 @@ class MtcController(QObject):
     
     def guardar_detalle(self):
         tipo = self.tipo_formulario
-        nombre = self.ui.lineEdit.text()
+        nombre = self.ui.lineEdit.text().title()
         if not nombre or not tipo:
             msg=QMessageBox()
             msg.setIcon(QMessageBox.Icon.Warning)
