@@ -143,7 +143,7 @@ class Ui_ExtintorDetails(object):
         self.tableWidgetExtintores.setMaximumSize(QtCore.QSize(16777215, 200))
         self.tableWidgetExtintores.setStyleSheet("color:black;")
         self.tableWidgetExtintores.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
-        self.tableWidgetExtintores.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tableWidgetExtintores.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tableWidgetExtintores.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.tableWidgetExtintores.setAutoScroll(True)
         self.tableWidgetExtintores.setAutoScrollMargin(16)

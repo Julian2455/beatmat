@@ -60,3 +60,35 @@ class Recarga(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def contar_gastos(cls):
+        db = SessionLocal()
+        total = db.query(cls).count()
+        db.close()
+        return total
+    
+    @classmethod
+    def eliminar_recarga(cls, recarga_id, id_extintor):
+        db = SessionLocal()
+        try:
+            recarga = db.query(cls).filter(cls.id == recarga_id).first()
+            if recarga:
+                db.delete(recarga)
+                db.commit()
+                total = db.query(cls).filter(cls.extintor_id==id_extintor).count()
+                if total>0:
+                    return True
+                from .extintor import Extintor
+                extintor = db.query(Extintor).filter_by(id=id_extintor).first()
+                if extintor:
+                    extintor.impreso=True
+                    db.commit()
+                    return True 
+            return False
+        except Exception as e:
+            print(f"Error al eliminar la recarga: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()

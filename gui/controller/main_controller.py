@@ -16,8 +16,8 @@ class MainController:
         # Iniciar componentes
         self.init_prices_bar()
         self.init_clientes_tab()
-        self.init_extintores_tab()
         self.init_card_bar()
+        self.init_extintores_tab()
         self.init_gastos_tab()
         self.init_mtc_bar()
         self.init_history_tab()
@@ -77,7 +77,7 @@ class MainController:
         self.extintor_details_tab.hide()
         
         # Conectar controladores
-        self.extintor_controller = ExtintorController(self.extintor_tab, self.client_controller)
+        self.extintor_controller = ExtintorController(self.extintor_tab, self.client_controller, self.tarjetas_controller)
         self.extintor_controller.details_ui = self.extintor_details_tab
         self.extintor_details_tab.btnAtras.clicked.connect(self.show_extintor_tab)
         

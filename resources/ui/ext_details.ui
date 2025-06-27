@@ -114,7 +114,7 @@ QPushButton:disabled {
      <property name="font">
       <font>
        <pointsize>12</pointsize>
-      <bold>true</bold>
+       <bold>true</bold>
        <underline>true</underline>
       </font>
      </property>
@@ -134,7 +134,7 @@ QPushButton:disabled {
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-      <bold>true</bold>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -167,7 +167,7 @@ QPushButton:disabled {
       <widget class="QPushButton" name="btnAgregarRecarga">
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
@@ -227,7 +227,7 @@ QPushButton:disabled {
       <enum>QFrame::Plain</enum>
      </property>
      <property name="verticalScrollBarPolicy">
-      <enum>Qt::ScrollBarAlwaysOff</enum>
+      <enum>Qt::ScrollBarAsNeeded</enum>
      </property>
      <property name="horizontalScrollBarPolicy">
       <enum>Qt::ScrollBarAsNeeded</enum>
@@ -265,7 +265,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -278,7 +278,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -291,7 +291,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -304,7 +304,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
       <property name="textAlignment">
@@ -318,7 +318,7 @@ QPushButton:disabled {
      <property name="font">
       <font>
        <pointsize>12</pointsize>
-      <bold>true</bold>
+       <bold>true</bold>
        <underline>true</underline>
       </font>
      </property>
@@ -338,7 +338,7 @@ QPushButton:disabled {
      <property name="font">
       <font>
        <pointsize>10</pointsize>
-      <bold>true</bold>
+       <bold>true</bold>
       </font>
      </property>
      <property name="styleSheet">
@@ -371,7 +371,7 @@ QPushButton:disabled {
       <widget class="QPushButton" name="btnAgregarTareas">
        <property name="font">
         <font>
-        <bold>true</bold>
+         <bold>true</bold>
         </font>
        </property>
        <property name="cursor">
@@ -468,7 +468,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -478,7 +478,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -488,7 +488,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -498,7 +498,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -508,7 +508,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -518,7 +518,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -528,7 +528,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -538,7 +538,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -548,7 +548,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -558,7 +558,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -568,7 +568,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -578,7 +578,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -588,7 +588,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>
@@ -598,7 +598,7 @@ QPushButton:disabled {
       </property>
       <property name="font">
        <font>
-       <bold>true</bold>
+        <bold>true</bold>
        </font>
       </property>
      </row>

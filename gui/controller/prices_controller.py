@@ -4,6 +4,7 @@ from utils import get_image
 from PyQt6.QtGui import QIcon, QDoubleValidator, QPixmap
 from PyQt6 import QtCore
 from PyQt6.QtCore import Qt, QObject, QLocale
+from datetime import date
 
 class PricesController(QObject):
     def __init__(self,ui):
@@ -15,6 +16,8 @@ class PricesController(QObject):
         self.cargar_precio_recargas()
         self.ui.btnGuardar.clicked.connect(self.guardar_cambios)
         self.ui.btnCancelar.clicked.connect(self.cancelar_cambios)
+        self.ui.btnCalcular.clicked.connect(self.mostrar_precio_recarga_sugerido)
+        CatGasto.inicializar_registro_fijo()
     
     def check_prices(self):
         Precios.revisar_nuevos()
@@ -132,7 +135,6 @@ class PricesController(QObject):
         QMessageBox.information(self.ui, "Información", "Se han descartado los cambios.")
 
     def limpiar_layout(self, layout):
-        """Elimina todos los widgets y layouts hijos del layout proporcionado"""
         while layout.count():
             item = layout.takeAt(0)
             widget = item.widget()
@@ -143,4 +145,19 @@ class PricesController(QObject):
                 if child_layout is not None:
                     self.limpiar_layout(child_layout)
                     child_layout.deleteLater()
+    
+    def mostrar_precio_recarga_sugerido(self):
+        hoy = date.today()
+        año_actual = hoy.year
+        mes_actual = hoy.month
+        try:
+            precio_sugerido = Precios.calcular_precio_recarga_5kg_sugerido(año_actual, mes_actual)
+            if precio_sugerido == 0.0:
+                QMessageBox.information(self.ui, "Precio Sugerido", 
+                                        "No hay datos suficientes (recargas o gastos) para calcular un precio sugerido en el ultimo trimestre.")
+            else:
+                QMessageBox.information(self.ui, "Precio Sugerido Recarga 5kg", 
+                                        f"El precio de recarga sugerido para 5kg en base al ultimo trimestre es: ${precio_sugerido:.2f}")
+        except Exception as e:
+            QMessageBox.critical(self.ui, "Error de Cálculo", str(e))
     

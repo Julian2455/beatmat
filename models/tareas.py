@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, ForeignKey, String, Date, Boolean
+from sqlalchemy import Column, Integer, ForeignKey, String, Date, Boolean, func
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
+from datetime import date
 
 class Tareas(Base):
     __tablename__='tareas'
@@ -62,6 +63,36 @@ class Tareas(Base):
             return True
         except Exception as e:
             print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def contar_tareas_en_rango(cls, fecha_inicio: date, fecha_fin: date) -> int:
+        db = SessionLocal()
+        try:
+            count = (
+                db.query(cls)
+                .filter(cls.fecha >= fecha_inicio, cls.fecha <= fecha_fin)
+                .count()
+            )
+            return count
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_tarea(cls, tarea_id):
+        db = SessionLocal()
+        try:
+            tarea = db.query(cls).filter(cls.id == tarea_id).first()
+            if tarea:
+                db.delete(tarea)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al eliminar la tarea: {e}")
             db.rollback()
             return False
         finally:

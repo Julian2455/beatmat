@@ -1,7 +1,9 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float, Boolean, func
 from sqlalchemy.orm import relationship,sessionmaker
 from db import Base, engine, SessionLocal
 from .lists import Capacidad, Tipo, Marca
+import math
+from datetime import date, timedelta
 
 class Precios(Base):
     __tablename__ = 'precios'
@@ -263,5 +265,63 @@ class Precios(Base):
         except Exception as e:
             db.rollback()
             print(f"Error: {e}")
+        finally:
+            db.close()
+    
+    @classmethod
+    def calcular_precio_recarga_5kg_sugerido(cls, año: int, mes: int, meses_a_considerar: int = 3) -> float:
+        from .lists import CatGasto
+        from .gastos import Gastos
+        from .tareas import Tareas 
+        db = SessionLocal()
+        try:
+            fecha_fin = date(año, mes, 1)
+            fecha_inicio = date(año, mes, 1)
+            for _ in range(meses_a_considerar - 1):
+                if fecha_inicio.month == 1:
+                    fecha_inicio = date(fecha_inicio.year - 1, 12, 1)
+                else:
+                    fecha_inicio = date(fecha_inicio.year, fecha_inicio.month - 1, 1)
+            categoria_nitrogeno = db.query(CatGasto).filter(func.lower(CatGasto.nombre) == "nitrógeno").first()
+            if not categoria_nitrogeno:
+                raise Exception("Debe existir la categoría de gasto 'Nitrógeno' para calcular el precio recomendado.")
+            cantidad_total_recargas_o_tareas = (
+                db.query(Tareas)
+                .filter(Tareas.fecha >= fecha_inicio, Tareas.fecha < date(fecha_fin.year, fecha_fin.month % 12 + 1, 1) if fecha_fin.month != 12 else date(fecha_fin.year + 1, 1, 1))
+                .count()
+            )
+            if cantidad_total_recargas_o_tareas == 0:
+                return 0.0
+            gastos_nitrogeno_periodo = (
+                db.query(Gastos)
+                .filter(
+                    Gastos.catgasto_id == categoria_nitrogeno.id,
+                    Gastos.fecha >= fecha_inicio,
+                    Gastos.fecha < date(fecha_fin.year, fecha_fin.month % 12 + 1, 1) if fecha_fin.month != 12 else date(fecha_fin.year + 1, 1, 1)
+                )
+                .all()
+            )
+            costo_total_nitrogeno = sum(g.gasto for g in gastos_nitrogeno_periodo)
+            otros_gastos_periodo = (
+                db.query(func.sum(Gastos.gasto))
+                .join(CatGasto, Gastos.catgasto_id == CatGasto.id)
+                .filter(
+                    func.lower(CatGasto.nombre) != "nitrógeno",
+                    Gastos.fecha >= fecha_inicio,
+                    Gastos.fecha < date(fecha_fin.year, fecha_fin.month % 12 + 1, 1) if fecha_fin.month != 12 else date(fecha_fin.year + 1, 1, 1)
+                )
+                .scalar()
+            )
+            gasto_otro_total = otros_gastos_periodo if otros_gastos_periodo is not None else 0.0
+            if gasto_otro_total == 0.0 and costo_total_nitrogeno == 0.0:
+                 return 0.0
+            costo_nitrogeno_unitario = costo_total_nitrogeno / cantidad_total_recargas_o_tareas
+            costo_otros_unitario = gasto_otro_total / cantidad_total_recargas_o_tareas
+            costo_total_unitario = costo_nitrogeno_unitario + costo_otros_unitario
+            precio_recomendado = round(costo_total_unitario / (1 - 0.30), 2)
+            return precio_recomendado
+        except Exception as e:
+            print(f"Error al calcular precio recomendado: {e}")
+            raise
         finally:
             db.close()

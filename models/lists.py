@@ -133,6 +133,21 @@ class CatGasto(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def inicializar_registro_fijo(cls):
+        db = SessionLocal()
+        try:
+            nitrogeno_existente = db.query(cls).filter_by(nombre="Nitrógeno").first()
+            if not nitrogeno_existente:
+                nuevo_nitrogeno = cls(nombre="Nitrógeno")
+                db.add(nuevo_nitrogeno)
+                db.commit()
+        except Exception as e:
+            print(f"Error al inicializar CatGasto: {e}")
+            db.rollback()
+        finally:
+            db.close()
 
 class CatPagos(Base):
     __tablename__ = 'catpagos'

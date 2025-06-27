@@ -12,7 +12,7 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_FormPrecios(object):
     def setupUi(self, FormPrecios):
         FormPrecios.setObjectName("FormPrecios")
-        FormPrecios.resize(800, 501)
+        FormPrecios.resize(795, 501)
         FormPrecios.setStyleSheet("QComboBox {\n"
 "     border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
@@ -45,8 +45,16 @@ class Ui_FormPrecios(object):
 "   QPushButton#btnGuardar:hover {\n"
 "     background-color: #0d47a1;\n"
 "   }\n"
+"   /* Estilo para el botón Calcular, similar a btnGuardar */\n"
+"   QPushButton#btnCalcular {\n"
+"     background-color: #1976d2;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#btnCalcular:hover {\n"
+"     background-color: #0d47a1;\n"
+"   }\n"
 "QScrollArea {\n"
-"     border: 2px solid rgb(85, 85, 127);\n"
+"   border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
 "     color: #333;\n"
 "     background-color: #fff;\n"
@@ -87,41 +95,22 @@ class Ui_FormPrecios(object):
         self.horizontalLayout_2.setContentsMargins(6, 6, 6, 6)
         self.horizontalLayout_2.setSpacing(6)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
-        self.labelCapacidad = QtWidgets.QLabel(parent=self.frameSeleccion)
-        self.labelCapacidad.setMinimumSize(QtCore.QSize(70, 0))
+        self.labelPrecioRecomendado = QtWidgets.QLabel(parent=self.frameSeleccion)
+        self.labelPrecioRecomendado.setMinimumSize(QtCore.QSize(70, 0))
         font = QtGui.QFont()
         font.setPointSize(9)
         font.setBold(True)
-        self.labelCapacidad.setFont(font)
-        self.labelCapacidad.setObjectName("labelCapacidad")
-        self.horizontalLayout_2.addWidget(self.labelCapacidad)
-        self.comboCapacidad = QtWidgets.QComboBox(parent=self.frameSeleccion)
-        self.comboCapacidad.setMinimumSize(QtCore.QSize(120, 25))
-        self.comboCapacidad.setObjectName("comboCapacidad")
-        self.horizontalLayout_2.addWidget(self.comboCapacidad)
-        self.labelTipo = QtWidgets.QLabel(parent=self.frameSeleccion)
-        self.labelTipo.setMinimumSize(QtCore.QSize(40, 0))
+        self.labelPrecioRecomendado.setFont(font)
+        self.labelPrecioRecomendado.setObjectName("labelPrecioRecomendado")
+        self.horizontalLayout_2.addWidget(self.labelPrecioRecomendado)
+        self.btnCalcular = QtWidgets.QPushButton(parent=self.frameSeleccion)
+        self.btnCalcular.setMinimumSize(QtCore.QSize(100, 0))
         font = QtGui.QFont()
-        font.setPointSize(9)
         font.setBold(True)
-        self.labelTipo.setFont(font)
-        self.labelTipo.setObjectName("labelTipo")
-        self.horizontalLayout_2.addWidget(self.labelTipo)
-        self.comboTipo = QtWidgets.QComboBox(parent=self.frameSeleccion)
-        self.comboTipo.setMinimumSize(QtCore.QSize(120, 25))
-        self.comboTipo.setObjectName("comboTipo")
-        self.horizontalLayout_2.addWidget(self.comboTipo)
-        self.labelMarca = QtWidgets.QLabel(parent=self.frameSeleccion)
-        font = QtGui.QFont()
-        font.setPointSize(9)
-        font.setBold(True)
-        self.labelMarca.setFont(font)
-        self.labelMarca.setObjectName("labelMarca")
-        self.horizontalLayout_2.addWidget(self.labelMarca)
-        self.comboMarca = QtWidgets.QComboBox(parent=self.frameSeleccion)
-        self.comboMarca.setMinimumSize(QtCore.QSize(120, 25))
-        self.comboMarca.setObjectName("comboMarca")
-        self.horizontalLayout_2.addWidget(self.comboMarca)
+        self.btnCalcular.setFont(font)
+        self.btnCalcular.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnCalcular.setObjectName("btnCalcular")
+        self.horizontalLayout_2.addWidget(self.btnCalcular)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
         self.verticalLayout.addWidget(self.frameSeleccion)
@@ -152,7 +141,7 @@ class Ui_FormPrecios(object):
         self.scrollAreaRecargas.setWidgetResizable(True)
         self.scrollAreaRecargas.setObjectName("scrollAreaRecargas")
         self.scrollAreaWidgetContentsRecargas = QtWidgets.QWidget()
-        self.scrollAreaWidgetContentsRecargas.setGeometry(QtCore.QRect(0, 0, 378, 330))
+        self.scrollAreaWidgetContentsRecargas.setGeometry(QtCore.QRect(0, 0, 376, 343))
         self.scrollAreaWidgetContentsRecargas.setObjectName("scrollAreaWidgetContentsRecargas")
         self.verticalLayoutRecargas = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContentsRecargas)
         self.verticalLayoutRecargas.setObjectName("verticalLayoutRecargas")
@@ -184,7 +173,7 @@ class Ui_FormPrecios(object):
         self.scrollAreaNuevos.setWidgetResizable(True)
         self.scrollAreaNuevos.setObjectName("scrollAreaNuevos")
         self.scrollAreaWidgetContentsNuevos = QtWidgets.QWidget()
-        self.scrollAreaWidgetContentsNuevos.setGeometry(QtCore.QRect(0, 0, 378, 330))
+        self.scrollAreaWidgetContentsNuevos.setGeometry(QtCore.QRect(0, 0, 375, 343))
         self.scrollAreaWidgetContentsNuevos.setObjectName("scrollAreaWidgetContentsNuevos")
         self.verticalLayoutNuevos = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContentsNuevos)
         self.verticalLayoutNuevos.setObjectName("verticalLayoutNuevos")
@@ -224,9 +213,8 @@ class Ui_FormPrecios(object):
         _translate = QtCore.QCoreApplication.translate
         FormPrecios.setWindowTitle(_translate("FormPrecios", "Gestión de Precios"))
         self.labelTitle.setText(_translate("FormPrecios", "GESTIÓN DE PRECIOS"))
-        self.labelCapacidad.setText(_translate("FormPrecios", "Capacidad:"))
-        self.labelTipo.setText(_translate("FormPrecios", "Tipo:"))
-        self.labelMarca.setText(_translate("FormPrecios", "Marca:"))
+        self.labelPrecioRecomendado.setText(_translate("FormPrecios", "Precio Recomendado:"))
+        self.btnCalcular.setText(_translate("FormPrecios", "Calcular"))
         self.labelRecargas.setText(_translate("FormPrecios", "Recargas"))
         self.labelNuevos.setText(_translate("FormPrecios", "Nuevos"))
         self.btnGuardar.setText(_translate("FormPrecios", "Guardar"))

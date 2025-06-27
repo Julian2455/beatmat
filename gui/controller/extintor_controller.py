@@ -1,13 +1,14 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QCheckBox, QMessageBox, QPushButton
+from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QCheckBox, QMessageBox, QPushButton, QHeaderView
 from PyQt6.QtGui import QAction, QColor, QBrush, QFont, QIcon, QPixmap
 from PyQt6.QtCore import Qt
-from PyQt6 import QtCore
+from PyQt6 import QtCore, QtWidgets
 from models import *  
 from utils import get_image
 
 class ExtintorController:
-    def __init__(self, ui, client_controller):
+    def __init__(self, ui, client_controller, tarjetas_controller=None):
         self.ui = ui
+        self.tarjetas_controller=tarjetas_controller
         self.query=None
         self.marca_filter = None
         self.tipo_filter = None
@@ -61,11 +62,15 @@ class ExtintorController:
         self.actualizar_estado_paginado()
         self.mostrar_boton_restaurar()
     
-    def obtener_id_extintor(self):
-        item_seleccionado = self.ui.tableWidget.currentItem()
+    def obtener_id_tabla(self,tabla):
+        item_seleccionado = tabla.currentItem()
         if item_seleccionado:
-            fila = item_seleccionado.row()
-            item_con_id = self.ui.tableWidget.item(fila, 0) 
+            if tabla == self.details_ui.tableWidgetTareas:
+                columna_seleccionada = item_seleccionado.column()
+                item_con_id = tabla.item(0, columna_seleccionada)
+            else:
+                fila_seleccionada = item_seleccionado.row()
+                item_con_id = tabla.item(fila_seleccionada, 0)
             id_extintor = item_con_id.data(Qt.ItemDataRole.UserRole)
             return id_extintor
         return None
@@ -115,25 +120,28 @@ class ExtintorController:
             self.pagina_actual = self.total_paginas
             self.mostrar_extintores()
     
-    def mostrar_detalles_extintor(self, index):
-        numeracion = self.ui.tableWidget.item(index.row(), 0).text()
-        self.details_ui.labelExtintores.setText(f"Detalles del Extintor {numeracion}")
-        id_extintor=self.obtener_id_extintor()
-        self.details_ui.extintor_id_actual = id_extintor
-        self.ui.hide()
-        self.details_ui.show()
-        self.details_ui.btnAtras.setIcon(QIcon(get_image("btn-atras")))
+    def _cargar_detalles_en_vista_secundaria(self, id_extintor):
+        self.details_ui.tableWidgetExtintores.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
+        self.details_ui.tableWidgetExtintores.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeMode.Stretch)
+        self.details_ui.tableWidgetTareas.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.NoSelection)
+        extintor = Extintor.get_by_id(id_extintor)
+        if extintor:
+            self.details_ui.labelExtintores.setText(f"Detalles del Extintor {extintor.numeracion}")
+            self.details_ui.extintor_id_actual = id_extintor
+        else:
+            self.details_ui.labelExtintores.setText("Detalles del Extintor: No encontrado")
+            return
         self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
         self.details_ui.tableWidgetExtintores.setRowCount(0)
         self.details_ui.tableWidgetTareas.setColumnCount(0)
-        recargas=Recarga.show_filter(id_extintor)
+        recargas = Recarga.show_filter(id_extintor)
         if recargas:
             self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
             for index, recarga in enumerate(recargas):
-                id_recarga = QTableWidgetItem(str(recarga.vto_control_recarga_formateado))
-                id_recarga.setData(Qt.ItemDataRole.UserRole, recarga.id)
-                self.details_ui.tableWidgetExtintores.setItem(index, 0, id_recarga)
+                id_recarga_item = QTableWidgetItem(str(recarga.vto_control_recarga_formateado))
+                id_recarga_item.setData(Qt.ItemDataRole.UserRole, recarga.id)
+                self.details_ui.tableWidgetExtintores.setItem(index, 0, id_recarga_item)
                 self.details_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(recarga.nuevo_control_recarga_formateado)))
                 self.details_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_ph)))
                 self.details_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.fecha_fabricacion)))
@@ -143,12 +151,15 @@ class ExtintorController:
             self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
             self.observaciones={}
             for col, tarea in enumerate(tareas):
-                id_item = QTableWidgetItem("")
-                id_item.setData(Qt.ItemDataRole.UserRole, tarea.id)
-                self.details_ui.tableWidgetTareas.setItem(0, col, id_item)
+                item_fecha_con_id = QTableWidgetItem(tarea.fecha_formateada)
+                item_fecha_con_id.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                font = QFont()
+                font.setBold(True)
+                item_fecha_con_id.setFont(font)
+                item_fecha_con_id.setData(Qt.ItemDataRole.UserRole, tarea.id)
+                self.details_ui.tableWidgetTareas.setItem(0, col, item_fecha_con_id)
                 self.observaciones[col] = tarea.observacion
-                valores = [
-                    tarea.fecha_formateada,
+                valores_restantes = [
                     tarea.tamizacion,
                     tarea.peso,      
                     tarea.control_tacho,
@@ -162,10 +173,11 @@ class ExtintorController:
                     tarea.bastago_bronce,
                     tarea.otro,
                 ]
-                for fila, valor in enumerate(valores):
+                for fila_relativa, valor in enumerate(valores_restantes):
+                    fila_real = fila_relativa + 1
                     item = QTableWidgetItem("")
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    if fila < 13 and fila!=0:
+                    if fila_real<13:
                         if valor==True:
                             item.setText("SI")
                             item.setForeground(QBrush(QColor("green")))
@@ -174,17 +186,24 @@ class ExtintorController:
                             item.setForeground(QBrush(QColor("red")))
                     else:
                         item.setText(str(valor))
-                        if fila == 0:
-                            font = QFont()
-                            font.setBold(True)
-                            item.setFont(font)
-                    self.details_ui.tableWidgetTareas.setItem(fila, col, item)
+                    self.details_ui.tableWidgetTareas.setItem(fila_real, col, item)
                 if tarea.observacion and tarea.observacion != "Null":
                     btn = QPushButton("Ver")
                     btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
                     self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
-                self.details_ui.tableWidgetTareas.setColumnWidth(col,85)
+                self.details_ui.tableWidgetTareas.setColumnWidth(col, 85)
+        self.details_ui.tableWidgetExtintores.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.details_ui.tableWidgetExtintores.customContextMenuRequested.connect(self.mostrar_menu_contextual_recargas)
+        self.details_ui.tableWidgetTareas.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.details_ui.tableWidgetTareas.customContextMenuRequested.connect(self.mostrar_menu_contextual_tareas)
+        self.ui.hide()
+        self.details_ui.show()
+        self.details_ui.btnAtras.setIcon(QIcon(get_image("btn-atras")))
     
+    def mostrar_detalles_extintor(self, index):
+        id_extintor = self.ui.tableWidget.item(index.row(), 0).data(Qt.ItemDataRole.UserRole)
+        self._cargar_detalles_en_vista_secundaria(id_extintor)
+
     def mostrar_observacion(self, columna):
         observacion = self.observaciones.get(columna, "No hay observación")  
         msg = QMessageBox()
@@ -197,34 +216,40 @@ class ExtintorController:
         index = self.ui.tableWidget.indexAt(pos)
         if not index.isValid():
             return
-        menu = QMenu(self.ui.tableWidget)
-        menu.setStyleSheet("""
-            QMenu {
-                background-color: white;
-                border: 1px solid #CCCCCC;
-            }
-            QMenu::item {
-                padding: 5px 15px;
-                background-color: white;
-            }
-            QMenu::item:selected {
-                background-color: #E0E0E0;
-                color: black;
-            }
-        """)
+        menu = self.menu_desplegable(self.ui.tableWidget)
         editar_action = QAction("Editar", self.ui.tableWidget)
         eliminar_action = QAction("Eliminar", self.ui.tableWidget)
         editar_action.triggered.connect(self.editar_extintor)
         eliminar_action.triggered.connect(self.eliminar_extintor)
         menu.addAction(editar_action)
         menu.addAction(eliminar_action)
-        menu.exec(self.ui.tableWidget.viewport().mapToGlobal(pos))
+        menu.popup(self.ui.tableWidget.viewport().mapToGlobal(pos))
+    
+    def mostrar_menu_contextual_recargas(self, pos):
+        index = self.details_ui.tableWidgetExtintores.indexAt(pos)
+        if not index.isValid():
+            return
+        menu=self.menu_desplegable(self.details_ui.tableWidgetExtintores)
+        eliminar_action = QAction("Eliminar", self.details_ui.tableWidgetExtintores)
+        eliminar_action.triggered.connect(self.eliminar_recarga)
+        menu.addAction(eliminar_action)
+        menu.popup(self.details_ui.tableWidgetExtintores.viewport().mapToGlobal(pos))
+    
+    def mostrar_menu_contextual_tareas(self, pos):
+        index = self.details_ui.tableWidgetTareas.indexAt(pos)
+        if not index.isValid():
+            return
+        menu=self.menu_desplegable(self.details_ui.tableWidgetTareas)
+        eliminar_action = QAction("Eliminar", self.details_ui.tableWidgetTareas)
+        eliminar_action.triggered.connect(self.eliminar_tarea)
+        menu.addAction(eliminar_action)
+        menu.popup(self.details_ui.tableWidgetTareas.viewport().mapToGlobal(pos))
     
     def set_edit_form_ext(self, edit_form_ext):
         self.edit_form_ext = edit_form_ext
 
     def editar_extintor(self):
-        id_extintor = self.obtener_id_extintor()
+        id_extintor = self.obtener_id_tabla(self.ui.tableWidget)
         if id_extintor and self.edit_form_ext:
             self.edit_form_ext.setWindowTitle("Editar Extintor")
             extintor = Extintor.get_by_id(id_extintor)
@@ -266,7 +291,7 @@ class ExtintorController:
                 self.edit_form_ext.mostrar_form()
 
     def eliminar_extintor(self):
-        id_extintor = self.obtener_id_extintor()
+        id_extintor = self.obtener_id_tabla(self.ui.tableWidget)
         numeracion_extintor = self.obtener_numeracion_extintor()
         if id_extintor and numeracion_extintor:
             msg = QMessageBox()
@@ -292,72 +317,8 @@ class ExtintorController:
         if self.client_controller.indice_actual:
             self.client_controller.extintores_clientes(self.client_controller.indice_actual)
     
-    def actualizar_tablas(self, id_extintor): #Esta es casi igual a mostrar_detalles_extintor, tuve que hacerla por que no podia llamar a ese metodo sin el index de la columna
-        extintor = Extintor.get_by_id(id_extintor)
-        self.details_ui.labelExtintores.setText(f"Detalles del Extintor {extintor.numeracion}")
-        self.ui.hide()
-        self.details_ui.show()
-        self.details_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
-        self.details_ui.tableWidgetTareas.horizontalHeader().setVisible(False)
-        self.details_ui.tableWidgetExtintores.setRowCount(0)
-        self.details_ui.tableWidgetTareas.setColumnCount(0) 
-        recargas=Recarga.show_filter(id_extintor)
-        if recargas:
-            self.details_ui.tableWidgetExtintores.setRowCount(len(recargas))
-            for index, recarga in enumerate(recargas):
-                id_recarga = QTableWidgetItem(str(recarga.vto_control_recarga_formateado))
-                id_recarga.setData(Qt.ItemDataRole.UserRole, recarga.id)
-                self.details_ui.tableWidgetExtintores.setItem(index, 0, id_recarga)
-                self.details_ui.tableWidgetExtintores.setItem(index, 1, QTableWidgetItem(str(recarga.nuevo_control_recarga_formateado)))
-                self.details_ui.tableWidgetExtintores.setItem(index, 2, QTableWidgetItem(str(recarga.vto_ph)))
-                self.details_ui.tableWidgetExtintores.setItem(index, 3, QTableWidgetItem(str(recarga.fecha_fabricacion)))       
-        tareas = Tareas.show_filter(id_extintor)
-        if tareas:
-            num_tareas = len(tareas)
-            self.details_ui.tableWidgetTareas.setColumnCount(num_tareas)
-            self.observaciones={}
-            for col, tarea in enumerate(tareas):
-                id_item = QTableWidgetItem("")
-                id_item.setData(Qt.ItemDataRole.UserRole, tarea.id)
-                self.details_ui.tableWidgetTareas.setItem(0, col, id_item)
-                self.observaciones[col] = tarea.observacion
-                valores = [
-                    tarea.fecha_formateada,
-                    tarea.tamizacion,
-                    tarea.peso,      
-                    tarea.control_tacho,
-                    tarea.relleno_polvo,
-                    tarea.cambio_manometro,
-                    tarea.oring,
-                    tarea.gatillo,
-                    tarea.pintura,
-                    tarea.interior,
-                    tarea.valvula,
-                    tarea.bastago_bronce,
-                    tarea.otro,
-                ]
-                for fila, valor in enumerate(valores):
-                    item = QTableWidgetItem("")
-                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    if fila < 13 and fila!=0:
-                        if valor==True:
-                            item.setText("SI")
-                            item.setForeground(QBrush(QColor("green")))
-                        else:
-                            item.setText("NO")
-                            item.setForeground(QBrush(QColor("red")))
-                    else:
-                        item.setText(str(valor))
-                        if fila == 0:
-                            font = QFont()
-                            font.setBold(True)
-                            item.setFont(font)
-                    self.details_ui.tableWidgetTareas.setItem(fila, col, item)
-                if tarea.observacion and tarea.observacion != "Null":
-                    btn = QPushButton("Ver")
-                    btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
-                    self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
-                self.details_ui.tableWidgetTareas.setColumnWidth(col,85)
+    def actualizar_tablas(self, id_extintor):
+        self._cargar_detalles_en_vista_secundaria(id_extintor)
     
     def buscar_extintor(self):
         previous_query = self.query
@@ -434,3 +395,68 @@ class ExtintorController:
         self.pagina_actual = 1
         self.mostrar_extintores()
     
+    def menu_desplegable(self, tabla):
+        menu = QMenu(tabla)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        return menu
+    
+    def eliminar_recarga(self):
+        id_recarga=self.obtener_id_tabla(self.details_ui.tableWidgetExtintores)
+        if id_recarga:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Recarga")
+            msg.setText(f"¿Estás seguro que quieres eliminar la recarga?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+            if respuesta == QMessageBox.StandardButton.Yes and Recarga.eliminar_recarga(id_recarga, self.details_ui.extintor_id_actual) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Recarga eliminada correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        if self.tarjetas_controller:
+            self.tarjetas_controller.mostrar_extintores()
+        self.actualizar_tablas(self.details_ui.extintor_id_actual)
+    
+    def eliminar_tarea(self):
+        id_tarea=self.obtener_id_tabla(self.details_ui.tableWidgetTareas)
+        if id_tarea:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Tarea")
+            msg.setText(f"¿Estás seguro que quieres eliminar la tarea?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+            if respuesta == QMessageBox.StandardButton.Yes and Tareas.eliminar_tarea(id_tarea) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Tarea eliminada correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        self.actualizar_tablas(self.details_ui.extintor_id_actual)
