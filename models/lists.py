@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
+from sqlalchemy.orm import joinedload
 
 class Marca(Base):
     __tablename__ = 'marca'
@@ -34,6 +35,37 @@ class Marca(Base):
             return False
         finally:
             db.close()
+    
+    @classmethod
+    def get_by_nombre(cls, nombre):
+        db = SessionLocal()
+        try:
+            return (
+                db.query(cls)
+                .options(joinedload(cls.extintores))
+                .filter_by(nombre=nombre)
+                .first()
+            )
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_por_id(cls, id_):
+        db = SessionLocal()
+        try:
+            obj = db.query(cls).get(id_)
+            if obj:
+                db.delete(obj)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+
 
 class Tipo(Base):
     __tablename__ = 'tipo'
@@ -61,6 +93,36 @@ class Tipo(Base):
             db.add(dato)
             db.commit()
             return True
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def get_by_nombre(cls, nombre):
+        db = SessionLocal()
+        try:
+            return (
+                db.query(cls)
+                .options(joinedload(cls.extintores))
+                .filter_by(nombre=nombre)
+                .first()
+            )
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_por_id(cls, id_):
+        db = SessionLocal()
+        try:
+            obj = db.query(cls).get(id_)
+            if obj:
+                db.delete(obj)
+                db.commit()
+                return True
+            return False
         except Exception as e:
             print(e)
             db.rollback()
@@ -101,6 +163,37 @@ class Capacidad(Base):
             return False
         finally:
             db.close()
+
+    @classmethod
+    def get_by_nombre(cls, nombre):
+        db = SessionLocal()
+        try:
+            return (
+                db.query(cls)
+                .options(joinedload(cls.extintores))
+                .filter_by(nombre=nombre)
+                .first()
+            )
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_por_id(cls, id_):
+        db = SessionLocal()
+        try:
+            obj = db.query(cls).get(id_)
+            if obj:
+                db.delete(obj)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+
 
 class CatGasto(Base):
     __tablename__ = 'catgasto'

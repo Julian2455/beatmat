@@ -15,6 +15,7 @@ class ClientController:
     def __init__(self, ui):
         self.ui = ui
         self.query=None
+        self.indice_actual = None
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
         self.total_clientes = Cliente.contar_clientes()
@@ -174,6 +175,7 @@ class ClientController:
             self.mostrar_clientes()
 
     def extintores_clientes(self,index):
+        self.indice_actual = index
         nombre = self.ui.tableWidget.item(index.row(), 0).text()
         domicilio = self.ui.tableWidget.item(index.row(), 1).text()
         telefono = self.ui.tableWidget.item(index.row(), 2).text()

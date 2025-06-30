@@ -19,10 +19,10 @@ class MainController:
         self.init_card_bar()
         self.init_extintores_tab()
         self.init_gastos_tab()
-        self.init_mtc_bar()
         self.init_history_tab()
         self.init_reportes_tab()
         self.init_caja_tab()
+        self.init_mtc_bar()
         self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
@@ -159,7 +159,7 @@ class MainController:
 
     def init_mtc_bar(self):
         self.config_form = ConfigUi()
-        self.mtc_controller = MtcController(self.config_form, self.extintor_controller, self.extintor_form_controller, self.gts_form_controller)
+        self.mtc_controller = MtcController(self.config_form, self.extintor_controller, self.caja_controller, self.extintor_form_controller, self.gts_form_controller)
         self.ui.actionMarcas.triggered.connect(lambda: self.mostrar_form_universal("Marca"))
         self.ui.actionTipos.triggered.connect(lambda: self.mostrar_form_universal("Tipo"))
         self.ui.actionCapacidad.triggered.connect(lambda: self.mostrar_form_universal("Capacidad"))

@@ -63,23 +63,25 @@ class Extintor(Base):
         try:
             extintores = (
                 db.query(
-                Extintor.id,
-                Extintor.numeracion,
-                Marca.nombre.label('marca_nombre'),
-                Tipo.nombre.label('tipo_nombre'),
-                Capacidad.nombre.label('capacidad_nombre'),
-                Extintor.impreso
+                    Extintor.id,
+                    Extintor.numeracion,
+                    Marca.nombre.label('marca_nombre'),
+                    Tipo.nombre.label('tipo_nombre'),
+                    Capacidad.nombre.label('capacidad_nombre'),
+                    Extintor.impreso
                 )
                 .join(Marca, Extintor.marca_id == Marca.id)
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
-                .filter(cls.impreso==False)
-                .filter(cls.estado==True)
+                .join(Recarga, Recarga.extintor_id == Extintor.id)  
+                .filter(cls.impreso == False)
+                .filter(cls.estado == True)
                 .all()
             )
             return extintores
         finally:
             db.close()
+
     
     @classmethod
     def show_all_client(cls, client_id):
