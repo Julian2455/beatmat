@@ -29,6 +29,8 @@ class HistorialController(QObject):
         self.clientes_combobox()
         self.setupDateEdits()
         self.mostrar_ventas()
+        self.ui.tableHistorialCompras.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.ui.tableHistorialCompras.customContextMenuRequested.connect(self.mostrar_menu_contextual)
     
     def setupDateEdits(self):
         fecha_minima_bd = Caja.obtener_fecha_minima()
@@ -130,8 +132,8 @@ class HistorialController(QObject):
             self.ui.tableHistorialCompras.setItem(index, 1, QTableWidgetItem(venta.fecha_formateado))
             self.ui.tableHistorialCompras.setItem(index, 2, QTableWidgetItem(nombre_cliente))
             self.ui.tableHistorialCompras.setItem(index, 3, QTableWidgetItem(medio_pago))
-            self.ui.tableHistorialCompras.setItem(index, 4, QTableWidgetItem(str(venta.cobro)))
-            self.ui.tableHistorialCompras.setItem(index, 5, QTableWidgetItem(str(venta.adeudado)))
+            self.ui.tableHistorialCompras.setItem(index, 4, QTableWidgetItem(str(venta.cobro or "")))
+            self.ui.tableHistorialCompras.setItem(index, 5, QTableWidgetItem(str(venta.adeudado or "")))
             self.ui.tableHistorialCompras.setItem(index, 6, QTableWidgetItem(str(venta.total)))
             self.ui.tableHistorialCompras.setItem(index, 7, QTableWidgetItem(venta.descripcion or ""))
         self.actualizar_estado_paginado()
@@ -148,3 +150,50 @@ class HistorialController(QObject):
     def mostrar_detalles_compra(self):
         id_compra = self.obtener_id_compra()
         return id_compra
+
+    def mostrar_menu_contextual(self, pos):
+        index = self.ui.tableHistorialCompras.indexAt(pos)
+        if not index.isValid():
+            return
+        menu = QMenu(self.ui.tableHistorialCompras)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        eliminar_action = QAction("Eliminar", self.ui.tableHistorialCompras)
+        eliminar_action.triggered.connect(self.eliminar_compra)
+        menu.addAction(eliminar_action)
+        menu.popup(self.ui.tableHistorialCompras.viewport().mapToGlobal(pos))
+    
+    def eliminar_compra(self):
+        id_compra=self.obtener_id_compra()
+        if id_compra:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Gasto")
+            msg.setText(f"¿Estás seguro que quieres eliminar la venta?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+            if respuesta == QMessageBox.StandardButton.Yes and Caja.eliminar_compra(id_compra) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Venta eliminada correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        self.mostrar_ventas()

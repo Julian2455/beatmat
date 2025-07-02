@@ -66,6 +66,23 @@ class Gastos(Base):
             db.close()
     
     @classmethod
+    def eliminar_gasto(cls, gasto_id):
+        db = SessionLocal()
+        try:
+            gasto = db.query(cls).filter(cls.id == gasto_id).first()
+            if gasto:
+                db.delete(gasto)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al eliminar gasto: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
     def obtener_fecha_minima(cls):
         db = SessionLocal()
         try:

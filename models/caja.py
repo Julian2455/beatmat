@@ -18,7 +18,7 @@ class Caja(Base):
     cliente_id=Column(Integer, ForeignKey('cliente.id'))
 
     cliente=relationship('Cliente',back_populates='caja')
-    detcaja=relationship('DetCaja',back_populates='caja')
+    detcaja=relationship('DetCaja',back_populates='caja', cascade="all, delete-orphan")
     catpagos=relationship('CatPagos',back_populates='caja')
 
     @property
@@ -90,6 +90,23 @@ class Caja(Base):
         total = db.query(cls).count()
         db.close()
         return total
+
+    @classmethod
+    def eliminar_compra(cls, compra_id):
+        db = SessionLocal()
+        try:
+            compra = db.query(cls).filter(cls.id == compra_id).first()
+            if compra:
+                db.delete(compra)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al eliminar la compra: {e}")
+            db.rollback()
+            return False
+        finally:
+            db.close()
     
     @classmethod
     def obtener_fecha_minima(cls):

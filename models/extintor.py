@@ -110,7 +110,7 @@ class Extintor(Base):
     @classmethod
     def contar_extintores(cls):
         db = SessionLocal()
-        total = db.query(cls).count()
+        total = db.query(cls).filter(cls.estado == True).count()
         db.close()
         return total
     
@@ -343,6 +343,7 @@ class Extintor(Base):
                 query = query.filter(cls.capacidad_id == capacidad_filter)
             if disponible:
                 query = query.filter(Extintor.cliente_id.is_(None))
+            query = query.filter(cls.estado == True)
             total = query.count()
             return total
         except Exception as e:

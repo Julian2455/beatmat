@@ -14,6 +14,7 @@ class GastosFormController(QDialog):
         self.gasto_id = gasto_id 
         self.ui.dateEdit.setDate(QDate.currentDate())
         self.llenar_comboBox()
+        self.ui.setWindowTitle("Registrar Gasto")
         self.ui.guardar_gasto.clicked.connect(self.guardar_gasto)
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.label.setPixmap(QPixmap(get_image("dinero")))
@@ -29,7 +30,7 @@ class GastosFormController(QDialog):
     def limpiar_formulario(self):
         self.ui.lineEdit.clear()
         self.ui.lineEdit_3.clear()
-        self.ui.comboBox_categoria.clear()
+        self.llenar_comboBox()
     
     def llenar_comboBox(self):
         self.ui.comboBox_categoria.clear()

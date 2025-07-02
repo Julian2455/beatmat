@@ -16,7 +16,15 @@ class ExtFormController(QDialog):
         self.precios_controller=precios_controller
         if self.extintor_id:
             self.cargar_datos_extintor()
+        try:
+            self.ui.guardar_extintor.clicked.disconnect()
+        except:
+            pass
         self.ui.guardar_extintor.clicked.connect(self.guardar_extintor)
+        try:
+            self.ui.cancelar_form.clicked.disconnect()
+        except:
+            pass
         self.ui.cancelar_form.clicked.connect(self.cerrar_form)
         self.ui.setWindowTitle("Registrar Extintor")
         self.llenar_combobox()
@@ -45,10 +53,19 @@ class ExtFormController(QDialog):
         extintor = Extintor.get_by_id(self.extintor_id)
         if extintor:
             self.ui.lineEdit_numeracion.setText(str(extintor.numeracion))
-            self.ui.comboBox_marca.currentData(QtCore.Qt.ItemDataRole.UserRole)
             self.ui.lineEdit_ubicacion.setText(extintor.ubicacion)
-            self.ui.comboBox_tipo.currentData(QtCore.Qt.ItemDataRole.UserRole)
-            self.ui.comboBox_capacidad.currentData(QtCore.Qt.ItemDataRole.UserRole)
+            for i in range(self.ui.comboBox_marca.count()):
+                if self.ui.comboBox_marca.itemData(i, QtCore.Qt.ItemDataRole.UserRole) == extintor.marca.id:
+                    self.ui.comboBox_marca.setCurrentIndex(i)
+                    break
+            for i in range(self.ui.comboBox_tipo.count()):
+                if self.ui.comboBox_tipo.itemData(i, QtCore.Qt.ItemDataRole.UserRole) == extintor.tipo.id:
+                    self.ui.comboBox_tipo.setCurrentIndex(i)
+                    break
+            for i in range(self.ui.comboBox_capacidad.count()):
+                if self.ui.comboBox_capacidad.itemData(i, QtCore.Qt.ItemDataRole.UserRole) == extintor.capacidad.id:
+                    self.ui.comboBox_capacidad.setCurrentIndex(i)
+                    break
 
     def obtener_datos(self):
         numeracion = self.ui.lineEdit_numeracion.text()
@@ -60,6 +77,8 @@ class ExtFormController(QDialog):
         return(numeracion,marca,ubicacion,tipo,capacidad)
     
     def guardar_extintor(self):
+        if not self.ui.isVisible():
+           return
         numeracion, marca, ubicacion, tipo, capacidad = self.obtener_datos()
         if not numeracion or not marca or not tipo or not capacidad:
             msg = QMessageBox()

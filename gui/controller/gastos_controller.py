@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView
+from PyQt6.QtWidgets import QTableWidgetItem, QHeaderView, QMenu, QMessageBox
 from PyQt6.QtCore import Qt, QObject, QDate
 from PyQt6.QtGui import QAction, QColor, QPixmap, QIcon, QPainter
 from PyQt6.QtCharts import QChart, QChartView, QPieSeries, QPieSlice
@@ -34,6 +34,8 @@ class GastosController(QObject):
         self.setupDateEdits()
         self.meses_combobox()
         self.ui.btnGenerarGrafico.clicked.connect(self.mostrar_grafico) 
+        self.ui.tableGastos.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.ui.tableGastos.customContextMenuRequested.connect(self.mostrar_menu_contextual)
 
     def setupDateEdits(self):
         fecha_minima_bd = Gastos.obtener_fecha_minima()
@@ -71,9 +73,9 @@ class GastosController(QObject):
         self.ui.tableGastos.setRowCount(len(resultados))
         for index, resultado in enumerate(resultados):
             gasto = resultado
-            id_gasto = QTableWidgetItem(str(gasto.id))
-            id_gasto.setData(Qt.ItemDataRole.UserRole, gasto.id)
-            self.ui.tableGastos.setItem(index, 0, QTableWidgetItem(str(gasto.fecha.strftime("%d-%m-%Y"))))
+            fecha_item = QTableWidgetItem(str(gasto.fecha.strftime("%d-%m-%Y")))
+            fecha_item.setData(Qt.ItemDataRole.UserRole, gasto.id)
+            self.ui.tableGastos.setItem(index, 0, fecha_item)
             gasto_formateado = f"{int(gasto.gasto):,}".replace(",", ".")
             self.ui.tableGastos.setItem(index, 1, QTableWidgetItem(gasto_formateado))
             self.ui.tableGastos.setItem(index, 2, QTableWidgetItem(str(gasto.categoria_nombre)))
@@ -171,3 +173,59 @@ class GastosController(QObject):
         self.ui.layoutGrafico.addWidget(self.chart_view)
         self.ui.labelEstadisticas.setText(f"Total de gastos del período: ${total_gastos_mes:,.0f}".replace(",", "."))
         self.ui.labelEstadisticas.show()
+    
+    def mostrar_menu_contextual(self, pos):
+        index = self.ui.tableGastos.indexAt(pos)
+        if not index.isValid():
+            return
+        menu = QMenu(self.ui.tableGastos)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        eliminar_action = QAction("Eliminar", self.ui.tableGastos)
+        eliminar_action.triggered.connect(self.eliminar_gasto)
+        menu.addAction(eliminar_action)
+        menu.popup(self.ui.tableGastos.viewport().mapToGlobal(pos))
+    
+    def obtener_id_gasto(self):
+        item_seleccionado = self.ui.tableGastos.currentItem()
+        if item_seleccionado:
+            fila = item_seleccionado.row()
+            item_con_id = self.ui.tableGastos.item(fila, 0) 
+            id = item_con_id.data(Qt.ItemDataRole.UserRole)
+            return id
+        return None
+    
+    def eliminar_gasto(self):
+        id_gasto=self.obtener_id_gasto()
+        if id_gasto:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Icon.Warning)
+            msg.setWindowTitle("Eliminar Gasto")
+            msg.setText(f"¿Estás seguro que quieres eliminar el gasto?")
+            msg.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
+            respuesta = msg.exec()
+            if respuesta == QMessageBox.StandardButton.Yes and Gastos.eliminar_gasto(id_gasto) == True:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Exito")
+                msg.setText("Gasto eliminado correctamente.")
+                msg.exec()
+            else:
+                msg=QMessageBox()
+                msg.setIcon(QMessageBox.Icon.Information)
+                msg.setWindowTitle("Cancelación")
+                msg.setText("Eliminacion cancelada.")
+                msg.exec()
+        self.mostrar_gastos()
