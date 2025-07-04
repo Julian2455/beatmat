@@ -59,7 +59,7 @@ class Ui_ExtintorDetails(object):
         self.btnAtras.setStyleSheet("\n"
 "    QPushButton {\n"
 "    color: rgb(255, 255, 255);\n"
-"    background-color: #007BF;\n"
+"    background-color: #007BFF;\n"
 "    color: rgb(8, 0, 255);\n"
 "    color: white;\n"
 "    border: none;\n"

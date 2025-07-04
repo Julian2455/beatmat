@@ -64,7 +64,7 @@ QTableWidget {
         <string notr="true">
 	QPushButton {
 	color: rgb(255, 255, 255);
-	background-color: #007BF;
+	background-color: #007BFF;
 	color: rgb(8, 0, 255);
     color: white;
     border: none;

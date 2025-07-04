@@ -6,11 +6,12 @@ from PyQt6.QtCore import QDate
 from PyQt6.QtGui import QPixmap
 
 class RecargaFormController(QDialog):
-    def __init__(self,ui,extintor_controller, vencimientos_controller, recarga_id=None):
+    def __init__(self,ui,extintor_controller, vencimientos_controller, tarjetas_controller, recarga_id=None):
         super().__init__()
         self.ui = ui
         self.recarga_controller = extintor_controller
         self.vencimientos_controller = vencimientos_controller
+        self.tarjetas_controller = tarjetas_controller
         self.recarga_id = recarga_id
         self.ui.spinBox_vto_ph.setValue(QDate.currentDate().year())
         self.ui.spinBox_fabricacion.setValue(QDate.currentDate().year())
@@ -49,4 +50,5 @@ class RecargaFormController(QDialog):
             msg.exec()
             self.recarga_controller.actualizar_tablas(self.ui.extintor_id)
             self.vencimientos_controller.mostrar_vencimientos()
+            self.tarjetas_controller.mostrar_extintores()
             self.cerrar_form()

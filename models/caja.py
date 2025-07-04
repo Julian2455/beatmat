@@ -54,7 +54,6 @@ class Caja(Base):
             db.commit()
             from .extintor import Extintor
             Extintor.actualizar_nuevo(nuevos)
-            Extintor.actualizar_impreso(extintores_ids)
             return True
         except Exception as e:
             print(f"Error al confirmar compra: {e}")

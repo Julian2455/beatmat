@@ -1,7 +1,7 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMessageBox, QMenu
 from models import *
 from utils import get_image
-from PyQt6.QtGui import QIcon, QDoubleValidator, QPixmap
+from PyQt6.QtGui import QIcon, QDoubleValidator, QPixmap, QAction
 from PyQt6 import QtCore
 from PyQt6.QtCore import Qt, QObject, QLocale
 
@@ -19,6 +19,13 @@ class MtcController(QObject):
         self.ui.tableWidget.customContextMenuRequested.connect(self.mostrar_menu_contextual)
         self.ui.cancelar_form.clicked.connect(self.cancelar)
         self.ui.label.setPixmap(QPixmap(get_image("config2")))
+        self.MODEL_DATA = {
+        "Marca": {"model": Marca, "plural_label": "Marcas", "register_method_name": "registrar"},
+        "Tipo": {"model": Tipo, "plural_label": "Tipos", "register_method_name": "registrar"},
+        "Capacidad": {"model": Capacidad, "plural_label": "Capacidades", "register_method_name": "registrar"},
+        "Gastos": {"model": CatGasto, "plural_label": "Categorías", "register_method_name": "registrar"},
+        "Pagos": {"model": CatPagos, "plural_label": "Medios de pago", "register_method_name": "registrar", "form_title": "Registrar medio de pago"},
+    }
 
     def cancelar(self):
         self.ui.close()
@@ -26,145 +33,108 @@ class MtcController(QObject):
     
     def limpiar_formulario(self):
         self.ui.lineEdit.clear()
+    
+    def mostrar_mensaje(self, icon, title, text):
+        msg = QMessageBox()
+        msg.setIcon(icon)
+        msg.setWindowTitle(title)
+        msg.setText(text)
+        msg.exec()
 
     def mostrar_form(self, tipo):
         self.tipo_formulario = tipo
-        self.ui.label_config.setText(f"Registrar {tipo}")
-        self.ui.setWindowTitle(f"Registrar {tipo}")
+        model_data = self.MODEL_DATA.get(tipo)
+        self.ui.label_config.setText(model_data.get("form_title", f"Registrar {tipo}"))
+        self.ui.setWindowTitle(model_data.get("form_title", f"Registrar {tipo}"))
         self.ui.nombre_detalle.setText(f"{tipo}")
-        if tipo == "Marca":
-            datos = Marca.show_all()
-            self.ui.label_registro.setText(f"{tipo}s registradas")
-        elif tipo == "Tipo":
-            datos = Tipo.show_all()
-            self.ui.label_registro.setText(f"{tipo}s registrados")
-        elif tipo == "Capacidad":
-            datos = Capacidad.show_all()
-            self.ui.label_registro.setText(f"{tipo}es registradas")
-        elif tipo == "Gastos":
-            datos= CatGasto.show_all()
-            self.ui.label_registro.setText(f"Categorias registradas")
-        elif tipo == "Pagos":
-            self.ui.label_config.setText(f"Registrar medio de pago")
-            self.ui.setWindowTitle(f"Registrar medio de pago")
-            datos= CatPagos.show_all()
-            self.ui.label_registro.setText(f"Medios de pago registrados")
-        else:
-            datos = []
+        self.ui.label_registro.setText(f"{model_data['plural_label']} registradas")
+        datos = model_data["model"].show_all()
         self.ui.tableWidget.setRowCount(len(datos))
         self.ui.tableWidget.setColumnCount(1)
         self.ui.tableWidget.verticalHeader().setVisible(False)
         self.ui.tableWidget.horizontalHeader().setVisible(False)
         for index, dato in enumerate(datos):
-            self.ui.tableWidget.setItem(index, 0, QTableWidgetItem(dato.nombre))
+            id_nombre = QTableWidgetItem(str(dato.nombre))
+            id_nombre.setData(Qt.ItemDataRole.UserRole, dato.id)
+            self.ui.tableWidget.setItem(index, 0, id_nombre)
         self.ui.show()
         
-    
     def guardar_detalle(self):
         tipo = self.tipo_formulario
         nombre = self.ui.lineEdit.text().title()
         if not nombre or not tipo:
-            msg=QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Warning)
-            msg.setWindowTitle("Error")
-            msg.setText(f"Por favor, completa el campo de {tipo}. Es obligatorio.")
-            msg.exec()
+            self.mostrar_mensaje(QMessageBox.Icon.Warning, "Error", f"Por favor, completa el campo de {tipo}. Es obligatorio.")
             return
-        if tipo == "Marca":
-            if Marca.registrar_marca(nombre) == True:
-                msg=QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Exito")
-                msg.setText(f"Marca '{nombre}' registrada correctamente.")
-                msg.exec()
-        elif tipo == "Tipo":
-            if Tipo.registrar_tipo(nombre) == True:
-                msg=QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Exito")
-                msg.setText(f"Tipo '{nombre}' registrado correctamente.")
-                msg.exec()
-        elif tipo == "Capacidad":
-            if Capacidad.registrar_capacidad(nombre) == True:
-                msg=QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Exito")
-                msg.setText(f"Capacidad '{nombre}' registrada correctamente.")
-                msg.exec()
-        elif tipo == "Gastos":
-            if CatGasto.registrar_categoria(nombre) == True:
-                msg=QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Exito")
-                msg.setText(f"Categoria '{nombre}' registrada correctamente.")
-                msg.exec()
-                if self.gts_form_controller:
-                    self.gts_form_controller.llenar_comboBox()
-        elif tipo == "Pagos":
-            if CatPagos.registrar_medio_pago(nombre) == True:
-                msg=QMessageBox()
-                msg.setIcon(QMessageBox.Icon.Information)
-                msg.setWindowTitle("Exito")
-                msg.setText(f"Medio de pago '{nombre}' registrado correctamente.")
-                msg.exec()
+        model_data = self.MODEL_DATA.get(tipo)
+        model_class = model_data["model"]
+        register_method = getattr(model_class, model_data["register_method_name"])
+        if register_method(nombre):
+            mensaje_exito = f"{model_data['plural_label']} '{nombre}' registrada correctamente."
+            self.mostrar_mensaje(QMessageBox.Icon.Information, "Éxito", mensaje_exito)
+            if tipo == "Gastos" and self.gts_form_controller:
+                self.gts_form_controller.llenar_comboBox()
+        else:
+            self.mostrar_mensaje(QMessageBox.Icon.Warning, "Error", f"No se pudo registrar {model_data['plural_label']} '{nombre}'.")
         self.caja_controller.pagos_combobox()
         self.extintor_controller.llenar_combobox_filtro()
         self.extintor_form_controller.llenar_combobox()
-        #self.ui.close()
         self.limpiar_formulario()
         self.mostrar_form(self.tipo_formulario)
 
+    def obtener_id(self):
+        item_seleccionado = self.ui.tableWidget.currentItem()
+        if item_seleccionado:
+            return item_seleccionado.data(Qt.ItemDataRole.UserRole)
+        return None
     
-    def mostrar_menu_contextual(self, posicion):
-        index = self.ui.tableWidget.indexAt(posicion)
+    def mostrar_menu_contextual(self, pos):
+        index = self.ui.tableWidget.indexAt(pos)
         if not index.isValid():
             return
-        fila = index.row()
-        menu = QMenu()
-        eliminar_action = menu.addAction("Eliminar")
-        action = menu.exec(self.ui.tableWidget.mapToGlobal(posicion))
-        if action == eliminar_action:
-            self.eliminar_detalle(fila)
-    def eliminar_detalle(self, row):
+        menu = QMenu(self.ui.tableWidget)
+        menu.setStyleSheet("""
+            QMenu {
+                background-color: white;
+                border: 1px solid #CCCCCC;
+            }
+            QMenu::item {
+                padding: 5px 15px;
+                background-color: white;
+            }
+            QMenu::item:selected {
+                background-color: #E0E0E0;
+                color: black;
+            }
+        """)
+        eliminar_action = QAction("Eliminar", self.ui.tableWidget)
+        eliminar_action.triggered.connect(self.eliminar_detalle)
+        menu.addAction(eliminar_action)
+        menu.popup(self.ui.tableWidget.viewport().mapToGlobal(pos))
+
+    def eliminar_detalle(self):
+        item_seleccionado = self.ui.tableWidget.currentItem()
+        id_a_eliminar = self.obtener_id()
+        if id_a_eliminar is None:
+            self.mostrar_mensaje(QMessageBox.Icon.Warning, "Advertencia", "No se pudo obtener el ID del elemento seleccionado.")
+            return
+        nombre = item_seleccionado.text()
         tipo = self.tipo_formulario
-        nombre = self.ui.tableWidget.item(row, 0).text()
+        model_data = self.MODEL_DATA.get(tipo)
         confirmar = QMessageBox.question(
             self.ui,
             "Eliminar",
-            f"¿Estás seguro de que querés eliminar '{nombre}' de {tipo}s?",
+            f"¿Estás seguro de que querés eliminar '{nombre}' de {model_data['plural_label']}?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         if confirmar == QMessageBox.StandardButton.No:
             return
-        en_uso = False
-        if tipo == "Marca":
-            marca = Marca.get_by_nombre(nombre)
-            if marca and marca.extintores:
-                en_uso = True
-            elif marca:
-                Marca.eliminar_por_id(marca.id)
-        elif tipo == "Tipo":
-            tipo_obj = Tipo.get_by_nombre(nombre)
-            if tipo_obj and tipo_obj.extintores:
-                en_uso = True
-            elif tipo_obj:
-                Tipo.eliminar_por_id(tipo_obj.id)
-        elif tipo == "Capacidad":
-            cap = Capacidad.get_by_nombre(nombre)
-            if cap and cap.extintores:
-                en_uso = True
-            elif cap:
-                Capacidad.eliminar_por_id(cap.id)
-        if en_uso:
-            QMessageBox.warning(
-                self.ui,
-                "Elemento en uso",
-                f"No se puede eliminar '{nombre}' porque está siendo utilizado por al menos un extintor."
-            )
+        model_class = model_data["model"]
+        if model_class.eliminar_por_id(id_a_eliminar):
+            self.mostrar_mensaje(QMessageBox.Icon.Information, "Eliminado", f"{tipo} '{nombre}' eliminado correctamente.")
         else:
-            QMessageBox.information(
-                self.ui,
-                "Eliminado",
-                f"{tipo} '{nombre}' eliminado correctamente."
+            self.mostrar_mensaje(
+                QMessageBox.Icon.Warning,
+                "Elemento en uso",
+                f"No se puede eliminar '{nombre}' porque está siendo utilizado por otros registros (ej. extintores o precios)."
             )
         self.mostrar_form(self.tipo_formulario)

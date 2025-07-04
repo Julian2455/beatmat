@@ -98,7 +98,7 @@ class MainController:
         
         self.alta_recarga = RecargaRegisterUi()
         self.extintor_details_tab.btnAgregarRecarga.clicked.connect(self.mostrar_form_recarga)
-        self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller, None)
+        self.recarga_form_controller = RecargaFormController(self.alta_recarga, self.extintor_controller, None, self.tarjetas_controller) 
 
         # Impresion de las tarjetitas
 

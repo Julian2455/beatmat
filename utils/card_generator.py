@@ -17,7 +17,8 @@ class CardPDFGenerator:
         if not filename:
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             filename = f"tarjetas_extintores_{timestamp}.pdf"
-        output_dir = "tarjetas_pdf"
+        home_dir = os.path.expanduser("~")
+        output_dir = os.path.join(home_dir, "Documents", "tarjetas_pdf")
         if not os.path.exists(output_dir):
             os.makedirs(output_dir)
         filepath = os.path.join(output_dir, filename)

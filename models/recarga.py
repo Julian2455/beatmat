@@ -53,6 +53,8 @@ class Recarga(Base):
             db = SessionLocal()
             db.add(datos)
             db.commit()
+            from .extintor import Extintor
+            Extintor.actualizar_impreso(extintor_id)
             return True
         except Exception as e:
             print(e)

@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship, joinedload
 from db import Base, engine, SessionLocal
-from sqlalchemy.orm import joinedload
 
 class Marca(Base):
     __tablename__ = 'marca'
@@ -22,7 +21,7 @@ class Marca(Base):
             db.close()
     
     @classmethod
-    def registrar_marca(cls, nombre):
+    def registrar(cls, nombre):
         dato=cls(nombre=nombre)
         try:
             db = SessionLocal()
@@ -37,30 +36,31 @@ class Marca(Base):
             db.close()
     
     @classmethod
-    def get_by_nombre(cls, nombre):
+    def tiene_referencias(cls, id):
         db = SessionLocal()
         try:
-            return (
-                db.query(cls)
-                .options(joinedload(cls.extintores))
-                .filter_by(nombre=nombre)
-                .first()
-            )
+            from .extintor import Extintor
+            from .precios import Precios
+            tiene_extintores = db.query(Extintor).filter_by(marca_id=id).first()
+            tiene_precios = db.query(Precios).filter_by(marca_id=id).first()
+            return tiene_extintores is not None or tiene_precios is not None
         finally:
             db.close()
 
     @classmethod
-    def eliminar_por_id(cls, id_):
+    def eliminar_por_id(cls, id):
         db = SessionLocal()
         try:
-            obj = db.query(cls).get(id_)
+            if cls.tiene_referencias(id):
+                return False
+            obj = db.query(cls).get(id)
             if obj:
                 db.delete(obj)
                 db.commit()
                 return True
             return False
         except Exception as e:
-            print(e)
+            print(f"Error al eliminar Marca: {e}")
             db.rollback()
             return False
         finally:
@@ -86,7 +86,7 @@ class Tipo(Base):
             db.close()
     
     @classmethod
-    def registrar_tipo(cls, nombre):
+    def registrar(cls, nombre):
         dato=cls(nombre=nombre)
         try:
             db = SessionLocal()
@@ -101,30 +101,31 @@ class Tipo(Base):
             db.close()
     
     @classmethod
-    def get_by_nombre(cls, nombre):
+    def tiene_referencias(cls, id):
         db = SessionLocal()
         try:
-            return (
-                db.query(cls)
-                .options(joinedload(cls.extintores))
-                .filter_by(nombre=nombre)
-                .first()
-            )
+            from .extintor import Extintor
+            from .precios import Precios
+            tiene_extintores = db.query(Extintor).filter_by(tipo_id=id).first()
+            tiene_precios = db.query(Precios).filter_by(tipo_id=id).first()
+            return tiene_extintores is not None or tiene_precios is not None
         finally:
             db.close()
 
     @classmethod
-    def eliminar_por_id(cls, id_):
+    def eliminar_por_id(cls, id):
         db = SessionLocal()
         try:
-            obj = db.query(cls).get(id_)
+            if cls.tiene_referencias(id):
+                return False
+            obj = db.query(cls).get(id)
             if obj:
                 db.delete(obj)
                 db.commit()
                 return True
             return False
         except Exception as e:
-            print(e)
+            print(f"Error al eliminar Tipo: {e}")
             db.rollback()
             return False
         finally:
@@ -150,7 +151,7 @@ class Capacidad(Base):
             db.close()
 
     @classmethod
-    def registrar_capacidad(cls, nombre):
+    def registrar(cls, nombre):
         dato=cls(nombre=nombre)
         try:
             db = SessionLocal()
@@ -165,30 +166,31 @@ class Capacidad(Base):
             db.close()
 
     @classmethod
-    def get_by_nombre(cls, nombre):
+    def tiene_referencias(cls, id):
         db = SessionLocal()
         try:
-            return (
-                db.query(cls)
-                .options(joinedload(cls.extintores))
-                .filter_by(nombre=nombre)
-                .first()
-            )
+            from .extintor import Extintor
+            from .precios import Precios
+            tiene_extintores = db.query(Extintor).filter_by(capacidad_id=id).first()
+            tiene_precios = db.query(Precios).filter_by(capacidad_id=id).first()
+            return tiene_extintores is not None or tiene_precios is not None
         finally:
             db.close()
 
     @classmethod
-    def eliminar_por_id(cls, id_):
+    def eliminar_por_id(cls, id):
         db = SessionLocal()
         try:
-            obj = db.query(cls).get(id_)
+            if cls.tiene_referencias(id):
+                return False
+            obj = db.query(cls).get(id)
             if obj:
                 db.delete(obj)
                 db.commit()
                 return True
             return False
         except Exception as e:
-            print(e)
+            print(f"Error al eliminar Capacidad: {e}")
             db.rollback()
             return False
         finally:
@@ -213,7 +215,7 @@ class CatGasto(Base):
             db.close()
     
     @classmethod
-    def registrar_categoria(cls, nombre):
+    def registrar(cls, nombre):
         dato=cls(nombre=nombre)
         try:
             db = SessionLocal()
@@ -222,6 +224,35 @@ class CatGasto(Base):
             return True
         except Exception as e:
             print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def tiene_referencias(cls, id):
+        db = SessionLocal()
+        try:
+            from .gastos import Gastos
+            tiene_gastos = db.query(Gastos).filter_by(catgasto_id=id).first()
+            return tiene_gastos is not None
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_por_id(cls, id):
+        db = SessionLocal()
+        try:
+            if cls.tiene_referencias(id):
+                return False
+            obj = db.query(cls).get(id)
+            if obj:
+                db.delete(obj)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al eliminar Categoria gasto: {e}")
             db.rollback()
             return False
         finally:
@@ -260,7 +291,7 @@ class CatPagos(Base):
             db.close()
     
     @classmethod
-    def registrar_medio_pago(cls, nombre):
+    def registrar(cls, nombre):
         dato=cls(nombre=nombre)
         try:
             db = SessionLocal()
@@ -269,6 +300,35 @@ class CatPagos(Base):
             return True
         except Exception as e:
             print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
+    
+    @classmethod
+    def tiene_referencias(cls, id):
+        db = SessionLocal()
+        try:
+            from .caja import Caja
+            tiene_ventas = db.query(Caja).filter_by(medio_pago=id).first()
+            return tiene_ventas is not None
+        finally:
+            db.close()
+
+    @classmethod
+    def eliminar_por_id(cls, id):
+        db = SessionLocal()
+        try:
+            if cls.tiene_referencias(id):
+                return False
+            obj = db.query(cls).get(id)
+            if obj:
+                db.delete(obj)
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(f"Error al eliminar Medio de pago: {e}")
             db.rollback()
             return False
         finally:

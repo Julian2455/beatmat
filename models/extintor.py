@@ -646,13 +646,12 @@ class Extintor(Base):
             db.close()
     
     @classmethod
-    def actualizar_impreso(cls, extintor_ids):
+    def actualizar_impreso(cls, extintor_id):
         try:
             db = SessionLocal()
-            for id_extintor in extintor_ids:
-                extintor = db.query(cls).filter_by(id=id_extintor).first()
-                if extintor:
-                    extintor.impreso=False 
+            extintor = db.query(cls).filter_by(id=extintor_id).first()
+            if extintor:
+                extintor.impreso=False 
             db.commit()
             return True
         except Exception as e:
