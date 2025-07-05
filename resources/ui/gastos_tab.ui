@@ -284,6 +284,10 @@ background:#34495E;</string>
              </item>
              <item alignment="Qt::AlignLeft">
               <widget class="QDateEdit" name="dateEdit">
+               <property name="styleSheet">
+                <string notr="true">color: rgb(255, 255, 255);
+background:#34495E;</string>
+               </property>
                <property name="calendarPopup">
                 <bool>true</bool>
                </property>

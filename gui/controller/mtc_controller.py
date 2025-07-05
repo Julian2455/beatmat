@@ -138,3 +138,7 @@ class MtcController(QObject):
                 f"No se puede eliminar '{nombre}' porque está siendo utilizado por otros registros (ej. extintores o precios)."
             )
         self.mostrar_form(self.tipo_formulario)
+        self.caja_controller.pagos_combobox()
+        self.extintor_controller.llenar_combobox_filtro()
+        self.extintor_form_controller.llenar_combobox()
+        self.gts_form_controller.llenar_comboBox()
