@@ -12,7 +12,7 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 
 class ClientController:
-    def __init__(self, ui):
+    def __init__(self, ui, caja_controller):
         self.ui = ui
         self.query=None
         self.indice_actual = None
@@ -21,6 +21,7 @@ class ClientController:
         self.total_clientes = Cliente.contar_clientes()
         self.total_paginas = (self.total_clientes // self.filas_por_pagina) + (1 if self.total_clientes % self.filas_por_pagina else 0)
         self.mostrar_clientes()
+        self.caja_controller=caja_controller
         self.ui.pushButton_2.clicked.connect(self.pagina_anterior) 
         self.ui.pushButton.clicked.connect(self.pagina_siguiente) 
         self.ui.pushButton_3.clicked.connect(self.primer_pagina) 
@@ -131,6 +132,7 @@ class ClientController:
                 msg.setWindowTitle("Exito")
                 msg.setText("Cliente eliminado correctamente.")
                 msg.exec()
+                self.caja_controller.clientes_combobox()
             else:
                 msg=QMessageBox()
                 msg.setIcon(QMessageBox.Icon.Information)

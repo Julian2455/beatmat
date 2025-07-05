@@ -41,7 +41,7 @@ class MainController:
         self.cliente_extintor.hide()
         
         # Conectar controladores
-        self.client_controller = ClientController(self.cliente_tab)
+        self.client_controller = ClientController(self.cliente_tab,caja_controller=None)
         self.client_controller.asociacion_ui = self.cliente_extintor
         self.cliente_extintor.btnAtras.clicked.connect(self.show_clientes_tab)
         
@@ -107,6 +107,7 @@ class MainController:
         # Configurar la tab de caja
         self.caja_tab = CajaUi()
         self.caja_controller = CajaController(self.caja_tab, historial_controller=self.historial_controller, print_controller=self.tarjetas_controller, reportes_controller=self.reportes_controller)
+        self.client_controller.caja_controller=self.caja_controller #le asigno el valor aca para evitar la dependencia cruzada
         self.ui.Caja.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Caja.layout().addWidget(self.caja_tab)
         
