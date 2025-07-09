@@ -31,6 +31,10 @@ class CajaController(QObject):
         self.ui.btnGuardar.clicked.connect(self.confirmar_compra) 
         self.ui.btnCancelar.clicked.connect(self.cancelar) 
         self.ui.lineCobro.textChanged.connect(self.cobrar)
+        self.ui.btnNuevoCliente.setIcon(QIcon(get_image("agregar-usuario2")))
+        self.ui.btnGuardar.setIcon(QIcon(get_image("save")))
+        self.ui.btnCancelar.setIcon(QIcon(get_image("cancel")))
+        self.ui.btnAgregarExtintores.setIcon(QIcon(get_image("extintor")))
     
     def clientes_combobox(self):
         self.ui.comboClientes.clear()
@@ -140,7 +144,23 @@ class CajaController(QObject):
                 for index, extintor in enumerate(extintores):
                     checkbox = QCheckBox()
                     checkbox.setProperty("extintor_id", extintor.id)
-                    checkbox.setStyleSheet("QCheckBox { margin-left: 30px; }")
+                    checkbox.setStyleSheet("""
+                                            QCheckBox {
+                                                margin-left: 30px;
+                                            }
+                                            QCheckBox::indicator {
+                                                width: 16px;
+                                                height: 16px;
+                                            }
+                                            QCheckBox::indicator:checked {
+                                                background-color: black;
+                                                border: 1px solid black;
+                                            }
+                                            QCheckBox::indicator:unchecked {
+                                                background-color: white;
+                                                border: 1px solid black;
+                                            }
+                                        """)
                     checkbox.setProperty("nuevo", False)
                     checkbox.stateChanged.connect(self.checkbox_state_changed)
                     linePrecio = QLineEdit()
@@ -149,7 +169,23 @@ class CajaController(QObject):
                         checkboxn = QCheckBox()
                         checkboxn.setProperty("extintor_id", extintor.id)
                         checkboxn.setProperty("nuevo", True)
-                        checkboxn.setStyleSheet("QCheckBox { margin-left: 30px; }")
+                        checkboxn.setStyleSheet("""
+                                                QCheckBox {
+                                                    margin-left: 30px;
+                                                }
+                                                QCheckBox::indicator {
+                                                    width: 16px;
+                                                    height: 16px;
+                                                }
+                                                QCheckBox::indicator:checked {
+                                                    background-color: black;
+                                                    border: 1px solid black;
+                                                }
+                                                QCheckBox::indicator:unchecked {
+                                                    background-color: white;
+                                                    border: 1px solid black;
+                                                }
+                                            """)
                         checkboxn.stateChanged.connect(self.checkbox_state_changed)
                         checkboxn.setChecked(True)
                         self.ui.tableExtintoresCliente.setCellWidget(index, 5, checkboxn)

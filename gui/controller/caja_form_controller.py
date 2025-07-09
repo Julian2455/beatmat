@@ -40,6 +40,13 @@ class CajaFormController(QObject):
         self.ui.comboBox_capacidad.currentIndexChanged.connect(self.filtrar_por_capacidad)
         self.ui.btnRestaurarFiltros.clicked.connect(self.restaurar_filtros)
         self.ui.btnAgregar.clicked.connect(self.add_selected)
+        self.ui.btnNuevoExtintor.setIcon(QIcon(get_image("extintor")))
+        self.ui.btnAgregar.setIcon(QIcon(get_image("save")))
+        self.ui.btnCancelar.setIcon(QIcon(get_image("cancel")))
+        self.ui.btnNextPage.setIcon(QIcon(get_image("sssiguiente"))) 
+        self.ui.btnPreviousPage.setIcon(QIcon(get_image("anterior"))) 
+        self.ui.btnFirstPage.setIcon(QIcon(get_image("anterior_1"))) 
+        self.ui.btnLastPage.setIcon(QIcon(get_image("proximo_1"))) 
         
     def cargar_datos_usuario(self):
         cliente=Cliente.get_by_id(self.cliente_id)

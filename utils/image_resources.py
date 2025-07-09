@@ -38,7 +38,9 @@ IMAGE_MAP = {
     "plantilla": resource_path("resources/images/plantilla.png"),
     "calendariod": resource_path("resources/images/calendariod.png"),
     "presupuesto": resource_path("resources/images/presupuesto.png"),
-    "dinero": resource_path("resources/images/dinero.png")
+    "dinero": resource_path("resources/images/dinero.png"),
+    "save": resource_path("resources/images/save.png"),
+    "cancel": resource_path("resources/images/cancel.png")
 }   
 
 def get_image(name):
