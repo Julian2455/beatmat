@@ -153,8 +153,8 @@ class CajaController(QObject):
                                                 height: 16px;
                                             }
                                             QCheckBox::indicator:checked {
-                                                background-color: black;
-                                                border: 1px solid black;
+                                                background-color: #2C3E50;
+                                                border: 1px solid #2C3E50;
                                             }
                                             QCheckBox::indicator:unchecked {
                                                 background-color: white;
@@ -178,8 +178,8 @@ class CajaController(QObject):
                                                     height: 16px;
                                                 }
                                                 QCheckBox::indicator:checked {
-                                                    background-color: black;
-                                                    border: 1px solid black;
+                                                    background-color: #2C3E50;
+                                                    border: 1px solid #2C3E50;
                                                 }
                                                 QCheckBox::indicator:unchecked {
                                                     background-color: white;
