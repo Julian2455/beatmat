@@ -314,8 +314,11 @@ class ExtintorController:
                 msg.setText("Eliminacion cancelada.")
                 msg.exec()
         self.mostrar_extintores()
+        self.ui.tableWidget.clearSelection()
         if self.client_controller.indice_actual:
             self.client_controller.extintores_clientes(self.client_controller.indice_actual)
+        if self.trash_controller:
+            self.trash_controller.cargar_extintores()
     
     def actualizar_tablas(self, id_extintor):
         self._cargar_detalles_en_vista_secundaria(id_extintor)

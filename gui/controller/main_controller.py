@@ -23,6 +23,7 @@ class MainController:
         self.init_reportes_tab()
         self.init_caja_tab()
         self.init_mtc_bar()
+        self.init_trash_bar()
         self.init_vencimientos_tab() 
         
         # Configurar iconos para las tabs
@@ -42,6 +43,7 @@ class MainController:
         
         # Conectar controladores
         self.client_controller = ClientController(self.cliente_tab,caja_controller=None)
+        self.client_controller.trash_controller = None
         self.client_controller.asociacion_ui = self.cliente_extintor
         self.cliente_extintor.btnAtras.clicked.connect(self.show_clientes_tab)
         
@@ -78,6 +80,7 @@ class MainController:
         
         # Conectar controladores
         self.extintor_controller = ExtintorController(self.extintor_tab, self.client_controller, self.tarjetas_controller)
+        self.extintor_controller.trash_controller = None
         self.extintor_controller.details_ui = self.extintor_details_tab
         self.extintor_details_tab.btnAtras.clicked.connect(self.show_extintor_tab)
         
@@ -182,6 +185,14 @@ class MainController:
         #conectar controladores
         self.vencimientos_controller=VencimientosController(self.vencimientos_tab)
         self.recarga_form_controller.vencimientos_controller = self.vencimientos_controller
+    
+    def init_trash_bar(self):
+        # Instancia de PreciosUi y conexion con el formulario
+        self.trash_ui = TrashUi()
+        self.trash_controller = TrashController(self.trash_ui, self.client_controller, self.extintor_controller)
+        self.client_controller.trash_controller = self.trash_controller
+        self.extintor_controller.trash_controller = self.trash_controller
+        self.ui.actionPapelera.triggered.connect(self.mostrar_form_papelera)
 
     def setup_tab_icons(self):
         # Reconfigurar iconos en las tabs para el ejecutable
@@ -235,6 +246,9 @@ class MainController:
     
     def mostrar_form_precios(self):
         self.precios_ui.mostrar_form()
+    
+    def mostrar_form_papelera(self):
+        self.trash_ui.mostrar_form()
 
     def mostrar_form_universal(self, tipo):
         self.mtc_controller.mostrar_form(tipo)

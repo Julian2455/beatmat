@@ -140,6 +140,9 @@ class ClientController:
                 msg.setText("Eliminacion cancelada.")
                 msg.exec()
         self.mostrar_clientes()
+        self.ui.tableWidget.clearSelection()
+        if self.trash_controller:
+            self.trash_controller.cargar_clientes()
                 
 
     def actualizar_estado_paginado(self):

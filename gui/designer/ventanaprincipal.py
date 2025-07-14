@@ -123,6 +123,8 @@ class Ui_MainWindow(object):
         self.actionGastos.setObjectName("actionGastos")
         self.actionMedios_de_Pago = QtGui.QAction(parent=MainWindow)
         self.actionMedios_de_Pago.setObjectName("actionMedios_de_Pago")
+        self.actionPapelera = QtGui.QAction(parent=MainWindow)
+        self.actionPapelera.setObjectName("actionPapelera")
         self.menuExtintores.addAction(self.actionMarcas)
         self.menuExtintores.addSeparator()
         self.menuExtintores.addAction(self.actionTipos)
@@ -133,6 +135,7 @@ class Ui_MainWindow(object):
         self.menuConfiguraci_n.addAction(self.actionTarjetas)
         self.menuConfiguraci_n.addAction(self.actionGastos)
         self.menuConfiguraci_n.addAction(self.actionMedios_de_Pago)
+        self.menuConfiguraci_n.addAction(self.actionPapelera)
         self.menuBar.addAction(self.menuConfiguraci_n.menuAction())
 
         self.retranslateUi(MainWindow)
@@ -158,6 +161,7 @@ class Ui_MainWindow(object):
         self.actionTarjetas.setText(_translate("MainWindow", "Tarjetas"))
         self.actionGastos.setText(_translate("MainWindow", "Gastos"))
         self.actionMedios_de_Pago.setText(_translate("MainWindow", "Medios de Pago"))
+        self.actionPapelera.setText(_translate("MainWindow", "Papelera"))
 
 
 if __name__ == "__main__":

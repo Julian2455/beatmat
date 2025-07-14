@@ -15,4 +15,5 @@ from .print_controller import ImpresionController
 from .gastos_controller import GastosController
 from .gts_form_controller import GastosFormController
 from .reportes_controller import ReportesController
+from .trash_controller import TrashController
 from .main_controller import MainController

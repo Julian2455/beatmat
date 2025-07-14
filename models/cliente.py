@@ -136,3 +136,33 @@ class Cliente(Base):
         total = db.query(cls).filter(cls.nombre.like(f"{nombre}%")).count()
         db.close()
         return total
+
+    @classmethod
+    def show_deleted(cls):
+        db = SessionLocal()
+        try:
+            clientes = (
+                db.query(cls)
+                .filter(cls.estado==False)
+                .all()
+            )
+            return clientes
+        finally:
+            db.close()
+    
+    @classmethod
+    def restaurar(cls,cliente_id):
+        try:
+            db=SessionLocal()
+            cliente = db.query(cls).filter_by(id=cliente_id).first()
+            if cliente:
+                cliente.estado = True
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()

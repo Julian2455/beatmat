@@ -18,3 +18,4 @@ from .reportes_tab import Ui_Reportes
 from .impresion_tarjetas import Ui_Impresion
 from .gastos_tab import Ui_Gastos
 from .gastos_form import Ui_GastosForm
+from .trash_form import Ui_TrashForm

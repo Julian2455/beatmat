@@ -721,3 +721,44 @@ class Extintor(Base):
             return None
         finally:
             db.close()
+    
+    @classmethod
+    def show_deleted(cls):
+        db = SessionLocal()
+        try:
+            extintores = (
+                db.query(
+                Extintor.id,
+                Extintor.numeracion,
+                Marca.nombre.label('marca_nombre'),
+                Extintor.ubicacion,
+                Tipo.nombre.label('tipo_nombre'),
+                Capacidad.nombre.label('capacidad_nombre'),
+                Extintor.impreso
+                )
+                .join(Marca, Extintor.marca_id == Marca.id)
+                .join(Tipo, Extintor.tipo_id == Tipo.id)
+                .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
+                .filter(cls.estado==False)
+                .all()
+            )
+            return extintores
+        finally:
+            db.close()
+    
+    @classmethod
+    def restaurar(cls,extintor_id):
+        try:
+            db=SessionLocal()
+            extintor = db.query(cls).filter_by(id=extintor_id).first()
+            if extintor:
+                extintor.estado = True
+                db.commit()
+                return True
+            return False
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return False
+        finally:
+            db.close()
