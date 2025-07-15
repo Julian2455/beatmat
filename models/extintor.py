@@ -74,8 +74,9 @@ class Extintor(Base):
                 .join(Tipo, Extintor.tipo_id == Tipo.id)
                 .join(Capacidad, Extintor.capacidad_id == Capacidad.id)
                 .join(Recarga, Recarga.extintor_id == Extintor.id)  
-                .filter(cls.impreso == False)
-                .filter(cls.estado == True)
+                .filter(Extintor.impreso == False)
+                .filter(Extintor.estado == True)
+                .distinct()
                 .all()
             )
             return extintores

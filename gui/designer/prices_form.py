@@ -53,6 +53,13 @@ class Ui_FormPrecios(object):
 "   QPushButton#btnCalcular:hover {\n"
 "     background-color: #0d47a1;\n"
 "   }\n"
+"   QPushButton#btnActualizar {\n"
+"     background-color: #007bff;\n"
+"     color: white;\n"
+"   }\n"
+"   QPushButton#btnActualizar:hover {\n"
+"     background-color: #0056b3;\n"
+"   }\n"
 "QScrollArea {\n"
 "   border: 2px solid rgb(85, 85, 127);\n"
 "     border-radius: 5px;\n"
@@ -113,6 +120,14 @@ class Ui_FormPrecios(object):
         self.horizontalLayout_2.addWidget(self.btnCalcular)
         spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Policy.Expanding, QtWidgets.QSizePolicy.Policy.Minimum)
         self.horizontalLayout_2.addItem(spacerItem1)
+        self.btnActualizar = QtWidgets.QPushButton(parent=self.frameSeleccion)
+        self.btnActualizar.setMinimumSize(QtCore.QSize(100, 0))
+        font = QtGui.QFont()
+        font.setBold(True)
+        self.btnActualizar.setFont(font)
+        self.btnActualizar.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnActualizar.setObjectName("btnActualizar")
+        self.horizontalLayout_2.addWidget(self.btnActualizar)
         self.verticalLayout.addWidget(self.frameSeleccion)
         self.horizontalLayoutPaneles = QtWidgets.QHBoxLayout()
         self.horizontalLayoutPaneles.setObjectName("horizontalLayoutPaneles")
@@ -215,6 +230,7 @@ class Ui_FormPrecios(object):
         self.labelTitle.setText(_translate("FormPrecios", "GESTIÓN DE PRECIOS"))
         self.labelPrecioRecomendado.setText(_translate("FormPrecios", "Precio Recomendado:"))
         self.btnCalcular.setText(_translate("FormPrecios", "Calcular"))
+        self.btnActualizar.setText(_translate("FormPrecios", "Actualizar"))
         self.labelRecargas.setText(_translate("FormPrecios", "Recargas"))
         self.labelNuevos.setText(_translate("FormPrecios", "Nuevos"))
         self.btnGuardar.setText(_translate("FormPrecios", "Guardar"))

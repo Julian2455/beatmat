@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>411</width>
-    <height>673</height>
+    <height>658</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,13 +24,13 @@ QCheckBox {
      padding: 5px 8px;
      color: #333;
      background-color: #fff;
-	padding:6px;
+  padding:6px;
    }
 QCheckBox:focus {
      border: 1px solid #0078d7;
      background-color: #eef6ff;
    }
-QTextEdit , QDateEdit {
+QTextEdit , QDateEdit ,QLineEdit{
      border: 2px solid rgb(85, 85, 127);
      border-radius: 5px;
      padding: 5px 8px;
@@ -38,7 +38,7 @@ QTextEdit , QDateEdit {
      background-color: #fff;
 padding:6px;
    }
-QTextEdit:focus {
+QTextEdit:focus ,QLineEdit:focus{
      border: 1px solid #0078d7;
      background-color: #eef6ff;
    }
@@ -63,7 +63,7 @@ QTextEdit:focus {
      background-color: #0d47a1;
    }</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout" stretch="2,8">
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="1,8">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -85,10 +85,15 @@ QTextEdit:focus {
       <string notr="true">background: #2C3E50;
 border-bottom: 6px solid #5F9EA0;
 border-bottom: 5px solid #007BFF;
-
 </string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="topMargin">
+       <number>2</number>
+      </property>
+      <property name="bottomMargin">
+       <number>2</number>
+      </property>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -106,14 +111,14 @@ border-bottom: 5px solid #007BFF;
        <widget class="QLabel" name="label">
         <property name="minimumSize">
          <size>
-          <width>30</width>
-          <height>30</height>
+          <width>25</width>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>30</width>
-          <height>30</height>
+          <width>25</width>
+          <height>25</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -135,19 +140,19 @@ border-bottom: 5px solid #007BFF;
         <property name="minimumSize">
          <size>
           <width>50</width>
-          <height>50</height>
+          <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>250</width>
-          <height>200</height>
+          <height>25</height>
          </size>
         </property>
         <property name="font">
          <font>
-          <pointsize>12</pointsize>
-          <italic>false</italic>
+          <pointsize>10</pointsize>
+         <italic>false</italic>
           <bold>true</bold>
          </font>
         </property>
@@ -182,38 +187,6 @@ color:rgb(255, 255, 255);</string>
       <item>
        <widget class="QWidget" name="widget_3" native="true">
         <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <spacer name="verticalSpacer_2">
-           <property name="orientation">
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeType">
-            <enum>QSizePolicy::Minimum</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>20</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_title">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Tareas Realizadas</string>
-           </property>
-          </widget>
-         </item>
          <item>
           <widget class="QFrame" name="frame_checkboxes">
            <property name="styleSheet">
@@ -250,7 +223,7 @@ color:rgb(255, 255, 255);</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
+            <item row="6" column="1">
              <widget class="QCheckBox" name="checkBox_otro">
               <property name="font">
                <font>
@@ -274,7 +247,7 @@ color:rgb(255, 255, 255);</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="6" column="0">
              <widget class="QCheckBox" name="checkBox_bastago_bronce">
               <property name="font">
                <font>
@@ -283,6 +256,30 @@ color:rgb(255, 255, 255);</string>
               </property>
               <property name="text">
                <string>Bastago Bronce</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QCheckBox" name="checkBox_manguera">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Cambio Manguera</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QCheckBox" name="checkBox_ph">
+              <property name="font">
+               <font>
+                <pointsize>10</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>Prueba Hidraulica</string>
               </property>
              </widget>
             </item>
@@ -373,29 +370,39 @@ color:rgb(255, 255, 255);</string>
            </layout>
           </widget>
          </item>
-         <item alignment="Qt::AlignHCenter">
-          <widget class="QLabel" name="label_observacion">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <bold>true</bold>
-            </font>
-           </property>
-           <property name="styleSheet">
-            <string notr="true">color:black;</string>
-           </property>
-           <property name="text">
-            <string>Observación</string>
-           </property>
-          </widget>
-         </item>
          <item>
           <widget class="QTextEdit" name="textEdit_observacion">
            <property name="styleSheet">
             <string notr="true"/>
            </property>
            <property name="placeholderText">
-            <string>Ingrese las observaciones</string>
+            <string>Observaciones</string>
+           </property>
+          </widget>
+         </item>
+         <item alignment="Qt::AlignHCenter">
+          <widget class="QLabel" name="label_empresa">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+            <bold>true</bold>
+            </font>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">color:black;</string>
+           </property>
+           <property name="text">
+            <string>Empresa</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLineEdit" name="lineEditEmpresa">
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="placeholderText">
+            <string>Ingrese la empresa</string>
            </property>
           </widget>
          </item>
@@ -404,7 +411,7 @@ color:rgb(255, 255, 255);</string>
            <property name="font">
             <font>
              <pointsize>11</pointsize>
-             <bold>true</bold>
+            <bold>true</bold>
             </font>
            </property>
            <property name="styleSheet">
@@ -465,7 +472,7 @@ color:rgb(255, 255, 255);</string>
              <widget class="QPushButton" name="cancelar_form">
               <property name="font">
                <font>
-                <bold>true</bold>
+               <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">
@@ -480,7 +487,7 @@ color:rgb(255, 255, 255);</string>
              <widget class="QPushButton" name="guardar_tareas">
               <property name="font">
                <font>
-                <bold>true</bold>
+               <bold>true</bold>
                </font>
               </property>
               <property name="styleSheet">

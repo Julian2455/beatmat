@@ -170,28 +170,34 @@ class ExtintorController:
                     tarea.pintura,
                     tarea.interior,
                     tarea.valvula,
+                    tarea.cambio_manguera,
+                    tarea.prueba_hidraulica,
                     tarea.bastago_bronce,
                     tarea.otro,
+                    tarea.empresa,
+                    tarea.observacion,
                 ]
                 for fila_relativa, valor in enumerate(valores_restantes):
                     fila_real = fila_relativa + 1
                     item = QTableWidgetItem("")
                     item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
-                    if fila_real<13:
+                    if fila_real < 17:
                         if valor==True:
                             item.setText("SI")
                             item.setForeground(QBrush(QColor("green")))
-                        else:
+                        elif valor==False:
                             item.setText("NO")
                             item.setForeground(QBrush(QColor("red")))
+                        else:
+                            item.setText(str(valor))
+                            if fila_real == 15:
+                                item.setToolTip(str(valor))
+                            if fila_real == 16:
+                                item.setToolTip(str(valor))
                     else:
                         item.setText(str(valor))
                     self.details_ui.tableWidgetTareas.setItem(fila_real, col, item)
-                if tarea.observacion and tarea.observacion != "Null":
-                    btn = QPushButton("Ver")
-                    btn.clicked.connect(lambda checked, c=col: self.mostrar_observacion(c))
-                    self.details_ui.tableWidgetTareas.setCellWidget(13, col, btn)
-                self.details_ui.tableWidgetTareas.setColumnWidth(col, 85)
+                self.details_ui.tableWidgetTareas.setColumnWidth(col, 100)
         self.details_ui.tableWidgetExtintores.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.details_ui.tableWidgetExtintores.customContextMenuRequested.connect(self.mostrar_menu_contextual_recargas)
         self.details_ui.tableWidgetTareas.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
@@ -203,14 +209,6 @@ class ExtintorController:
     def mostrar_detalles_extintor(self, index):
         id_extintor = self.ui.tableWidget.item(index.row(), 0).data(Qt.ItemDataRole.UserRole)
         self._cargar_detalles_en_vista_secundaria(id_extintor)
-
-    def mostrar_observacion(self, columna):
-        observacion = self.observaciones.get(columna, "No hay observación")  
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Icon.Information)
-        msg.setWindowTitle("Observación")
-        msg.setText(observacion)
-        msg.exec()
 
     def mostrar_menu_contextual(self, pos):
         index = self.ui.tableWidget.indexAt(pos)

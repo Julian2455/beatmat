@@ -54,6 +54,13 @@ QComboBox:focus {
    QPushButton#btnCalcular:hover {
      background-color: #0d47a1;
    }
+   QPushButton#btnActualizar {
+     background-color: #007bff;
+     color: white;
+   }
+   QPushButton#btnActualizar:hover {
+     background-color: #0056b3;
+   }
 QScrollArea {
    border: 2px solid rgb(85, 85, 127);
      border-radius: 5px;
@@ -226,6 +233,27 @@ border:none;</string>
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnActualizar">
+        <property name="minimumSize">
+         <size>
+          <width>100</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="text">
+         <string>Actualizar</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

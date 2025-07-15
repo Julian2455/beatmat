@@ -165,33 +165,33 @@ class CajaController(QObject):
                     checkbox.stateChanged.connect(self.checkbox_state_changed)
                     linePrecio = QLineEdit()
                     linePrecio.setValidator(self.validator)
+                    checkboxn = QCheckBox()
+                    checkboxn.setProperty("extintor_id", extintor.id)
+                    checkboxn.setProperty("nuevo", True)
+                    checkboxn.setStyleSheet("""
+                                            QCheckBox {
+                                                margin-left: 30px;
+                                            }
+                                            QCheckBox::indicator {
+                                                width: 16px;
+                                                height: 16px;
+                                            }
+                                            QCheckBox::indicator:checked {
+                                                background-color: #2C3E50;
+                                                border: 1px solid #2C3E50;
+                                            }
+                                            QCheckBox::indicator:unchecked {
+                                                background-color: white;
+                                                border: 1px solid black;
+                                            }
+                                        """)
+                    checkboxn.stateChanged.connect(self.checkbox_state_changed)
                     if extintor.nuevo==True:
-                        checkboxn = QCheckBox()
-                        checkboxn.setProperty("extintor_id", extintor.id)
-                        checkboxn.setProperty("nuevo", True)
-                        checkboxn.setStyleSheet("""
-                                                QCheckBox {
-                                                    margin-left: 30px;
-                                                }
-                                                QCheckBox::indicator {
-                                                    width: 16px;
-                                                    height: 16px;
-                                                }
-                                                QCheckBox::indicator:checked {
-                                                    background-color: #2C3E50;
-                                                    border: 1px solid #2C3E50;
-                                                }
-                                                QCheckBox::indicator:unchecked {
-                                                    background-color: white;
-                                                    border: 1px solid black;
-                                                }
-                                            """)
-                        checkboxn.stateChanged.connect(self.checkbox_state_changed)
                         checkboxn.setChecked(True)
-                        self.ui.tableExtintoresCliente.setCellWidget(index, 5, checkboxn)
                         precio_nuevo = Extintor.new_prices(extintor_id=extintor.id)
                         if precio_nuevo:
                             self.selected_nuevos[extintor.id] = precio_nuevo.valor_num
+                    self.ui.tableExtintoresCliente.setCellWidget(index, 5, checkboxn)
                     self.ui.tableExtintoresCliente.setCellWidget(index, 6, checkbox)
                     self.ui.tableExtintoresCliente.setCellWidget(index, 7, linePrecio)
                     linePrecio.textChanged.connect(self.actualizar_precio_fila)
@@ -303,9 +303,6 @@ class CajaController(QObject):
         if not cobro:
             self.mostrar_error("Monto de cobro vacío", "Debe ingresar un monto de cobro.")
             return
-        if not hasattr(self, 'total') or self.total <= 0:
-            self.mostrar_error("Total inválido", "El total de la compra debe ser mayor a cero.")
-            return
         precios_adicionales = {}
         precios_totales = {}
         cobro_num = self.locale.toDouble(cobro)[0]
@@ -322,8 +319,7 @@ class CajaController(QObject):
             if line_edit and line_edit.text():
                 try:
                     precio_adicional = self.locale.toDouble(line_edit.text())[0]
-                    if precio_adicional > 0:
-                        precios_adicionales[extintor_id] = precio_adicional
+                    precios_adicionales[extintor_id] = precio_adicional
                 except ValueError:
                     pass
             item_total = self.ui.tableExtintoresCliente.item(fila, 8)

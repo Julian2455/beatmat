@@ -46,7 +46,9 @@ class TareaFormController(QDialog):
             self.ui.checkBox_pintura,
             self.ui.checkBox_relleno_polvo,
             self.ui.checkBox_tamizacion,
-            self.ui.checkBox_valvula
+            self.ui.checkBox_valvula,
+            self.ui.checkBox_ph,
+            self.ui.checkBox_manguera
         ]
         for checkbox in checkboxes:
             checkbox.setStyleSheet(estilo_checkbox)
@@ -65,6 +67,9 @@ class TareaFormController(QDialog):
         self.ui.checkBox_relleno_polvo.setChecked(False)
         self.ui.checkBox_tamizacion.setChecked(False)
         self.ui.checkBox_valvula.setChecked(False)
+        self.ui.checkBox_ph.setChecked(False)
+        self.ui.checkBox_manguera.setChecked(False)
+        self.ui.lineEditEmpresa.clear()
         self.ui.textEdit_observacion.clear()
         self.ui.dateEdit_fecha.setDate(QDate.currentDate())
 
@@ -81,22 +86,25 @@ class TareaFormController(QDialog):
         relleno = self.ui.checkBox_relleno_polvo.isChecked()
         tamizacion = self.ui.checkBox_tamizacion.isChecked()
         valvula = self.ui.checkBox_valvula.isChecked()
+        manguera = self.ui.checkBox_manguera.isChecked()
+        ph = self.ui.checkBox_ph.isChecked()
+        empresa = self.ui.lineEditEmpresa.text()
         observacion = self.ui.textEdit_observacion.toPlainText()
         fecha = self.ui.dateEdit_fecha.date().toPyDate()
 
         return (
             bastago, manometro, tacho, gatillo, interior,
             oring, otro, peso, pintura, relleno,
-            tamizacion, valvula, observacion, fecha
+            tamizacion, valvula, manguera, ph, empresa, observacion, fecha
         )
 
     def guardar_tarea(self):
-        bastago, manometro, tacho, gatillo, interior, oring, otro, peso, pintura, relleno, tamizacion, valvula, observacion, fecha = self.obtener_datos()
+        bastago, manometro, tacho, gatillo, interior, oring, otro, peso, pintura, relleno, tamizacion, valvula, manguera, ph, empresa, observacion, fecha = self.obtener_datos()
         extintor_id = self.ui.extintor_id
         if Tareas.registrar(
             bastago, manometro, tacho, gatillo, interior,
             oring, otro, peso, pintura, relleno,
-            tamizacion, valvula, observacion, fecha, extintor_id
+            tamizacion, valvula, manguera, ph, empresa, observacion, fecha, extintor_id
         ):
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Icon.Information)

@@ -21,6 +21,9 @@ class Tareas(Base):
     otro=Column(Boolean,nullable=False)
     observacion=Column(String(255))
     fecha=Column(Date,nullable=False)
+    cambio_manguera=Column(Boolean,nullable=True)
+    prueba_hidraulica=Column(Boolean,nullable=True)
+    empresa=Column(String(50),nullable=True)
 
     extintor_id=Column(Integer, ForeignKey('extintor.id'))
 
@@ -51,10 +54,10 @@ class Tareas(Base):
             db.close()
     
     @classmethod
-    def registrar(cls,bastago,manometro,tacho,gatillo,interior,oring,otro,peso,pintura,relleno,tamizacion,valvula,observacion,fecha,extintor_id):
+    def registrar(cls,bastago,manometro,tacho,gatillo,interior,oring,otro,peso,pintura,relleno,tamizacion,valvula,manguera,ph,empresa,observacion,fecha,extintor_id):
         datos=cls(bastago_bronce=bastago,cambio_manometro=manometro,control_tacho=tacho,
                 gatillo=gatillo,interior=interior,oring=oring,otro=otro,peso=peso,pintura=pintura,
-                relleno_polvo=relleno,tamizacion=tamizacion,valvula=valvula,observacion=observacion,
+                relleno_polvo=relleno,tamizacion=tamizacion,valvula=valvula,cambio_manguera=manguera,prueba_hidraulica=ph,empresa=empresa,observacion=observacion,
                 fecha=fecha,extintor_id=extintor_id)
         try:
             db = SessionLocal()
