@@ -95,7 +95,21 @@ class Ui_Extintor(object):
 "QTabBar::tab:hover {\n"
 "    background: #3E556E;\n"
 "}\n"
-"\n"
+"QCheckBox {\n"
+"    spacing: 5px;\n"
+"}\n"
+"QCheckBox::indicator {\n"
+"    width: 16px;\n"
+"    height: 16px;\n"
+"}\n"
+"QCheckBox::indicator:unchecked {\n"
+"    border: 1px solid #cccccc;\n"
+"    background-color: white;\n"
+"}\n"
+"QCheckBox::indicator:checked {\n"
+"    border: 1px solid #3498db;\n"
+"    background-color: #3498db;\n"
+"}\n"
 "/* Paginación (si usás QLabel/QPushButton para ello) */\n"
 "QLabel#paginaActual {\n"
 "    color: #007BFF;\n"
@@ -153,6 +167,9 @@ class Ui_Extintor(object):
         self.comboBox_capacidad.setObjectName("comboBox_capacidad")
         self.comboBox_capacidad.addItem("")
         self.horizontalLayout_3.addWidget(self.comboBox_capacidad)
+        self.checkBox_stock = QtWidgets.QCheckBox(parent=self.frame_2)
+        self.checkBox_stock.setObjectName("checkBox_stock")
+        self.horizontalLayout_3.addWidget(self.checkBox_stock)
         self.btnRestaurarFiltros = QtWidgets.QPushButton(parent=self.frame_2)
         self.btnRestaurarFiltros.setMinimumSize(QtCore.QSize(120, 35))
         font = QtGui.QFont()
@@ -310,6 +327,7 @@ class Ui_Extintor(object):
         self.comboBox_marca.setItemText(0, _translate("Extintor", "----Marca----"))
         self.comboBox_tipo.setItemText(0, _translate("Extintor", "----Tipo----"))
         self.comboBox_capacidad.setItemText(0, _translate("Extintor", "----Capacidad----"))
+        self.checkBox_stock.setText(_translate("Extintor", "Stock"))
         self.btnRestaurarFiltros.setText(_translate("Extintor", "Restaurar filtros"))
         self.pushButton_5.setText(_translate("Extintor", "Nuevo extintor"))
         item = self.tableWidget.horizontalHeaderItem(0)

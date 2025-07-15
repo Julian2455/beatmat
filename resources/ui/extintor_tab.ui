@@ -22,10 +22,10 @@ QMainWindow {
 }
 
 QPushButton {
-	color: rgb(255, 255, 255);
-	background-color: rgb(19, 109, 255);
-	background-color: rgb(35, 39, 255);
-	color: rgb(8, 0, 255);
+    color: rgb(255, 255, 255);
+    background-color: rgb(19, 109, 255);
+    background-color: rgb(35, 39, 255);
+    color: rgb(8, 0, 255);
     background-color: #007BFF;
     color: white;
     border: none;
@@ -77,7 +77,7 @@ QTableWidget {
 }
 
 QTableWidget{
-	border: none;
+    border: none;
 }
 
 /* QTabWidget (barra de navegación) */
@@ -96,7 +96,21 @@ QTabBar::tab:selected {
 QTabBar::tab:hover {
     background: #3E556E;
 }
-
+QCheckBox {
+    spacing: 5px;
+}
+QCheckBox::indicator {
+    width: 16px;
+    height: 16px;
+}
+QCheckBox::indicator:unchecked {
+    border: 1px solid #cccccc;
+    background-color: white;
+}
+QCheckBox::indicator:checked {
+    border: 1px solid #3498db;
+    background-color: #3498db;
+}
 /* Paginación (si usás QLabel/QPushButton para ello) */
 QLabel#paginaActual {
     color: #007BFF;
@@ -230,6 +244,13 @@ color:black</string>
           <string>----Capacidad----</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="checkBox_stock">
+        <property name="text">
+         <string>Stock</string>
+        </property>
        </widget>
       </item>
       <item>

@@ -13,6 +13,7 @@ class ExtintorController:
         self.marca_filter = None
         self.tipo_filter = None
         self.capacidad_filter = None
+        self.disponible = None
         self.client_controller = client_controller
         self.pagina_actual = 1 
         self.filas_por_pagina = 10  
@@ -40,24 +41,36 @@ class ExtintorController:
         self.ui.comboBox_tipo.currentIndexChanged.connect(self.filtrar_por_tipo)
         self.ui.comboBox_capacidad.currentIndexChanged.connect(self.filtrar_por_capacidad)
         self.ui.btnRestaurarFiltros.clicked.connect(self.restaurar_filtros)
+        self.ui.checkBox_stock.stateChanged.connect(self.stock)
 
     def mostrar_extintores(self):
-        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
+        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter or self.disponible:
             extintores = Extintor.buscar(numeracion=self.query, marca_filter=self.marca_filter, 
                 tipo_filter=self.tipo_filter, capacidad_filter=self.capacidad_filter,
-                page=self.pagina_actual, per_page=self.filas_por_pagina)
+                page=self.pagina_actual, per_page=self.filas_por_pagina, disponible=self.disponible) 
         else:
             extintores = Extintor.show_all(page=self.pagina_actual, per_page=self.filas_por_pagina)
         self.ui.tableWidget.setRowCount(len(extintores))
         self.checkboxes_impresion = []
         for index, extintor in enumerate(extintores):
             id_extintor = QTableWidgetItem(str(extintor.numeracion))
+            marca_item = QTableWidgetItem(extintor.marca_nombre)
+            ubicacion_item = QTableWidgetItem(extintor.ubicacion)
+            tipo_item = QTableWidgetItem(extintor.tipo_nombre)
+            capacidad_item = QTableWidgetItem(extintor.capacidad_nombre)
+            if extintor.cliente_id is None:
+                color_fila = QColor(255, 200, 200)
+                id_extintor.setBackground(color_fila)
+                marca_item.setBackground(color_fila)
+                ubicacion_item.setBackground(color_fila)
+                tipo_item.setBackground(color_fila)
+                capacidad_item.setBackground(color_fila)
             id_extintor.setData(Qt.ItemDataRole.UserRole, extintor.id)
             self.ui.tableWidget.setItem(index, 0, id_extintor)
-            self.ui.tableWidget.setItem(index, 1, QTableWidgetItem(extintor.marca_nombre))
-            self.ui.tableWidget.setItem(index, 2, QTableWidgetItem(extintor.ubicacion))
-            self.ui.tableWidget.setItem(index, 3, QTableWidgetItem(extintor.tipo_nombre))
-            self.ui.tableWidget.setItem(index, 4, QTableWidgetItem(extintor.capacidad_nombre))
+            self.ui.tableWidget.setItem(index, 1, marca_item)
+            self.ui.tableWidget.setItem(index, 2, ubicacion_item)
+            self.ui.tableWidget.setItem(index, 3, tipo_item)
+            self.ui.tableWidget.setItem(index, 4, capacidad_item)
 
         self.actualizar_estado_paginado()
         self.mostrar_boton_restaurar()
@@ -85,10 +98,10 @@ class ExtintorController:
         return None
     
     def actualizar_estado_paginado(self):
-        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter:
+        if self.query or self.marca_filter or self.tipo_filter or self.capacidad_filter or self.disponible:
             self.total_extintores = Extintor.contar_buscar(
                 numeracion=self.query, marca_filter=self.marca_filter, tipo_filter=self.tipo_filter, 
-                capacidad_filter=self.capacidad_filter)
+                capacidad_filter=self.capacidad_filter, disponible=self.disponible)
         else:
             self.total_extintores = Extintor.contar_extintores()
         self.total_paginas = (self.total_extintores // self.filas_por_pagina) + (1 if self.total_extintores % self.filas_por_pagina else 0)
@@ -375,6 +388,14 @@ class ExtintorController:
             self.capacidad_filter = None
         else:
             self.capacidad_filter = self.ui.comboBox_capacidad.itemData(indice, QtCore.Qt.ItemDataRole.UserRole)
+        self.pagina_actual = 1
+        self.mostrar_extintores()
+    
+    def stock(self):
+        if self.disponible == True:
+            self.disponible=None
+        else:
+            self.disponible=True
         self.pagina_actual = 1
         self.mostrar_extintores()
 
