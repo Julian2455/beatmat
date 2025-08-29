@@ -194,7 +194,7 @@ class ClientController:
         self.asociacion_ui.tableWidgetExtintores.verticalHeader().setVisible(False)
         self.asociacion_ui.tableWidgetExtintores.setRowCount(0)
         self.asociacion_ui.pushButton.clicked.connect(lambda: self.imprimir_extintores_cliente(nombre,domicilio,telefono))
-        extintores=Extintor.extintor_asociado_cliente(id_cliente)
+        extintores=Extintor.extintor_asociado_cliente(id_cliente) 
         if extintores:
             self.asociacion_ui.tableWidgetExtintores.setRowCount(len(extintores))
             for index, resultado in enumerate(extintores):
@@ -220,6 +220,7 @@ class ClientController:
                         tarea.pintura,
                         tarea.interior,
                         tarea.valvula,
+                        tarea.cambio_manguera,
                         tarea.bastago_bronce,
                     ]
                     for i, valor in enumerate(valores):
@@ -233,8 +234,7 @@ class ClientController:
                     observacion = tarea.observacion
                     if not observacion or observacion == "Null":
                         observacion = "-"
-                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 18, QTableWidgetItem(observacion))
-                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 19, QTableWidgetItem(str(resultado["ubicacion"])))
+                    self.asociacion_ui.tableWidgetExtintores.setItem(index, 19, QTableWidgetItem(observacion))
                 self.asociacion_ui.tableWidgetExtintores.resizeColumnsToContents()
 
     def buscar_cliente(self):

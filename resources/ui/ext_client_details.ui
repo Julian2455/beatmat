@@ -473,6 +473,19 @@ color:#007BFF</string>
         </column>
         <column>
          <property name="text">
+          <string>Cambio de manguera</string>
+         </property>
+         <property name="font">
+          <font>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="textAlignment">
+          <set>AlignLeading|AlignVCenter</set>
+         </property>
+        </column>
+        <column>
+         <property name="text">
           <string>Bastago de bronce</string>
          </property>
          <property name="font">
@@ -487,19 +500,6 @@ color:#007BFF</string>
         <column>
          <property name="text">
           <string>Observaciones</string>
-         </property>
-         <property name="font">
-          <font>
-           <bold>true</bold>
-          </font>
-         </property>
-         <property name="textAlignment">
-          <set>AlignLeading|AlignVCenter</set>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Lugar asignado</string>
          </property>
          <property name="font">
           <font>

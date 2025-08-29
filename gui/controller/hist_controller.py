@@ -1,6 +1,6 @@
 from PyQt6.QtWidgets import QTableWidgetItem, QMenu, QDialog, QMessageBox, QPushButton
 from PyQt6.QtGui import QAction, QColor, QBrush, QFont, QIcon, QPixmap
-from PyQt6.QtCore import Qt, QObject, QDate
+from PyQt6.QtCore import Qt, QObject, QDate, QLocale
 from PyQt6 import QtCore
 from datetime import timedelta
 from models import *  
@@ -31,18 +31,24 @@ class HistorialController(QObject):
         self.mostrar_ventas()
         self.ui.tableHistorialCompras.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         self.ui.tableHistorialCompras.customContextMenuRequested.connect(self.mostrar_menu_contextual)
+        self.ui.btnNextPage.setIcon(QIcon(get_image("sssiguiente"))) 
+        self.ui.btnPreviousPage.setIcon(QIcon(get_image("anterior"))) 
+        self.ui.btnFirstPage.setIcon(QIcon(get_image("anterior_1"))) 
+        self.ui.btnLastPage.setIcon(QIcon(get_image("proximo_1")))
+        self.locale = QLocale(QLocale.Language.Spanish, QLocale.Country.Argentina)
+        self.ui.frameEstadisticas.hide()
     
     def setupDateEdits(self):
         fecha_minima_bd = Caja.obtener_fecha_minima()
         fecha_minima = QDate.fromString((fecha_minima_bd - timedelta(days=1)).strftime("%Y-%m-%d"), "yyyy-MM-dd")
         self.ui.dateEdit.setMinimumDate(fecha_minima)
-        self.ui.dateEdit.setSpecialValueText("--/--/--")
-        self.ui.dateEdit.setDate(fecha_minima)
+        self.ui.dateEdit.setMaximumDate(QDate.currentDate())
+        self.ui.dateEdit.setDate(QDate.currentDate())
         self.fecha_filtro_activo = False
         self.ui.dateEdit.dateChanged.connect(self.on_date_changed)
     
     def on_date_changed(self, date):
-        if date == self.ui.dateEdit.minimumDate():
+        if date == QDate.currentDate():
             self.fecha_filtro_activo = False
             self.mostrar_ventas()
             return
@@ -51,9 +57,18 @@ class HistorialController(QObject):
         self.fecha_py = date.toPyDate()
         self.pagina_actual = 1 
         self.mostrar_ventas()
+        self.mostrar_totales()
+    
+    def mostrar_totales(self):
+        totales = Caja.total_fecha(self.fecha_py)
+        if totales:
+            self.ui.labelTotalVentas.setText(f"Total Ventas: ${self.locale.toString(float(totales.total_ventas), 'f', 2)}")
+            self.ui.labelTotalCobrado.setText(f"Total Cobrado: ${self.locale.toString(float(totales.total_cobrado), 'f', 2)}")
+            self.ui.labelTotalAdeudado.setText(f"Total Adeudado: ${self.locale.toString(float(totales.total_adeudado), 'f', 2)}")
+            self.ui.frameEstadisticas.show()
     
     def limpiar_filtros(self):
-        self.ui.dateEdit.setDate(self.ui.dateEdit.minimumDate())
+        self.ui.dateEdit.setDate(QDate.currentDate())
         self.fecha_filtro_activo = False
         self.fecha_py = None
         self.ui.comboClientes.setCurrentIndex(0)
@@ -61,6 +76,7 @@ class HistorialController(QObject):
         self.ui.btnRestaurar.setVisible(False)
         self.pagina_actual = 1
         self.mostrar_ventas()
+        self.ui.frameEstadisticas.hide()
 
     def actualizar_estado_paginado(self):
         if self.fecha_filtro_activo or self.cliente:
@@ -197,3 +213,6 @@ class HistorialController(QObject):
                 msg.setText("Eliminacion cancelada.")
                 msg.exec()
         self.mostrar_ventas()
+        self.mostrar_totales()
+        if self.reportes_controller:
+            self.reportes_controller.cargar_datos()

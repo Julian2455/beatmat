@@ -129,6 +129,7 @@ class MainController:
         # Configurar tab para historial de compras
         self.historial_tab=HistorialUi()
         self.historial_controller = HistorialController(self.historial_tab)
+        self.historial_controller.reportes_controller = None
         self.ui.Historial.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Historial.layout().addWidget(self.historial_tab)
 
@@ -152,6 +153,7 @@ class MainController:
     def init_reportes_tab(self):
         self.reportes_tab=ReportesUi()
         self.reportes_controller=ReportesController(self.reportes_tab)
+        self.historial_controller.reportes_controller = self.reportes_controller
         self.ui.Reportes.setLayout(QtWidgets.QVBoxLayout())
         self.ui.Reportes.layout().addWidget(self.reportes_tab)
     

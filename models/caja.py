@@ -572,3 +572,23 @@ class Caja(Base):
             return []
         finally:
             db.close()
+    
+    @classmethod
+    def total_fecha(cls, fecha):
+        db = SessionLocal()
+        try:
+            resultado = (
+                db.query(
+                    func.sum(cls.total).label('total_ventas'),
+                    func.sum(cls.cobro).label('total_cobrado'),
+                    func.sum(cls.adeudado).label('total_adeudado')
+                )
+                .filter(cls.fecha == fecha)
+                .first()
+            )
+            if resultado.total_ventas:
+                return resultado
+            else:
+                return None
+        finally:
+            db.close()
